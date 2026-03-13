@@ -19207,6 +19207,13 @@ var FileSpreadsheet = createLucideIcon("file-spreadsheet", [
 		key: "10kma7"
 	}]
 ]);
+var File = createLucideIcon("file", [["path", {
+	d: "M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",
+	key: "1oefj6"
+}], ["path", {
+	d: "M14 2v5a1 1 0 0 0 1 1h5",
+	key: "wfsgrz"
+}]]);
 var Lightbulb = createLucideIcon("lightbulb", [
 	["path", {
 		d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
@@ -26356,11 +26363,217 @@ var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 }));
 CardFooter.displayName = "CardFooter";
 //#endregion
+//#region src/components/FileSlot.tsx
+function FileSlot({ label, file, onChange, accept, disabled, onError }) {
+	const inputRef = (0, import_react.useRef)(null);
+	const handleFileChange = (e) => {
+		const selected = e.target.files?.[0] || null;
+		if (selected) {
+			if (!selected.name.match(/\.(csv|xls|xlsx)$/i)) {
+				if (onError) onError();
+				if (inputRef.current) inputRef.current.value = "";
+				return;
+			}
+		}
+		onChange(selected);
+		if (inputRef.current) inputRef.current.value = "";
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/FileSlot.tsx:32:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-2",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/FileSlot.tsx:33:7",
+				"data-prohibitions": "[editContent]",
+				className: "text-sm font-medium text-foreground/90",
+				children: label
+			}),
+			!file ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				"data-uid": "src/components/FileSlot.tsx:35:9",
+				"data-prohibitions": "[editContent]",
+				type: "button",
+				onClick: () => !disabled && inputRef.current?.click(),
+				disabled,
+				className: cn$1("w-full border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", disabled ? "opacity-50 cursor-not-allowed bg-muted/50" : "hover:bg-accent/40 hover:border-primary/40 cursor-pointer bg-background"),
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
+						"data-uid": "src/components/FileSlot.tsx:46:11",
+						"data-prohibitions": "[editContent]",
+						className: "w-6 h-6 text-muted-foreground/70 mb-2"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/FileSlot.tsx:47:11",
+						"data-prohibitions": "[]",
+						className: "text-sm font-medium text-muted-foreground",
+						children: "Clique para selecionar"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/FileSlot.tsx:48:11",
+						"data-prohibitions": "[]",
+						className: "text-xs text-muted-foreground/70 mt-1",
+						children: "CSV ou Excel (.xlsx, .xls)"
+					})
+				]
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/FileSlot.tsx:51:9",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center justify-between p-3 border rounded-lg bg-accent/20 border-primary/20 shadow-sm transition-all duration-200",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/FileSlot.tsx:52:11",
+					"data-prohibitions": "[editContent]",
+					className: "flex items-center space-x-3 overflow-hidden pr-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/FileSlot.tsx:53:13",
+						"data-prohibitions": "[]",
+						className: "p-2 bg-primary/10 rounded-md shrink-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(File, {
+							"data-uid": "src/components/FileSlot.tsx:54:15",
+							"data-prohibitions": "[editContent]",
+							className: "w-4 h-4 text-primary"
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/FileSlot.tsx:56:13",
+						"data-prohibitions": "[editContent]",
+						className: "flex flex-col overflow-hidden text-left",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/FileSlot.tsx:57:15",
+							"data-prohibitions": "[editContent]",
+							className: "text-sm font-medium truncate",
+							title: file.name,
+							children: file.name
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							"data-uid": "src/components/FileSlot.tsx:60:15",
+							"data-prohibitions": "[editContent]",
+							className: "text-xs text-muted-foreground",
+							children: [(file.size / 1024).toFixed(1), " KB"]
+						})]
+					})]
+				}), !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					"data-uid": "src/components/FileSlot.tsx:66:13",
+					"data-prohibitions": "[]",
+					variant: "ghost",
+					size: "icon",
+					className: "h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10",
+					onClick: () => onChange(null),
+					title: "Remover arquivo",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+						"data-uid": "src/components/FileSlot.tsx:73:15",
+						"data-prohibitions": "[editContent]",
+						className: "w-4 h-4"
+					})
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+				"data-uid": "src/components/FileSlot.tsx:78:7",
+				"data-prohibitions": "[editContent]",
+				type: "file",
+				className: "hidden",
+				accept,
+				ref: inputRef,
+				onChange: handleFileChange,
+				disabled
+			})
+		]
+	});
+}
+//#endregion
+//#region src/components/UploadCard.tsx
+function UploadCard({ title, description, slots, onFileChange, onUpload, loading, loaded, onError }) {
+	const allRequiredFilesPresent = slots.every((s) => !s.required || s.file !== null);
+	const canUpload = slots.some((s) => s.file !== null) && allRequiredFilesPresent && !loading && !loaded;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/UploadCard.tsx:48:5",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("flex flex-col h-full transition-colors", loaded ? "border-primary/50 bg-primary/[0.03]" : ""),
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+				"data-uid": "src/components/UploadCard.tsx:54:7",
+				"data-prohibitions": "[editContent]",
+				className: "pb-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
+					"data-uid": "src/components/UploadCard.tsx:55:9",
+					"data-prohibitions": "[editContent]",
+					className: "flex items-center gap-2 text-lg",
+					children: [loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+						"data-uid": "src/components/UploadCard.tsx:57:13",
+						"data-prohibitions": "[editContent]",
+						className: "w-5 h-5 text-emerald-500"
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
+						"data-uid": "src/components/UploadCard.tsx:59:13",
+						"data-prohibitions": "[editContent]",
+						className: "w-5 h-5 text-muted-foreground"
+					}), title]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
+					"data-uid": "src/components/UploadCard.tsx:63:9",
+					"data-prohibitions": "[editContent]",
+					className: "text-sm",
+					children: description
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+				"data-uid": "src/components/UploadCard.tsx:65:7",
+				"data-prohibitions": "[editContent]",
+				className: "flex-1 space-y-5 pb-4",
+				children: slots.map((slot) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/UploadCard.tsx:67:11",
+					"data-prohibitions": "[editContent]",
+					className: "space-y-1.5",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSlot, {
+						"data-uid": "src/components/UploadCard.tsx:68:13",
+						"data-prohibitions": "[editContent]",
+						label: slot.label,
+						file: slot.file,
+						onChange: (file) => onFileChange(slot.id, file),
+						accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+						disabled: loading || loaded,
+						onError
+					}), slot.helpText]
+				}, slot.id))
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardFooter, {
+				"data-uid": "src/components/UploadCard.tsx:80:7",
+				"data-prohibitions": "[editContent]",
+				className: "pt-2",
+				children: loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/UploadCard.tsx:82:11",
+					"data-prohibitions": "[]",
+					className: "w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+						"data-uid": "src/components/UploadCard.tsx:83:13",
+						"data-prohibitions": "[editContent]",
+						className: "w-4 h-4"
+					}), " Dados Processados"]
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					"data-uid": "src/components/UploadCard.tsx:86:11",
+					"data-prohibitions": "[editContent]",
+					className: "w-full transition-all",
+					onClick: onUpload,
+					disabled: !canUpload,
+					variant: canUpload ? "default" : "secondary",
+					children: [loading ? "Processando..." : "Processar Dados", !loading && canUpload && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
+						"data-uid": "src/components/UploadCard.tsx:93:39",
+						"data-prohibitions": "[editContent]",
+						className: "w-4 h-4 ml-2"
+					})]
+				})
+			})
+		]
+	});
+}
+//#endregion
 //#region src/pages/Import.tsx
 function ImportPage() {
 	const { importData, erpNeeds, supplierItems } = useProcurementStore();
 	const { toast } = useToast();
 	const [loading, setLoading] = (0, import_react.useState)(null);
+	const [erpFile, setErpFile] = (0, import_react.useState)(null);
+	const [amDemandaFile, setAmDemandaFile] = (0, import_react.useState)(null);
+	const [amPedidoFile, setAmPedidoFile] = (0, import_react.useState)(null);
+	const [quoteFile, setQuoteFile] = (0, import_react.useState)(null);
+	const isErpLoaded = erpNeeds.length > 0;
+	const isAmLoaded = supplierItems.some((i) => i.source.startsWith("AM"));
+	const isQuoteLoaded = supplierItems.some((i) => i.source === "DIRECT_QUOTE");
 	const handleUpload = (type) => {
 		setLoading(type);
 		setTimeout(() => {
@@ -26368,84 +26581,162 @@ function ImportPage() {
 			setLoading(null);
 			toast({
 				title: "Sucesso",
-				description: `Dados de ${type} importados com sucesso.`
+				description: `Dados de ${type} processados com sucesso.`
 			});
-		}, 1e3);
+		}, 1500);
 	};
-	const isErpLoaded = erpNeeds.length > 0;
-	const isAmLoaded = supplierItems.some((i) => i.source.startsWith("AM"));
-	const isQuoteLoaded = supplierItems.some((i) => i.source === "DIRECT_QUOTE");
+	const handleFileChangeError = () => {
+		toast({
+			title: "Arquivo Inválido",
+			description: "Por favor, selecione um arquivo válido (CSV ou Excel).",
+			variant: "destructive"
+		});
+	};
+	const showNextStep = isErpLoaded || isAmLoaded || isQuoteLoaded;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Import.tsx:28:5",
+		"data-uid": "src/pages/Import.tsx:43:5",
 		"data-prohibitions": "[editContent]",
-		className: "space-y-8 animate-fade-in-up",
+		className: "space-y-8 animate-fade-in-up pb-12",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:29:7",
+				"data-uid": "src/pages/Import.tsx:44:7",
 				"data-prohibitions": "[]",
-				className: "text-center max-w-2xl mx-auto",
+				className: "text-center max-w-2xl mx-auto space-y-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/Import.tsx:30:9",
+					"data-uid": "src/pages/Import.tsx:45:9",
 					"data-prohibitions": "[]",
-					className: "text-3xl font-bold tracking-tight mb-2",
+					className: "text-3xl font-bold tracking-tight",
 					children: "Importação de Dados"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Import.tsx:31:9",
+					"data-uid": "src/pages/Import.tsx:46:9",
 					"data-prohibitions": "[]",
-					className: "text-muted-foreground",
+					className: "text-muted-foreground text-sm md:text-base",
 					children: "Faça o upload das suas planilhas para cruzar os dados de compras e otimizar suas decisões."
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:36:7",
+				"data-uid": "src/pages/Import.tsx:51:7",
 				"data-prohibitions": "[]",
-				className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+				className: "grid grid-cols-1 md:grid-cols-3 gap-6 items-start",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:37:9",
+						"data-uid": "src/pages/Import.tsx:52:9",
 						"data-prohibitions": "[editContent]",
 						title: "Planilha ERP",
-						description: "Extração de Necessidade, Estoque Mín/Máx",
+						description: "Extração de Necessidade e Estoque Mín/Máx do seu sistema.",
 						loaded: isErpLoaded,
 						loading: loading === "ERP",
-						onUpload: () => handleUpload("ERP")
+						slots: [{
+							id: "erp",
+							label: "Relatório de Estoque (ERP)",
+							file: erpFile,
+							required: true,
+							helpText: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/Import.tsx:64:17",
+								"data-prohibitions": "[]",
+								className: "text-[11px] text-muted-foreground mt-2 p-3 bg-muted/40 rounded-md border border-border/50",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									"data-uid": "src/pages/Import.tsx:65:19",
+									"data-prohibitions": "[]",
+									className: "font-semibold block mb-1.5 text-foreground/80 flex items-center gap-1.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
+										"data-uid": "src/pages/Import.tsx:66:21",
+										"data-prohibitions": "[editContent]",
+										className: "w-3.5 h-3.5"
+									}), " Colunas obrigatórias:"]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+									"data-uid": "src/pages/Import.tsx:68:19",
+									"data-prohibitions": "[]",
+									className: "list-disc list-inside space-y-1 ml-1",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+											"data-uid": "src/pages/Import.tsx:69:21",
+											"data-prohibitions": "[]",
+											children: "Descrição do Produto"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+											"data-uid": "src/pages/Import.tsx:70:21",
+											"data-prohibitions": "[]",
+											children: "Quantidade Mínima em Estoque"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+											"data-uid": "src/pages/Import.tsx:71:21",
+											"data-prohibitions": "[]",
+											children: "Quantidade Máxima de Estoque"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+											"data-uid": "src/pages/Import.tsx:72:21",
+											"data-prohibitions": "[]",
+											children: "Quantidade que deve ser comprada"
+										})
+									]
+								})]
+							})
+						}],
+						onFileChange: (id, file) => setErpFile(file),
+						onUpload: () => handleUpload("ERP"),
+						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:44:9",
+						"data-uid": "src/pages/Import.tsx:83:9",
 						"data-prohibitions": "[editContent]",
 						title: "Ação Magistral",
-						description: "Relatórios de Demanda e Pedidos",
+						description: "Relatórios de Demanda (Exclusivos) e Pedidos (Commodities).",
 						loaded: isAmLoaded,
 						loading: loading === "AM",
-						onUpload: () => handleUpload("AM")
+						slots: [{
+							id: "am_demanda",
+							label: "Relatório de Demanda",
+							file: amDemandaFile,
+							required: true
+						}, {
+							id: "am_pedido",
+							label: "Relatório de Pedidos",
+							file: amPedidoFile,
+							required: true
+						}],
+						onFileChange: (id, file) => {
+							if (id === "am_demanda") setAmDemandaFile(file);
+							if (id === "am_pedido") setAmPedidoFile(file);
+						},
+						onUpload: () => handleUpload("AM"),
+						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:51:9",
+						"data-uid": "src/pages/Import.tsx:105:9",
 						"data-prohibitions": "[editContent]",
 						title: "Cotações Diretas",
-						description: "Cotações enviadas por fornecedores",
+						description: "Planilhas de cotações enviadas diretamente por fornecedores (Opcional).",
 						loaded: isQuoteLoaded,
 						loading: loading === "QUOTE",
-						onUpload: () => handleUpload("QUOTE")
+						slots: [{
+							id: "quote",
+							label: "Cotação de Fornecedor",
+							file: quoteFile,
+							required: true
+						}],
+						onFileChange: (id, file) => setQuoteFile(file),
+						onUpload: () => handleUpload("QUOTE"),
+						onError: handleFileChangeError
 					})
 				]
 			}),
-			(isErpLoaded || isAmLoaded || isQuoteLoaded) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Import.tsx:61:9",
+			showNextStep && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/pages/Import.tsx:118:9",
 				"data-prohibitions": "[]",
-				className: "flex justify-center mt-8",
+				className: "flex justify-center mt-12 animate-fade-in",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-					"data-uid": "src/pages/Import.tsx:62:11",
+					"data-uid": "src/pages/Import.tsx:119:11",
 					"data-prohibitions": "[]",
 					asChild: true,
 					size: "lg",
-					className: "gap-2",
+					className: "gap-2 px-8 shadow-md",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-						"data-uid": "src/pages/Import.tsx:63:13",
+						"data-uid": "src/pages/Import.tsx:120:13",
 						"data-prohibitions": "[]",
 						to: "/matching",
 						children: ["Ir para Mapeamento IA ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-							"data-uid": "src/pages/Import.tsx:64:37",
+							"data-uid": "src/pages/Import.tsx:121:37",
 							"data-prohibitions": "[editContent]",
 							className: "w-4 h-4"
 						})]
@@ -26453,51 +26744,6 @@ function ImportPage() {
 				})
 			})
 		]
-	});
-}
-function UploadCard({ title, description, loaded, loading, onUpload }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		"data-uid": "src/pages/Import.tsx:87:5",
-		"data-prohibitions": "[editContent]",
-		className: loaded ? "border-primary/50 bg-primary/5" : "",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-			"data-uid": "src/pages/Import.tsx:88:7",
-			"data-prohibitions": "[editContent]",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
-				"data-uid": "src/pages/Import.tsx:89:9",
-				"data-prohibitions": "[editContent]",
-				className: "flex items-center gap-2",
-				children: [loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-					"data-uid": "src/pages/Import.tsx:91:13",
-					"data-prohibitions": "[editContent]",
-					className: "w-5 h-5 text-emerald-500"
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
-					"data-uid": "src/pages/Import.tsx:93:13",
-					"data-prohibitions": "[editContent]",
-					className: "w-5 h-5 text-muted-foreground"
-				}), title]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-				"data-uid": "src/pages/Import.tsx:97:9",
-				"data-prohibitions": "[editContent]",
-				children: description
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-			"data-uid": "src/pages/Import.tsx:99:7",
-			"data-prohibitions": "[editContent]",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-				"data-uid": "src/pages/Import.tsx:100:9",
-				"data-prohibitions": "[editContent]",
-				variant: loaded ? "outline" : "default",
-				className: "w-full",
-				onClick: onUpload,
-				disabled: loading,
-				children: [loading ? "Processando..." : loaded ? "Atualizar Arquivo" : "Fazer Upload", !loading && !loaded && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-					"data-uid": "src/pages/Import.tsx:107:35",
-					"data-prohibitions": "[editContent]",
-					className: "w-4 h-4 ml-2"
-				})]
-			})
-		})]
 	});
 }
 //#endregion
@@ -31005,4 +31251,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-kjfuoq0J.js.map
+//# sourceMappingURL=index-DOrxO8md.js.map
