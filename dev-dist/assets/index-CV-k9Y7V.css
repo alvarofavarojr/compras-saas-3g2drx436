@@ -927,6 +927,10 @@ section[aria-label='Notifications alt+T'] {
   margin-top: 6rem;
 }
 
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .mt-4{
   margin-top: 1rem;
 }
@@ -1071,6 +1075,10 @@ section[aria-label='Notifications alt+T'] {
 
 .max-h-\[--radix-select-content-available-height\]{
   max-height: var(--radix-select-content-available-height);
+}
+
+.max-h-\[160px\]{
+  max-height: 160px;
 }
 
 .max-h-\[300px\]{
@@ -1475,6 +1483,10 @@ section[aria-label='Notifications alt+T'] {
 
 .gap-2{
   gap: 0.5rem;
+}
+
+.gap-3{
+  gap: 0.75rem;
 }
 
 .gap-4{
@@ -1898,8 +1910,16 @@ section[aria-label='Notifications alt+T'] {
   padding: 0.25rem;
 }
 
+.p-1\.5{
+  padding: 0.375rem;
+}
+
 .p-2{
   padding: 0.5rem;
+}
+
+.p-2\.5{
+  padding: 0.625rem;
 }
 
 .p-3{

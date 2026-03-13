@@ -8,14 +8,16 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { FileSlot } from './FileSlot'
 
 export type SlotConfig = {
   id: string
   label: string
-  file: File | null
+  files: File[]
   required?: boolean
+  maxFiles?: number
   helpText?: React.ReactNode
 }
 
@@ -23,11 +25,12 @@ export interface UploadCardProps {
   title: string
   description: string
   slots: SlotConfig[]
-  onFileChange: (slotId: string, file: File | null) => void
+  onFileChange: (slotId: string, files: File[]) => void
   onUpload: () => void
   loading: boolean
+  progress?: number
   loaded: boolean
-  onError: () => void
+  onError: (msg: string) => void
 }
 
 export function UploadCard({
@@ -37,11 +40,12 @@ export function UploadCard({
   onFileChange,
   onUpload,
   loading,
+  progress,
   loaded,
   onError,
 }: UploadCardProps) {
-  const allRequiredFilesPresent = slots.every((s) => !s.required || s.file !== null)
-  const anyFilePresent = slots.some((s) => s.file !== null)
+  const allRequiredFilesPresent = slots.every((s) => !s.required || s.files.length > 0)
+  const anyFilePresent = slots.some((s) => s.files.length > 0)
   const canUpload = anyFilePresent && allRequiredFilesPresent && !loading && !loaded
 
   return (
@@ -67,17 +71,27 @@ export function UploadCard({
           <div key={slot.id} className="space-y-1.5">
             <FileSlot
               label={slot.label}
-              file={slot.file}
-              onChange={(file) => onFileChange(slot.id, file)}
+              files={slot.files}
+              onChange={(files) => onFileChange(slot.id, files)}
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               disabled={loading || loaded}
+              maxFiles={slot.maxFiles}
               onError={onError}
             />
             {slot.helpText}
           </div>
         ))}
       </CardContent>
-      <CardFooter className="pt-2">
+      <CardFooter className="pt-2 flex flex-col gap-3 items-stretch">
+        {loading && typeof progress === 'number' && (
+          <div className="space-y-1.5 w-full">
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>Processando arquivos...</span>
+              <span>{progress}%</span>
+            </div>
+            <Progress value={progress} className="h-1.5" />
+          </div>
+        )}
         {loaded ? (
           <div className="w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20">
             <CheckCircle2 className="w-4 h-4" /> Dados Processados
@@ -86,7 +100,7 @@ export function UploadCard({
           <Button
             className="w-full transition-all"
             onClick={onUpload}
-            disabled={!canUpload}
+            disabled={!canUpload || loading}
             variant={canUpload ? 'default' : 'secondary'}
           >
             {loading ? 'Processando...' : 'Processar Dados'}

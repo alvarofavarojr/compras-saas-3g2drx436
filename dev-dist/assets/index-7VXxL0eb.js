@@ -26363,34 +26363,250 @@ var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 }));
 CardFooter.displayName = "CardFooter";
 //#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-context@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-context/dist/index.mjs
+function createContextScope(scopeName, createContextScopeDeps = []) {
+	let defaultContexts = [];
+	function createContext3(rootComponentName, defaultContext) {
+		const BaseContext = import_react.createContext(defaultContext);
+		BaseContext.displayName = rootComponentName + "Context";
+		const index = defaultContexts.length;
+		defaultContexts = [...defaultContexts, defaultContext];
+		const Provider = (props) => {
+			const { scope, children, ...context } = props;
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const value = import_react.useMemo(() => context, Object.values(context));
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
+				value,
+				children
+			});
+		};
+		Provider.displayName = rootComponentName + "Provider";
+		function useContext2(consumerName, scope) {
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const context = import_react.useContext(Context);
+			if (context) return context;
+			if (defaultContext !== void 0) return defaultContext;
+			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+		}
+		return [Provider, useContext2];
+	}
+	const createScope = () => {
+		const scopeContexts = defaultContexts.map((defaultContext) => {
+			return import_react.createContext(defaultContext);
+		});
+		return function useScope(scope) {
+			const contexts = scope?.[scopeName] || scopeContexts;
+			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
+				...scope,
+				[scopeName]: contexts
+			} }), [scope, contexts]);
+		};
+	};
+	createScope.scopeName = scopeName;
+	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+	const baseScope = scopes[0];
+	if (scopes.length === 1) return baseScope;
+	const createScope = () => {
+		const scopeHooks = scopes.map((createScope2) => ({
+			useScope: createScope2(),
+			scopeName: createScope2.scopeName
+		}));
+		return function useComposedScopes(overrideScopes) {
+			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
+				return {
+					...nextScopes2,
+					...currentScope
+				};
+			}, {});
+			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+		};
+	};
+	createScope.scopeName = baseScope.scopeName;
+	return createScope;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.3_@types+react@19.2.14__@types+re_0243fb2db8a1fb85ca77b8d9e5c2d650/node_modules/@radix-ui/react-primitive/dist/index.mjs
+var Primitive = [
+	"a",
+	"button",
+	"div",
+	"form",
+	"h2",
+	"h3",
+	"img",
+	"input",
+	"label",
+	"li",
+	"nav",
+	"ol",
+	"p",
+	"select",
+	"span",
+	"svg",
+	"ul"
+].reduce((primitive, node) => {
+	const Slot = /* @__PURE__ */ createSlot(`Primitive.${node}`);
+	const Node = import_react.forwardRef((props, forwardedRef) => {
+		const { asChild, ...primitiveProps } = props;
+		const Comp = asChild ? Slot : node;
+		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
+			...primitiveProps,
+			ref: forwardedRef
+		});
+	});
+	Node.displayName = `Primitive.${node}`;
+	return {
+		...primitive,
+		[node]: Node
+	};
+}, {});
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-progress@1.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_7258c0b550570cef5cd6f2d2227aa6b9/node_modules/@radix-ui/react-progress/dist/index.mjs
+var PROGRESS_NAME = "Progress";
+var DEFAULT_MAX = 100;
+var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
+var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
+var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
+	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
+	const max = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
+	if (valueProp !== null && !isValidValueNumber(valueProp, max)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
+	const value = isValidValueNumber(valueProp, max) ? valueProp : null;
+	const valueLabel = isNumber(value) ? getValueLabel(value, max) : void 0;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
+		scope: __scopeProgress,
+		value,
+		max,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+			"aria-valuemax": max,
+			"aria-valuemin": 0,
+			"aria-valuenow": isNumber(value) ? value : void 0,
+			"aria-valuetext": valueLabel,
+			role: "progressbar",
+			"data-state": getProgressState(value, max),
+			"data-value": value ?? void 0,
+			"data-max": max,
+			...progressProps,
+			ref: forwardedRef
+		})
+	});
+});
+Progress$1.displayName = PROGRESS_NAME;
+var INDICATOR_NAME = "ProgressIndicator";
+var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeProgress, ...indicatorProps } = props;
+	const context = useProgressContext(INDICATOR_NAME, __scopeProgress);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+		"data-state": getProgressState(context.value, context.max),
+		"data-value": context.value ?? void 0,
+		"data-max": context.max,
+		...indicatorProps,
+		ref: forwardedRef
+	});
+});
+ProgressIndicator.displayName = INDICATOR_NAME;
+function defaultGetValueLabel(value, max) {
+	return `${Math.round(value / max * 100)}%`;
+}
+function getProgressState(value, maxValue) {
+	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
+}
+function isNumber(value) {
+	return typeof value === "number";
+}
+function isValidMaxNumber(max) {
+	return isNumber(max) && !isNaN(max) && max > 0;
+}
+function isValidValueNumber(value, max) {
+	return isNumber(value) && !isNaN(value) && value <= max && value >= 0;
+}
+function getInvalidMaxError(propValue, componentName) {
+	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
+}
+function getInvalidValueError(propValue, componentName) {
+	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
+  - a positive number
+  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
+  - \`null\` or \`undefined\` if the progress is indeterminate.
+
+Defaulting to \`null\`.`;
+}
+var Root = Progress$1;
+var Indicator = ProgressIndicator;
+//#endregion
+//#region src/components/ui/progress.tsx
+var Progress = import_react.forwardRef(({ className, value, indicatorClassName, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
+	"data-uid": "src/components/ui/progress.tsx:11:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
+		"data-uid": "src/components/ui/progress.tsx:16:5",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("h-full w-full flex-1 bg-primary transition-all", indicatorClassName),
+		style: { transform: `translateX(-${100 - (value || 0)}%)` }
+	})
+}));
+Progress.displayName = Root.displayName;
+//#endregion
 //#region src/components/FileSlot.tsx
-function FileSlot({ label, file, onChange, accept, disabled, onError }) {
+function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onError }) {
 	const inputRef = (0, import_react.useRef)(null);
 	const handleFileChange = (e) => {
-		const selected = e.target.files?.[0] || null;
-		if (selected) {
-			if (!selected.name.match(/\.(csv|xls|xlsx)$/i)) {
-				if (onError) onError();
-				if (inputRef.current) inputRef.current.value = "";
-				return;
-			}
+		const selected = Array.from(e.target.files || []);
+		if (!selected.length) return;
+		const validFiles = selected.filter((f) => f.name.match(/\.(csv|xls|xlsx)$/i));
+		if (validFiles.length !== selected.length) {
+			if (onError) onError("Por favor, selecione apenas arquivos válidos (CSV ou Excel).");
 		}
-		onChange(selected);
+		if (maxFiles === 1) {
+			if (validFiles.length > 0) onChange([validFiles[0]]);
+		} else {
+			const newFiles = [...files, ...validFiles];
+			const unique = Array.from(new Map(newFiles.map((f) => [f.name, f])).values());
+			if (unique.length > maxFiles) {
+				if (onError) onError(`Você pode enviar no máximo ${maxFiles} arquivos para esta categoria.`);
+				onChange(unique.slice(0, maxFiles));
+			} else onChange(unique);
+		}
 		if (inputRef.current) inputRef.current.value = "";
 	};
+	const removeFile = (index) => {
+		onChange(files.filter((_, i) => i !== index));
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/FileSlot.tsx:32:5",
+		"data-uid": "src/components/FileSlot.tsx:58:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-2",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/FileSlot.tsx:33:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/FileSlot.tsx:59:7",
 				"data-prohibitions": "[editContent]",
-				className: "text-sm font-medium text-foreground/90",
-				children: label
+				className: "flex justify-between items-center",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/FileSlot.tsx:60:9",
+					"data-prohibitions": "[editContent]",
+					className: "text-sm font-medium text-foreground/90",
+					children: label
+				}), maxFiles > 1 && files.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/FileSlot.tsx:62:11",
+					"data-prohibitions": "[editContent]",
+					className: "text-xs text-muted-foreground",
+					children: [
+						files.length,
+						" / ",
+						maxFiles,
+						" arquivos"
+					]
+				})]
 			}),
-			!file ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-				"data-uid": "src/components/FileSlot.tsx:35:9",
+			(!maxFiles || files.length < maxFiles) && !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				"data-uid": "src/components/FileSlot.tsx:69:9",
 				"data-prohibitions": "[editContent]",
 				type: "button",
 				onClick: () => !disabled && inputRef.current?.click(),
@@ -26398,165 +26614,196 @@ function FileSlot({ label, file, onChange, accept, disabled, onError }) {
 				className: cn$1("w-full border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", disabled ? "opacity-50 cursor-not-allowed bg-muted/50" : "hover:bg-accent/40 hover:border-primary/40 cursor-pointer bg-background"),
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-						"data-uid": "src/components/FileSlot.tsx:46:11",
+						"data-uid": "src/components/FileSlot.tsx:80:11",
 						"data-prohibitions": "[editContent]",
 						className: "w-6 h-6 text-muted-foreground/70 mb-2"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/FileSlot.tsx:47:11",
+						"data-uid": "src/components/FileSlot.tsx:81:11",
 						"data-prohibitions": "[]",
 						className: "text-sm font-medium text-muted-foreground",
 						children: "Clique para selecionar"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/FileSlot.tsx:48:11",
+						"data-uid": "src/components/FileSlot.tsx:82:11",
 						"data-prohibitions": "[]",
 						className: "text-xs text-muted-foreground/70 mt-1",
 						children: "CSV ou Excel (.xlsx, .xls)"
 					})
 				]
-			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/FileSlot.tsx:51:9",
+			}),
+			files.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/FileSlot.tsx:87:9",
 				"data-prohibitions": "[editContent]",
-				className: "flex items-center justify-between p-3 border rounded-lg bg-accent/20 border-primary/20 shadow-sm transition-all duration-200",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/FileSlot.tsx:52:11",
+				className: "space-y-2 mt-3 max-h-[160px] overflow-y-auto pr-1",
+				children: files.map((file, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/FileSlot.tsx:89:13",
 					"data-prohibitions": "[editContent]",
-					className: "flex items-center space-x-3 overflow-hidden pr-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/FileSlot.tsx:53:13",
-						"data-prohibitions": "[]",
-						className: "p-2 bg-primary/10 rounded-md shrink-0",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(File, {
-							"data-uid": "src/components/FileSlot.tsx:54:15",
-							"data-prohibitions": "[editContent]",
-							className: "w-4 h-4 text-primary"
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/FileSlot.tsx:56:13",
+					className: "flex items-center justify-between p-2.5 border rounded-lg bg-accent/20 border-primary/20 shadow-sm transition-all duration-200",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/FileSlot.tsx:93:15",
 						"data-prohibitions": "[editContent]",
-						className: "flex flex-col overflow-hidden text-left",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/FileSlot.tsx:57:15",
+						className: "flex items-center space-x-3 overflow-hidden pr-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/FileSlot.tsx:94:17",
+							"data-prohibitions": "[]",
+							className: "p-1.5 bg-primary/10 rounded-md shrink-0",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(File, {
+								"data-uid": "src/components/FileSlot.tsx:95:19",
+								"data-prohibitions": "[editContent]",
+								className: "w-4 h-4 text-primary"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/FileSlot.tsx:97:17",
 							"data-prohibitions": "[editContent]",
-							className: "text-sm font-medium truncate",
-							title: file.name,
-							children: file.name
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							"data-uid": "src/components/FileSlot.tsx:60:15",
-							"data-prohibitions": "[editContent]",
-							className: "text-xs text-muted-foreground",
-							children: [(file.size / 1024).toFixed(1), " KB"]
+							className: "flex flex-col overflow-hidden text-left",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/FileSlot.tsx:98:19",
+								"data-prohibitions": "[editContent]",
+								className: "text-xs font-medium truncate",
+								title: file.name,
+								children: file.name
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								"data-uid": "src/components/FileSlot.tsx:101:19",
+								"data-prohibitions": "[editContent]",
+								className: "text-[10px] text-muted-foreground",
+								children: [(file.size / 1024).toFixed(1), " KB"]
+							})]
 						})]
+					}), !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						"data-uid": "src/components/FileSlot.tsx:107:17",
+						"data-prohibitions": "[]",
+						variant: "ghost",
+						size: "icon",
+						className: "h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10",
+						onClick: () => removeFile(idx),
+						title: "Remover arquivo",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+							"data-uid": "src/components/FileSlot.tsx:114:19",
+							"data-prohibitions": "[editContent]",
+							className: "w-3.5 h-3.5"
+						})
 					})]
-				}), !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-					"data-uid": "src/components/FileSlot.tsx:66:13",
-					"data-prohibitions": "[]",
-					variant: "ghost",
-					size: "icon",
-					className: "h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10",
-					onClick: () => onChange(null),
-					title: "Remover arquivo",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
-						"data-uid": "src/components/FileSlot.tsx:73:15",
-						"data-prohibitions": "[editContent]",
-						className: "w-4 h-4"
-					})
-				})]
+				}, idx))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-				"data-uid": "src/components/FileSlot.tsx:78:7",
+				"data-uid": "src/components/FileSlot.tsx:122:7",
 				"data-prohibitions": "[editContent]",
 				type: "file",
 				className: "hidden",
 				accept,
 				ref: inputRef,
 				onChange: handleFileChange,
-				disabled
+				disabled,
+				multiple: maxFiles > 1
 			})
 		]
 	});
 }
 //#endregion
 //#region src/components/UploadCard.tsx
-function UploadCard({ title, description, slots, onFileChange, onUpload, loading, loaded, onError }) {
-	const allRequiredFilesPresent = slots.every((s) => !s.required || s.file !== null);
-	const canUpload = slots.some((s) => s.file !== null) && allRequiredFilesPresent && !loading && !loaded;
+function UploadCard({ title, description, slots, onFileChange, onUpload, loading, progress, loaded, onError }) {
+	const allRequiredFilesPresent = slots.every((s) => !s.required || s.files.length > 0);
+	const canUpload = slots.some((s) => s.files.length > 0) && allRequiredFilesPresent && !loading && !loaded;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		"data-uid": "src/components/UploadCard.tsx:48:5",
+		"data-uid": "src/components/UploadCard.tsx:52:5",
 		"data-prohibitions": "[editContent]",
 		className: cn$1("flex flex-col h-full transition-colors", loaded ? "border-primary/50 bg-primary/[0.03]" : ""),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-				"data-uid": "src/components/UploadCard.tsx:54:7",
+				"data-uid": "src/components/UploadCard.tsx:58:7",
 				"data-prohibitions": "[editContent]",
 				className: "pb-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
-					"data-uid": "src/components/UploadCard.tsx:55:9",
+					"data-uid": "src/components/UploadCard.tsx:59:9",
 					"data-prohibitions": "[editContent]",
 					className: "flex items-center gap-2 text-lg",
 					children: [loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-						"data-uid": "src/components/UploadCard.tsx:57:13",
+						"data-uid": "src/components/UploadCard.tsx:61:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-5 h-5 text-emerald-500"
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
-						"data-uid": "src/components/UploadCard.tsx:59:13",
+						"data-uid": "src/components/UploadCard.tsx:63:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-5 h-5 text-muted-foreground"
 					}), title]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-					"data-uid": "src/components/UploadCard.tsx:63:9",
+					"data-uid": "src/components/UploadCard.tsx:67:9",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm",
 					children: description
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-				"data-uid": "src/components/UploadCard.tsx:65:7",
+				"data-uid": "src/components/UploadCard.tsx:69:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex-1 space-y-5 pb-4",
 				children: slots.map((slot) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/UploadCard.tsx:67:11",
+					"data-uid": "src/components/UploadCard.tsx:71:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-1.5",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSlot, {
-						"data-uid": "src/components/UploadCard.tsx:68:13",
+						"data-uid": "src/components/UploadCard.tsx:72:13",
 						"data-prohibitions": "[editContent]",
 						label: slot.label,
-						file: slot.file,
-						onChange: (file) => onFileChange(slot.id, file),
+						files: slot.files,
+						onChange: (files) => onFileChange(slot.id, files),
 						accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
 						disabled: loading || loaded,
+						maxFiles: slot.maxFiles,
 						onError
 					}), slot.helpText]
 				}, slot.id))
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardFooter, {
-				"data-uid": "src/components/UploadCard.tsx:80:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardFooter, {
+				"data-uid": "src/components/UploadCard.tsx:85:7",
 				"data-prohibitions": "[editContent]",
-				className: "pt-2",
-				children: loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/UploadCard.tsx:82:11",
+				className: "pt-2 flex flex-col gap-3 items-stretch",
+				children: [loading && typeof progress === "number" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/UploadCard.tsx:87:11",
+					"data-prohibitions": "[editContent]",
+					className: "space-y-1.5 w-full",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/UploadCard.tsx:88:13",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-muted-foreground",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/UploadCard.tsx:89:15",
+							"data-prohibitions": "[]",
+							children: "Processando arquivos..."
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							"data-uid": "src/components/UploadCard.tsx:90:15",
+							"data-prohibitions": "[editContent]",
+							children: [progress, "%"]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
+						"data-uid": "src/components/UploadCard.tsx:92:13",
+						"data-prohibitions": "[editContent]",
+						value: progress,
+						className: "h-1.5"
+					})]
+				}), loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/UploadCard.tsx:96:11",
 					"data-prohibitions": "[]",
 					className: "w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-						"data-uid": "src/components/UploadCard.tsx:83:13",
+						"data-uid": "src/components/UploadCard.tsx:97:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-4 h-4"
 					}), " Dados Processados"]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/components/UploadCard.tsx:86:11",
+					"data-uid": "src/components/UploadCard.tsx:100:11",
 					"data-prohibitions": "[editContent]",
 					className: "w-full transition-all",
 					onClick: onUpload,
-					disabled: !canUpload,
+					disabled: !canUpload || loading,
 					variant: canUpload ? "default" : "secondary",
 					children: [loading ? "Processando..." : "Processar Dados", !loading && canUpload && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-						"data-uid": "src/components/UploadCard.tsx:93:39",
+						"data-uid": "src/components/UploadCard.tsx:107:39",
 						"data-prohibitions": "[editContent]",
 						className: "w-4 h-4 ml-2"
 					})]
-				})
+				})]
 			})
 		]
 	});
@@ -26567,105 +26814,119 @@ function ImportPage() {
 	const { importData, erpNeeds, supplierItems } = useProcurementStore();
 	const { toast } = useToast();
 	const [loading, setLoading] = (0, import_react.useState)(null);
-	const [erpFile, setErpFile] = (0, import_react.useState)(null);
-	const [amDemandaFile, setAmDemandaFile] = (0, import_react.useState)(null);
-	const [amPedidoFile, setAmPedidoFile] = (0, import_react.useState)(null);
-	const [quoteFile, setQuoteFile] = (0, import_react.useState)(null);
+	const [progress, setProgress] = (0, import_react.useState)(0);
+	const [erpFiles, setErpFiles] = (0, import_react.useState)([]);
+	const [amDemandaFiles, setAmDemandaFiles] = (0, import_react.useState)([]);
+	const [amPedidoFiles, setAmPedidoFiles] = (0, import_react.useState)([]);
+	const [quoteFiles, setQuoteFiles] = (0, import_react.useState)([]);
 	const isErpLoaded = erpNeeds.length > 0;
 	const isAmLoaded = supplierItems.some((i) => i.source.startsWith("AM"));
 	const isQuoteLoaded = supplierItems.some((i) => i.source === "DIRECT_QUOTE");
 	const handleUpload = (type) => {
 		setLoading(type);
-		setTimeout(() => {
-			importData(type);
-			setLoading(null);
-			toast({
-				title: "Sucesso",
-				description: `Dados de ${type} processados com sucesso.`
+		setProgress(0);
+		const interval = setInterval(() => {
+			setProgress((prev) => {
+				if (prev >= 90) return 90;
+				return prev + 10;
 			});
+		}, 150);
+		setTimeout(() => {
+			clearInterval(interval);
+			setProgress(100);
+			setTimeout(() => {
+				importData(type);
+				setLoading(null);
+				toast({
+					title: "Sucesso",
+					description: `Dados de ${type} processados com sucesso.`
+				});
+			}, 300);
 		}, 1500);
 	};
-	const handleFileChangeError = () => {
+	const handleFileChangeError = (msg) => {
 		toast({
-			title: "Arquivo Inválido",
-			description: "Por favor, selecione um arquivo válido (CSV ou Excel).",
+			title: "Atenção",
+			description: typeof msg === "string" ? msg : "Por favor, selecione um arquivo válido (CSV ou Excel).",
 			variant: "destructive"
 		});
 	};
-	const showNextStep = isErpLoaded || isAmLoaded || isQuoteLoaded;
+	const showNextStep = isErpLoaded && (isAmLoaded || isQuoteLoaded);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Import.tsx:43:5",
+		"data-uid": "src/pages/Import.tsx:58:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-8 animate-fade-in-up pb-12",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:44:7",
+				"data-uid": "src/pages/Import.tsx:59:7",
 				"data-prohibitions": "[]",
 				className: "text-center max-w-2xl mx-auto space-y-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/Import.tsx:45:9",
+					"data-uid": "src/pages/Import.tsx:60:9",
 					"data-prohibitions": "[]",
 					className: "text-3xl font-bold tracking-tight",
 					children: "Importação de Dados"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Import.tsx:46:9",
+					"data-uid": "src/pages/Import.tsx:61:9",
 					"data-prohibitions": "[]",
 					className: "text-muted-foreground text-sm md:text-base",
 					children: "Faça o upload das suas planilhas para cruzar os dados de compras e otimizar suas decisões."
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:51:7",
+				"data-uid": "src/pages/Import.tsx:66:7",
 				"data-prohibitions": "[]",
 				className: "grid grid-cols-1 md:grid-cols-3 gap-6 items-start",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:52:9",
+						"data-uid": "src/pages/Import.tsx:67:9",
 						"data-prohibitions": "[editContent]",
 						title: "Planilha ERP",
 						description: "Extração de Necessidade e Estoque Mín/Máx do seu sistema.",
 						loaded: isErpLoaded,
 						loading: loading === "ERP",
+						progress: loading === "ERP" ? progress : void 0,
 						slots: [{
 							id: "erp",
 							label: "Relatório de Estoque (ERP)",
-							file: erpFile,
+							files: erpFiles,
+							maxFiles: 1,
 							required: true,
 							helpText: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Import.tsx:64:17",
+								"data-uid": "src/pages/Import.tsx:81:17",
 								"data-prohibitions": "[]",
 								className: "text-[11px] text-muted-foreground mt-2 p-3 bg-muted/40 rounded-md border border-border/50",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									"data-uid": "src/pages/Import.tsx:65:19",
+									"data-uid": "src/pages/Import.tsx:82:19",
 									"data-prohibitions": "[]",
 									className: "font-semibold block mb-1.5 text-foreground/80 flex items-center gap-1.5",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
-										"data-uid": "src/pages/Import.tsx:66:21",
+										"data-uid": "src/pages/Import.tsx:83:21",
 										"data-prohibitions": "[editContent]",
 										className: "w-3.5 h-3.5"
 									}), " Colunas obrigatórias:"]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
-									"data-uid": "src/pages/Import.tsx:68:19",
+									"data-uid": "src/pages/Import.tsx:85:19",
 									"data-prohibitions": "[]",
 									className: "list-disc list-inside space-y-1 ml-1",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:69:21",
+											"data-uid": "src/pages/Import.tsx:86:21",
 											"data-prohibitions": "[]",
 											children: "Descrição do Produto"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:70:21",
+											"data-uid": "src/pages/Import.tsx:87:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade Mínima em Estoque"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:71:21",
+											"data-uid": "src/pages/Import.tsx:88:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade Máxima de Estoque"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:72:21",
+											"data-uid": "src/pages/Import.tsx:89:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade que deve ser comprada"
 										})
@@ -26673,70 +26934,75 @@ function ImportPage() {
 								})]
 							})
 						}],
-						onFileChange: (id, file) => setErpFile(file),
+						onFileChange: (id, files) => setErpFiles(files),
 						onUpload: () => handleUpload("ERP"),
 						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:83:9",
+						"data-uid": "src/pages/Import.tsx:100:9",
 						"data-prohibitions": "[editContent]",
 						title: "Ação Magistral",
 						description: "Relatórios de Demanda (Exclusivos) e Pedidos (Commodities).",
 						loaded: isAmLoaded,
 						loading: loading === "AM",
+						progress: loading === "AM" ? progress : void 0,
 						slots: [{
 							id: "am_demanda",
 							label: "Relatório de Demanda",
-							file: amDemandaFile,
+							files: amDemandaFiles,
+							maxFiles: 20,
 							required: true
 						}, {
 							id: "am_pedido",
 							label: "Relatório de Pedidos",
-							file: amPedidoFile,
+							files: amPedidoFiles,
+							maxFiles: 20,
 							required: true
 						}],
-						onFileChange: (id, file) => {
-							if (id === "am_demanda") setAmDemandaFile(file);
-							if (id === "am_pedido") setAmPedidoFile(file);
+						onFileChange: (id, files) => {
+							if (id === "am_demanda") setAmDemandaFiles(files);
+							if (id === "am_pedido") setAmPedidoFiles(files);
 						},
 						onUpload: () => handleUpload("AM"),
 						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:105:9",
+						"data-uid": "src/pages/Import.tsx:130:9",
 						"data-prohibitions": "[editContent]",
 						title: "Cotações Diretas",
 						description: "Planilhas de cotações enviadas diretamente por fornecedores (Opcional).",
 						loaded: isQuoteLoaded,
 						loading: loading === "QUOTE",
+						progress: loading === "QUOTE" ? progress : void 0,
 						slots: [{
 							id: "quote",
 							label: "Cotação de Fornecedor",
-							file: quoteFile,
+							files: quoteFiles,
+							maxFiles: 20,
 							required: true
 						}],
-						onFileChange: (id, file) => setQuoteFile(file),
+						onFileChange: (id, files) => setQuoteFiles(files),
 						onUpload: () => handleUpload("QUOTE"),
 						onError: handleFileChangeError
 					})
 				]
 			}),
 			showNextStep && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Import.tsx:118:9",
+				"data-uid": "src/pages/Import.tsx:152:9",
 				"data-prohibitions": "[]",
 				className: "flex justify-center mt-12 animate-fade-in",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-					"data-uid": "src/pages/Import.tsx:119:11",
+					"data-uid": "src/pages/Import.tsx:153:11",
 					"data-prohibitions": "[]",
 					asChild: true,
 					size: "lg",
 					className: "gap-2 px-8 shadow-md",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-						"data-uid": "src/pages/Import.tsx:120:13",
+						"data-uid": "src/pages/Import.tsx:154:13",
 						"data-prohibitions": "[]",
 						to: "/matching",
 						children: ["Ir para Mapeamento IA ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-							"data-uid": "src/pages/Import.tsx:121:37",
+							"data-uid": "src/pages/Import.tsx:155:37",
 							"data-prohibitions": "[editContent]",
 							className: "w-4 h-4"
 						})]
@@ -28140,197 +28406,6 @@ function MatchingPage() {
 		})]
 	});
 }
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-context@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-context/dist/index.mjs
-function createContextScope(scopeName, createContextScopeDeps = []) {
-	let defaultContexts = [];
-	function createContext3(rootComponentName, defaultContext) {
-		const BaseContext = import_react.createContext(defaultContext);
-		BaseContext.displayName = rootComponentName + "Context";
-		const index = defaultContexts.length;
-		defaultContexts = [...defaultContexts, defaultContext];
-		const Provider = (props) => {
-			const { scope, children, ...context } = props;
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const value = import_react.useMemo(() => context, Object.values(context));
-			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
-				value,
-				children
-			});
-		};
-		Provider.displayName = rootComponentName + "Provider";
-		function useContext2(consumerName, scope) {
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const context = import_react.useContext(Context);
-			if (context) return context;
-			if (defaultContext !== void 0) return defaultContext;
-			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-		}
-		return [Provider, useContext2];
-	}
-	const createScope = () => {
-		const scopeContexts = defaultContexts.map((defaultContext) => {
-			return import_react.createContext(defaultContext);
-		});
-		return function useScope(scope) {
-			const contexts = scope?.[scopeName] || scopeContexts;
-			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
-				...scope,
-				[scopeName]: contexts
-			} }), [scope, contexts]);
-		};
-	};
-	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-	const baseScope = scopes[0];
-	if (scopes.length === 1) return baseScope;
-	const createScope = () => {
-		const scopeHooks = scopes.map((createScope2) => ({
-			useScope: createScope2(),
-			scopeName: createScope2.scopeName
-		}));
-		return function useComposedScopes(overrideScopes) {
-			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
-				return {
-					...nextScopes2,
-					...currentScope
-				};
-			}, {});
-			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-		};
-	};
-	createScope.scopeName = baseScope.scopeName;
-	return createScope;
-}
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.3_@types+react@19.2.14__@types+re_0243fb2db8a1fb85ca77b8d9e5c2d650/node_modules/@radix-ui/react-primitive/dist/index.mjs
-var Primitive = [
-	"a",
-	"button",
-	"div",
-	"form",
-	"h2",
-	"h3",
-	"img",
-	"input",
-	"label",
-	"li",
-	"nav",
-	"ol",
-	"p",
-	"select",
-	"span",
-	"svg",
-	"ul"
-].reduce((primitive, node) => {
-	const Slot = /* @__PURE__ */ createSlot(`Primitive.${node}`);
-	const Node = import_react.forwardRef((props, forwardedRef) => {
-		const { asChild, ...primitiveProps } = props;
-		const Comp = asChild ? Slot : node;
-		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
-		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
-			...primitiveProps,
-			ref: forwardedRef
-		});
-	});
-	Node.displayName = `Primitive.${node}`;
-	return {
-		...primitive,
-		[node]: Node
-	};
-}, {});
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-progress@1.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_7258c0b550570cef5cd6f2d2227aa6b9/node_modules/@radix-ui/react-progress/dist/index.mjs
-var PROGRESS_NAME = "Progress";
-var DEFAULT_MAX = 100;
-var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
-var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
-var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
-	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
-	const max = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
-	if (valueProp !== null && !isValidValueNumber(valueProp, max)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
-	const value = isValidValueNumber(valueProp, max) ? valueProp : null;
-	const valueLabel = isNumber(value) ? getValueLabel(value, max) : void 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
-		scope: __scopeProgress,
-		value,
-		max,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			"aria-valuemax": max,
-			"aria-valuemin": 0,
-			"aria-valuenow": isNumber(value) ? value : void 0,
-			"aria-valuetext": valueLabel,
-			role: "progressbar",
-			"data-state": getProgressState(value, max),
-			"data-value": value ?? void 0,
-			"data-max": max,
-			...progressProps,
-			ref: forwardedRef
-		})
-	});
-});
-Progress$1.displayName = PROGRESS_NAME;
-var INDICATOR_NAME = "ProgressIndicator";
-var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, ...indicatorProps } = props;
-	const context = useProgressContext(INDICATOR_NAME, __scopeProgress);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-state": getProgressState(context.value, context.max),
-		"data-value": context.value ?? void 0,
-		"data-max": context.max,
-		...indicatorProps,
-		ref: forwardedRef
-	});
-});
-ProgressIndicator.displayName = INDICATOR_NAME;
-function defaultGetValueLabel(value, max) {
-	return `${Math.round(value / max * 100)}%`;
-}
-function getProgressState(value, maxValue) {
-	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
-}
-function isNumber(value) {
-	return typeof value === "number";
-}
-function isValidMaxNumber(max) {
-	return isNumber(max) && !isNaN(max) && max > 0;
-}
-function isValidValueNumber(value, max) {
-	return isNumber(value) && !isNaN(value) && value <= max && value >= 0;
-}
-function getInvalidMaxError(propValue, componentName) {
-	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
-}
-function getInvalidValueError(propValue, componentName) {
-	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
-  - a positive number
-  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
-  - \`null\` or \`undefined\` if the progress is indeterminate.
-
-Defaulting to \`null\`.`;
-}
-var Root = Progress$1;
-var Indicator = ProgressIndicator;
-//#endregion
-//#region src/components/ui/progress.tsx
-var Progress = import_react.forwardRef(({ className, value, indicatorClassName, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	"data-uid": "src/components/ui/progress.tsx:11:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
-		"data-uid": "src/components/ui/progress.tsx:16:5",
-		"data-prohibitions": "[editContent]",
-		className: cn$1("h-full w-full flex-1 bg-primary transition-all", indicatorClassName),
-		style: { transform: `translateX(-${100 - (value || 0)}%)` }
-	})
-}));
-Progress.displayName = Root.displayName;
 //#endregion
 //#region src/components/optimization/CIFWidget.tsx
 function CIFWidget() {
@@ -31251,4 +31326,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DOrxO8md.js.map
+//# sourceMappingURL=index-7VXxL0eb.js.map
