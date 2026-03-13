@@ -19090,6 +19090,17 @@ var BrainCircuit = createLucideIcon("brain-circuit", [
 		key: "1e43v0"
 	}]
 ]);
+var Briefcase = createLucideIcon("briefcase", [["path", {
+	d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",
+	key: "jecpp"
+}], ["rect", {
+	width: "20",
+	height: "14",
+	x: "2",
+	y: "6",
+	rx: "2",
+	key: "i6l2r4"
+}]]);
 var ChartLine = createLucideIcon("chart-line", [["path", {
 	d: "M3 3v16a2 2 0 0 0 2 2h16",
 	key: "c24i48"
@@ -19163,6 +19174,13 @@ var CloudUpload = createLucideIcon("cloud-upload", [
 		key: "1quai1"
 	}]
 ]);
+var Code = createLucideIcon("code", [["path", {
+	d: "m16 18 6-6-6-6",
+	key: "eg8j8"
+}], ["path", {
+	d: "m8 6-6 6 6 6",
+	key: "ppft3o"
+}]]);
 var FileSpreadsheet = createLucideIcon("file-spreadsheet", [
 	["path", {
 		d: "M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",
@@ -19187,6 +19205,34 @@ var FileSpreadsheet = createLucideIcon("file-spreadsheet", [
 	["path", {
 		d: "M14 17h2",
 		key: "10kma7"
+	}]
+]);
+var Lightbulb = createLucideIcon("lightbulb", [
+	["path", {
+		d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
+		key: "1gvzjb"
+	}],
+	["path", {
+		d: "M9 18h6",
+		key: "x1upvd"
+	}],
+	["path", {
+		d: "M10 22h4",
+		key: "ceow96"
+	}]
+]);
+var Map$1 = createLucideIcon("map", [
+	["path", {
+		d: "M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z",
+		key: "169xi5"
+	}],
+	["path", {
+		d: "M15 5.764v15",
+		key: "1pn4in"
+	}],
+	["path", {
+		d: "M9 3.236v15",
+		key: "1uimfh"
 	}]
 ]);
 var Menu = createLucideIcon("menu", [
@@ -19294,6 +19340,13 @@ var TrendingDown = createLucideIcon("trending-down", [["path", {
 	d: "m22 17-8.5-8.5-5 5L2 7",
 	key: "x473p"
 }]]);
+var TrendingUp = createLucideIcon("trending-up", [["path", {
+	d: "M16 7h6v6",
+	key: "box55l"
+}], ["path", {
+	d: "m22 7-8.5 8.5-5-5L2 17",
+	key: "1t1m79"
+}]]);
 var TriangleAlert = createLucideIcon("triangle-alert", [
 	["path", {
 		d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
@@ -19340,6 +19393,10 @@ var X = createLucideIcon("x", [["path", {
 }], ["path", {
 	d: "m6 6 12 12",
 	key: "d8bk6v"
+}]]);
+var Zap = createLucideIcon("zap", [["path", {
+	d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
+	key: "1xq2db"
 }]]);
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/tailwind-merge@2.6.1/node_modules/tailwind-merge/dist/bundle-mjs.mjs
@@ -26069,133 +26126,138 @@ function Layout() {
 			name: "Otimização",
 			path: "/optimization",
 			icon: ChartLine
+		},
+		{
+			name: "Roteiro",
+			path: "/roteiro",
+			icon: Map$1
 		}
 	];
 	const NavItems = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: navLinks.map((link) => {
 		const Icon = link.icon;
 		const isActive = location.pathname === link.path;
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-			"data-uid": "src/components/Layout.tsx:32:11",
+			"data-uid": "src/components/Layout.tsx:33:11",
 			"data-prohibitions": "[editContent]",
 			to: link.path,
 			onClick: () => setIsOpen(false),
 			className: cn$1("flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors", isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"),
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
-				"data-uid": "src/components/Layout.tsx:43:13",
+				"data-uid": "src/components/Layout.tsx:44:13",
 				"data-prohibitions": "[editContent]",
 				className: "w-4 h-4"
 			}), link.name]
 		}, link.path);
 	}) });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Layout.tsx:52:5",
+		"data-uid": "src/components/Layout.tsx:53:5",
 		"data-prohibitions": "[editContent]",
 		className: "flex flex-col min-h-screen",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
-				"data-uid": "src/components/Layout.tsx:53:7",
+				"data-uid": "src/components/Layout.tsx:54:7",
 				"data-prohibitions": "[editContent]",
 				className: "glass-nav border-b bg-background/80 backdrop-blur-md sticky top-0 z-40",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Layout.tsx:54:9",
+					"data-uid": "src/components/Layout.tsx:55:9",
 					"data-prohibitions": "[editContent]",
 					className: "container mx-auto px-4 h-16 flex items-center justify-between",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-							"data-uid": "src/components/Layout.tsx:55:11",
+							"data-uid": "src/components/Layout.tsx:56:11",
 							"data-prohibitions": "[]",
 							to: "/",
 							className: "flex items-center gap-2 group",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/Layout.tsx:56:13",
+								"data-uid": "src/components/Layout.tsx:57:13",
 								"data-prohibitions": "[]",
 								className: "bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Rocket, {
-									"data-uid": "src/components/Layout.tsx:57:15",
+									"data-uid": "src/components/Layout.tsx:58:15",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5 text-primary"
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/Layout.tsx:59:13",
+								"data-uid": "src/components/Layout.tsx:60:13",
 								"data-prohibitions": "[]",
 								className: "font-bold text-lg tracking-tight",
 								children: "ProcureSaaS"
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-							"data-uid": "src/components/Layout.tsx:62:11",
+							"data-uid": "src/components/Layout.tsx:63:11",
 							"data-prohibitions": "[]",
 							className: "hidden md:flex items-center gap-1",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavItems, {
-								"data-uid": "src/components/Layout.tsx:63:13",
+								"data-uid": "src/components/Layout.tsx:64:13",
 								"data-prohibitions": "[editContent]"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/Layout.tsx:66:11",
+							"data-uid": "src/components/Layout.tsx:67:11",
 							"data-prohibitions": "[editContent]",
 							className: "flex items-center gap-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-								"data-uid": "src/components/Layout.tsx:67:13",
+								"data-uid": "src/components/Layout.tsx:68:13",
 								"data-prohibitions": "[editContent]",
 								variant: "ghost",
 								size: "icon",
 								onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
 								className: "rounded-full",
 								children: theme === "dark" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sun, {
-									"data-uid": "src/components/Layout.tsx:73:35",
+									"data-uid": "src/components/Layout.tsx:74:35",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5"
 								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Moon, {
-									"data-uid": "src/components/Layout.tsx:73:65",
+									"data-uid": "src/components/Layout.tsx:74:65",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5"
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sheet, {
-								"data-uid": "src/components/Layout.tsx:76:13",
+								"data-uid": "src/components/Layout.tsx:77:13",
 								"data-prohibitions": "[]",
 								open: isOpen,
 								onOpenChange: setIsOpen,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTrigger, {
-									"data-uid": "src/components/Layout.tsx:77:15",
+									"data-uid": "src/components/Layout.tsx:78:15",
 									"data-prohibitions": "[]",
 									asChild: true,
 									className: "md:hidden",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-										"data-uid": "src/components/Layout.tsx:78:17",
+										"data-uid": "src/components/Layout.tsx:79:17",
 										"data-prohibitions": "[]",
 										variant: "ghost",
 										size: "icon",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
-											"data-uid": "src/components/Layout.tsx:79:19",
+											"data-uid": "src/components/Layout.tsx:80:19",
 											"data-prohibitions": "[editContent]",
 											className: "w-5 h-5"
 										})
 									})
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetContent, {
-									"data-uid": "src/components/Layout.tsx:82:15",
+									"data-uid": "src/components/Layout.tsx:83:15",
 									"data-prohibitions": "[]",
 									side: "right",
 									className: "w-[280px]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTitle, {
-											"data-uid": "src/components/Layout.tsx:83:17",
+											"data-uid": "src/components/Layout.tsx:84:17",
 											"data-prohibitions": "[]",
 											className: "sr-only",
 											children: "Menu de Navegação"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetDescription, {
-											"data-uid": "src/components/Layout.tsx:84:17",
+											"data-uid": "src/components/Layout.tsx:85:17",
 											"data-prohibitions": "[]",
 											className: "sr-only",
 											children: "Acesse as páginas da ferramenta"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											"data-uid": "src/components/Layout.tsx:87:17",
+											"data-uid": "src/components/Layout.tsx:88:17",
 											"data-prohibitions": "[]",
 											className: "flex flex-col gap-2 mt-8",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavItems, {
-												"data-uid": "src/components/Layout.tsx:88:19",
+												"data-uid": "src/components/Layout.tsx:89:19",
 												"data-prohibitions": "[editContent]"
 											})
 										})
@@ -26207,29 +26269,29 @@ function Layout() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
-				"data-uid": "src/components/Layout.tsx:96:7",
+				"data-uid": "src/components/Layout.tsx:97:7",
 				"data-prohibitions": "[]",
 				className: "flex-1 w-full max-w-7xl mx-auto px-4 py-8",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {
-					"data-uid": "src/components/Layout.tsx:97:9",
+					"data-uid": "src/components/Layout.tsx:98:9",
 					"data-prohibitions": "[editContent]"
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
-				"data-uid": "src/components/Layout.tsx:100:7",
+				"data-uid": "src/components/Layout.tsx:101:7",
 				"data-prohibitions": "[editContent]",
 				className: "border-t py-8 mt-12 bg-card/50",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Layout.tsx:101:9",
+					"data-uid": "src/components/Layout.tsx:102:9",
 					"data-prohibitions": "[editContent]",
 					className: "container mx-auto px-4 text-center text-sm text-muted-foreground",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/components/Layout.tsx:102:11",
+						"data-uid": "src/components/Layout.tsx:103:11",
 						"data-prohibitions": "[]",
 						className: "flex items-center justify-center gap-1",
 						children: "Gestão de Compras Inteligente."
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/components/Layout.tsx:103:11",
+						"data-uid": "src/components/Layout.tsx:104:11",
 						"data-prohibitions": "[editContent]",
 						className: "mt-2",
 						children: [
@@ -30602,6 +30664,209 @@ function OptimizationPage() {
 	});
 }
 //#endregion
+//#region src/data/roadmapData.ts
+var roadmapData = [
+	{
+		phase: 1,
+		title: "Ideação e Problema",
+		description: "Encontre uma dor real que as pessoas estão dispostas a pagar para resolver.",
+		content: [
+			"**Foque no problema, não na solução:** Muitos fundadores constroem algo legal que ninguém precisa. Comece perguntando: \"Qual processo manual chato meu público odeia fazer?\"",
+			"**Escolha um nicho específico:** \"Software para empresas\" é muito amplo. \"Software de gestão de estoque para clínicas veterinárias de pequeno porte\" é um excelente começo.",
+			"**A Regra da Vitamina vs. Analgésico:** Seu SaaS deve ser um analgésico (resolve uma dor aguda e imediata) e não uma vitamina (algo bom de ter, mas não essencial)."
+		],
+		proTip: "Use o Reddit, grupos do Facebook e ReclameAqui para minerar reclamações e encontrar problemas reais que as pessoas já estão tentando resolver com planilhas."
+	},
+	{
+		phase: 2,
+		title: "Validação de Mercado",
+		description: "Descubra se as pessoas comprariam antes de escrever a primeira linha de código.",
+		content: [
+			"**O Teste do Mom Test:** Ao falar com clientes, não pergunte \"Você usaria isso?\". Pergunte \"Como você resolve esse problema hoje?\" e \"Quanto você gastou tentando resolver isso?\".",
+			"**Landing Page de Pré-venda:** Crie uma página simples explicando o benefício principal e coloque um formulário de e-mail ou botão de pagamento (com desconto de early bird).",
+			"**Falso Positivo:** Likes e \"ideia legal\" não são validação. Validação real é cartão de crédito passado, tempo comprometido ou carta de intenção assinada."
+		],
+		proTip: "Se você não consegue vender a ideia em uma landing page simples ou em uma ligação de 15 minutos, o produto não vai se vender sozinho quando estiver pronto."
+	},
+	{
+		phase: 3,
+		title: "O MVP (Mínimo Produto Viável)",
+		description: "Construa apenas o núcleo essencial que resolve o problema de forma funcional.",
+		content: [
+			"**Corte sem dó:** Se uma funcionalidade não é estritamente necessária para entregar o valor principal, deixe para a versão 2.0.",
+			"**Design não é tudo no início:** Um produto feio que resolve uma dor gigante será usado. Um produto lindo que não serve para nada será abandonado. Foque na utilidade.",
+			"**Onboarding manual:** No começo, você não precisa de um sistema complexo de onboarding automatizado. Ligue para seus primeiros 10 clientes e configure as contas deles pessoalmente."
+		],
+		proTip: "Se você não tem vergonha da primeira versão do seu produto, você demorou demais para lançar (Reid Hoffman)."
+	},
+	{
+		phase: 4,
+		title: "Modelo de Negócio",
+		description: "Defina como você vai cobrar pelo valor gerado.",
+		content: [
+			"**Cobre mais do que você acha justo:** Desenvolvedores tendem a subprecificar. Se o seu SaaS economiza 10 horas semanais de um profissional que ganha R$ 50/hora, cobrar R$ 200/mês é muito barato.",
+			"**Evite o Freemium no início:** O Freemium exige volume massivo para dar certo. Prefira um modelo de Trial (teste grátis de 7-14 dias) e planos pagos desde o dia zero.",
+			"**Planos em Tiers:** Tenha 3 opções de preço. A maioria escolherá a do meio se você ancorar a mais cara corretamente."
+		],
+		proTip: "Cobre anualmente oferecendo 2 meses de desconto. Isso injeta caixa no início do projeto e reduz a taxa de cancelamento (churn)."
+	},
+	{
+		phase: 5,
+		title: "Tech Stack e Lançamento",
+		description: "Escolha suas ferramentas e coloque o projeto no mundo.",
+		content: [
+			"**Use o que você domina:** A melhor stack é aquela que você já sabe usar. Não aprenda uma linguagem nova só porque está na moda se o objetivo é validar um negócio rápido.",
+			"**Não reinvente a roda:** Use ferramentas prontas para autenticação, pagamentos e envio de e-mails. Focar em construir um sistema de login próprio não agrega valor ao seu cliente.",
+			"**O lançamento não é um evento único:** Se lançar e ninguém aparecer, tudo bem. O verdadeiro lançamento é um processo contínuo de marketing e vendas dia após dia."
+		],
+		proTip: "Integre o Stripe ou Pagar.me desde o dia 1 usando ferramentas no-code ou bibliotecas prontas. Não perca meses integrando bancos convencionais."
+	}
+];
+//#endregion
+//#region src/pages/Roadmap.tsx
+var icons = [
+	Lightbulb,
+	TrendingUp,
+	Zap,
+	Briefcase,
+	Code
+];
+function RoadmapPage() {
+	const renderContent = (text) => {
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: text.split("**").map((part, i) => i % 2 === 1 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+			"data-uid": "src/pages/Roadmap.tsx:15:13",
+			"data-prohibitions": "[editContent]",
+			className: "text-foreground",
+			children: part
+		}, i) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			"data-uid": "src/pages/Roadmap.tsx:19:13",
+			"data-prohibitions": "[editContent]",
+			children: part
+		}, i)) });
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Roadmap.tsx:27:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-8 animate-fade-in-up",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/pages/Roadmap.tsx:28:7",
+			"data-prohibitions": "[]",
+			className: "text-center max-w-2xl mx-auto",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+				"data-uid": "src/pages/Roadmap.tsx:29:9",
+				"data-prohibitions": "[]",
+				className: "text-3xl font-bold tracking-tight mb-2 flex items-center justify-center gap-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Map$1, {
+					"data-uid": "src/pages/Roadmap.tsx:30:11",
+					"data-prohibitions": "[editContent]",
+					className: "w-8 h-8 text-primary"
+				}), " Roteiro de Construção"]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				"data-uid": "src/pages/Roadmap.tsx:32:9",
+				"data-prohibitions": "[]",
+				className: "text-muted-foreground",
+				children: "Guia passo a passo com as 5 fases essenciais para construir e lançar o seu SaaS com sucesso."
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			"data-uid": "src/pages/Roadmap.tsx:38:7",
+			"data-prohibitions": "[editContent]",
+			className: "relative border-l border-border ml-4 md:ml-8 space-y-8 pb-8",
+			children: roadmapData.map((phase, index) => {
+				const Icon = icons[index % icons.length];
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Roadmap.tsx:42:13",
+					"data-prohibitions": "[editContent]",
+					className: "relative pl-8 md:pl-12",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Roadmap.tsx:43:15",
+						"data-prohibitions": "[]",
+						className: "absolute -left-5 top-1 bg-background border-2 border-primary rounded-full p-2",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
+							"data-uid": "src/pages/Roadmap.tsx:44:17",
+							"data-prohibitions": "[editContent]",
+							className: "w-5 h-5 text-primary"
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+						"data-uid": "src/pages/Roadmap.tsx:47:15",
+						"data-prohibitions": "[editContent]",
+						className: "border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+							"data-uid": "src/pages/Roadmap.tsx:48:17",
+							"data-prohibitions": "[editContent]",
+							className: "pb-3",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									"data-uid": "src/pages/Roadmap.tsx:49:19",
+									"data-prohibitions": "[editContent]",
+									className: "flex items-center justify-between mb-1",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										"data-uid": "src/pages/Roadmap.tsx:50:21",
+										"data-prohibitions": "[editContent]",
+										variant: "outline",
+										className: "text-primary border-primary/30 bg-primary/5",
+										children: ["Fase ", phase.phase]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+									"data-uid": "src/pages/Roadmap.tsx:57:19",
+									"data-prohibitions": "[editContent]",
+									className: "text-xl",
+									children: phase.title
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
+									"data-uid": "src/pages/Roadmap.tsx:58:19",
+									"data-prohibitions": "[editContent]",
+									className: "text-base font-medium text-foreground/80",
+									children: phase.description
+								})
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+							"data-uid": "src/pages/Roadmap.tsx:62:17",
+							"data-prohibitions": "[editContent]",
+							className: "space-y-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								"data-uid": "src/pages/Roadmap.tsx:63:19",
+								"data-prohibitions": "[editContent]",
+								className: "space-y-2",
+								children: phase.content.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/pages/Roadmap.tsx:65:23",
+									"data-prohibitions": "[editContent]",
+									className: "flex gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+										"data-uid": "src/pages/Roadmap.tsx:66:25",
+										"data-prohibitions": "[editContent]",
+										className: "w-5 h-5 text-emerald-500 shrink-0 mt-0.5"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										"data-uid": "src/pages/Roadmap.tsx:67:25",
+										"data-prohibitions": "[editContent]",
+										className: "text-muted-foreground text-sm leading-relaxed",
+										children: renderContent(item)
+									})]
+								}, i))
+							}), phase.proTip && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/Roadmap.tsx:75:21",
+								"data-prohibitions": "[editContent]",
+								className: "mt-4 bg-secondary/50 rounded-lg p-3 text-sm border border-border/50",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+									"data-uid": "src/pages/Roadmap.tsx:76:23",
+									"data-prohibitions": "[]",
+									className: "text-foreground flex items-center gap-1 mb-1",
+									children: "💡 Dica Pro"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									"data-uid": "src/pages/Roadmap.tsx:79:23",
+									"data-prohibitions": "[editContent]",
+									className: "text-muted-foreground",
+									children: phase.proTip
+								})]
+							})]
+						})]
+					})]
+				}, phase.phase);
+			})
+		})]
+	});
+}
+//#endregion
 //#region src/pages/NotFound.tsx
 var NotFound = () => {
 	const location = useLocation();
@@ -30643,77 +30908,86 @@ var NotFound = () => {
 //#endregion
 //#region src/App.tsx
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
-	"data-uid": "src/App.tsx:15:3",
+	"data-uid": "src/App.tsx:16:3",
 	"data-prohibitions": "[]",
 	defaultTheme: "light",
 	storageKey: "vite-ui-theme",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProcurementProvider, {
-		"data-uid": "src/App.tsx:16:5",
+		"data-uid": "src/App.tsx:17:5",
 		"data-prohibitions": "[]",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-			"data-uid": "src/App.tsx:17:7",
+			"data-uid": "src/App.tsx:18:7",
 			"data-prohibitions": "[]",
 			future: {
 				v7_startTransition: false,
 				v7_relativeSplatPath: false
 			},
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:18:9",
+				"data-uid": "src/App.tsx:19:9",
 				"data-prohibitions": "[]",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:19:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:20:11",
 						"data-prohibitions": "[editContent]"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:21:11",
+						"data-prohibitions": "[editContent]"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+						"data-uid": "src/App.tsx:22:11",
 						"data-prohibitions": "[]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-							"data-uid": "src/App.tsx:22:13",
+							"data-uid": "src/App.tsx:23:13",
 							"data-prohibitions": "[]",
 							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-								"data-uid": "src/App.tsx:22:29",
+								"data-uid": "src/App.tsx:23:29",
 								"data-prohibitions": "[editContent]"
 							}),
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-									"data-uid": "src/App.tsx:23:15",
+									"data-uid": "src/App.tsx:24:15",
 									"data-prohibitions": "[editContent]",
 									path: "/",
 									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImportPage, {
-										"data-uid": "src/App.tsx:23:40",
-										"data-prohibitions": "[editContent]"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-									"data-uid": "src/App.tsx:24:15",
-									"data-prohibitions": "[editContent]",
-									path: "/matching",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MatchingPage, {
-										"data-uid": "src/App.tsx:24:48",
+										"data-uid": "src/App.tsx:24:40",
 										"data-prohibitions": "[editContent]"
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 									"data-uid": "src/App.tsx:25:15",
 									"data-prohibitions": "[editContent]",
+									path: "/matching",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MatchingPage, {
+										"data-uid": "src/App.tsx:25:48",
+										"data-prohibitions": "[editContent]"
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:26:15",
+									"data-prohibitions": "[editContent]",
 									path: "/optimization",
 									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(OptimizationPage, {
-										"data-uid": "src/App.tsx:25:52",
+										"data-uid": "src/App.tsx:26:52",
+										"data-prohibitions": "[editContent]"
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:27:15",
+									"data-prohibitions": "[editContent]",
+									path: "/roteiro",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RoadmapPage, {
+										"data-uid": "src/App.tsx:27:47",
 										"data-prohibitions": "[editContent]"
 									})
 								})
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-							"data-uid": "src/App.tsx:27:13",
+							"data-uid": "src/App.tsx:29:13",
 							"data-prohibitions": "[editContent]",
 							path: "*",
 							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-								"data-uid": "src/App.tsx:27:38",
+								"data-uid": "src/App.tsx:29:38",
 								"data-prohibitions": "[editContent]"
 							})
 						})]
@@ -30731,4 +31005,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-8efHEQhP.js.map
+//# sourceMappingURL=index-kjfuoq0J.js.map
