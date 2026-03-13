@@ -1,14 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import {
-  Rocket,
-  Menu,
-  Moon,
-  Sun,
-  LayoutDashboard,
-  Compass,
-  CheckSquare,
-  Wrench,
-} from 'lucide-react'
+import { Rocket, Menu, Moon, Sun, UploadCloud, BrainCircuit, LineChart } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -20,19 +11,16 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import usePlannerStore from '@/stores/usePlannerStore'
 
 export default function Layout() {
   const { theme, setTheme } = useTheme()
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
-  const { progress } = usePlannerStore()
 
   const navLinks = [
-    { name: 'Início', path: '/', icon: LayoutDashboard },
-    { name: 'Roteiro', path: '/roteiro', icon: Compass },
-    { name: 'Ferramentas', path: '/ferramentas', icon: Wrench },
-    { name: 'Meu Plano', path: '/plano', icon: CheckSquare },
+    { name: 'Importar Dados', path: '/', icon: UploadCloud },
+    { name: 'Mapeamento IA', path: '/matching', icon: BrainCircuit },
+    { name: 'Otimização', path: '/optimization', icon: LineChart },
   ]
 
   const NavItems = () => (
@@ -54,11 +42,6 @@ export default function Layout() {
           >
             <Icon className="w-4 h-4" />
             {link.name}
-            {link.name === 'Meu Plano' && progress > 0 && (
-              <span className="ml-auto text-xs bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full">
-                {progress}%
-              </span>
-            )}
           </Link>
         )
       })}
@@ -67,13 +50,13 @@ export default function Layout() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="glass-nav">
+      <header className="glass-nav border-b bg-background/80 backdrop-blur-md sticky top-0 z-40">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
               <Rocket className="w-5 h-5 text-primary" />
             </div>
-            <span className="font-bold text-lg tracking-tight">SaaS Blueprint</span>
+            <span className="font-bold text-lg tracking-tight">ProcureSaaS</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -99,7 +82,7 @@ export default function Layout() {
               <SheetContent side="right" className="w-[280px]">
                 <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
                 <SheetDescription className="sr-only">
-                  Acesse as páginas do SaaS Blueprint
+                  Acesse as páginas da ferramenta
                 </SheetDescription>
                 <div className="flex flex-col gap-2 mt-8">
                   <NavItems />
@@ -116,12 +99,9 @@ export default function Layout() {
 
       <footer className="border-t py-8 mt-12 bg-card/50">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p className="flex items-center justify-center gap-1">
-            Construído com <span className="text-red-500">❤️</span> para empreendedores e
-            desenvolvedores.
-          </p>
+          <p className="flex items-center justify-center gap-1">Gestão de Compras Inteligente.</p>
           <p className="mt-2">
-            © {new Date().getFullYear()} SaaS Blueprint. Todos os direitos reservados.
+            © {new Date().getFullYear()} ProcureSaaS. Todos os direitos reservados.
           </p>
         </div>
       </footer>

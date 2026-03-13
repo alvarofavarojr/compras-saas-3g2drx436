@@ -18109,15 +18109,15 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$6 = DismissableLayer;
+var Root$4 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-use-layout-effect@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs
 var useLayoutEffect2 = globalThis?.document ? import_react.useLayoutEffect : () => {};
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-portal@1.1.9_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_7668895bec2444446faa4e0f4eb5244b/node_modules/@radix-ui/react-portal/dist/index.mjs
-var PORTAL_NAME$2 = "Portal";
-var Portal$1 = import_react.forwardRef((props, forwardedRef) => {
+var PORTAL_NAME$3 = "Portal";
+var Portal$2 = import_react.forwardRef((props, forwardedRef) => {
 	const { container: containerProp, ...portalProps } = props;
 	const [mounted, setMounted] = import_react.useState(false);
 	useLayoutEffect2(() => setMounted(true), []);
@@ -18127,7 +18127,7 @@ var Portal$1 = import_react.forwardRef((props, forwardedRef) => {
 		ref: forwardedRef
 	}), container) : null;
 });
-Portal$1.displayName = PORTAL_NAME$2;
+Portal$2.displayName = PORTAL_NAME$3;
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-presence@1.1.5_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_c01c26c80b5ab5e3ecefbda6eca51ad1/node_modules/@radix-ui/react-presence/dist/index.mjs
 function useStateMachine(initialState, machine) {
@@ -18251,7 +18251,7 @@ function useControllableState({ prop, defaultProp, onChange = () => {}, caller }
 	}
 	return [value, import_react.useCallback((nextValue) => {
 		if (isControlled) {
-			const value2 = isFunction$1(nextValue) ? nextValue(prop) : nextValue;
+			const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
 			if (value2 !== prop) onChangeRef.current?.(value2);
 		} else setUncontrolledProp(nextValue);
 	}, [
@@ -18280,7 +18280,7 @@ function useUncontrolledState({ defaultProp, onChange }) {
 		onChangeRef
 	];
 }
-function isFunction$1(value) {
+function isFunction(value) {
 	return typeof value === "function";
 }
 //#endregion
@@ -18297,7 +18297,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	whiteSpace: "nowrap",
 	wordWrap: "normal"
 });
-var NAME$2 = "VisuallyHidden";
+var NAME$1 = "VisuallyHidden";
 var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
 		...props,
@@ -18308,8 +18308,8 @@ var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-VisuallyHidden.displayName = NAME$2;
-var Root$5 = VisuallyHidden;
+VisuallyHidden.displayName = NAME$1;
+var Root$3 = VisuallyHidden;
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-toast@1.2.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_4581e89c6ba13e4159ce65546c8b2a16/node_modules/@radix-ui/react-toast/dist/index.mjs
 var PROVIDER_NAME$1 = "ToastProvider";
@@ -18343,13 +18343,13 @@ var ToastProvider$1 = (props) => {
 	});
 };
 ToastProvider$1.displayName = PROVIDER_NAME$1;
-var VIEWPORT_NAME = "ToastViewport";
+var VIEWPORT_NAME$1 = "ToastViewport";
 var VIEWPORT_DEFAULT_HOTKEY = ["F8"];
 var VIEWPORT_PAUSE = "toast.viewportPause";
 var VIEWPORT_RESUME = "toast.viewportResume";
 var ToastViewport$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, hotkey = VIEWPORT_DEFAULT_HOTKEY, label = "Notifications ({hotkey})", ...viewportProps } = props;
-	const context = useToastProviderContext(VIEWPORT_NAME, __scopeToast);
+	const context = useToastProviderContext(VIEWPORT_NAME$1, __scopeToast);
 	const getItems = useCollection$1(__scopeToast);
 	const wrapperRef = import_react.useRef(null);
 	const headFocusProxyRef = import_react.useRef(null);
@@ -18465,7 +18465,7 @@ var ToastViewport$1 = import_react.forwardRef((props, forwardedRef) => {
 		]
 	});
 });
-ToastViewport$1.displayName = VIEWPORT_NAME;
+ToastViewport$1.displayName = VIEWPORT_NAME$1;
 var FOCUS_PROXY_NAME = "ToastFocusProxy";
 var FocusProxy = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, onFocusFromOutsideViewport, ...proxyProps } = props;
@@ -18609,7 +18609,7 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 		onClose: handleClose,
 		children: import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$1.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
@@ -18700,7 +18700,7 @@ var ToastAnnounce = (props) => {
 		const timer = window.setTimeout(() => setIsAnnounced(true), 1e3);
 		return () => window.clearTimeout(timer);
 	}, []);
-	return isAnnounced ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
+	return isAnnounced ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
 		asChild: true,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden, {
 			...announceProps,
@@ -18838,7 +18838,7 @@ function focusFirst$1(candidates) {
 	});
 }
 var Provider$1 = ToastProvider$1;
-var Viewport = ToastViewport$1;
+var Viewport$1 = ToastViewport$1;
 var Root2$2 = Toast$2;
 var Title$1 = ToastTitle$1;
 var Description$1 = ToastDescription$1;
@@ -18992,7 +18992,7 @@ var hasA11yProp = (props) => {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Icon = (0, import_react.forwardRef)(({ color = "currentColor", size = 24, strokeWidth = 2, absoluteStrokeWidth, className = "", children, iconNode, ...rest }, ref) => (0, import_react.createElement)("svg", {
+var Icon$1 = (0, import_react.forwardRef)(({ color = "currentColor", size = 24, strokeWidth = 2, absoluteStrokeWidth, className = "", children, iconNode, ...rest }, ref) => (0, import_react.createElement)("svg", {
 	ref,
 	...defaultAttributes,
 	width: size,
@@ -19012,7 +19012,7 @@ var Icon = (0, import_react.forwardRef)(({ color = "currentColor", size = 24, st
 * See the LICENSE file in the root directory of this source tree.
 */
 var createLucideIcon = (iconName, iconNode) => {
-	const Component = (0, import_react.forwardRef)(({ className, ...props }, ref) => (0, import_react.createElement)(Icon, {
+	const Component = (0, import_react.forwardRef)(({ className, ...props }, ref) => (0, import_react.createElement)(Icon$1, {
 		ref,
 		iconNode,
 		className: mergeClasses(`lucide-${toKebabCase(toPascalCase(iconName))}`, `lucide-${iconName}`, className),
@@ -19028,6 +19028,68 @@ var ArrowRight = createLucideIcon("arrow-right", [["path", {
 	d: "m12 5 7 7-7 7",
 	key: "xquz4c"
 }]]);
+var BrainCircuit = createLucideIcon("brain-circuit", [
+	["path", {
+		d: "M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z",
+		key: "l5xja"
+	}],
+	["path", {
+		d: "M9 13a4.5 4.5 0 0 0 3-4",
+		key: "10igwf"
+	}],
+	["path", {
+		d: "M6.003 5.125A3 3 0 0 0 6.401 6.5",
+		key: "105sqy"
+	}],
+	["path", {
+		d: "M3.477 10.896a4 4 0 0 1 .585-.396",
+		key: "ql3yin"
+	}],
+	["path", {
+		d: "M6 18a4 4 0 0 1-1.967-.516",
+		key: "2e4loj"
+	}],
+	["path", {
+		d: "M12 13h4",
+		key: "1ku699"
+	}],
+	["path", {
+		d: "M12 18h6a2 2 0 0 1 2 2v1",
+		key: "105ag5"
+	}],
+	["path", {
+		d: "M12 8h8",
+		key: "1lhi5i"
+	}],
+	["path", {
+		d: "M16 8V5a2 2 0 0 1 2-2",
+		key: "u6izg6"
+	}],
+	["circle", {
+		cx: "16",
+		cy: "13",
+		r: ".5",
+		key: "ry7gng"
+	}],
+	["circle", {
+		cx: "18",
+		cy: "3",
+		r: ".5",
+		key: "1aiba7"
+	}],
+	["circle", {
+		cx: "20",
+		cy: "21",
+		r: ".5",
+		key: "yhc1fs"
+	}],
+	["circle", {
+		cx: "20",
+		cy: "8",
+		r: ".5",
+		key: "1e43v0"
+	}]
+]);
 var ChartLine = createLucideIcon("chart-line", [["path", {
 	d: "M3 3v16a2 2 0 0 0 2 2h16",
 	key: "c24i48"
@@ -19043,6 +19105,32 @@ var ChevronDown = createLucideIcon("chevron-down", [["path", {
 	d: "m6 9 6 6 6-6",
 	key: "qrunsl"
 }]]);
+var ChevronUp = createLucideIcon("chevron-up", [["path", {
+	d: "m18 15-6-6-6 6",
+	key: "153udz"
+}]]);
+var CircleAlert = createLucideIcon("circle-alert", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}],
+	["line", {
+		x1: "12",
+		x2: "12",
+		y1: "8",
+		y2: "12",
+		key: "1pkeuh"
+	}],
+	["line", {
+		x1: "12",
+		x2: "12.01",
+		y1: "16",
+		y2: "16",
+		key: "4dfq90"
+	}]
+]);
 var CircleCheck = createLucideIcon("circle-check", [["circle", {
 	cx: "12",
 	cy: "12",
@@ -19052,130 +19140,53 @@ var CircleCheck = createLucideIcon("circle-check", [["circle", {
 	d: "m9 12 2 2 4-4",
 	key: "dzmm74"
 }]]);
-var Circle = createLucideIcon("circle", [["circle", {
-	cx: "12",
-	cy: "12",
-	r: "10",
-	key: "1mglay"
-}]]);
-var ClipboardList = createLucideIcon("clipboard-list", [
-	["rect", {
-		width: "8",
-		height: "4",
-		x: "8",
-		y: "2",
-		rx: "1",
-		ry: "1",
-		key: "tgr4d6"
-	}],
-	["path", {
-		d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
-		key: "116196"
-	}],
-	["path", {
-		d: "M12 11h4",
-		key: "1jrz19"
-	}],
-	["path", {
-		d: "M12 16h4",
-		key: "n85exb"
-	}],
-	["path", {
-		d: "M8 11h.01",
-		key: "1dfujw"
-	}],
-	["path", {
-		d: "M8 16h.01",
-		key: "18s6g9"
-	}]
-]);
-var CodeXml = createLucideIcon("code-xml", [
-	["path", {
-		d: "m18 16 4-4-4-4",
-		key: "1inbqp"
-	}],
-	["path", {
-		d: "m6 8-4 4 4 4",
-		key: "15zrgr"
-	}],
-	["path", {
-		d: "m14.5 4-5 16",
-		key: "e7oirm"
-	}]
-]);
-var Compass = createLucideIcon("compass", [["circle", {
+var Clock = createLucideIcon("clock", [["circle", {
 	cx: "12",
 	cy: "12",
 	r: "10",
 	key: "1mglay"
 }], ["path", {
-	d: "m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z",
-	key: "9ktpf1"
+	d: "M12 6v6l4 2",
+	key: "mmk7yg"
 }]]);
-var ExternalLink = createLucideIcon("external-link", [
+var CloudUpload = createLucideIcon("cloud-upload", [
 	["path", {
-		d: "M15 3h6v6",
-		key: "1q9fwt"
+		d: "M12 13v8",
+		key: "1l5pq0"
 	}],
 	["path", {
-		d: "M10 14 21 3",
-		key: "gplh6r"
+		d: "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242",
+		key: "1pljnt"
 	}],
 	["path", {
-		d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6",
-		key: "a6xqqp"
+		d: "m8 17 4-4 4 4",
+		key: "1quai1"
 	}]
 ]);
-var Funnel = createLucideIcon("funnel", [["path", {
-	d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
-	key: "sc7q7i"
-}]]);
-var LayoutDashboard = createLucideIcon("layout-dashboard", [
-	["rect", {
-		width: "7",
-		height: "9",
-		x: "3",
-		y: "3",
-		rx: "1",
-		key: "10lvy0"
-	}],
-	["rect", {
-		width: "7",
-		height: "5",
-		x: "14",
-		y: "3",
-		rx: "1",
-		key: "16une8"
-	}],
-	["rect", {
-		width: "7",
-		height: "9",
-		x: "14",
-		y: "12",
-		rx: "1",
-		key: "1hutg5"
-	}],
-	["rect", {
-		width: "7",
-		height: "5",
-		x: "3",
-		y: "16",
-		rx: "1",
-		key: "ldoo1y"
-	}]
-]);
-var Lightbulb = createLucideIcon("lightbulb", [
+var FileSpreadsheet = createLucideIcon("file-spreadsheet", [
 	["path", {
-		d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
-		key: "1gvzjb"
+		d: "M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",
+		key: "1oefj6"
 	}],
 	["path", {
-		d: "M9 18h6",
-		key: "x1upvd"
+		d: "M14 2v5a1 1 0 0 0 1 1h5",
+		key: "wfsgrz"
 	}],
 	["path", {
-		d: "M10 22h4",
-		key: "ceow96"
+		d: "M8 13h2",
+		key: "yr2amv"
+	}],
+	["path", {
+		d: "M14 13h2",
+		key: "un5t4a"
+	}],
+	["path", {
+		d: "M8 17h2",
+		key: "2yhykz"
+	}],
+	["path", {
+		d: "M14 17h2",
+		key: "10kma7"
 	}]
 ]);
 var Menu = createLucideIcon("menu", [
@@ -19196,6 +19207,28 @@ var Moon = createLucideIcon("moon", [["path", {
 	d: "M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401",
 	key: "kfwtm"
 }]]);
+var PackageCheck = createLucideIcon("package-check", [
+	["path", {
+		d: "M12 22V12",
+		key: "d0xqtd"
+	}],
+	["path", {
+		d: "m16 17 2 2 4-4",
+		key: "uh5qu3"
+	}],
+	["path", {
+		d: "M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753",
+		key: "kpkbpo"
+	}],
+	["path", {
+		d: "M3.29 7 12 12l8.71-5",
+		key: "19ckod"
+	}],
+	["path", {
+		d: "m7.5 4.27 8.997 5.148",
+		key: "9yrvtv"
+	}]
+]);
 var Rocket = createLucideIcon("rocket", [
 	["path", {
 		d: "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5",
@@ -19214,27 +19247,6 @@ var Rocket = createLucideIcon("rocket", [
 		key: "92ym6u"
 	}]
 ]);
-var Save = createLucideIcon("save", [
-	["path", {
-		d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z",
-		key: "1c8476"
-	}],
-	["path", {
-		d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7",
-		key: "1ydtos"
-	}],
-	["path", {
-		d: "M7 3v4a1 1 0 0 0 1 1h7",
-		key: "t51u73"
-	}]
-]);
-var SquareCheckBig = createLucideIcon("square-check-big", [["path", {
-	d: "M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344",
-	key: "2acyp4"
-}], ["path", {
-	d: "m9 11 3 3L22 4",
-	key: "1pflzl"
-}]]);
 var Sun = createLucideIcon("sun", [
 	["circle", {
 		cx: "12",
@@ -19275,30 +19287,53 @@ var Sun = createLucideIcon("sun", [
 		key: "1shlcs"
 	}]
 ]);
-var Target = createLucideIcon("target", [
-	["circle", {
-		cx: "12",
-		cy: "12",
-		r: "10",
-		key: "1mglay"
+var TrendingDown = createLucideIcon("trending-down", [["path", {
+	d: "M16 17h6v-6",
+	key: "t6n2it"
+}], ["path", {
+	d: "m22 17-8.5-8.5-5 5L2 7",
+	key: "x473p"
+}]]);
+var TriangleAlert = createLucideIcon("triangle-alert", [
+	["path", {
+		d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+		key: "wmoenq"
 	}],
-	["circle", {
-		cx: "12",
-		cy: "12",
-		r: "6",
-		key: "1vlfrh"
+	["path", {
+		d: "M12 9v4",
+		key: "juzpu7"
 	}],
-	["circle", {
-		cx: "12",
-		cy: "12",
-		r: "2",
-		key: "1c9p78"
+	["path", {
+		d: "M12 17h.01",
+		key: "p32p05"
 	}]
 ]);
-var Wrench = createLucideIcon("wrench", [["path", {
-	d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z",
-	key: "1ngwbx"
-}]]);
+var Truck = createLucideIcon("truck", [
+	["path", {
+		d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2",
+		key: "wrbu53"
+	}],
+	["path", {
+		d: "M15 18H9",
+		key: "1lyqi6"
+	}],
+	["path", {
+		d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
+		key: "lysw3i"
+	}],
+	["circle", {
+		cx: "17",
+		cy: "18",
+		r: "2",
+		key: "332jqn"
+	}],
+	["circle", {
+		cx: "7",
+		cy: "18",
+		r: "2",
+		key: "19iecd"
+	}]
+]);
 var X = createLucideIcon("x", [["path", {
 	d: "M18 6 6 18",
 	key: "1bl5f8"
@@ -20730,14 +20765,14 @@ function cn$1(...inputs) {
 //#endregion
 //#region src/components/ui/toast.tsx
 var ToastProvider = Provider$1;
-var ToastViewport = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport, {
+var ToastViewport = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport$1, {
 	"data-uid": "src/components/ui/toast.tsx:15:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1("fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]", className),
 	...props
 }));
-ToastViewport.displayName = Viewport.displayName;
+ToastViewport.displayName = Viewport$1.displayName;
 var toastVariants = cva("group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full", {
 	variants: { variant: {
 		default: "border bg-background text-foreground",
@@ -21837,7 +21872,7 @@ var oppositeSideMap = {
 	bottom: "top",
 	top: "bottom"
 };
-function clamp(start, value, end) {
+function clamp$1(start, value, end) {
 	return max(start, min(value, end));
 }
 function evaluate(value, param) {
@@ -22147,7 +22182,7 @@ var arrow$3 = (options) => ({
 		const min$1 = minPadding;
 		const max = clientSize - arrowDimensions[length] - maxPadding;
 		const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
-		const offset = clamp(min$1, center, max);
+		const offset = clamp$1(min$1, center, max);
 		const shouldAddOffset = !middlewareData.arrow && getAlignment(placement) != null && center !== offset && rects.reference[length] / 2 - (center < min$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
 		const alignmentOffset = shouldAddOffset ? center < min$1 ? center - min$1 : center - max : 0;
 		return {
@@ -22373,14 +22408,14 @@ var shift$2 = function(options) {
 				const maxSide = mainAxis === "y" ? "bottom" : "right";
 				const min = mainAxisCoord + overflow[minSide];
 				const max = mainAxisCoord - overflow[maxSide];
-				mainAxisCoord = clamp(min, mainAxisCoord, max);
+				mainAxisCoord = clamp$1(min, mainAxisCoord, max);
 			}
 			if (checkCrossAxis) {
 				const minSide = crossAxis === "y" ? "top" : "left";
 				const maxSide = crossAxis === "y" ? "bottom" : "right";
 				const min = crossAxisCoord + overflow[minSide];
 				const max = crossAxisCoord - overflow[maxSide];
-				crossAxisCoord = clamp(min, crossAxisCoord, max);
+				crossAxisCoord = clamp$1(min, crossAxisCoord, max);
 			}
 			const limitedCoords = limiter.fn({
 				...state,
@@ -23466,7 +23501,7 @@ var arrow = (options, deps) => {
 };
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-arrow@1.1.7_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_e05f2c19a58a99fddf374207b5e3778c/node_modules/@radix-ui/react-arrow/dist/index.mjs
-var NAME$1 = "Arrow";
+var NAME = "Arrow";
 var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { children, width = 10, height = 5, ...arrowProps } = props;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.svg, {
@@ -23479,8 +23514,8 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 		children: props.asChild ? children : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("polygon", { points: "0,0 30,0 15,10" })
 	});
 });
-Arrow$1.displayName = NAME$1;
-var Root$4 = Arrow$1;
+Arrow$1.displayName = NAME;
+var Root$2 = Arrow$1;
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-use-size@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-size/dist/index.mjs
 function useSize(element) {
@@ -23551,11 +23586,11 @@ var PopperAnchor = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME;
-var CONTENT_NAME$4 = "PopperContent";
-var [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$4);
+var CONTENT_NAME$3 = "PopperContent";
+var [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$3);
 var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopePopper, side = "bottom", sideOffset = 0, align = "center", alignOffset = 0, arrowPadding = 0, avoidCollisions = true, collisionBoundary = [], collisionPadding: collisionPaddingProp = 0, sticky = "partial", hideWhenDetached = false, updatePositionStrategy = "optimized", onPlaced, ...contentProps } = props;
-	const context = usePopperContext(CONTENT_NAME$4, __scopePopper);
+	const context = usePopperContext(CONTENT_NAME$3, __scopePopper);
 	const [content, setContent] = import_react.useState(null);
 	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
 	const [arrow$4, setArrow] = import_react.useState(null);
@@ -23668,8 +23703,8 @@ var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-PopperContent.displayName = CONTENT_NAME$4;
-var ARROW_NAME$1 = "PopperArrow";
+PopperContent.displayName = CONTENT_NAME$3;
+var ARROW_NAME$2 = "PopperArrow";
 var OPPOSITE_SIDE = {
 	top: "bottom",
 	right: "left",
@@ -23678,7 +23713,7 @@ var OPPOSITE_SIDE = {
 };
 var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwardedRef) {
 	const { __scopePopper, ...arrowProps } = props;
-	const contentContext = useContentContext(ARROW_NAME$1, __scopePopper);
+	const contentContext = useContentContext(ARROW_NAME$2, __scopePopper);
 	const baseSide = OPPOSITE_SIDE[contentContext.placedSide];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 		ref: contentContext.onArrowChange,
@@ -23701,7 +23736,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -23711,7 +23746,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 		})
 	});
 });
-PopperArrow.displayName = ARROW_NAME$1;
+PopperArrow.displayName = ARROW_NAME$2;
 function isNotNull(value) {
 	return value !== null;
 }
@@ -23758,12 +23793,12 @@ function getSideAndAlignFromPlacement(placement) {
 }
 var Root2$1 = Popper;
 var Anchor = PopperAnchor;
-var Content$2 = PopperContent;
+var Content$1 = PopperContent;
 var Arrow = PopperArrow;
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-tooltip@1.2.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+reac_9074d9fb06315b089b2bee17c4c65951/node_modules/@radix-ui/react-tooltip/dist/index.mjs
 var [createTooltipContext, createTooltipScope] = createContextScope$1("Tooltip", [createPopperScope]);
-var usePopperScope = createPopperScope();
+var usePopperScope$1 = createPopperScope();
 var PROVIDER_NAME = "TooltipProvider";
 var DEFAULT_DELAY_DURATION = 700;
 var TOOLTIP_OPEN = "tooltip.open";
@@ -23803,7 +23838,7 @@ var [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_N
 var Tooltip$1 = (props) => {
 	const { __scopeTooltip, children, open: openProp, defaultOpen, onOpenChange, disableHoverableContent: disableHoverableContentProp, delayDuration: delayDurationProp } = props;
 	const providerContext = useTooltipProviderContext(TOOLTIP_NAME, props.__scopeTooltip);
-	const popperScope = usePopperScope(__scopeTooltip);
+	const popperScope = usePopperScope$1(__scopeTooltip);
 	const [trigger, setTrigger] = import_react.useState(null);
 	const contentId = useId();
 	const openTimerRef = import_react.useRef(0);
@@ -23884,12 +23919,12 @@ var Tooltip$1 = (props) => {
 	});
 };
 Tooltip$1.displayName = TOOLTIP_NAME;
-var TRIGGER_NAME$4 = "TooltipTrigger";
+var TRIGGER_NAME$2 = "TooltipTrigger";
 var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, ...triggerProps } = props;
-	const context = useTooltipContext(TRIGGER_NAME$4, __scopeTooltip);
-	const providerContext = useTooltipProviderContext(TRIGGER_NAME$4, __scopeTooltip);
-	const popperScope = usePopperScope(__scopeTooltip);
+	const context = useTooltipContext(TRIGGER_NAME$2, __scopeTooltip);
+	const providerContext = useTooltipProviderContext(TRIGGER_NAME$2, __scopeTooltip);
+	const popperScope = usePopperScope$1(__scopeTooltip);
 	const composedRefs = useComposedRefs(forwardedRef, import_react.useRef(null), context.onTriggerChange);
 	const isPointerDownRef = import_react.useRef(false);
 	const hasPointerMoveOpenedRef = import_react.useRef(false);
@@ -23929,18 +23964,18 @@ var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TooltipTrigger$1.displayName = TRIGGER_NAME$4;
-var PORTAL_NAME$1 = "TooltipPortal";
-var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$1, { forceMount: void 0 });
+TooltipTrigger$1.displayName = TRIGGER_NAME$2;
+var PORTAL_NAME$2 = "TooltipPortal";
+var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$2, { forceMount: void 0 });
 var TooltipPortal = (props) => {
 	const { __scopeTooltip, forceMount, children, container } = props;
-	const context = useTooltipContext(PORTAL_NAME$1, __scopeTooltip);
+	const context = useTooltipContext(PORTAL_NAME$2, __scopeTooltip);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
 		scope: __scopeTooltip,
 		forceMount,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 			present: forceMount || context.open,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
 				asChild: true,
 				container,
 				children
@@ -23948,12 +23983,12 @@ var TooltipPortal = (props) => {
 		})
 	});
 };
-TooltipPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$3 = "TooltipContent";
+TooltipPortal.displayName = PORTAL_NAME$2;
+var CONTENT_NAME$2 = "TooltipContent";
 var TooltipContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext$1(CONTENT_NAME$3, props.__scopeTooltip);
+	const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeTooltip);
 	const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
-	const context = useTooltipContext(CONTENT_NAME$3, props.__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || context.open,
 		children: context.disableHoverableContent ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipContentImpl, {
@@ -23968,8 +24003,8 @@ var TooltipContent$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 var TooltipContentHoverable = import_react.forwardRef((props, forwardedRef) => {
-	const context = useTooltipContext(CONTENT_NAME$3, props.__scopeTooltip);
-	const providerContext = useTooltipProviderContext(CONTENT_NAME$3, props.__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
+	const providerContext = useTooltipProviderContext(CONTENT_NAME$2, props.__scopeTooltip);
 	const ref = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, ref);
 	const [pointerGraceArea, setPointerGraceArea] = import_react.useState(null);
@@ -24046,8 +24081,8 @@ var [VisuallyHiddenContentContextProvider, useVisuallyHiddenContentContext] = cr
 var Slottable = /* @__PURE__ */ createSlottable("TooltipContent");
 var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, children, "aria-label": ariaLabel, onEscapeKeyDown, onPointerDownOutside, ...contentProps } = props;
-	const context = useTooltipContext(CONTENT_NAME$3, __scopeTooltip);
-	const popperScope = usePopperScope(__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$2, __scopeTooltip);
+	const popperScope = usePopperScope$1(__scopeTooltip);
 	const { onClose } = context;
 	import_react.useEffect(() => {
 		document.addEventListener(TOOLTIP_OPEN, onClose);
@@ -24069,7 +24104,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 		onPointerDownOutside,
 		onFocusOutside: (event) => event.preventDefault(),
 		onDismiss: onClose,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content$2, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content$1, {
 			"data-state": context.stateAttribute,
 			...popperScope,
 			...contentProps,
@@ -24085,7 +24120,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -24094,18 +24129,18 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TooltipContent$1.displayName = CONTENT_NAME$3;
-var ARROW_NAME = "TooltipArrow";
+TooltipContent$1.displayName = CONTENT_NAME$2;
+var ARROW_NAME$1 = "TooltipArrow";
 var TooltipArrow = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, ...arrowProps } = props;
-	const popperScope = usePopperScope(__scopeTooltip);
-	return useVisuallyHiddenContentContext(ARROW_NAME, __scopeTooltip).isInside ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
+	const popperScope = usePopperScope$1(__scopeTooltip);
+	return useVisuallyHiddenContentContext(ARROW_NAME$1, __scopeTooltip).isInside ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
 		...popperScope,
 		...arrowProps,
 		ref: forwardedRef
 	});
 });
-TooltipArrow.displayName = ARROW_NAME;
+TooltipArrow.displayName = ARROW_NAME$1;
 function getExitSideFromRect(point, rect) {
 	const top = Math.abs(rect.top - point.y);
 	const bottom = Math.abs(rect.bottom - point.y);
@@ -24289,114 +24324,204 @@ var useTheme = () => {
 	return context;
 };
 //#endregion
-//#region src/stores/usePlannerStore.tsx
-var defaultChecklist = [
+//#region src/lib/mockData.ts
+var MOCK_SUPPLIERS = [
 	{
-		id: "1-1",
-		text: "Definir o nicho de mercado",
-		completed: false,
-		phase: 1
+		id: "S1",
+		name: "FarmaDistribuidora",
+		cifThreshold: 500
 	},
 	{
-		id: "1-2",
-		text: "Identificar a dor principal",
-		completed: false,
-		phase: 1
+		id: "S2",
+		name: "Ação Magistral Hub",
+		cifThreshold: 300
 	},
 	{
-		id: "2-1",
-		text: "Entrevistar 5 potenciais clientes",
-		completed: false,
-		phase: 2
-	},
-	{
-		id: "2-2",
-		text: "Criar Landing Page de pré-venda",
-		completed: false,
-		phase: 2
-	},
-	{
-		id: "3-1",
-		text: "Listar features essenciais (cortar os excessos)",
-		completed: false,
-		phase: 3
-	},
-	{
-		id: "3-2",
-		text: "Desenhar wireframes básicos",
-		completed: false,
-		phase: 3
-	},
-	{
-		id: "4-1",
-		text: "Definir modelo de precificação",
-		completed: false,
-		phase: 4
-	},
-	{
-		id: "5-1",
-		text: "Escolher a Stack Tecnológica",
-		completed: false,
-		phase: 5
-	},
-	{
-		id: "5-2",
-		text: "Configurar gateway de pagamento (Stripe/Pagar.me)",
-		completed: false,
-		phase: 5
+		id: "S3",
+		name: "DiretoLab",
+		cifThreshold: 1e3
 	}
 ];
-var PlannerContext = (0, import_react.createContext)(null);
-var PlannerProvider = ({ children }) => {
-	const [projectData, setProjectDataState] = (0, import_react.useState)(() => {
-		const saved = localStorage.getItem("saas-planner-data");
-		return saved ? JSON.parse(saved) : {
-			name: "",
-			problem: "",
-			audience: ""
-		};
-	});
-	const [checklist, setChecklist] = (0, import_react.useState)(() => {
-		const saved = localStorage.getItem("saas-planner-checklist");
-		return saved ? JSON.parse(saved) : defaultChecklist;
-	});
-	(0, import_react.useEffect)(() => {
-		localStorage.setItem("saas-planner-data", JSON.stringify(projectData));
-	}, [projectData]);
-	(0, import_react.useEffect)(() => {
-		localStorage.setItem("saas-planner-checklist", JSON.stringify(checklist));
-	}, [checklist]);
-	const setProjectData = (data) => {
-		setProjectDataState((prev) => ({
-			...prev,
-			...data
+var MOCK_ERP_NEEDS = [
+	{
+		id: "E1",
+		description: "Paracetamol 500mg",
+		minStock: 1e3,
+		maxStock: 5e3,
+		currentStock: 800,
+		requiredQuantity: 4200,
+		monthlyConsumption: 1e3
+	},
+	{
+		id: "E2",
+		description: "Amoxicilina 500mg",
+		minStock: 500,
+		maxStock: 2e3,
+		currentStock: 400,
+		requiredQuantity: 1600,
+		monthlyConsumption: 600
+	},
+	{
+		id: "E3",
+		description: "Ibuprofeno 400mg",
+		minStock: 800,
+		maxStock: 3e3,
+		currentStock: 500,
+		requiredQuantity: 2500,
+		monthlyConsumption: 800
+	},
+	{
+		id: "E4",
+		description: "Dipirona 500mg",
+		minStock: 2e3,
+		maxStock: 1e4,
+		currentStock: 1500,
+		requiredQuantity: 8500,
+		monthlyConsumption: 3e3
+	}
+];
+var MOCK_SUPPLIER_ITEMS = [
+	{
+		id: "I1",
+		source: "AM_DEMANDA",
+		description: "Paracetamol 500mg cx 50",
+		supplierId: "S2",
+		price: .12,
+		expiryDate: "2027-12-01",
+		minQuantity: 1e3,
+		bulkDiscount: {
+			qty: 6e3,
+			discount: .15
+		}
+	},
+	{
+		id: "I2",
+		source: "DIRECT_QUOTE",
+		description: "Paracetamol 500",
+		supplierId: "S1",
+		price: .1,
+		expiryDate: "2024-05-01",
+		minQuantity: 500
+	},
+	{
+		id: "I3",
+		source: "AM_PEDIDO",
+		description: "Amoxil 500mg",
+		supplierId: "S2",
+		price: .45,
+		expiryDate: "2026-06-01",
+		minQuantity: 500
+	},
+	{
+		id: "I4",
+		source: "DIRECT_QUOTE",
+		description: "Amoxicilina 500mg",
+		supplierId: "S3",
+		price: .4,
+		expiryDate: "2026-01-01",
+		minQuantity: 2e3
+	},
+	{
+		id: "I5",
+		source: "AM_PEDIDO",
+		description: "Ibuprofeno 400mg",
+		supplierId: "S2",
+		price: .18,
+		expiryDate: "2026-12-01",
+		minQuantity: 1e3
+	},
+	{
+		id: "I6",
+		source: "DIRECT_QUOTE",
+		description: "Ibuprofeno 400mg",
+		supplierId: "S1",
+		price: .15,
+		expiryDate: "2025-12-01",
+		minQuantity: 1e3,
+		bulkDiscount: {
+			qty: 4e3,
+			discount: .1
+		}
+	},
+	{
+		id: "I7",
+		source: "AM_DEMANDA",
+		description: "Dipirona Sódica 500mg",
+		supplierId: "S2",
+		price: .08,
+		expiryDate: "2026-10-01",
+		minQuantity: 5e3
+	}
+];
+//#endregion
+//#region src/stores/useProcurementStore.tsx
+var StoreContext = (0, import_react.createContext)(null);
+var ProcurementProvider = ({ children }) => {
+	const [suppliers, setSuppliers] = (0, import_react.useState)([]);
+	const [erpNeeds, setErpNeeds] = (0, import_react.useState)([]);
+	const [supplierItems, setSupplierItems] = (0, import_react.useState)([]);
+	const [matchedNeeds, setMatchedNeeds] = (0, import_react.useState)([]);
+	const importData = (type) => {
+		if (type === "ERP") {
+			setErpNeeds(MOCK_ERP_NEEDS);
+			generateMatches(MOCK_ERP_NEEDS, supplierItems);
+		} else {
+			setSuppliers(MOCK_SUPPLIERS);
+			const newItems = type === "AM" ? MOCK_SUPPLIER_ITEMS.filter((i) => i.source.startsWith("AM")) : MOCK_SUPPLIER_ITEMS.filter((i) => i.source === "DIRECT_QUOTE");
+			const allItems = [...supplierItems, ...newItems];
+			const uniqueItems = Array.from(new Map(allItems.map((i) => [i.id, i])).values());
+			setSupplierItems(uniqueItems);
+			if (erpNeeds.length > 0) generateMatches(erpNeeds, uniqueItems);
+		}
+	};
+	const generateMatches = (needs, items) => {
+		setMatchedNeeds(needs.map((need) => {
+			const keyword = need.description.split(" ")[0].toLowerCase();
+			const needMatches = items.filter((item) => item.description.toLowerCase().includes(keyword)).map((item) => ({
+				itemId: item.id,
+				confidence: item.description === need.description ? .99 : .85
+			}));
+			needMatches.sort((a, b) => b.confidence - a.confidence);
+			const bestMatch = needMatches[0];
+			return {
+				erpId: need.id,
+				matches: needMatches,
+				selectedItemId: bestMatch?.itemId,
+				suggestedQuantity: need.requiredQuantity
+			};
 		}));
 	};
-	const toggleChecklistItem = (id) => {
-		setChecklist((prev) => prev.map((item) => item.id === id ? {
-			...item,
-			completed: !item.completed
-		} : item));
+	const confirmMatch = (erpId, itemId) => {
+		setMatchedNeeds((prev) => prev.map((m) => m.erpId === erpId ? {
+			...m,
+			selectedItemId: itemId
+		} : m));
 	};
-	const completedCount = checklist.filter((item) => item.completed).length;
-	const progress = Math.round(completedCount / checklist.length * 100) || 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PlannerContext.Provider, {
-		"data-uid": "src/stores/usePlannerStore.tsx:81:5",
+	const updateQuantity = (erpId, qty) => {
+		setMatchedNeeds((prev) => prev.map((m) => m.erpId === erpId ? {
+			...m,
+			suggestedQuantity: qty
+		} : m));
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StoreContext.Provider, {
+		"data-uid": "src/stores/useProcurementStore.tsx:78:5",
 		"data-prohibitions": "[editContent]",
 		value: {
-			projectData,
-			setProjectData,
-			checklist,
-			toggleChecklistItem,
-			progress
+			suppliers,
+			erpNeeds,
+			supplierItems,
+			matchedNeeds,
+			importData,
+			confirmMatch,
+			updateQuantity
 		},
 		children
 	});
 };
-function usePlannerStore() {
-	const context = (0, import_react.useContext)(PlannerContext);
-	if (!context) throw new Error("usePlannerStore must be used within a PlannerProvider");
-	return context;
+function useProcurementStore() {
+	const ctx = (0, import_react.useContext)(StoreContext);
+	if (!ctx) throw new Error("Missing Provider");
+	return ctx;
 }
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-slot@1.2.4_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-slot/dist/index.mjs
@@ -24439,7 +24564,7 @@ function createSlot(ownerName) {
 	Slot2.displayName = `${ownerName}.Slot`;
 	return Slot2;
 }
-var Slot$1 = /* @__PURE__ */ createSlot("Slot");
+var Slot$2 = /* @__PURE__ */ createSlot("Slot");
 /* @__NO_SIDE_EFFECTS__ */
 function createSlotClone(ownerName) {
 	const SlotClone = import_react.forwardRef((props, forwardedRef) => {
@@ -24517,7 +24642,7 @@ var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespa
 	}
 });
 var Button = import_react.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(asChild ? Slot$1 : "button", {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(asChild ? Slot$2 : "button", {
 		"data-uid": "src/components/ui/button.tsx:44:7",
 		"data-prohibitions": "[editContent]",
 		className: cn$1(buttonVariants({
@@ -24530,1928 +24655,6 @@ var Button = import_react.forwardRef(({ className, variant, size, asChild = fals
 	});
 });
 Button.displayName = "Button";
-//#endregion
-//#region src/components/ui/card.tsx
-var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:8:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("rounded-lg border bg-card text-card-foreground shadow-sm", className),
-	...props
-}));
-Card.displayName = "Card";
-var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:19:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex flex-col space-y-1.5 p-6", className),
-	...props
-}));
-CardHeader.displayName = "CardHeader";
-var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:26:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-2xl font-semibold leading-none tracking-tight", className),
-	...props
-}));
-CardTitle.displayName = "CardTitle";
-var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:37:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-sm text-muted-foreground", className),
-	...props
-}));
-CardDescription.displayName = "CardDescription";
-var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:44:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("p-6 pt-0", className),
-	...props
-}));
-CardContent.displayName = "CardContent";
-var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:51:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex items-center p-6 pt-0", className),
-	...props
-}));
-CardFooter.displayName = "CardFooter";
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-context@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-context/dist/index.mjs
-function createContextScope(scopeName, createContextScopeDeps = []) {
-	let defaultContexts = [];
-	function createContext3(rootComponentName, defaultContext) {
-		const BaseContext = import_react.createContext(defaultContext);
-		BaseContext.displayName = rootComponentName + "Context";
-		const index = defaultContexts.length;
-		defaultContexts = [...defaultContexts, defaultContext];
-		const Provider = (props) => {
-			const { scope, children, ...context } = props;
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const value = import_react.useMemo(() => context, Object.values(context));
-			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
-				value,
-				children
-			});
-		};
-		Provider.displayName = rootComponentName + "Provider";
-		function useContext2(consumerName, scope) {
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const context = import_react.useContext(Context);
-			if (context) return context;
-			if (defaultContext !== void 0) return defaultContext;
-			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-		}
-		return [Provider, useContext2];
-	}
-	const createScope = () => {
-		const scopeContexts = defaultContexts.map((defaultContext) => {
-			return import_react.createContext(defaultContext);
-		});
-		return function useScope(scope) {
-			const contexts = scope?.[scopeName] || scopeContexts;
-			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
-				...scope,
-				[scopeName]: contexts
-			} }), [scope, contexts]);
-		};
-	};
-	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-	const baseScope = scopes[0];
-	if (scopes.length === 1) return baseScope;
-	const createScope = () => {
-		const scopeHooks = scopes.map((createScope2) => ({
-			useScope: createScope2(),
-			scopeName: createScope2.scopeName
-		}));
-		return function useComposedScopes(overrideScopes) {
-			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
-				return {
-					...nextScopes2,
-					...currentScope
-				};
-			}, {});
-			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-		};
-	};
-	createScope.scopeName = baseScope.scopeName;
-	return createScope;
-}
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.3_@types+react@19.2.14__@types+re_0243fb2db8a1fb85ca77b8d9e5c2d650/node_modules/@radix-ui/react-primitive/dist/index.mjs
-var Primitive = [
-	"a",
-	"button",
-	"div",
-	"form",
-	"h2",
-	"h3",
-	"img",
-	"input",
-	"label",
-	"li",
-	"nav",
-	"ol",
-	"p",
-	"select",
-	"span",
-	"svg",
-	"ul"
-].reduce((primitive, node) => {
-	const Slot = /* @__PURE__ */ createSlot(`Primitive.${node}`);
-	const Node = import_react.forwardRef((props, forwardedRef) => {
-		const { asChild, ...primitiveProps } = props;
-		const Comp = asChild ? Slot : node;
-		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
-		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
-			...primitiveProps,
-			ref: forwardedRef
-		});
-	});
-	Node.displayName = `Primitive.${node}`;
-	return {
-		...primitive,
-		[node]: Node
-	};
-}, {});
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-progress@1.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_7258c0b550570cef5cd6f2d2227aa6b9/node_modules/@radix-ui/react-progress/dist/index.mjs
-var PROGRESS_NAME = "Progress";
-var DEFAULT_MAX = 100;
-var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
-var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
-var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
-	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
-	const max = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
-	if (valueProp !== null && !isValidValueNumber(valueProp, max)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
-	const value = isValidValueNumber(valueProp, max) ? valueProp : null;
-	const valueLabel = isNumber(value) ? getValueLabel(value, max) : void 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
-		scope: __scopeProgress,
-		value,
-		max,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			"aria-valuemax": max,
-			"aria-valuemin": 0,
-			"aria-valuenow": isNumber(value) ? value : void 0,
-			"aria-valuetext": valueLabel,
-			role: "progressbar",
-			"data-state": getProgressState(value, max),
-			"data-value": value ?? void 0,
-			"data-max": max,
-			...progressProps,
-			ref: forwardedRef
-		})
-	});
-});
-Progress$1.displayName = PROGRESS_NAME;
-var INDICATOR_NAME$1 = "ProgressIndicator";
-var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, ...indicatorProps } = props;
-	const context = useProgressContext(INDICATOR_NAME$1, __scopeProgress);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-state": getProgressState(context.value, context.max),
-		"data-value": context.value ?? void 0,
-		"data-max": context.max,
-		...indicatorProps,
-		ref: forwardedRef
-	});
-});
-ProgressIndicator.displayName = INDICATOR_NAME$1;
-function defaultGetValueLabel(value, max) {
-	return `${Math.round(value / max * 100)}%`;
-}
-function getProgressState(value, maxValue) {
-	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
-}
-function isNumber(value) {
-	return typeof value === "number";
-}
-function isValidMaxNumber(max) {
-	return isNumber(max) && !isNaN(max) && max > 0;
-}
-function isValidValueNumber(value, max) {
-	return isNumber(value) && !isNaN(value) && value <= max && value >= 0;
-}
-function getInvalidMaxError(propValue, componentName) {
-	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
-}
-function getInvalidValueError(propValue, componentName) {
-	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
-  - a positive number
-  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
-  - \`null\` or \`undefined\` if the progress is indeterminate.
-
-Defaulting to \`null\`.`;
-}
-var Root$3 = Progress$1;
-var Indicator = ProgressIndicator;
-//#endregion
-//#region src/components/ui/progress.tsx
-var Progress = import_react.forwardRef(({ className, value, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
-	"data-uid": "src/components/ui/progress.tsx:11:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
-		"data-uid": "src/components/ui/progress.tsx:16:5",
-		"data-prohibitions": "[editContent]",
-		className: "h-full w-full flex-1 bg-primary transition-all",
-		style: { transform: `translateX(-${100 - (value || 0)}%)` }
-	})
-}));
-Progress.displayName = Root$3.displayName;
-//#endregion
-//#region src/pages/Index.tsx
-function Index() {
-	const { progress } = usePlannerStore();
-	const pillars = [
-		{
-			icon: Target,
-			title: "Validação",
-			desc: "Encontre um problema real e confirme que as pessoas pagariam por ele.",
-			color: "text-orange-500",
-			bg: "bg-orange-500/10"
-		},
-		{
-			icon: Lightbulb,
-			title: "Planejamento",
-			desc: "Defina o MVP cortando tudo que não é essencial para a dor principal.",
-			color: "text-blue-500",
-			bg: "bg-blue-500/10"
-		},
-		{
-			icon: CodeXml,
-			title: "Desenvolvimento",
-			desc: "Escolha a stack certa e lance rápido, sem reinventar a roda.",
-			color: "text-emerald-500",
-			bg: "bg-emerald-500/10"
-		},
-		{
-			icon: ChartLine,
-			title: "Crescimento",
-			desc: "Defina preços, capte feedback e escale o marketing gradualmente.",
-			color: "text-purple-500",
-			bg: "bg-purple-500/10"
-		}
-	];
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:44:5",
-		"data-prohibitions": "[editContent]",
-		className: "animate-fade-in-up space-y-20",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				"data-uid": "src/pages/Index.tsx:46:7",
-				"data-prohibitions": "[]",
-				className: "text-center space-y-6 pt-12 pb-8",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/Index.tsx:47:9",
-						"data-prohibitions": "[]",
-						className: "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Rocket, {
-							"data-uid": "src/pages/Index.tsx:48:11",
-							"data-prohibitions": "[editContent]",
-							className: "w-4 h-4"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/pages/Index.tsx:49:11",
-							"data-prohibitions": "[]",
-							children: "O guia definitivo para o seu primeiro SaaS"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-						"data-uid": "src/pages/Index.tsx:51:9",
-						"data-prohibitions": "[]",
-						className: "text-4xl md:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight",
-						children: [
-							"SaaS Blueprint:",
-							" ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/pages/Index.tsx:53:11",
-								"data-prohibitions": "[]",
-								className: "text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400",
-								children: "De Zero ao Primeiro Cliente"
-							})
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:57:9",
-						"data-prohibitions": "[]",
-						className: "text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed",
-						children: "O caminho para um software bem-sucedido não é apenas sobre escrever código perfeito. É sobre validar problemas reais, planejar estrategicamente e lançar rápido."
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/Index.tsx:62:9",
-						"data-prohibitions": "[]",
-						className: "flex flex-col sm:flex-row items-center justify-center gap-4 pt-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							"data-uid": "src/pages/Index.tsx:63:11",
-							"data-prohibitions": "[]",
-							asChild: true,
-							size: "lg",
-							className: "h-12 px-8 text-base shadow-lg shadow-primary/20 hover:scale-105 transition-transform",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-								"data-uid": "src/pages/Index.tsx:68:13",
-								"data-prohibitions": "[]",
-								to: "/roteiro",
-								children: ["Começar a Jornada ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-									"data-uid": "src/pages/Index.tsx:69:33",
-									"data-prohibitions": "[editContent]",
-									className: "ml-2 w-5 h-5"
-								})]
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							"data-uid": "src/pages/Index.tsx:72:11",
-							"data-prohibitions": "[]",
-							asChild: true,
-							variant: "outline",
-							size: "lg",
-							className: "h-12 px-8 text-base",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-								"data-uid": "src/pages/Index.tsx:73:13",
-								"data-prohibitions": "[]",
-								to: "/ferramentas",
-								children: "Explorar Ferramentas"
-							})
-						})]
-					})
-				]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-				"data-uid": "src/pages/Index.tsx:79:7",
-				"data-prohibitions": "[editContent]",
-				className: "max-w-md mx-auto",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-					"data-uid": "src/pages/Index.tsx:80:9",
-					"data-prohibitions": "[editContent]",
-					className: "border-primary/20 shadow-xl shadow-primary/5 bg-card/50 backdrop-blur",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-						"data-uid": "src/pages/Index.tsx:81:11",
-						"data-prohibitions": "[editContent]",
-						className: "p-6",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Index.tsx:82:13",
-								"data-prohibitions": "[editContent]",
-								className: "flex justify-between items-center mb-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-									"data-uid": "src/pages/Index.tsx:83:15",
-									"data-prohibitions": "[]",
-									className: "font-semibold flex items-center gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-										"data-uid": "src/pages/Index.tsx:84:17",
-										"data-prohibitions": "[editContent]",
-										className: "w-5 h-5 text-emerald-500"
-									}), "Progresso do seu Plano"]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									"data-uid": "src/pages/Index.tsx:87:15",
-									"data-prohibitions": "[editContent]",
-									className: "text-sm font-medium text-muted-foreground",
-									children: [progress, "%"]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-								"data-uid": "src/pages/Index.tsx:89:13",
-								"data-prohibitions": "[editContent]",
-								value: progress,
-								className: "h-2 mb-4"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Index.tsx:90:13",
-								"data-prohibitions": "[editContent]",
-								className: "text-center",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-									"data-uid": "src/pages/Index.tsx:91:15",
-									"data-prohibitions": "[editContent]",
-									to: "/plano",
-									className: "text-sm text-primary hover:underline font-medium",
-									children: progress === 0 ? "Comece a preencher seu plano agora →" : "Continue o bom trabalho →"
-								})
-							})
-						]
-					})
-				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				"data-uid": "src/pages/Index.tsx:102:7",
-				"data-prohibitions": "[editContent]",
-				className: "space-y-8",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Index.tsx:103:9",
-					"data-prohibitions": "[]",
-					className: "text-center",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						"data-uid": "src/pages/Index.tsx:104:11",
-						"data-prohibitions": "[]",
-						className: "text-3xl font-bold tracking-tight",
-						children: "Os 4 Pilares da Construção"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:105:11",
-						"data-prohibitions": "[]",
-						className: "text-muted-foreground mt-2",
-						children: "Um framework testado para minimizar riscos e maximizar resultados."
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:110:9",
-					"data-prohibitions": "[editContent]",
-					className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
-					children: pillars.map((pillar, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-						"data-uid": "src/pages/Index.tsx:112:13",
-						"data-prohibitions": "[editContent]",
-						className: "group hover:border-primary/50 transition-colors bg-card/40",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-							"data-uid": "src/pages/Index.tsx:113:15",
-							"data-prohibitions": "[editContent]",
-							className: "p-6 space-y-4",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									"data-uid": "src/pages/Index.tsx:114:17",
-									"data-prohibitions": "[editContent]",
-									className: cn$1("w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110", pillar.bg, pillar.color),
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(pillar.icon, {
-										"data-uid": "src/pages/Index.tsx:121:19",
-										"data-prohibitions": "[editContent]",
-										className: "w-6 h-6"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-									"data-uid": "src/pages/Index.tsx:123:17",
-									"data-prohibitions": "[editContent]",
-									className: "font-bold text-lg",
-									children: pillar.title
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/pages/Index.tsx:124:17",
-									"data-prohibitions": "[editContent]",
-									className: "text-sm text-muted-foreground leading-relaxed",
-									children: pillar.desc
-								})
-							]
-						})
-					}, idx))
-				})]
-			})
-		]
-	});
-}
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-collapsible@1.1.12_@types+react-dom@19.2.3_@types+react@19.2.14__@types_10a2c6d0ac3bcc7422bd3020fe61e076/node_modules/@radix-ui/react-collapsible/dist/index.mjs
-var COLLAPSIBLE_NAME = "Collapsible";
-var [createCollapsibleContext, createCollapsibleScope] = createContextScope$1(COLLAPSIBLE_NAME);
-var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
-var Collapsible = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeCollapsible, open: openProp, defaultOpen, disabled, onOpenChange, ...collapsibleProps } = props;
-	const [open, setOpen] = useControllableState({
-		prop: openProp,
-		defaultProp: defaultOpen ?? false,
-		onChange: onOpenChange,
-		caller: COLLAPSIBLE_NAME
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CollapsibleProvider, {
-		scope: __scopeCollapsible,
-		disabled,
-		contentId: useId(),
-		open,
-		onOpenToggle: import_react.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			"data-state": getState$3(open),
-			"data-disabled": disabled ? "" : void 0,
-			...collapsibleProps,
-			ref: forwardedRef
-		})
-	});
-});
-Collapsible.displayName = COLLAPSIBLE_NAME;
-var TRIGGER_NAME$3 = "CollapsibleTrigger";
-var CollapsibleTrigger = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeCollapsible, ...triggerProps } = props;
-	const context = useCollapsibleContext(TRIGGER_NAME$3, __scopeCollapsible);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
-		type: "button",
-		"aria-controls": context.contentId,
-		"aria-expanded": context.open || false,
-		"data-state": getState$3(context.open),
-		"data-disabled": context.disabled ? "" : void 0,
-		disabled: context.disabled,
-		...triggerProps,
-		ref: forwardedRef,
-		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-	});
-});
-CollapsibleTrigger.displayName = TRIGGER_NAME$3;
-var CONTENT_NAME$2 = "CollapsibleContent";
-var CollapsibleContent = import_react.forwardRef((props, forwardedRef) => {
-	const { forceMount, ...contentProps } = props;
-	const context = useCollapsibleContext(CONTENT_NAME$2, props.__scopeCollapsible);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || context.open,
-		children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CollapsibleContentImpl, {
-			...contentProps,
-			ref: forwardedRef,
-			present
-		})
-	});
-});
-CollapsibleContent.displayName = CONTENT_NAME$2;
-var CollapsibleContentImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeCollapsible, present, children, ...contentProps } = props;
-	const context = useCollapsibleContext(CONTENT_NAME$2, __scopeCollapsible);
-	const [isPresent, setIsPresent] = import_react.useState(present);
-	const ref = import_react.useRef(null);
-	const composedRefs = useComposedRefs(forwardedRef, ref);
-	const heightRef = import_react.useRef(0);
-	const height = heightRef.current;
-	const widthRef = import_react.useRef(0);
-	const width = widthRef.current;
-	const isOpen = context.open || isPresent;
-	const isMountAnimationPreventedRef = import_react.useRef(isOpen);
-	const originalStylesRef = import_react.useRef(void 0);
-	import_react.useEffect(() => {
-		const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
-		return () => cancelAnimationFrame(rAF);
-	}, []);
-	useLayoutEffect2(() => {
-		const node = ref.current;
-		if (node) {
-			originalStylesRef.current = originalStylesRef.current || {
-				transitionDuration: node.style.transitionDuration,
-				animationName: node.style.animationName
-			};
-			node.style.transitionDuration = "0s";
-			node.style.animationName = "none";
-			const rect = node.getBoundingClientRect();
-			heightRef.current = rect.height;
-			widthRef.current = rect.width;
-			if (!isMountAnimationPreventedRef.current) {
-				node.style.transitionDuration = originalStylesRef.current.transitionDuration;
-				node.style.animationName = originalStylesRef.current.animationName;
-			}
-			setIsPresent(present);
-		}
-	}, [context.open, present]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-		"data-state": getState$3(context.open),
-		"data-disabled": context.disabled ? "" : void 0,
-		id: context.contentId,
-		hidden: !isOpen,
-		...contentProps,
-		ref: composedRefs,
-		style: {
-			[`--radix-collapsible-content-height`]: height ? `${height}px` : void 0,
-			[`--radix-collapsible-content-width`]: width ? `${width}px` : void 0,
-			...props.style
-		},
-		children: isOpen && children
-	});
-});
-function getState$3(open) {
-	return open ? "open" : "closed";
-}
-var Root$2 = Collapsible;
-var Trigger$1 = CollapsibleTrigger;
-var Content$1 = CollapsibleContent;
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-direction@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-direction/dist/index.mjs
-var DirectionContext = import_react.createContext(void 0);
-function useDirection(localDir) {
-	const globalDir = import_react.useContext(DirectionContext);
-	return localDir || globalDir || "ltr";
-}
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-accordion@1.2.12_@types+react-dom@19.2.3_@types+react@19.2.14__@types+r_8b3df72274e0fa0cff1629993ef7cc33/node_modules/@radix-ui/react-accordion/dist/index.mjs
-var ACCORDION_NAME = "Accordion";
-var ACCORDION_KEYS = [
-	"Home",
-	"End",
-	"ArrowDown",
-	"ArrowUp",
-	"ArrowLeft",
-	"ArrowRight"
-];
-var [Collection, useCollection, createCollectionScope] = createCollection(ACCORDION_NAME);
-var [createAccordionContext, createAccordionScope] = createContextScope$1(ACCORDION_NAME, [createCollectionScope, createCollapsibleScope]);
-var useCollapsibleScope = createCollapsibleScope();
-var Accordion$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { type, ...accordionProps } = props;
-	const singleProps = accordionProps;
-	const multipleProps = accordionProps;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Provider, {
-		scope: props.__scopeAccordion,
-		children: type === "multiple" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionImplMultiple, {
-			...multipleProps,
-			ref: forwardedRef
-		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionImplSingle, {
-			...singleProps,
-			ref: forwardedRef
-		})
-	});
-});
-Accordion$1.displayName = ACCORDION_NAME;
-var [AccordionValueProvider, useAccordionValueContext] = createAccordionContext(ACCORDION_NAME);
-var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccordionContext(ACCORDION_NAME, { collapsible: false });
-var AccordionImplSingle = import_react.forwardRef((props, forwardedRef) => {
-	const { value: valueProp, defaultValue, onValueChange = () => {}, collapsible = false, ...accordionSingleProps } = props;
-	const [value, setValue] = useControllableState({
-		prop: valueProp,
-		defaultProp: defaultValue ?? "",
-		onChange: onValueChange,
-		caller: ACCORDION_NAME
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionValueProvider, {
-		scope: props.__scopeAccordion,
-		value: import_react.useMemo(() => value ? [value] : [], [value]),
-		onItemOpen: setValue,
-		onItemClose: import_react.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionCollapsibleProvider, {
-			scope: props.__scopeAccordion,
-			collapsible,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionImpl, {
-				...accordionSingleProps,
-				ref: forwardedRef
-			})
-		})
-	});
-});
-var AccordionImplMultiple = import_react.forwardRef((props, forwardedRef) => {
-	const { value: valueProp, defaultValue, onValueChange = () => {}, ...accordionMultipleProps } = props;
-	const [value, setValue] = useControllableState({
-		prop: valueProp,
-		defaultProp: defaultValue ?? [],
-		onChange: onValueChange,
-		caller: ACCORDION_NAME
-	});
-	const handleItemOpen = import_react.useCallback((itemValue) => setValue((prevValue = []) => [...prevValue, itemValue]), [setValue]);
-	const handleItemClose = import_react.useCallback((itemValue) => setValue((prevValue = []) => prevValue.filter((value2) => value2 !== itemValue)), [setValue]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionValueProvider, {
-		scope: props.__scopeAccordion,
-		value,
-		onItemOpen: handleItemOpen,
-		onItemClose: handleItemClose,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionCollapsibleProvider, {
-			scope: props.__scopeAccordion,
-			collapsible: true,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionImpl, {
-				...accordionMultipleProps,
-				ref: forwardedRef
-			})
-		})
-	});
-});
-var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
-var AccordionImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
-	const composedRefs = useComposedRefs(import_react.useRef(null), forwardedRef);
-	const getItems = useCollection(__scopeAccordion);
-	const isDirectionLTR = useDirection(dir) === "ltr";
-	const handleKeyDown = composeEventHandlers(props.onKeyDown, (event) => {
-		if (!ACCORDION_KEYS.includes(event.key)) return;
-		const target = event.target;
-		const triggerCollection = getItems().filter((item) => !item.ref.current?.disabled);
-		const triggerIndex = triggerCollection.findIndex((item) => item.ref.current === target);
-		const triggerCount = triggerCollection.length;
-		if (triggerIndex === -1) return;
-		event.preventDefault();
-		let nextIndex = triggerIndex;
-		const homeIndex = 0;
-		const endIndex = triggerCount - 1;
-		const moveNext = () => {
-			nextIndex = triggerIndex + 1;
-			if (nextIndex > endIndex) nextIndex = homeIndex;
-		};
-		const movePrev = () => {
-			nextIndex = triggerIndex - 1;
-			if (nextIndex < homeIndex) nextIndex = endIndex;
-		};
-		switch (event.key) {
-			case "Home":
-				nextIndex = homeIndex;
-				break;
-			case "End":
-				nextIndex = endIndex;
-				break;
-			case "ArrowRight":
-				if (orientation === "horizontal") if (isDirectionLTR) moveNext();
-				else movePrev();
-				break;
-			case "ArrowDown":
-				if (orientation === "vertical") moveNext();
-				break;
-			case "ArrowLeft":
-				if (orientation === "horizontal") if (isDirectionLTR) movePrev();
-				else moveNext();
-				break;
-			case "ArrowUp":
-				if (orientation === "vertical") movePrev();
-				break;
-		}
-		triggerCollection[nextIndex % triggerCount].ref.current?.focus();
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionImplProvider, {
-		scope: __scopeAccordion,
-		disabled,
-		direction: dir,
-		orientation,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
-			scope: __scopeAccordion,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-				...accordionProps,
-				"data-orientation": orientation,
-				ref: composedRefs,
-				onKeyDown: disabled ? void 0 : handleKeyDown
-			})
-		})
-	});
-});
-var ITEM_NAME = "AccordionItem";
-var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME);
-var AccordionItem$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAccordion, value, ...accordionItemProps } = props;
-	const accordionContext = useAccordionContext(ITEM_NAME, __scopeAccordion);
-	const valueContext = useAccordionValueContext(ITEM_NAME, __scopeAccordion);
-	const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-	const triggerId = useId();
-	const open = value && valueContext.value.includes(value) || false;
-	const disabled = accordionContext.disabled || props.disabled;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionItemProvider, {
-		scope: __scopeAccordion,
-		open,
-		disabled,
-		triggerId,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
-			"data-orientation": accordionContext.orientation,
-			"data-state": getState$2(open),
-			...collapsibleScope,
-			...accordionItemProps,
-			ref: forwardedRef,
-			disabled,
-			open,
-			onOpenChange: (open2) => {
-				if (open2) valueContext.onItemOpen(value);
-				else valueContext.onItemClose(value);
-			}
-		})
-	});
-});
-AccordionItem$1.displayName = ITEM_NAME;
-var HEADER_NAME = "AccordionHeader";
-var AccordionHeader = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAccordion, ...headerProps } = props;
-	const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
-	const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.h3, {
-		"data-orientation": accordionContext.orientation,
-		"data-state": getState$2(itemContext.open),
-		"data-disabled": itemContext.disabled ? "" : void 0,
-		...headerProps,
-		ref: forwardedRef
-	});
-});
-AccordionHeader.displayName = HEADER_NAME;
-var TRIGGER_NAME$2 = "AccordionTrigger";
-var AccordionTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAccordion, ...triggerProps } = props;
-	const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
-	const itemContext = useAccordionItemContext(TRIGGER_NAME$2, __scopeAccordion);
-	const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME$2, __scopeAccordion);
-	const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.ItemSlot, {
-		scope: __scopeAccordion,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trigger$1, {
-			"aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
-			"data-orientation": accordionContext.orientation,
-			id: itemContext.triggerId,
-			...collapsibleScope,
-			...triggerProps,
-			ref: forwardedRef
-		})
-	});
-});
-AccordionTrigger$1.displayName = TRIGGER_NAME$2;
-var CONTENT_NAME$1 = "AccordionContent";
-var AccordionContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAccordion, ...contentProps } = props;
-	const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
-	const itemContext = useAccordionItemContext(CONTENT_NAME$1, __scopeAccordion);
-	const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$1, {
-		role: "region",
-		"aria-labelledby": itemContext.triggerId,
-		"data-orientation": accordionContext.orientation,
-		...collapsibleScope,
-		...contentProps,
-		ref: forwardedRef,
-		style: {
-			["--radix-accordion-content-height"]: "var(--radix-collapsible-content-height)",
-			["--radix-accordion-content-width"]: "var(--radix-collapsible-content-width)",
-			...props.style
-		}
-	});
-});
-AccordionContent$1.displayName = CONTENT_NAME$1;
-function getState$2(open) {
-	return open ? "open" : "closed";
-}
-var Root2 = Accordion$1;
-var Item = AccordionItem$1;
-var Header = AccordionHeader;
-var Trigger2 = AccordionTrigger$1;
-var Content2 = AccordionContent$1;
-//#endregion
-//#region src/components/ui/accordion.tsx
-var Accordion = Root2;
-var AccordionItem = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Item, {
-	"data-uid": "src/components/ui/accordion.tsx:14:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("border-b", className),
-	...props
-}));
-AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Header, {
-	"data-uid": "src/components/ui/accordion.tsx:22:3",
-	"data-prohibitions": "[editContent]",
-	className: "flex",
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger2, {
-		"data-uid": "src/components/ui/accordion.tsx:23:5",
-		"data-prohibitions": "[editContent]",
-		ref,
-		className: cn$1("flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180", className),
-		...props,
-		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
-			"data-uid": "src/components/ui/accordion.tsx:32:7",
-			"data-prohibitions": "[editContent]",
-			className: "h-4 w-4 shrink-0 transition-transform duration-200"
-		})]
-	})
-}));
-AccordionTrigger.displayName = Trigger2.displayName;
-var AccordionContent = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content2, {
-	"data-uid": "src/components/ui/accordion.tsx:42:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/ui/accordion.tsx:47:5",
-		"data-prohibitions": "[editContent]",
-		className: cn$1("pb-4 pt-0", className),
-		children
-	})
-}));
-AccordionContent.displayName = Content2.displayName;
-//#endregion
-//#region src/components/ui/badge.tsx
-var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
-	variants: { variant: {
-		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-		outline: "text-foreground"
-	} },
-	defaultVariants: { variant: "default" }
-});
-function Badge({ className, variant, ...props }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/ui/badge.tsx:30:10",
-		"data-prohibitions": "[editContent]",
-		className: cn$1(badgeVariants({ variant }), className),
-		...props
-	});
-}
-//#endregion
-//#region src/data/roadmapData.ts
-var roadmapData = [
-	{
-		phase: 1,
-		title: "Ideação e Problema",
-		description: "Encontre uma dor real que as pessoas estão dispostas a pagar para resolver.",
-		content: [
-			"**Foque no problema, não na solução:** Muitos fundadores constroem algo legal que ninguém precisa. Comece perguntando: \"Qual processo manual chato meu público odeia fazer?\"",
-			"**Escolha um nicho específico:** \"Software para empresas\" é muito amplo. \"Software de gestão de estoque para clínicas veterinárias de pequeno porte\" é um excelente começo.",
-			"**A Regra da Vitamina vs. Analgésico:** Seu SaaS deve ser um analgésico (resolve uma dor aguda e imediata) e não uma vitamina (algo bom de ter, mas não essencial)."
-		],
-		proTip: "Use o Reddit, grupos do Facebook e ReclameAqui para minerar reclamações e encontrar problemas reais que as pessoas já estão tentando resolver com planilhas."
-	},
-	{
-		phase: 2,
-		title: "Validação de Mercado",
-		description: "Descubra se as pessoas comprariam antes de escrever a primeira linha de código.",
-		content: [
-			"**O Teste do Mom Test:** Ao falar com clientes, não pergunte \"Você usaria isso?\". Pergunte \"Como você resolve esse problema hoje?\" e \"Quanto você gastou tentando resolver isso?\".",
-			"**Landing Page de Pré-venda:** Crie uma página simples explicando o benefício principal e coloque um formulário de e-mail ou botão de pagamento (com desconto de early bird).",
-			"**Falso Positivo:** Likes e \"ideia legal\" não são validação. Validação real é cartão de crédito passado, tempo comprometido ou carta de intenção assinada."
-		],
-		proTip: "Se você não consegue vender a ideia em uma landing page simples ou em uma ligação de 15 minutos, o produto não vai se vender sozinho quando estiver pronto."
-	},
-	{
-		phase: 3,
-		title: "O MVP (Mínimo Produto Viável)",
-		description: "Construa apenas o núcleo essencial que resolve o problema de forma funcional.",
-		content: [
-			"**Corte sem dó:** Se uma funcionalidade não é estritamente necessária para entregar o valor principal, deixe para a versão 2.0.",
-			"**Design não é tudo no início:** Um produto feio que resolve uma dor gigante será usado. Um produto lindo que não serve para nada será abandonado. Foque na utilidade.",
-			"**Onboarding manual:** No começo, você não precisa de um sistema complexo de onboarding automatizado. Ligue para seus primeiros 10 clientes e configure as contas deles pessoalmente."
-		],
-		proTip: "Se você não tem vergonha da primeira versão do seu produto, você demorou demais para lançar (Reid Hoffman)."
-	},
-	{
-		phase: 4,
-		title: "Modelo de Negócio",
-		description: "Defina como você vai cobrar pelo valor gerado.",
-		content: [
-			"**Cobre mais do que você acha justo:** Desenvolvedores tendem a subprecificar. Se o seu SaaS economiza 10 horas semanais de um profissional que ganha R$ 50/hora, cobrar R$ 200/mês é muito barato.",
-			"**Evite o Freemium no início:** O Freemium exige volume massivo para dar certo. Prefira um modelo de Trial (teste grátis de 7-14 dias) e planos pagos desde o dia zero.",
-			"**Planos em Tiers:** Tenha 3 opções de preço. A maioria escolherá a do meio se você ancorar a mais cara corretamente."
-		],
-		proTip: "Cobre anualmente oferecendo 2 meses de desconto. Isso injeta caixa no início do projeto e reduz a taxa de cancelamento (churn)."
-	},
-	{
-		phase: 5,
-		title: "Tech Stack e Lançamento",
-		description: "Escolha suas ferramentas e coloque o projeto no mundo.",
-		content: [
-			"**Use o que você domina:** A melhor stack é aquela que você já sabe usar. Não aprenda uma linguagem nova só porque está na moda se o objetivo é validar um negócio rápido.",
-			"**Não reinvente a roda:** Use ferramentas prontas para autenticação, pagamentos e envio de e-mails. Focar em construir um sistema de login próprio não agrega valor ao seu cliente.",
-			"**O lançamento não é um evento único:** Se lançar e ninguém aparecer, tudo bem. O verdadeiro lançamento é um processo contínuo de marketing e vendas dia após dia."
-		],
-		proTip: "Integre o Stripe ou Pagar.me desde o dia 1 usando ferramentas no-code ou bibliotecas prontas. Não perca meses integrando bancos convencionais."
-	}
-];
-//#endregion
-//#region src/pages/Roadmap.tsx
-function Roadmap() {
-	const { checklist } = usePlannerStore();
-	const isPhaseCompleted = (phaseNum) => {
-		const phaseItems = checklist.filter((item) => item.phase === phaseNum);
-		if (phaseItems.length === 0) return false;
-		return phaseItems.every((item) => item.completed);
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Roadmap.tsx:24:5",
-		"data-prohibitions": "[editContent]",
-		className: "max-w-3xl mx-auto animate-fade-in-up",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Roadmap.tsx:25:7",
-			"data-prohibitions": "[]",
-			className: "mb-10 text-center",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-				"data-uid": "src/pages/Roadmap.tsx:26:9",
-				"data-prohibitions": "[]",
-				className: "text-3xl font-bold tracking-tight mb-3",
-				children: "O Roteiro Definitivo"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/pages/Roadmap.tsx:27:9",
-				"data-prohibitions": "[]",
-				className: "text-muted-foreground text-lg",
-				children: "Siga este passo a passo para construir e lançar seu SaaS com segurança e estratégia."
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Accordion, {
-			"data-uid": "src/pages/Roadmap.tsx:32:7",
-			"data-prohibitions": "[editContent]",
-			type: "single",
-			collapsible: true,
-			defaultValue: "phase-1",
-			className: "space-y-4",
-			children: roadmapData.map((phase) => {
-				const completed = isPhaseCompleted(phase.phase);
-				return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
-					"data-uid": "src/pages/Roadmap.tsx:36:13",
-					"data-prohibitions": "[editContent]",
-					value: `phase-${phase.phase}`,
-					className: "border border-border/50 rounded-lg bg-card/30 overflow-hidden",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
-						"data-uid": "src/pages/Roadmap.tsx:41:15",
-						"data-prohibitions": "[editContent]",
-						className: "px-6 hover:no-underline hover:bg-secondary/50 transition-all [&[data-state=open]]:bg-secondary/30",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/Roadmap.tsx:42:17",
-							"data-prohibitions": "[editContent]",
-							className: "flex items-center gap-4 text-left",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Roadmap.tsx:43:19",
-								"data-prohibitions": "[editContent]",
-								className: "shrink-0",
-								children: completed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-									"data-uid": "src/pages/Roadmap.tsx:45:23",
-									"data-prohibitions": "[editContent]",
-									className: "w-6 h-6 text-emerald-500"
-								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Circle, {
-									"data-uid": "src/pages/Roadmap.tsx:47:23",
-									"data-prohibitions": "[editContent]",
-									className: "w-6 h-6 text-muted-foreground/50"
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Roadmap.tsx:50:19",
-								"data-prohibitions": "[editContent]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/Roadmap.tsx:51:21",
-									"data-prohibitions": "[editContent]",
-									className: "flex items-center gap-2 mb-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
-										"data-uid": "src/pages/Roadmap.tsx:52:23",
-										"data-prohibitions": "[editContent]",
-										variant: completed ? "default" : "secondary",
-										className: completed ? "bg-emerald-500 hover:bg-emerald-600" : "",
-										children: ["Fase ", phase.phase]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-										"data-uid": "src/pages/Roadmap.tsx:58:23",
-										"data-prohibitions": "[editContent]",
-										className: "font-semibold text-lg",
-										children: phase.title
-									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/pages/Roadmap.tsx:60:21",
-									"data-prohibitions": "[editContent]",
-									className: "text-sm text-muted-foreground font-normal line-clamp-1",
-									children: phase.description
-								})]
-							})]
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
-						"data-uid": "src/pages/Roadmap.tsx:66:15",
-						"data-prohibitions": "[editContent]",
-						className: "px-6 pb-6 pt-2",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/Roadmap.tsx:67:17",
-							"data-prohibitions": "[editContent]",
-							className: "pl-10 space-y-6",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-								"data-uid": "src/pages/Roadmap.tsx:68:19",
-								"data-prohibitions": "[editContent]",
-								className: "space-y-4",
-								children: phase.content.map((item, idx) => {
-									const parts = item.split(/(\*\*.*?\*\*)/g);
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-										"data-uid": "src/pages/Roadmap.tsx:73:25",
-										"data-prohibitions": "[editContent]",
-										className: "flex gap-3 text-foreground/90 leading-relaxed",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											"data-uid": "src/pages/Roadmap.tsx:74:27",
-											"data-prohibitions": "[]",
-											className: "text-primary mt-1 shrink-0",
-											children: "•"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											"data-uid": "src/pages/Roadmap.tsx:75:27",
-											"data-prohibitions": "[editContent]",
-											children: parts.map((part, i) => part.startsWith("**") && part.endsWith("**") ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-												"data-uid": "src/pages/Roadmap.tsx:78:33",
-												"data-prohibitions": "[editContent]",
-												className: "font-semibold text-foreground",
-												children: part.slice(2, -2)
-											}, i) : part)
-										})]
-									}, idx);
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-								"data-uid": "src/pages/Roadmap.tsx:91:19",
-								"data-prohibitions": "[editContent]",
-								className: "bg-primary/5 border-primary/20",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-									"data-uid": "src/pages/Roadmap.tsx:92:21",
-									"data-prohibitions": "[editContent]",
-									className: "p-4 flex gap-4 items-start",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbulb, {
-										"data-uid": "src/pages/Roadmap.tsx:93:23",
-										"data-prohibitions": "[editContent]",
-										className: "w-6 h-6 text-amber-500 shrink-0 mt-0.5"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										"data-uid": "src/pages/Roadmap.tsx:94:23",
-										"data-prohibitions": "[editContent]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-											"data-uid": "src/pages/Roadmap.tsx:95:25",
-											"data-prohibitions": "[]",
-											className: "font-semibold text-sm text-amber-500 mb-1",
-											children: "Dica Pro"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											"data-uid": "src/pages/Roadmap.tsx:96:25",
-											"data-prohibitions": "[editContent]",
-											className: "text-sm text-muted-foreground leading-relaxed",
-											children: phase.proTip
-										})]
-									})]
-								})
-							})]
-						})
-					})]
-				}, phase.phase);
-			})
-		})]
-	});
-}
-//#endregion
-//#region src/data/toolsData.ts
-var toolsData = [
-	{
-		id: "1",
-		name: "Supabase",
-		category: "Desenvolvimento",
-		description: "A alternativa Open Source ao Firebase. Banco de dados Postgres, Autenticação e Storage em minutos.",
-		freeTier: true,
-		url: "https://supabase.com",
-		logoUrl: "https://img.usecurling.com/i?q=database&shape=fill&color=green"
-	},
-	{
-		id: "2",
-		name: "Vercel",
-		category: "Desenvolvimento",
-		description: "Plataforma de deploy focada em performance e experiência do desenvolvedor. Ideal para React/Next.js.",
-		freeTier: true,
-		url: "https://vercel.com",
-		logoUrl: "https://img.usecurling.com/i?q=triangle&shape=fill&color=white"
-	},
-	{
-		id: "3",
-		name: "Stripe",
-		category: "Pagamentos",
-		description: "A infraestrutura de pagamentos mais robusta para negócios na internet. APIs incríveis para assinaturas.",
-		freeTier: false,
-		url: "https://stripe.com",
-		logoUrl: "https://img.usecurling.com/i?q=credit-card&shape=fill&color=violet"
-	},
-	{
-		id: "4",
-		name: "Figma",
-		category: "Design",
-		description: "Ferramenta de design colaborativo líder de mercado. Essencial para criar wireframes e protótipos rápidos.",
-		freeTier: true,
-		url: "https://figma.com",
-		logoUrl: "https://img.usecurling.com/i?q=pen-tool&shape=outline&color=multicolor"
-	},
-	{
-		id: "5",
-		name: "Resend",
-		category: "Marketing",
-		description: "API de e-mail feita para desenvolvedores. Simples, moderna e com excelente taxa de entrega.",
-		freeTier: true,
-		url: "https://resend.com",
-		logoUrl: "https://img.usecurling.com/i?q=mail&shape=outline&color=white"
-	},
-	{
-		id: "6",
-		name: "Bubble",
-		category: "No-Code",
-		description: "Crie aplicações web completas sem escrever código. Excelente para validar MVPs complexos rapidamente.",
-		freeTier: true,
-		url: "https://bubble.io",
-		logoUrl: "https://img.usecurling.com/i?q=grid&shape=fill&color=blue"
-	},
-	{
-		id: "7",
-		name: "Shadcn UI",
-		category: "Desenvolvimento",
-		description: "Componentes lindamente desenhados que você pode copiar e colar nos seus apps. Acessíveis e customizáveis.",
-		freeTier: true,
-		url: "https://ui.shadcn.com",
-		logoUrl: "https://img.usecurling.com/i?q=code&shape=outline&color=white"
-	},
-	{
-		id: "8",
-		name: "PostHog",
-		category: "Marketing",
-		description: "Plataforma open-source de product analytics, gravação de sessão, feature flags e testes A/B.",
-		freeTier: true,
-		url: "https://posthog.com",
-		logoUrl: "https://img.usecurling.com/i?q=chart-pie&shape=fill&color=orange"
-	}
-];
-//#endregion
-//#region src/pages/Tools.tsx
-var categories = [
-	"Desenvolvimento",
-	"Pagamentos",
-	"Design",
-	"Marketing",
-	"No-Code"
-];
-function Tools() {
-	const [activeCategory, setActiveCategory] = (0, import_react.useState)("Todas");
-	const filteredTools = toolsData.filter((tool) => activeCategory === "Todas" || tool.category === activeCategory);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Tools.tsx:24:5",
-		"data-prohibitions": "[editContent]",
-		className: "animate-fade-in-up",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Tools.tsx:25:7",
-				"data-prohibitions": "[]",
-				className: "mb-10 text-center",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/Tools.tsx:26:9",
-					"data-prohibitions": "[]",
-					className: "text-3xl font-bold tracking-tight mb-3",
-					children: "SaaS Stack"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Tools.tsx:27:9",
-					"data-prohibitions": "[]",
-					className: "text-muted-foreground text-lg max-w-2xl mx-auto",
-					children: "Uma seleção curada das melhores ferramentas para construir, lançar e escalar o seu SaaS sem dores de cabeça."
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Tools.tsx:33:7",
-				"data-prohibitions": "[editContent]",
-				className: "flex flex-col md:flex-row gap-4 items-center justify-center mb-10 overflow-x-auto pb-4 scrollbar-hide",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Tools.tsx:34:9",
-					"data-prohibitions": "[]",
-					className: "flex items-center gap-2 text-sm font-medium text-muted-foreground mr-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, {
-						"data-uid": "src/pages/Tools.tsx:35:11",
-						"data-prohibitions": "[editContent]",
-						className: "w-4 h-4"
-					}), " Filtros:"]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Tools.tsx:37:9",
-					"data-prohibitions": "[editContent]",
-					className: "flex gap-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-						"data-uid": "src/pages/Tools.tsx:38:11",
-						"data-prohibitions": "[]",
-						variant: activeCategory === "Todas" ? "default" : "secondary",
-						className: "cursor-pointer text-sm px-4 py-1",
-						onClick: () => setActiveCategory("Todas"),
-						children: "Todas"
-					}), categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-						"data-uid": "src/pages/Tools.tsx:46:13",
-						"data-prohibitions": "[editContent]",
-						variant: activeCategory === cat ? "default" : "secondary",
-						className: "cursor-pointer text-sm px-4 py-1 whitespace-nowrap",
-						onClick: () => setActiveCategory(cat),
-						children: cat
-					}, cat))]
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Tools.tsx:58:7",
-				"data-prohibitions": "[editContent]",
-				className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6",
-				children: filteredTools.map((tool) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Tools.tsx:60:11",
-					"data-prohibitions": "[editContent]",
-					className: "group flex flex-col h-full hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/pages/Tools.tsx:64:13",
-							"data-prohibitions": "[editContent]",
-							className: "flex flex-row items-center gap-4 pb-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Tools.tsx:65:15",
-								"data-prohibitions": "[]",
-								className: "w-12 h-12 rounded-xl border bg-background flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									"data-uid": "src/pages/Tools.tsx:66:17",
-									"data-prohibitions": "[editContent]",
-									src: tool.logoUrl,
-									alt: `Logo ${tool.name}`,
-									className: "w-8 h-8 object-contain"
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Tools.tsx:72:15",
-								"data-prohibitions": "[editContent]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-									"data-uid": "src/pages/Tools.tsx:73:17",
-									"data-prohibitions": "[editContent]",
-									className: "font-semibold text-lg leading-tight",
-									children: tool.name
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/pages/Tools.tsx:74:17",
-									"data-prohibitions": "[editContent]",
-									className: "text-xs text-muted-foreground",
-									children: tool.category
-								})]
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/pages/Tools.tsx:77:13",
-							"data-prohibitions": "[editContent]",
-							className: "flex-1",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								"data-uid": "src/pages/Tools.tsx:78:15",
-								"data-prohibitions": "[editContent]",
-								className: "text-sm text-muted-foreground leading-relaxed mt-2",
-								children: tool.description
-							})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardFooter, {
-							"data-uid": "src/pages/Tools.tsx:82:13",
-							"data-prohibitions": "[editContent]",
-							className: "pt-4 border-t flex items-center justify-between",
-							children: [tool.freeTier ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-								"data-uid": "src/pages/Tools.tsx:84:17",
-								"data-prohibitions": "[]",
-								variant: "outline",
-								className: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400",
-								children: "Tem versão Grátis"
-							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-								"data-uid": "src/pages/Tools.tsx:91:17",
-								"data-prohibitions": "[]",
-								variant: "outline",
-								className: "text-muted-foreground",
-								children: "Pago"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-								"data-uid": "src/pages/Tools.tsx:95:15",
-								"data-prohibitions": "[editContent]",
-								size: "icon",
-								variant: "ghost",
-								asChild: true,
-								className: "group-hover:text-primary",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-									"data-uid": "src/pages/Tools.tsx:96:17",
-									"data-prohibitions": "[editContent]",
-									href: tool.url,
-									target: "_blank",
-									rel: "noopener noreferrer",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, {
-										"data-uid": "src/pages/Tools.tsx:97:19",
-										"data-prohibitions": "[editContent]",
-										className: "w-4 h-4"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										"data-uid": "src/pages/Tools.tsx:98:19",
-										"data-prohibitions": "[editContent]",
-										className: "sr-only",
-										children: ["Visitar site do ", tool.name]
-									})]
-								})
-							})]
-						})
-					]
-				}, tool.id))
-			})
-		]
-	});
-}
-//#endregion
-//#region src/components/ui/input.tsx
-var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-		"data-uid": "src/components/ui/input.tsx:9:7",
-		"data-prohibitions": "[editContent]",
-		type,
-		className: cn$1("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
-		ref,
-		...props
-	});
-});
-Input.displayName = "Input";
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-label@2.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_55fa612a976b7bdfbf4dcdd93d861aab/node_modules/@radix-ui/react-label/dist/index.mjs
-var NAME = "Label";
-var Label$1 = import_react.forwardRef((props, forwardedRef) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.label, {
-		...props,
-		ref: forwardedRef,
-		onMouseDown: (event) => {
-			if (event.target.closest("button, input, select, textarea")) return;
-			props.onMouseDown?.(event);
-			if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
-		}
-	});
-});
-Label$1.displayName = NAME;
-var Root$1 = Label$1;
-//#endregion
-//#region src/components/ui/label.tsx
-var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
-	"data-uid": "src/components/ui/label.tsx:16:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1(labelVariants(), className),
-	...props
-}));
-Label.displayName = Root$1.displayName;
-//#endregion
-//#region src/components/ui/textarea.tsx
-var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
-		"data-uid": "src/components/ui/textarea.tsx:9:7",
-		"data-prohibitions": "[editContent]",
-		className: cn$1("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
-		ref,
-		...props
-	});
-});
-Textarea.displayName = "Textarea";
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-use-previous@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-previous/dist/index.mjs
-function usePrevious(value) {
-	const ref = import_react.useRef({
-		value,
-		previous: value
-	});
-	return import_react.useMemo(() => {
-		if (ref.current.value !== value) {
-			ref.current.previous = ref.current.value;
-			ref.current.value = value;
-		}
-		return ref.current.previous;
-	}, [value]);
-}
-//#endregion
-//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-checkbox@1.3.3_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_a9bfe74df417688e01ae6068318bf0dd/node_modules/@radix-ui/react-checkbox/dist/index.mjs
-var CHECKBOX_NAME = "Checkbox";
-var [createCheckboxContext, createCheckboxScope] = createContextScope$1(CHECKBOX_NAME);
-var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
-function CheckboxProvider(props) {
-	const { __scopeCheckbox, checked: checkedProp, children, defaultChecked, disabled, form, name, onCheckedChange, required, value = "on", internal_do_not_use_render } = props;
-	const [checked, setChecked] = useControllableState({
-		prop: checkedProp,
-		defaultProp: defaultChecked ?? false,
-		onChange: onCheckedChange,
-		caller: CHECKBOX_NAME
-	});
-	const [control, setControl] = import_react.useState(null);
-	const [bubbleInput, setBubbleInput] = import_react.useState(null);
-	const hasConsumerStoppedPropagationRef = import_react.useRef(false);
-	const isFormControl = control ? !!form || !!control.closest("form") : true;
-	const context = {
-		checked,
-		disabled,
-		setChecked,
-		control,
-		setControl,
-		name,
-		form,
-		value,
-		hasConsumerStoppedPropagationRef,
-		required,
-		defaultChecked: isIndeterminate(defaultChecked) ? false : defaultChecked,
-		isFormControl,
-		bubbleInput,
-		setBubbleInput
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxProviderImpl, {
-		scope: __scopeCheckbox,
-		...context,
-		children: isFunction(internal_do_not_use_render) ? internal_do_not_use_render(context) : children
-	});
-}
-var TRIGGER_NAME$1 = "CheckboxTrigger";
-var CheckboxTrigger = import_react.forwardRef(({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) => {
-	const { control, value, disabled, checked, required, setControl, setChecked, hasConsumerStoppedPropagationRef, isFormControl, bubbleInput } = useCheckboxContext(TRIGGER_NAME$1, __scopeCheckbox);
-	const composedRefs = useComposedRefs(forwardedRef, setControl);
-	const initialCheckedStateRef = import_react.useRef(checked);
-	import_react.useEffect(() => {
-		const form = control?.form;
-		if (form) {
-			const reset = () => setChecked(initialCheckedStateRef.current);
-			form.addEventListener("reset", reset);
-			return () => form.removeEventListener("reset", reset);
-		}
-	}, [control, setChecked]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
-		type: "button",
-		role: "checkbox",
-		"aria-checked": isIndeterminate(checked) ? "mixed" : checked,
-		"aria-required": required,
-		"data-state": getState$1(checked),
-		"data-disabled": disabled ? "" : void 0,
-		disabled,
-		value,
-		...checkboxProps,
-		ref: composedRefs,
-		onKeyDown: composeEventHandlers(onKeyDown, (event) => {
-			if (event.key === "Enter") event.preventDefault();
-		}),
-		onClick: composeEventHandlers(onClick, (event) => {
-			setChecked((prevChecked) => isIndeterminate(prevChecked) ? true : !prevChecked);
-			if (bubbleInput && isFormControl) {
-				hasConsumerStoppedPropagationRef.current = event.isPropagationStopped();
-				if (!hasConsumerStoppedPropagationRef.current) event.stopPropagation();
-			}
-		})
-	});
-});
-CheckboxTrigger.displayName = TRIGGER_NAME$1;
-var Checkbox$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeCheckbox, name, checked, defaultChecked, required, disabled, value, onCheckedChange, form, ...checkboxProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxProvider, {
-		__scopeCheckbox,
-		checked,
-		defaultChecked,
-		disabled,
-		required,
-		onCheckedChange,
-		name,
-		form,
-		value,
-		internal_do_not_use_render: ({ isFormControl }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxTrigger, {
-			...checkboxProps,
-			ref: forwardedRef,
-			__scopeCheckbox
-		}), isFormControl && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxBubbleInput, { __scopeCheckbox })] })
-	});
-});
-Checkbox$1.displayName = CHECKBOX_NAME;
-var INDICATOR_NAME = "CheckboxIndicator";
-var CheckboxIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeCheckbox, forceMount, ...indicatorProps } = props;
-	const context = useCheckboxContext(INDICATOR_NAME, __scopeCheckbox);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || isIndeterminate(context.checked) || context.checked === true,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-			"data-state": getState$1(context.checked),
-			"data-disabled": context.disabled ? "" : void 0,
-			...indicatorProps,
-			ref: forwardedRef,
-			style: {
-				pointerEvents: "none",
-				...props.style
-			}
-		})
-	});
-});
-CheckboxIndicator.displayName = INDICATOR_NAME;
-var BUBBLE_INPUT_NAME = "CheckboxBubbleInput";
-var CheckboxBubbleInput = import_react.forwardRef(({ __scopeCheckbox, ...props }, forwardedRef) => {
-	const { control, hasConsumerStoppedPropagationRef, checked, defaultChecked, required, disabled, name, value, form, bubbleInput, setBubbleInput } = useCheckboxContext(BUBBLE_INPUT_NAME, __scopeCheckbox);
-	const composedRefs = useComposedRefs(forwardedRef, setBubbleInput);
-	const prevChecked = usePrevious(checked);
-	const controlSize = useSize(control);
-	import_react.useEffect(() => {
-		const input = bubbleInput;
-		if (!input) return;
-		const inputProto = window.HTMLInputElement.prototype;
-		const setChecked = Object.getOwnPropertyDescriptor(inputProto, "checked").set;
-		const bubbles = !hasConsumerStoppedPropagationRef.current;
-		if (prevChecked !== checked && setChecked) {
-			const event = new Event("click", { bubbles });
-			input.indeterminate = isIndeterminate(checked);
-			setChecked.call(input, isIndeterminate(checked) ? false : checked);
-			input.dispatchEvent(event);
-		}
-	}, [
-		bubbleInput,
-		prevChecked,
-		checked,
-		hasConsumerStoppedPropagationRef
-	]);
-	const defaultCheckedRef = import_react.useRef(isIndeterminate(checked) ? false : checked);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.input, {
-		type: "checkbox",
-		"aria-hidden": true,
-		defaultChecked: defaultChecked ?? defaultCheckedRef.current,
-		required,
-		disabled,
-		name,
-		value,
-		form,
-		...props,
-		tabIndex: -1,
-		ref: composedRefs,
-		style: {
-			...props.style,
-			...controlSize,
-			position: "absolute",
-			pointerEvents: "none",
-			opacity: 0,
-			margin: 0,
-			transform: "translateX(-100%)"
-		}
-	});
-});
-CheckboxBubbleInput.displayName = BUBBLE_INPUT_NAME;
-function isFunction(value) {
-	return typeof value === "function";
-}
-function isIndeterminate(checked) {
-	return checked === "indeterminate";
-}
-function getState$1(checked) {
-	return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
-}
-//#endregion
-//#region src/components/ui/checkbox.tsx
-var Checkbox = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox$1, {
-	"data-uid": "src/components/ui/checkbox.tsx:12:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxIndicator, {
-		"data-uid": "src/components/ui/checkbox.tsx:20:5",
-		"data-prohibitions": "[editContent]",
-		className: cn$1("flex items-center justify-center text-current"),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-			"data-uid": "src/components/ui/checkbox.tsx:21:7",
-			"data-prohibitions": "[editContent]",
-			className: "h-4 w-4"
-		})
-	})
-}));
-Checkbox.displayName = Checkbox$1.displayName;
-//#endregion
-//#region src/pages/Planner.tsx
-function Planner() {
-	const { projectData, setProjectData, checklist, toggleChecklistItem, progress } = usePlannerStore();
-	const { toast } = useToast();
-	const handleSave = () => {
-		toast({
-			title: "Projeto salvo com sucesso!",
-			description: "Seus dados foram salvos no seu navegador.",
-			variant: "default"
-		});
-	};
-	const phases = [
-		1,
-		2,
-		3,
-		4,
-		5
-	];
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Planner.tsx:32:5",
-		"data-prohibitions": "[editContent]",
-		className: "max-w-5xl mx-auto animate-fade-in-up",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Planner.tsx:33:7",
-			"data-prohibitions": "[]",
-			className: "mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Planner.tsx:34:9",
-				"data-prohibitions": "[]",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/Planner.tsx:35:11",
-					"data-prohibitions": "[]",
-					className: "text-3xl font-bold tracking-tight mb-2",
-					children: "Meu Plano de Ação"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Planner.tsx:36:11",
-					"data-prohibitions": "[]",
-					className: "text-muted-foreground",
-					children: "Documente sua ideia e acompanhe seu progresso prático."
-				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-				"data-uid": "src/pages/Planner.tsx:40:9",
-				"data-prohibitions": "[]",
-				onClick: handleSave,
-				className: "gap-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Save, {
-					"data-uid": "src/pages/Planner.tsx:41:11",
-					"data-prohibitions": "[editContent]",
-					className: "w-4 h-4"
-				}), " Salvar Alterações"]
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Planner.tsx:45:7",
-			"data-prohibitions": "[editContent]",
-			className: "grid grid-cols-1 lg:grid-cols-3 gap-8",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Planner.tsx:47:9",
-				"data-prohibitions": "[editContent]",
-				className: "lg:col-span-1 space-y-6",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Planner.tsx:48:11",
-					"data-prohibitions": "[]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/Planner.tsx:49:13",
-						"data-prohibitions": "[]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/Planner.tsx:50:15",
-							"data-prohibitions": "[]",
-							className: "text-lg",
-							children: "Detalhes do Projeto"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-							"data-uid": "src/pages/Planner.tsx:51:15",
-							"data-prohibitions": "[]",
-							children: "Defina a base da sua ideia"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-						"data-uid": "src/pages/Planner.tsx:53:13",
-						"data-prohibitions": "[]",
-						className: "space-y-4",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Planner.tsx:54:15",
-								"data-prohibitions": "[]",
-								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/pages/Planner.tsx:55:17",
-									"data-prohibitions": "[]",
-									htmlFor: "name",
-									children: "Nome do Projeto (Provisório)"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/Planner.tsx:56:17",
-									"data-prohibitions": "[editContent]",
-									id: "name",
-									placeholder: "Ex: AutoVet",
-									value: projectData.name,
-									onChange: (e) => setProjectData({ name: e.target.value })
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Planner.tsx:63:15",
-								"data-prohibitions": "[]",
-								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/pages/Planner.tsx:64:17",
-									"data-prohibitions": "[]",
-									htmlFor: "audience",
-									children: "Público Alvo"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/Planner.tsx:65:17",
-									"data-prohibitions": "[editContent]",
-									id: "audience",
-									placeholder: "Ex: Clínicas Veterinárias Pequenas",
-									value: projectData.audience,
-									onChange: (e) => setProjectData({ audience: e.target.value })
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Planner.tsx:72:15",
-								"data-prohibitions": "[]",
-								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/pages/Planner.tsx:73:17",
-									"data-prohibitions": "[]",
-									htmlFor: "problem",
-									children: "Problema Principal que Resolve"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
-									"data-uid": "src/pages/Planner.tsx:74:17",
-									"data-prohibitions": "[editContent]",
-									id: "problem",
-									placeholder: "Descreva a dor que você vai curar...",
-									className: "min-h-[120px] resize-none",
-									value: projectData.problem,
-									onChange: (e) => setProjectData({ problem: e.target.value })
-								})]
-							})
-						]
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Planner.tsx:85:11",
-					"data-prohibitions": "[editContent]",
-					className: "bg-primary/5 border-primary/20",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-						"data-uid": "src/pages/Planner.tsx:86:13",
-						"data-prohibitions": "[]",
-						className: "pb-3",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
-							"data-uid": "src/pages/Planner.tsx:87:15",
-							"data-prohibitions": "[]",
-							className: "text-md flex items-center gap-2 text-primary",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClipboardList, {
-								"data-uid": "src/pages/Planner.tsx:88:17",
-								"data-prohibitions": "[editContent]",
-								className: "w-5 h-5"
-							}), " Status Global"]
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-						"data-uid": "src/pages/Planner.tsx:91:13",
-						"data-prohibitions": "[editContent]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/Planner.tsx:92:15",
-							"data-prohibitions": "[editContent]",
-							className: "flex items-end justify-between mb-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/pages/Planner.tsx:93:17",
-								"data-prohibitions": "[]",
-								className: "text-sm font-medium",
-								children: "Jornada Completada"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								"data-uid": "src/pages/Planner.tsx:94:17",
-								"data-prohibitions": "[editContent]",
-								className: "text-2xl font-bold text-primary",
-								children: [progress, "%"]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-							"data-uid": "src/pages/Planner.tsx:96:15",
-							"data-prohibitions": "[editContent]",
-							value: progress,
-							className: "h-2.5"
-						})]
-					})]
-				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Planner.tsx:102:9",
-				"data-prohibitions": "[editContent]",
-				className: "lg:col-span-2 space-y-6",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Planner.tsx:103:11",
-					"data-prohibitions": "[editContent]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/Planner.tsx:104:13",
-						"data-prohibitions": "[]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/Planner.tsx:105:15",
-							"data-prohibitions": "[]",
-							className: "text-xl",
-							children: "Checklist de Execução"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-							"data-uid": "src/pages/Planner.tsx:106:15",
-							"data-prohibitions": "[]",
-							children: "Marque as tarefas conforme avança no seu SaaS"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/Planner.tsx:108:13",
-						"data-prohibitions": "[editContent]",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/Planner.tsx:109:15",
-							"data-prohibitions": "[editContent]",
-							className: "space-y-8",
-							children: phases.map((phaseNum) => {
-								const phaseItems = checklist.filter((item) => item.phase === phaseNum);
-								if (phaseItems.length === 0) return null;
-								const isAllCompleted = phaseItems.every((i) => i.completed);
-								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/Planner.tsx:117:21",
-									"data-prohibitions": "[editContent]",
-									className: "space-y-3",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-										"data-uid": "src/pages/Planner.tsx:118:23",
-										"data-prohibitions": "[editContent]",
-										className: cn$1("text-sm font-bold uppercase tracking-wider flex items-center gap-2", isAllCompleted ? "text-emerald-500" : "text-muted-foreground"),
-										children: [
-											isAllCompleted && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-												"data-uid": "src/pages/Planner.tsx:124:44",
-												"data-prohibitions": "[editContent]",
-												className: "w-4 h-4"
-											}),
-											"Fase ",
-											phaseNum
-										]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										"data-uid": "src/pages/Planner.tsx:127:23",
-										"data-prohibitions": "[editContent]",
-										className: "space-y-2",
-										children: phaseItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/pages/Planner.tsx:129:27",
-											"data-prohibitions": "[editContent]",
-											className: cn$1("flex items-start gap-3 p-3 rounded-md border transition-colors hover:bg-muted/50", item.completed ? "bg-muted/30 border-transparent" : "bg-card"),
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
-												"data-uid": "src/pages/Planner.tsx:136:29",
-												"data-prohibitions": "[editContent]",
-												id: item.id,
-												checked: item.completed,
-												onCheckedChange: () => toggleChecklistItem(item.id),
-												className: "mt-0.5 data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-												"data-uid": "src/pages/Planner.tsx:142:29",
-												"data-prohibitions": "[editContent]",
-												htmlFor: item.id,
-												className: cn$1("text-sm font-medium leading-tight cursor-pointer", item.completed && "line-through text-muted-foreground"),
-												children: item.text
-											})]
-										}, item.id))
-									})]
-								}, phaseNum);
-							})
-						})
-					})]
-				})
-			})]
-		})]
-	});
-}
-//#endregion
-//#region src/pages/NotFound.tsx
-var NotFound = () => {
-	const location = useLocation();
-	(0, import_react.useEffect)(() => {
-		console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-	}, [location.pathname]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/pages/NotFound.tsx:13:5",
-		"data-prohibitions": "[]",
-		className: "min-h-screen flex items-center justify-center bg-gray-100",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/NotFound.tsx:14:7",
-			"data-prohibitions": "[]",
-			className: "text-center",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/NotFound.tsx:15:9",
-					"data-prohibitions": "[]",
-					className: "text-4xl font-bold mb-4",
-					children: "404"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/NotFound.tsx:16:9",
-					"data-prohibitions": "[]",
-					className: "text-xl text-gray-600 mb-4",
-					children: "Oops! Page not found"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-					"data-uid": "src/pages/NotFound.tsx:17:9",
-					"data-prohibitions": "[]",
-					href: "/",
-					className: "text-blue-500 hover:text-blue-700 underline",
-					children: "Return to Home"
-				})
-			]
-		})
-	});
-};
 //#endregion
 //#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-focus-scope@1.1.7_@types+react-dom@19.2.3_@types+react@19.2.14__@types+_f62f3af4ca2ba305a7aecf04c8534604/node_modules/@radix-ui/react-focus-scope/dist/index.mjs
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
@@ -27515,10 +25718,10 @@ var Dialog = (props) => {
 	});
 };
 Dialog.displayName = DIALOG_NAME;
-var TRIGGER_NAME = "DialogTrigger";
+var TRIGGER_NAME$1 = "DialogTrigger";
 var DialogTrigger = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...triggerProps } = props;
-	const context = useDialogContext(TRIGGER_NAME, __scopeDialog);
+	const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
 	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 		type: "button",
@@ -27531,18 +25734,18 @@ var DialogTrigger = import_react.forwardRef((props, forwardedRef) => {
 		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
 	});
 });
-DialogTrigger.displayName = TRIGGER_NAME;
-var PORTAL_NAME = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME, { forceMount: void 0 });
+DialogTrigger.displayName = TRIGGER_NAME$1;
+var PORTAL_NAME$1 = "DialogPortal";
+var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME$1, { forceMount: void 0 });
 var DialogPortal = (props) => {
 	const { __scopeDialog, forceMount, children, container } = props;
-	const context = useDialogContext(PORTAL_NAME, __scopeDialog);
+	const context = useDialogContext(PORTAL_NAME$1, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider, {
 		scope: __scopeDialog,
 		forceMount,
 		children: import_react.Children.map(children, (child) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 			present: forceMount || context.open,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
 				asChild: true,
 				container,
 				children: child
@@ -27550,7 +25753,7 @@ var DialogPortal = (props) => {
 		}))
 	});
 };
-DialogPortal.displayName = PORTAL_NAME;
+DialogPortal.displayName = PORTAL_NAME$1;
 var OVERLAY_NAME = "DialogOverlay";
 var DialogOverlay = import_react.forwardRef((props, forwardedRef) => {
 	const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
@@ -27565,12 +25768,12 @@ var DialogOverlay = import_react.forwardRef((props, forwardedRef) => {
 	}) : null;
 });
 DialogOverlay.displayName = OVERLAY_NAME;
-var Slot = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
+var Slot$1 = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
 var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...overlayProps } = props;
 	const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
-		as: Slot,
+		as: Slot$1,
 		allowPinchZoom: true,
 		shards: [context.contentRef],
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
@@ -27584,11 +25787,11 @@ var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-var CONTENT_NAME = "DialogContent";
+var CONTENT_NAME$1 = "DialogContent";
 var DialogContent = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext(CONTENT_NAME, props.__scopeDialog);
+	const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeDialog);
 	const { forceMount = portalContext.forceMount, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || context.open,
 		children: context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentModal, {
@@ -27600,9 +25803,9 @@ var DialogContent = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-DialogContent.displayName = CONTENT_NAME;
+DialogContent.displayName = CONTENT_NAME$1;
 var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
 	const contentRef = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
 	import_react.useEffect(() => {
@@ -27627,7 +25830,7 @@ var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
 	const hasInteractedOutsideRef = import_react.useRef(false);
 	const hasPointerDownOutsideRef = import_react.useRef(false);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
@@ -27658,7 +25861,7 @@ var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
 });
 var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME, __scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$1, __scopeDialog);
 	const contentRef = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, contentRef);
 	useFocusGuards();
@@ -27722,7 +25925,7 @@ function getState(open) {
 }
 var TITLE_WARNING_NAME = "DialogTitleWarning";
 var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-	contentName: CONTENT_NAME,
+	contentName: CONTENT_NAME$1,
 	titleName: TITLE_NAME,
 	docsSlug: "dialog"
 });
@@ -27755,9 +25958,9 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root = Dialog;
-var Trigger = DialogTrigger;
-var Portal = DialogPortal;
+var Root$1 = Dialog;
+var Trigger$1 = DialogTrigger;
+var Portal$1 = DialogPortal;
 var Overlay = DialogOverlay;
 var Content = DialogContent;
 var Title = DialogTitle;
@@ -27765,9 +25968,9 @@ var Description = DialogDescription;
 var Close = DialogClose;
 //#endregion
 //#region src/components/ui/sheet.tsx
-var Sheet = Root;
-var SheetTrigger = Trigger;
-var SheetPortal = Portal;
+var Sheet = Root$1;
+var SheetTrigger = Trigger$1;
+var SheetPortal = Portal$1;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/sheet.tsx:21:3",
 	"data-prohibitions": "[editContent]",
@@ -27851,163 +26054,148 @@ function Layout() {
 	const { theme, setTheme } = useTheme();
 	const location = useLocation();
 	const [isOpen, setIsOpen] = (0, import_react.useState)(false);
-	const { progress } = usePlannerStore();
 	const navLinks = [
 		{
-			name: "Início",
+			name: "Importar Dados",
 			path: "/",
-			icon: LayoutDashboard
+			icon: CloudUpload
 		},
 		{
-			name: "Roteiro",
-			path: "/roteiro",
-			icon: Compass
+			name: "Mapeamento IA",
+			path: "/matching",
+			icon: BrainCircuit
 		},
 		{
-			name: "Ferramentas",
-			path: "/ferramentas",
-			icon: Wrench
-		},
-		{
-			name: "Meu Plano",
-			path: "/plano",
-			icon: SquareCheckBig
+			name: "Otimização",
+			path: "/optimization",
+			icon: ChartLine
 		}
 	];
 	const NavItems = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: navLinks.map((link) => {
 		const Icon = link.icon;
 		const isActive = location.pathname === link.path;
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-			"data-uid": "src/components/Layout.tsx:44:11",
+			"data-uid": "src/components/Layout.tsx:32:11",
 			"data-prohibitions": "[editContent]",
 			to: link.path,
 			onClick: () => setIsOpen(false),
 			className: cn$1("flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors", isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"),
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
-					"data-uid": "src/components/Layout.tsx:55:13",
-					"data-prohibitions": "[editContent]",
-					className: "w-4 h-4"
-				}),
-				link.name,
-				link.name === "Meu Plano" && progress > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					"data-uid": "src/components/Layout.tsx:58:15",
-					"data-prohibitions": "[editContent]",
-					className: "ml-auto text-xs bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full",
-					children: [progress, "%"]
-				})
-			]
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
+				"data-uid": "src/components/Layout.tsx:43:13",
+				"data-prohibitions": "[editContent]",
+				className: "w-4 h-4"
+			}), link.name]
 		}, link.path);
 	}) });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Layout.tsx:69:5",
+		"data-uid": "src/components/Layout.tsx:52:5",
 		"data-prohibitions": "[editContent]",
 		className: "flex flex-col min-h-screen",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
-				"data-uid": "src/components/Layout.tsx:70:7",
+				"data-uid": "src/components/Layout.tsx:53:7",
 				"data-prohibitions": "[editContent]",
-				className: "glass-nav",
+				className: "glass-nav border-b bg-background/80 backdrop-blur-md sticky top-0 z-40",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Layout.tsx:71:9",
+					"data-uid": "src/components/Layout.tsx:54:9",
 					"data-prohibitions": "[editContent]",
 					className: "container mx-auto px-4 h-16 flex items-center justify-between",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-							"data-uid": "src/components/Layout.tsx:72:11",
+							"data-uid": "src/components/Layout.tsx:55:11",
 							"data-prohibitions": "[]",
 							to: "/",
 							className: "flex items-center gap-2 group",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/Layout.tsx:73:13",
+								"data-uid": "src/components/Layout.tsx:56:13",
 								"data-prohibitions": "[]",
 								className: "bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Rocket, {
-									"data-uid": "src/components/Layout.tsx:74:15",
+									"data-uid": "src/components/Layout.tsx:57:15",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5 text-primary"
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/Layout.tsx:76:13",
+								"data-uid": "src/components/Layout.tsx:59:13",
 								"data-prohibitions": "[]",
 								className: "font-bold text-lg tracking-tight",
-								children: "SaaS Blueprint"
+								children: "ProcureSaaS"
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-							"data-uid": "src/components/Layout.tsx:79:11",
+							"data-uid": "src/components/Layout.tsx:62:11",
 							"data-prohibitions": "[]",
 							className: "hidden md:flex items-center gap-1",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavItems, {
-								"data-uid": "src/components/Layout.tsx:80:13",
+								"data-uid": "src/components/Layout.tsx:63:13",
 								"data-prohibitions": "[editContent]"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/Layout.tsx:83:11",
+							"data-uid": "src/components/Layout.tsx:66:11",
 							"data-prohibitions": "[editContent]",
 							className: "flex items-center gap-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-								"data-uid": "src/components/Layout.tsx:84:13",
+								"data-uid": "src/components/Layout.tsx:67:13",
 								"data-prohibitions": "[editContent]",
 								variant: "ghost",
 								size: "icon",
 								onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
 								className: "rounded-full",
 								children: theme === "dark" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sun, {
-									"data-uid": "src/components/Layout.tsx:90:35",
+									"data-uid": "src/components/Layout.tsx:73:35",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5"
 								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Moon, {
-									"data-uid": "src/components/Layout.tsx:90:65",
+									"data-uid": "src/components/Layout.tsx:73:65",
 									"data-prohibitions": "[editContent]",
 									className: "w-5 h-5"
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sheet, {
-								"data-uid": "src/components/Layout.tsx:93:13",
+								"data-uid": "src/components/Layout.tsx:76:13",
 								"data-prohibitions": "[]",
 								open: isOpen,
 								onOpenChange: setIsOpen,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTrigger, {
-									"data-uid": "src/components/Layout.tsx:94:15",
+									"data-uid": "src/components/Layout.tsx:77:15",
 									"data-prohibitions": "[]",
 									asChild: true,
 									className: "md:hidden",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-										"data-uid": "src/components/Layout.tsx:95:17",
+										"data-uid": "src/components/Layout.tsx:78:17",
 										"data-prohibitions": "[]",
 										variant: "ghost",
 										size: "icon",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
-											"data-uid": "src/components/Layout.tsx:96:19",
+											"data-uid": "src/components/Layout.tsx:79:19",
 											"data-prohibitions": "[editContent]",
 											className: "w-5 h-5"
 										})
 									})
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetContent, {
-									"data-uid": "src/components/Layout.tsx:99:15",
+									"data-uid": "src/components/Layout.tsx:82:15",
 									"data-prohibitions": "[]",
 									side: "right",
 									className: "w-[280px]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTitle, {
-											"data-uid": "src/components/Layout.tsx:100:17",
+											"data-uid": "src/components/Layout.tsx:83:17",
 											"data-prohibitions": "[]",
 											className: "sr-only",
 											children: "Menu de Navegação"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetDescription, {
-											"data-uid": "src/components/Layout.tsx:101:17",
+											"data-uid": "src/components/Layout.tsx:84:17",
 											"data-prohibitions": "[]",
 											className: "sr-only",
-											children: "Acesse as páginas do SaaS Blueprint"
+											children: "Acesse as páginas da ferramenta"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											"data-uid": "src/components/Layout.tsx:104:17",
+											"data-uid": "src/components/Layout.tsx:87:17",
 											"data-prohibitions": "[]",
 											className: "flex flex-col gap-2 mt-8",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavItems, {
-												"data-uid": "src/components/Layout.tsx:105:19",
+												"data-uid": "src/components/Layout.tsx:88:19",
 												"data-prohibitions": "[editContent]"
 											})
 										})
@@ -28019,44 +26207,35 @@ function Layout() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
-				"data-uid": "src/components/Layout.tsx:113:7",
+				"data-uid": "src/components/Layout.tsx:96:7",
 				"data-prohibitions": "[]",
 				className: "flex-1 w-full max-w-7xl mx-auto px-4 py-8",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {
-					"data-uid": "src/components/Layout.tsx:114:9",
+					"data-uid": "src/components/Layout.tsx:97:9",
 					"data-prohibitions": "[editContent]"
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
-				"data-uid": "src/components/Layout.tsx:117:7",
+				"data-uid": "src/components/Layout.tsx:100:7",
 				"data-prohibitions": "[editContent]",
 				className: "border-t py-8 mt-12 bg-card/50",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Layout.tsx:118:9",
+					"data-uid": "src/components/Layout.tsx:101:9",
 					"data-prohibitions": "[editContent]",
 					className: "container mx-auto px-4 text-center text-sm text-muted-foreground",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/components/Layout.tsx:119:11",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/components/Layout.tsx:102:11",
 						"data-prohibitions": "[]",
 						className: "flex items-center justify-center gap-1",
-						children: [
-							"Construído com ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/Layout.tsx:120:28",
-								"data-prohibitions": "[]",
-								className: "text-red-500",
-								children: "❤️"
-							}),
-							" para empreendedores e desenvolvedores."
-						]
+						children: "Gestão de Compras Inteligente."
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/components/Layout.tsx:123:11",
+						"data-uid": "src/components/Layout.tsx:103:11",
 						"data-prohibitions": "[editContent]",
 						className: "mt-2",
 						children: [
 							"© ",
 							(/* @__PURE__ */ new Date()).getFullYear(),
-							" SaaS Blueprint. Todos os direitos reservados."
+							" ProcureSaaS. Todos os direitos reservados."
 						]
 					})]
 				})
@@ -28065,88 +26244,4476 @@ function Layout() {
 	});
 }
 //#endregion
+//#region src/components/ui/card.tsx
+var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:8:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("rounded-lg border bg-card text-card-foreground shadow-sm", className),
+	...props
+}));
+Card.displayName = "Card";
+var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:19:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex flex-col space-y-1.5 p-6", className),
+	...props
+}));
+CardHeader.displayName = "CardHeader";
+var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:26:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-2xl font-semibold leading-none tracking-tight", className),
+	...props
+}));
+CardTitle.displayName = "CardTitle";
+var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:37:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-sm text-muted-foreground", className),
+	...props
+}));
+CardDescription.displayName = "CardDescription";
+var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:44:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("p-6 pt-0", className),
+	...props
+}));
+CardContent.displayName = "CardContent";
+var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:51:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex items-center p-6 pt-0", className),
+	...props
+}));
+CardFooter.displayName = "CardFooter";
+//#endregion
+//#region src/pages/Import.tsx
+function ImportPage() {
+	const { importData, erpNeeds, supplierItems } = useProcurementStore();
+	const { toast } = useToast();
+	const [loading, setLoading] = (0, import_react.useState)(null);
+	const handleUpload = (type) => {
+		setLoading(type);
+		setTimeout(() => {
+			importData(type);
+			setLoading(null);
+			toast({
+				title: "Sucesso",
+				description: `Dados de ${type} importados com sucesso.`
+			});
+		}, 1e3);
+	};
+	const isErpLoaded = erpNeeds.length > 0;
+	const isAmLoaded = supplierItems.some((i) => i.source.startsWith("AM"));
+	const isQuoteLoaded = supplierItems.some((i) => i.source === "DIRECT_QUOTE");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Import.tsx:28:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-8 animate-fade-in-up",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Import.tsx:29:7",
+				"data-prohibitions": "[]",
+				className: "text-center max-w-2xl mx-auto",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+					"data-uid": "src/pages/Import.tsx:30:9",
+					"data-prohibitions": "[]",
+					className: "text-3xl font-bold tracking-tight mb-2",
+					children: "Importação de Dados"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					"data-uid": "src/pages/Import.tsx:31:9",
+					"data-prohibitions": "[]",
+					className: "text-muted-foreground",
+					children: "Faça o upload das suas planilhas para cruzar os dados de compras e otimizar suas decisões."
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Import.tsx:36:7",
+				"data-prohibitions": "[]",
+				className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
+						"data-uid": "src/pages/Import.tsx:37:9",
+						"data-prohibitions": "[editContent]",
+						title: "Planilha ERP",
+						description: "Extração de Necessidade, Estoque Mín/Máx",
+						loaded: isErpLoaded,
+						loading: loading === "ERP",
+						onUpload: () => handleUpload("ERP")
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
+						"data-uid": "src/pages/Import.tsx:44:9",
+						"data-prohibitions": "[editContent]",
+						title: "Ação Magistral",
+						description: "Relatórios de Demanda e Pedidos",
+						loaded: isAmLoaded,
+						loading: loading === "AM",
+						onUpload: () => handleUpload("AM")
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
+						"data-uid": "src/pages/Import.tsx:51:9",
+						"data-prohibitions": "[editContent]",
+						title: "Cotações Diretas",
+						description: "Cotações enviadas por fornecedores",
+						loaded: isQuoteLoaded,
+						loading: loading === "QUOTE",
+						onUpload: () => handleUpload("QUOTE")
+					})
+				]
+			}),
+			(isErpLoaded || isAmLoaded || isQuoteLoaded) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/pages/Import.tsx:61:9",
+				"data-prohibitions": "[]",
+				className: "flex justify-center mt-8",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					"data-uid": "src/pages/Import.tsx:62:11",
+					"data-prohibitions": "[]",
+					asChild: true,
+					size: "lg",
+					className: "gap-2",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+						"data-uid": "src/pages/Import.tsx:63:13",
+						"data-prohibitions": "[]",
+						to: "/matching",
+						children: ["Ir para Mapeamento IA ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
+							"data-uid": "src/pages/Import.tsx:64:37",
+							"data-prohibitions": "[editContent]",
+							className: "w-4 h-4"
+						})]
+					})
+				})
+			})
+		]
+	});
+}
+function UploadCard({ title, description, loaded, loading, onUpload }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/pages/Import.tsx:87:5",
+		"data-prohibitions": "[editContent]",
+		className: loaded ? "border-primary/50 bg-primary/5" : "",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+			"data-uid": "src/pages/Import.tsx:88:7",
+			"data-prohibitions": "[editContent]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
+				"data-uid": "src/pages/Import.tsx:89:9",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center gap-2",
+				children: [loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+					"data-uid": "src/pages/Import.tsx:91:13",
+					"data-prohibitions": "[editContent]",
+					className: "w-5 h-5 text-emerald-500"
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
+					"data-uid": "src/pages/Import.tsx:93:13",
+					"data-prohibitions": "[editContent]",
+					className: "w-5 h-5 text-muted-foreground"
+				}), title]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
+				"data-uid": "src/pages/Import.tsx:97:9",
+				"data-prohibitions": "[editContent]",
+				children: description
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/pages/Import.tsx:99:7",
+			"data-prohibitions": "[editContent]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+				"data-uid": "src/pages/Import.tsx:100:9",
+				"data-prohibitions": "[editContent]",
+				variant: loaded ? "outline" : "default",
+				className: "w-full",
+				onClick: onUpload,
+				disabled: loading,
+				children: [loading ? "Processando..." : loaded ? "Atualizar Arquivo" : "Fazer Upload", !loading && !loaded && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
+					"data-uid": "src/pages/Import.tsx:107:35",
+					"data-prohibitions": "[editContent]",
+					className: "w-4 h-4 ml-2"
+				})]
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/components/ui/badge.tsx
+var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
+	variants: { variant: {
+		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+		outline: "text-foreground"
+	} },
+	defaultVariants: { variant: "default" }
+});
+function Badge({ className, variant, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/ui/badge.tsx:30:10",
+		"data-prohibitions": "[editContent]",
+		className: cn$1(badgeVariants({ variant }), className),
+		...props
+	});
+}
+//#endregion
+//#region src/components/ui/table.tsx
+var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/table.tsx:8:5",
+	"data-prohibitions": "[editContent]",
+	className: "relative w-full overflow-auto",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("table", {
+		"data-uid": "src/components/ui/table.tsx:9:7",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1("w-full caption-bottom text-sm", className),
+		...props
+	})
+}));
+Table.displayName = "Table";
+var TableHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
+	"data-uid": "src/components/ui/table.tsx:19:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("[&_tr]:border-b", className),
+	...props
+}));
+TableHeader.displayName = "TableHeader";
+var TableBody = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
+	"data-uid": "src/components/ui/table.tsx:27:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("[&_tr:last-child]:border-0", className),
+	...props
+}));
+TableBody.displayName = "TableBody";
+var TableFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tfoot", {
+	"data-uid": "src/components/ui/table.tsx:35:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className),
+	...props
+}));
+TableFooter.displayName = "TableFooter";
+var TableRow = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
+	"data-uid": "src/components/ui/table.tsx:45:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
+	...props
+}));
+TableRow.displayName = "TableRow";
+var TableHead = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+	"data-uid": "src/components/ui/table.tsx:61:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
+	...props
+}));
+TableHead.displayName = "TableHead";
+var TableCell = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+	"data-uid": "src/components/ui/table.tsx:76:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("p-4 align-middle [&:has([role=checkbox])]:pr-0", className),
+	...props
+}));
+TableCell.displayName = "TableCell";
+var TableCaption = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("caption", {
+	"data-uid": "src/components/ui/table.tsx:88:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("mt-4 text-sm text-muted-foreground", className),
+	...props
+}));
+TableCaption.displayName = "TableCaption";
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number/dist/index.mjs
+function clamp(value, [min, max]) {
+	return Math.min(max, Math.max(min, value));
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-direction@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-direction/dist/index.mjs
+var DirectionContext = import_react.createContext(void 0);
+function useDirection(localDir) {
+	const globalDir = import_react.useContext(DirectionContext);
+	return localDir || globalDir || "ltr";
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-use-previous@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-previous/dist/index.mjs
+function usePrevious(value) {
+	const ref = import_react.useRef({
+		value,
+		previous: value
+	});
+	return import_react.useMemo(() => {
+		if (ref.current.value !== value) {
+			ref.current.previous = ref.current.value;
+			ref.current.value = value;
+		}
+		return ref.current.previous;
+	}, [value]);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-select@2.2.6_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_53894a32562cb9eeb6aef8b357a4f4e3/node_modules/@radix-ui/react-select/dist/index.mjs
+var OPEN_KEYS = [
+	" ",
+	"Enter",
+	"ArrowUp",
+	"ArrowDown"
+];
+var SELECTION_KEYS = [" ", "Enter"];
+var SELECT_NAME = "Select";
+var [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME);
+var [createSelectContext, createSelectScope] = createContextScope$1(SELECT_NAME, [createCollectionScope, createPopperScope]);
+var usePopperScope = createPopperScope();
+var [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME);
+var [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME);
+var Select$1 = (props) => {
+	const { __scopeSelect, children, open: openProp, defaultOpen, onOpenChange, value: valueProp, defaultValue, onValueChange, dir, name, autoComplete, disabled, required, form } = props;
+	const popperScope = usePopperScope(__scopeSelect);
+	const [trigger, setTrigger] = import_react.useState(null);
+	const [valueNode, setValueNode] = import_react.useState(null);
+	const [valueNodeHasChildren, setValueNodeHasChildren] = import_react.useState(false);
+	const direction = useDirection(dir);
+	const [open, setOpen] = useControllableState({
+		prop: openProp,
+		defaultProp: defaultOpen ?? false,
+		onChange: onOpenChange,
+		caller: SELECT_NAME
+	});
+	const [value, setValue] = useControllableState({
+		prop: valueProp,
+		defaultProp: defaultValue,
+		onChange: onValueChange,
+		caller: SELECT_NAME
+	});
+	const triggerPointerDownPosRef = import_react.useRef(null);
+	const isFormControl = trigger ? form || !!trigger.closest("form") : true;
+	const [nativeOptionsSet, setNativeOptionsSet] = import_react.useState(/* @__PURE__ */ new Set());
+	const nativeSelectKey = Array.from(nativeOptionsSet).map((option) => option.props.value).join(";");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$1, {
+		...popperScope,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectProvider, {
+			required,
+			scope: __scopeSelect,
+			trigger,
+			onTriggerChange: setTrigger,
+			valueNode,
+			onValueNodeChange: setValueNode,
+			valueNodeHasChildren,
+			onValueNodeHasChildrenChange: setValueNodeHasChildren,
+			contentId: useId(),
+			value,
+			onValueChange: setValue,
+			open,
+			onOpenChange: setOpen,
+			dir: direction,
+			triggerPointerDownPosRef,
+			disabled,
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Provider, {
+				scope: __scopeSelect,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectNativeOptionsProvider, {
+					scope: props.__scopeSelect,
+					onNativeOptionAdd: import_react.useCallback((option) => {
+						setNativeOptionsSet((prev) => new Set(prev).add(option));
+					}, []),
+					onNativeOptionRemove: import_react.useCallback((option) => {
+						setNativeOptionsSet((prev) => {
+							const optionsSet = new Set(prev);
+							optionsSet.delete(option);
+							return optionsSet;
+						});
+					}, []),
+					children
+				})
+			}), isFormControl ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectBubbleInput, {
+				"aria-hidden": true,
+				required,
+				tabIndex: -1,
+				name,
+				autoComplete,
+				value,
+				onChange: (event) => setValue(event.target.value),
+				disabled,
+				form,
+				children: [value === void 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", { value: "" }) : null, Array.from(nativeOptionsSet)]
+			}, nativeSelectKey) : null]
+		})
+	});
+};
+Select$1.displayName = SELECT_NAME;
+var TRIGGER_NAME = "SelectTrigger";
+var SelectTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, disabled = false, ...triggerProps } = props;
+	const popperScope = usePopperScope(__scopeSelect);
+	const context = useSelectContext(TRIGGER_NAME, __scopeSelect);
+	const isDisabled = context.disabled || disabled;
+	const composedRefs = useComposedRefs(forwardedRef, context.onTriggerChange);
+	const getItems = useCollection(__scopeSelect);
+	const pointerTypeRef = import_react.useRef("touch");
+	const [searchRef, handleTypeaheadSearch, resetTypeahead] = useTypeaheadSearch((search) => {
+		const enabledItems = getItems().filter((item) => !item.disabled);
+		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.value === context.value));
+		if (nextItem !== void 0) context.onValueChange(nextItem.value);
+	});
+	const handleOpen = (pointerEvent) => {
+		if (!isDisabled) {
+			context.onOpenChange(true);
+			resetTypeahead();
+		}
+		if (pointerEvent) context.triggerPointerDownPosRef.current = {
+			x: Math.round(pointerEvent.pageX),
+			y: Math.round(pointerEvent.pageY)
+		};
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
+		asChild: true,
+		...popperScope,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+			type: "button",
+			role: "combobox",
+			"aria-controls": context.contentId,
+			"aria-expanded": context.open,
+			"aria-required": context.required,
+			"aria-autocomplete": "none",
+			dir: context.dir,
+			"data-state": context.open ? "open" : "closed",
+			disabled: isDisabled,
+			"data-disabled": isDisabled ? "" : void 0,
+			"data-placeholder": shouldShowPlaceholder(context.value) ? "" : void 0,
+			...triggerProps,
+			ref: composedRefs,
+			onClick: composeEventHandlers(triggerProps.onClick, (event) => {
+				event.currentTarget.focus();
+				if (pointerTypeRef.current !== "mouse") handleOpen(event);
+			}),
+			onPointerDown: composeEventHandlers(triggerProps.onPointerDown, (event) => {
+				pointerTypeRef.current = event.pointerType;
+				const target = event.target;
+				if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
+				if (event.button === 0 && event.ctrlKey === false && event.pointerType === "mouse") {
+					handleOpen(event);
+					event.preventDefault();
+				}
+			}),
+			onKeyDown: composeEventHandlers(triggerProps.onKeyDown, (event) => {
+				const isTypingAhead = searchRef.current !== "";
+				if (!(event.ctrlKey || event.altKey || event.metaKey) && event.key.length === 1) handleTypeaheadSearch(event.key);
+				if (isTypingAhead && event.key === " ") return;
+				if (OPEN_KEYS.includes(event.key)) {
+					handleOpen();
+					event.preventDefault();
+				}
+			})
+		})
+	});
+});
+SelectTrigger$1.displayName = TRIGGER_NAME;
+var VALUE_NAME = "SelectValue";
+var SelectValue$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, className, style, children, placeholder = "", ...valueProps } = props;
+	const context = useSelectContext(VALUE_NAME, __scopeSelect);
+	const { onValueNodeHasChildrenChange } = context;
+	const hasChildren = children !== void 0;
+	const composedRefs = useComposedRefs(forwardedRef, context.onValueNodeChange);
+	useLayoutEffect2(() => {
+		onValueNodeHasChildrenChange(hasChildren);
+	}, [onValueNodeHasChildrenChange, hasChildren]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		...valueProps,
+		ref: composedRefs,
+		style: { pointerEvents: "none" },
+		children: shouldShowPlaceholder(context.value) ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: placeholder }) : children
+	});
+});
+SelectValue$1.displayName = VALUE_NAME;
+var ICON_NAME = "SelectIcon";
+var SelectIcon = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, children, ...iconProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		"aria-hidden": true,
+		...iconProps,
+		ref: forwardedRef,
+		children: children || "▼"
+	});
+});
+SelectIcon.displayName = ICON_NAME;
+var PORTAL_NAME = "SelectPortal";
+var SelectPortal = (props) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
+		asChild: true,
+		...props
+	});
+};
+SelectPortal.displayName = PORTAL_NAME;
+var CONTENT_NAME = "SelectContent";
+var SelectContent$1 = import_react.forwardRef((props, forwardedRef) => {
+	const context = useSelectContext(CONTENT_NAME, props.__scopeSelect);
+	const [fragment, setFragment] = import_react.useState();
+	useLayoutEffect2(() => {
+		setFragment(new DocumentFragment());
+	}, []);
+	if (!context.open) {
+		const frag = fragment;
+		return frag ? import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
+			scope: props.__scopeSelect,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
+				scope: props.__scopeSelect,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: props.children })
+			})
+		}), frag) : null;
+	}
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentImpl, {
+		...props,
+		ref: forwardedRef
+	});
+});
+SelectContent$1.displayName = CONTENT_NAME;
+var CONTENT_MARGIN = 10;
+var [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME);
+var CONTENT_IMPL_NAME = "SelectContentImpl";
+var Slot = /* @__PURE__ */ createSlot$1("SelectContent.RemoveScroll");
+var SelectContentImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, position = "item-aligned", onCloseAutoFocus, onEscapeKeyDown, onPointerDownOutside, side, sideOffset, align, alignOffset, arrowPadding, collisionBoundary, collisionPadding, sticky, hideWhenDetached, avoidCollisions, ...contentProps } = props;
+	const context = useSelectContext(CONTENT_NAME, __scopeSelect);
+	const [content, setContent] = import_react.useState(null);
+	const [viewport, setViewport] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
+	const [selectedItem, setSelectedItem] = import_react.useState(null);
+	const [selectedItemText, setSelectedItemText] = import_react.useState(null);
+	const getItems = useCollection(__scopeSelect);
+	const [isPositioned, setIsPositioned] = import_react.useState(false);
+	const firstValidItemFoundRef = import_react.useRef(false);
+	import_react.useEffect(() => {
+		if (content) return hideOthers(content);
+	}, [content]);
+	useFocusGuards();
+	const focusFirst = import_react.useCallback((candidates) => {
+		const [firstItem, ...restItems] = getItems().map((item) => item.ref.current);
+		const [lastItem] = restItems.slice(-1);
+		const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
+		for (const candidate of candidates) {
+			if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
+			candidate?.scrollIntoView({ block: "nearest" });
+			if (candidate === firstItem && viewport) viewport.scrollTop = 0;
+			if (candidate === lastItem && viewport) viewport.scrollTop = viewport.scrollHeight;
+			candidate?.focus();
+			if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
+		}
+	}, [getItems, viewport]);
+	const focusSelectedItem = import_react.useCallback(() => focusFirst([selectedItem, content]), [
+		focusFirst,
+		selectedItem,
+		content
+	]);
+	import_react.useEffect(() => {
+		if (isPositioned) focusSelectedItem();
+	}, [isPositioned, focusSelectedItem]);
+	const { onOpenChange, triggerPointerDownPosRef } = context;
+	import_react.useEffect(() => {
+		if (content) {
+			let pointerMoveDelta = {
+				x: 0,
+				y: 0
+			};
+			const handlePointerMove = (event) => {
+				pointerMoveDelta = {
+					x: Math.abs(Math.round(event.pageX) - (triggerPointerDownPosRef.current?.x ?? 0)),
+					y: Math.abs(Math.round(event.pageY) - (triggerPointerDownPosRef.current?.y ?? 0))
+				};
+			};
+			const handlePointerUp = (event) => {
+				if (pointerMoveDelta.x <= 10 && pointerMoveDelta.y <= 10) event.preventDefault();
+				else if (!content.contains(event.target)) onOpenChange(false);
+				document.removeEventListener("pointermove", handlePointerMove);
+				triggerPointerDownPosRef.current = null;
+			};
+			if (triggerPointerDownPosRef.current !== null) {
+				document.addEventListener("pointermove", handlePointerMove);
+				document.addEventListener("pointerup", handlePointerUp, {
+					capture: true,
+					once: true
+				});
+			}
+			return () => {
+				document.removeEventListener("pointermove", handlePointerMove);
+				document.removeEventListener("pointerup", handlePointerUp, { capture: true });
+			};
+		}
+	}, [
+		content,
+		onOpenChange,
+		triggerPointerDownPosRef
+	]);
+	import_react.useEffect(() => {
+		const close = () => onOpenChange(false);
+		window.addEventListener("blur", close);
+		window.addEventListener("resize", close);
+		return () => {
+			window.removeEventListener("blur", close);
+			window.removeEventListener("resize", close);
+		};
+	}, [onOpenChange]);
+	const [searchRef, handleTypeaheadSearch] = useTypeaheadSearch((search) => {
+		const enabledItems = getItems().filter((item) => !item.disabled);
+		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.ref.current === document.activeElement));
+		if (nextItem) setTimeout(() => nextItem.ref.current.focus());
+	});
+	const itemRefCallback = import_react.useCallback((node, value, disabled) => {
+		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
+		if (context.value !== void 0 && context.value === value || isFirstValidItem) {
+			setSelectedItem(node);
+			if (isFirstValidItem) firstValidItemFoundRef.current = true;
+		}
+	}, [context.value]);
+	const handleItemLeave = import_react.useCallback(() => content?.focus(), [content]);
+	const itemTextRefCallback = import_react.useCallback((node, value, disabled) => {
+		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
+		if (context.value !== void 0 && context.value === value || isFirstValidItem) setSelectedItemText(node);
+	}, [context.value]);
+	const SelectPosition = position === "popper" ? SelectPopperPosition : SelectItemAlignedPosition;
+	const popperContentProps = SelectPosition === SelectPopperPosition ? {
+		side,
+		sideOffset,
+		align,
+		alignOffset,
+		arrowPadding,
+		collisionBoundary,
+		collisionPadding,
+		sticky,
+		hideWhenDetached,
+		avoidCollisions
+	} : {};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
+		scope: __scopeSelect,
+		content,
+		viewport,
+		onViewportChange: setViewport,
+		itemRefCallback,
+		selectedItem,
+		onItemLeave: handleItemLeave,
+		itemTextRefCallback,
+		focusSelectedItem,
+		selectedItemText,
+		position,
+		isPositioned,
+		searchRef,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
+			as: Slot,
+			allowPinchZoom: true,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
+				asChild: true,
+				trapped: context.open,
+				onMountAutoFocus: (event) => {
+					event.preventDefault();
+				},
+				onUnmountAutoFocus: composeEventHandlers(onCloseAutoFocus, (event) => {
+					context.trigger?.focus({ preventScroll: true });
+					event.preventDefault();
+				}),
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
+					asChild: true,
+					disableOutsidePointerEvents: true,
+					onEscapeKeyDown,
+					onPointerDownOutside,
+					onFocusOutside: (event) => event.preventDefault(),
+					onDismiss: () => context.onOpenChange(false),
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectPosition, {
+						role: "listbox",
+						id: context.contentId,
+						"data-state": context.open ? "open" : "closed",
+						dir: context.dir,
+						onContextMenu: (event) => event.preventDefault(),
+						...contentProps,
+						...popperContentProps,
+						onPlaced: () => setIsPositioned(true),
+						ref: composedRefs,
+						style: {
+							display: "flex",
+							flexDirection: "column",
+							outline: "none",
+							...contentProps.style
+						},
+						onKeyDown: composeEventHandlers(contentProps.onKeyDown, (event) => {
+							const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+							if (event.key === "Tab") event.preventDefault();
+							if (!isModifierKey && event.key.length === 1) handleTypeaheadSearch(event.key);
+							if ([
+								"ArrowUp",
+								"ArrowDown",
+								"Home",
+								"End"
+							].includes(event.key)) {
+								let candidateNodes = getItems().filter((item) => !item.disabled).map((item) => item.ref.current);
+								if (["ArrowUp", "End"].includes(event.key)) candidateNodes = candidateNodes.slice().reverse();
+								if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+									const currentElement = event.target;
+									const currentIndex = candidateNodes.indexOf(currentElement);
+									candidateNodes = candidateNodes.slice(currentIndex + 1);
+								}
+								setTimeout(() => focusFirst(candidateNodes));
+								event.preventDefault();
+							}
+						})
+					})
+				})
+			})
+		})
+	});
+});
+SelectContentImpl.displayName = CONTENT_IMPL_NAME;
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition";
+var SelectItemAlignedPosition = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, onPlaced, ...popperProps } = props;
+	const context = useSelectContext(CONTENT_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(CONTENT_NAME, __scopeSelect);
+	const [contentWrapper, setContentWrapper] = import_react.useState(null);
+	const [content, setContent] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
+	const getItems = useCollection(__scopeSelect);
+	const shouldExpandOnScrollRef = import_react.useRef(false);
+	const shouldRepositionRef = import_react.useRef(true);
+	const { viewport, selectedItem, selectedItemText, focusSelectedItem } = contentContext;
+	const position = import_react.useCallback(() => {
+		if (context.trigger && context.valueNode && contentWrapper && content && viewport && selectedItem && selectedItemText) {
+			const triggerRect = context.trigger.getBoundingClientRect();
+			const contentRect = content.getBoundingClientRect();
+			const valueNodeRect = context.valueNode.getBoundingClientRect();
+			const itemTextRect = selectedItemText.getBoundingClientRect();
+			if (context.dir !== "rtl") {
+				const itemTextOffset = itemTextRect.left - contentRect.left;
+				const left = valueNodeRect.left - itemTextOffset;
+				const leftDelta = triggerRect.left - left;
+				const minContentWidth = triggerRect.width + leftDelta;
+				const contentWidth = Math.max(minContentWidth, contentRect.width);
+				const rightEdge = window.innerWidth - CONTENT_MARGIN;
+				const clampedLeft = clamp(left, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, rightEdge - contentWidth)]);
+				contentWrapper.style.minWidth = minContentWidth + "px";
+				contentWrapper.style.left = clampedLeft + "px";
+			} else {
+				const itemTextOffset = contentRect.right - itemTextRect.right;
+				const right = window.innerWidth - valueNodeRect.right - itemTextOffset;
+				const rightDelta = window.innerWidth - triggerRect.right - right;
+				const minContentWidth = triggerRect.width + rightDelta;
+				const contentWidth = Math.max(minContentWidth, contentRect.width);
+				const leftEdge = window.innerWidth - CONTENT_MARGIN;
+				const clampedRight = clamp(right, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, leftEdge - contentWidth)]);
+				contentWrapper.style.minWidth = minContentWidth + "px";
+				contentWrapper.style.right = clampedRight + "px";
+			}
+			const items = getItems();
+			const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
+			const itemsHeight = viewport.scrollHeight;
+			const contentStyles = window.getComputedStyle(content);
+			const contentBorderTopWidth = parseInt(contentStyles.borderTopWidth, 10);
+			const contentPaddingTop = parseInt(contentStyles.paddingTop, 10);
+			const contentBorderBottomWidth = parseInt(contentStyles.borderBottomWidth, 10);
+			const contentPaddingBottom = parseInt(contentStyles.paddingBottom, 10);
+			const fullContentHeight = contentBorderTopWidth + contentPaddingTop + itemsHeight + contentPaddingBottom + contentBorderBottomWidth;
+			const minContentHeight = Math.min(selectedItem.offsetHeight * 5, fullContentHeight);
+			const viewportStyles = window.getComputedStyle(viewport);
+			const viewportPaddingTop = parseInt(viewportStyles.paddingTop, 10);
+			const viewportPaddingBottom = parseInt(viewportStyles.paddingBottom, 10);
+			const topEdgeToTriggerMiddle = triggerRect.top + triggerRect.height / 2 - CONTENT_MARGIN;
+			const triggerMiddleToBottomEdge = availableHeight - topEdgeToTriggerMiddle;
+			const selectedItemHalfHeight = selectedItem.offsetHeight / 2;
+			const itemOffsetMiddle = selectedItem.offsetTop + selectedItemHalfHeight;
+			const contentTopToItemMiddle = contentBorderTopWidth + contentPaddingTop + itemOffsetMiddle;
+			const itemMiddleToContentBottom = fullContentHeight - contentTopToItemMiddle;
+			if (contentTopToItemMiddle <= topEdgeToTriggerMiddle) {
+				const isLastItem = items.length > 0 && selectedItem === items[items.length - 1].ref.current;
+				contentWrapper.style.bottom = "0px";
+				const viewportOffsetBottom = content.clientHeight - viewport.offsetTop - viewport.offsetHeight;
+				const height = contentTopToItemMiddle + Math.max(triggerMiddleToBottomEdge, selectedItemHalfHeight + (isLastItem ? viewportPaddingBottom : 0) + viewportOffsetBottom + contentBorderBottomWidth);
+				contentWrapper.style.height = height + "px";
+			} else {
+				const isFirstItem = items.length > 0 && selectedItem === items[0].ref.current;
+				contentWrapper.style.top = "0px";
+				const height = Math.max(topEdgeToTriggerMiddle, contentBorderTopWidth + viewport.offsetTop + (isFirstItem ? viewportPaddingTop : 0) + selectedItemHalfHeight) + itemMiddleToContentBottom;
+				contentWrapper.style.height = height + "px";
+				viewport.scrollTop = contentTopToItemMiddle - topEdgeToTriggerMiddle + viewport.offsetTop;
+			}
+			contentWrapper.style.margin = `${CONTENT_MARGIN}px 0`;
+			contentWrapper.style.minHeight = minContentHeight + "px";
+			contentWrapper.style.maxHeight = availableHeight + "px";
+			onPlaced?.();
+			requestAnimationFrame(() => shouldExpandOnScrollRef.current = true);
+		}
+	}, [
+		getItems,
+		context.trigger,
+		context.valueNode,
+		contentWrapper,
+		content,
+		viewport,
+		selectedItem,
+		selectedItemText,
+		context.dir,
+		onPlaced
+	]);
+	useLayoutEffect2(() => position(), [position]);
+	const [contentZIndex, setContentZIndex] = import_react.useState();
+	useLayoutEffect2(() => {
+		if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
+	}, [content]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectViewportProvider, {
+		scope: __scopeSelect,
+		contentWrapper,
+		shouldExpandOnScrollRef,
+		onScrollButtonChange: import_react.useCallback((node) => {
+			if (node && shouldRepositionRef.current === true) {
+				position();
+				focusSelectedItem?.();
+				shouldRepositionRef.current = false;
+			}
+		}, [position, focusSelectedItem]),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			ref: setContentWrapper,
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				position: "fixed",
+				zIndex: contentZIndex
+			},
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+				...popperProps,
+				ref: composedRefs,
+				style: {
+					boxSizing: "border-box",
+					maxHeight: "100%",
+					...popperProps.style
+				}
+			})
+		})
+	});
+});
+SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
+var POPPER_POSITION_NAME = "SelectPopperPosition";
+var SelectPopperPosition = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, align = "start", collisionPadding = CONTENT_MARGIN, ...popperProps } = props;
+	const popperScope = usePopperScope(__scopeSelect);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$1, {
+		...popperScope,
+		...popperProps,
+		ref: forwardedRef,
+		align,
+		collisionPadding,
+		style: {
+			boxSizing: "border-box",
+			...popperProps.style,
+			"--radix-select-content-transform-origin": "var(--radix-popper-transform-origin)",
+			"--radix-select-content-available-width": "var(--radix-popper-available-width)",
+			"--radix-select-content-available-height": "var(--radix-popper-available-height)",
+			"--radix-select-trigger-width": "var(--radix-popper-anchor-width)",
+			"--radix-select-trigger-height": "var(--radix-popper-anchor-height)"
+		}
+	});
+});
+SelectPopperPosition.displayName = POPPER_POSITION_NAME;
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {});
+var VIEWPORT_NAME = "SelectViewport";
+var SelectViewport = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, nonce, ...viewportProps } = props;
+	const contentContext = useSelectContentContext(VIEWPORT_NAME, __scopeSelect);
+	const viewportContext = useSelectViewportContext(VIEWPORT_NAME, __scopeSelect);
+	const composedRefs = useComposedRefs(forwardedRef, contentContext.onViewportChange);
+	const prevScrollTopRef = import_react.useRef(0);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
+		dangerouslySetInnerHTML: { __html: `[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}` },
+		nonce
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
+		scope: __scopeSelect,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			"data-radix-select-viewport": "",
+			role: "presentation",
+			...viewportProps,
+			ref: composedRefs,
+			style: {
+				position: "relative",
+				flex: 1,
+				overflow: "hidden auto",
+				...viewportProps.style
+			},
+			onScroll: composeEventHandlers(viewportProps.onScroll, (event) => {
+				const viewport = event.currentTarget;
+				const { contentWrapper, shouldExpandOnScrollRef } = viewportContext;
+				if (shouldExpandOnScrollRef?.current && contentWrapper) {
+					const scrolledBy = Math.abs(prevScrollTopRef.current - viewport.scrollTop);
+					if (scrolledBy > 0) {
+						const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
+						const cssMinHeight = parseFloat(contentWrapper.style.minHeight);
+						const cssHeight = parseFloat(contentWrapper.style.height);
+						const prevHeight = Math.max(cssMinHeight, cssHeight);
+						if (prevHeight < availableHeight) {
+							const nextHeight = prevHeight + scrolledBy;
+							const clampedNextHeight = Math.min(availableHeight, nextHeight);
+							const heightDiff = nextHeight - clampedNextHeight;
+							contentWrapper.style.height = clampedNextHeight + "px";
+							if (contentWrapper.style.bottom === "0px") {
+								viewport.scrollTop = heightDiff > 0 ? heightDiff : 0;
+								contentWrapper.style.justifyContent = "flex-end";
+							}
+						}
+					}
+				}
+				prevScrollTopRef.current = viewport.scrollTop;
+			})
+		})
+	})] });
+});
+SelectViewport.displayName = VIEWPORT_NAME;
+var GROUP_NAME = "SelectGroup";
+var [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME);
+var SelectGroup$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...groupProps } = props;
+	const groupId = useId();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectGroupContextProvider, {
+		scope: __scopeSelect,
+		id: groupId,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			role: "group",
+			"aria-labelledby": groupId,
+			...groupProps,
+			ref: forwardedRef
+		})
+	});
+});
+SelectGroup$1.displayName = GROUP_NAME;
+var LABEL_NAME = "SelectLabel";
+var SelectLabel$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...labelProps } = props;
+	const groupContext = useSelectGroupContext(LABEL_NAME, __scopeSelect);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		id: groupContext.id,
+		...labelProps,
+		ref: forwardedRef
+	});
+});
+SelectLabel$1.displayName = LABEL_NAME;
+var ITEM_NAME = "SelectItem";
+var [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME);
+var SelectItem$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, value, disabled = false, textValue: textValueProp, ...itemProps } = props;
+	const context = useSelectContext(ITEM_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(ITEM_NAME, __scopeSelect);
+	const isSelected = context.value === value;
+	const [textValue, setTextValue] = import_react.useState(textValueProp ?? "");
+	const [isFocused, setIsFocused] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => contentContext.itemRefCallback?.(node, value, disabled));
+	const textId = useId();
+	const pointerTypeRef = import_react.useRef("touch");
+	const handleSelect = () => {
+		if (!disabled) {
+			context.onValueChange(value);
+			context.onOpenChange(false);
+		}
+	};
+	if (value === "") throw new Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItemContextProvider, {
+		scope: __scopeSelect,
+		value,
+		disabled,
+		textId,
+		isSelected,
+		onItemTextChange: import_react.useCallback((node) => {
+			setTextValue((prevTextValue) => prevTextValue || (node?.textContent ?? "").trim());
+		}, []),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.ItemSlot, {
+			scope: __scopeSelect,
+			value,
+			disabled,
+			textValue,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+				role: "option",
+				"aria-labelledby": textId,
+				"data-highlighted": isFocused ? "" : void 0,
+				"aria-selected": isSelected && isFocused,
+				"data-state": isSelected ? "checked" : "unchecked",
+				"aria-disabled": disabled || void 0,
+				"data-disabled": disabled ? "" : void 0,
+				tabIndex: disabled ? void 0 : -1,
+				...itemProps,
+				ref: composedRefs,
+				onFocus: composeEventHandlers(itemProps.onFocus, () => setIsFocused(true)),
+				onBlur: composeEventHandlers(itemProps.onBlur, () => setIsFocused(false)),
+				onClick: composeEventHandlers(itemProps.onClick, () => {
+					if (pointerTypeRef.current !== "mouse") handleSelect();
+				}),
+				onPointerUp: composeEventHandlers(itemProps.onPointerUp, () => {
+					if (pointerTypeRef.current === "mouse") handleSelect();
+				}),
+				onPointerDown: composeEventHandlers(itemProps.onPointerDown, (event) => {
+					pointerTypeRef.current = event.pointerType;
+				}),
+				onPointerMove: composeEventHandlers(itemProps.onPointerMove, (event) => {
+					pointerTypeRef.current = event.pointerType;
+					if (disabled) contentContext.onItemLeave?.();
+					else if (pointerTypeRef.current === "mouse") event.currentTarget.focus({ preventScroll: true });
+				}),
+				onPointerLeave: composeEventHandlers(itemProps.onPointerLeave, (event) => {
+					if (event.currentTarget === document.activeElement) contentContext.onItemLeave?.();
+				}),
+				onKeyDown: composeEventHandlers(itemProps.onKeyDown, (event) => {
+					if (contentContext.searchRef?.current !== "" && event.key === " ") return;
+					if (SELECTION_KEYS.includes(event.key)) handleSelect();
+					if (event.key === " ") event.preventDefault();
+				})
+			})
+		})
+	});
+});
+SelectItem$1.displayName = ITEM_NAME;
+var ITEM_TEXT_NAME = "SelectItemText";
+var SelectItemText = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, className, style, ...itemTextProps } = props;
+	const context = useSelectContext(ITEM_TEXT_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(ITEM_TEXT_NAME, __scopeSelect);
+	const itemContext = useSelectItemContext(ITEM_TEXT_NAME, __scopeSelect);
+	const nativeOptionsContext = useSelectNativeOptionsContext(ITEM_TEXT_NAME, __scopeSelect);
+	const [itemTextNode, setItemTextNode] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setItemTextNode(node), itemContext.onItemTextChange, (node) => contentContext.itemTextRefCallback?.(node, itemContext.value, itemContext.disabled));
+	const textContent = itemTextNode?.textContent;
+	const nativeOption = import_react.useMemo(() => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+		value: itemContext.value,
+		disabled: itemContext.disabled,
+		children: textContent
+	}, itemContext.value), [
+		itemContext.disabled,
+		itemContext.value,
+		textContent
+	]);
+	const { onNativeOptionAdd, onNativeOptionRemove } = nativeOptionsContext;
+	useLayoutEffect2(() => {
+		onNativeOptionAdd(nativeOption);
+		return () => onNativeOptionRemove(nativeOption);
+	}, [
+		onNativeOptionAdd,
+		onNativeOptionRemove,
+		nativeOption
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		id: itemContext.textId,
+		...itemTextProps,
+		ref: composedRefs
+	}), itemContext.isSelected && context.valueNode && !context.valueNodeHasChildren ? import_react_dom.createPortal(itemTextProps.children, context.valueNode) : null] });
+});
+SelectItemText.displayName = ITEM_TEXT_NAME;
+var ITEM_INDICATOR_NAME = "SelectItemIndicator";
+var SelectItemIndicator = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...itemIndicatorProps } = props;
+	return useSelectItemContext(ITEM_INDICATOR_NAME, __scopeSelect).isSelected ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		"aria-hidden": true,
+		...itemIndicatorProps,
+		ref: forwardedRef
+	}) : null;
+});
+SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton";
+var SelectScrollUpButton$1 = import_react.forwardRef((props, forwardedRef) => {
+	const contentContext = useSelectContentContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
+	const viewportContext = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
+	const [canScrollUp, setCanScrollUp] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
+	useLayoutEffect2(() => {
+		if (contentContext.viewport && contentContext.isPositioned) {
+			let handleScroll2 = function() {
+				setCanScrollUp(viewport.scrollTop > 0);
+			};
+			const viewport = contentContext.viewport;
+			handleScroll2();
+			viewport.addEventListener("scroll", handleScroll2);
+			return () => viewport.removeEventListener("scroll", handleScroll2);
+		}
+	}, [contentContext.viewport, contentContext.isPositioned]);
+	return canScrollUp ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
+		...props,
+		ref: composedRefs,
+		onAutoScroll: () => {
+			const { viewport, selectedItem } = contentContext;
+			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop - selectedItem.offsetHeight;
+		}
+	}) : null;
+});
+SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton";
+var SelectScrollDownButton$1 = import_react.forwardRef((props, forwardedRef) => {
+	const contentContext = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
+	const viewportContext = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
+	const [canScrollDown, setCanScrollDown] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
+	useLayoutEffect2(() => {
+		if (contentContext.viewport && contentContext.isPositioned) {
+			let handleScroll2 = function() {
+				const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+				setCanScrollDown(Math.ceil(viewport.scrollTop) < maxScroll);
+			};
+			const viewport = contentContext.viewport;
+			handleScroll2();
+			viewport.addEventListener("scroll", handleScroll2);
+			return () => viewport.removeEventListener("scroll", handleScroll2);
+		}
+	}, [contentContext.viewport, contentContext.isPositioned]);
+	return canScrollDown ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
+		...props,
+		ref: composedRefs,
+		onAutoScroll: () => {
+			const { viewport, selectedItem } = contentContext;
+			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop + selectedItem.offsetHeight;
+		}
+	}) : null;
+});
+SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
+var SelectScrollButtonImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, onAutoScroll, ...scrollIndicatorProps } = props;
+	const contentContext = useSelectContentContext("SelectScrollButton", __scopeSelect);
+	const autoScrollTimerRef = import_react.useRef(null);
+	const getItems = useCollection(__scopeSelect);
+	const clearAutoScrollTimer = import_react.useCallback(() => {
+		if (autoScrollTimerRef.current !== null) {
+			window.clearInterval(autoScrollTimerRef.current);
+			autoScrollTimerRef.current = null;
+		}
+	}, []);
+	import_react.useEffect(() => {
+		return () => clearAutoScrollTimer();
+	}, [clearAutoScrollTimer]);
+	useLayoutEffect2(() => {
+		getItems().find((item) => item.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
+	}, [getItems]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		"aria-hidden": true,
+		...scrollIndicatorProps,
+		ref: forwardedRef,
+		style: {
+			flexShrink: 0,
+			...scrollIndicatorProps.style
+		},
+		onPointerDown: composeEventHandlers(scrollIndicatorProps.onPointerDown, () => {
+			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
+		}),
+		onPointerMove: composeEventHandlers(scrollIndicatorProps.onPointerMove, () => {
+			contentContext.onItemLeave?.();
+			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
+		}),
+		onPointerLeave: composeEventHandlers(scrollIndicatorProps.onPointerLeave, () => {
+			clearAutoScrollTimer();
+		})
+	});
+});
+var SEPARATOR_NAME = "SelectSeparator";
+var SelectSeparator$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...separatorProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		"aria-hidden": true,
+		...separatorProps,
+		ref: forwardedRef
+	});
+});
+SelectSeparator$1.displayName = SEPARATOR_NAME;
+var ARROW_NAME = "SelectArrow";
+var SelectArrow = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...arrowProps } = props;
+	const popperScope = usePopperScope(__scopeSelect);
+	const context = useSelectContext(ARROW_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(ARROW_NAME, __scopeSelect);
+	return context.open && contentContext.position === "popper" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
+		...popperScope,
+		...arrowProps,
+		ref: forwardedRef
+	}) : null;
+});
+SelectArrow.displayName = ARROW_NAME;
+var BUBBLE_INPUT_NAME = "SelectBubbleInput";
+var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...props }, forwardedRef) => {
+	const ref = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, ref);
+	const prevValue = usePrevious(value);
+	import_react.useEffect(() => {
+		const select = ref.current;
+		if (!select) return;
+		const selectProto = window.HTMLSelectElement.prototype;
+		const setValue = Object.getOwnPropertyDescriptor(selectProto, "value").set;
+		if (prevValue !== value && setValue) {
+			const event = new Event("change", { bubbles: true });
+			setValue.call(select, value);
+			select.dispatchEvent(event);
+		}
+	}, [prevValue, value]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.select, {
+		...props,
+		style: {
+			...VISUALLY_HIDDEN_STYLES,
+			...props.style
+		},
+		ref: composedRefs,
+		defaultValue: value
+	});
+});
+SelectBubbleInput.displayName = BUBBLE_INPUT_NAME;
+function shouldShowPlaceholder(value) {
+	return value === "" || value === void 0;
+}
+function useTypeaheadSearch(onSearchChange) {
+	const handleSearchChange = useCallbackRef$1(onSearchChange);
+	const searchRef = import_react.useRef("");
+	const timerRef = import_react.useRef(0);
+	const handleTypeaheadSearch = import_react.useCallback((key) => {
+		const search = searchRef.current + key;
+		handleSearchChange(search);
+		(function updateSearch(value) {
+			searchRef.current = value;
+			window.clearTimeout(timerRef.current);
+			if (value !== "") timerRef.current = window.setTimeout(() => updateSearch(""), 1e3);
+		})(search);
+	}, [handleSearchChange]);
+	const resetTypeahead = import_react.useCallback(() => {
+		searchRef.current = "";
+		window.clearTimeout(timerRef.current);
+	}, []);
+	import_react.useEffect(() => {
+		return () => window.clearTimeout(timerRef.current);
+	}, []);
+	return [
+		searchRef,
+		handleTypeaheadSearch,
+		resetTypeahead
+	];
+}
+function findNextItem(items, search, currentItem) {
+	const normalizedSearch = search.length > 1 && Array.from(search).every((char) => char === search[0]) ? search[0] : search;
+	const currentItemIndex = currentItem ? items.indexOf(currentItem) : -1;
+	let wrappedItems = wrapArray(items, Math.max(currentItemIndex, 0));
+	if (normalizedSearch.length === 1) wrappedItems = wrappedItems.filter((v) => v !== currentItem);
+	const nextItem = wrappedItems.find((item) => item.textValue.toLowerCase().startsWith(normalizedSearch.toLowerCase()));
+	return nextItem !== currentItem ? nextItem : void 0;
+}
+function wrapArray(array, startIndex) {
+	return array.map((_, index) => array[(startIndex + index) % array.length]);
+}
+var Root2 = Select$1;
+var Trigger = SelectTrigger$1;
+var Value = SelectValue$1;
+var Icon = SelectIcon;
+var Portal = SelectPortal;
+var Content2 = SelectContent$1;
+var Viewport = SelectViewport;
+var Label = SelectLabel$1;
+var Item = SelectItem$1;
+var ItemText = SelectItemText;
+var ItemIndicator = SelectItemIndicator;
+var ScrollUpButton = SelectScrollUpButton$1;
+var ScrollDownButton = SelectScrollDownButton$1;
+var Separator = SelectSeparator$1;
+//#endregion
+//#region src/components/ui/select.tsx
+var Select = Root2;
+var SelectValue = Value;
+var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger, {
+	"data-uid": "src/components/ui/select.tsx:18:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
+	...props,
+	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
+		"data-uid": "src/components/ui/select.tsx:27:5",
+		"data-prohibitions": "[]",
+		asChild: true,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+			"data-uid": "src/components/ui/select.tsx:28:7",
+			"data-prohibitions": "[editContent]",
+			className: "h-4 w-4 opacity-50"
+		})
+	})]
+}));
+SelectTrigger.displayName = Trigger.displayName;
+var SelectScrollUpButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollUpButton, {
+	"data-uid": "src/components/ui/select.tsx:38:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex cursor-default items-center justify-center py-1", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronUp, {
+		"data-uid": "src/components/ui/select.tsx:43:5",
+		"data-prohibitions": "[editContent]",
+		className: "h-4 w-4"
+	})
+}));
+SelectScrollUpButton.displayName = ScrollUpButton.displayName;
+var SelectScrollDownButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollDownButton, {
+	"data-uid": "src/components/ui/select.tsx:52:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex cursor-default items-center justify-center py-1", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+		"data-uid": "src/components/ui/select.tsx:57:5",
+		"data-prohibitions": "[editContent]",
+		className: "h-4 w-4"
+	})
+}));
+SelectScrollDownButton.displayName = ScrollDownButton.displayName;
+var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal, {
+	"data-uid": "src/components/ui/select.tsx:66:3",
+	"data-prohibitions": "[editContent]",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2, {
+		"data-uid": "src/components/ui/select.tsx:67:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1("relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-select-content-transform-origin]", position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className),
+		position,
+		...props,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollUpButton, {
+				"data-uid": "src/components/ui/select.tsx:78:7",
+				"data-prohibitions": "[editContent]"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport, {
+				"data-uid": "src/components/ui/select.tsx:79:7",
+				"data-prohibitions": "[editContent]",
+				className: cn$1("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"),
+				children
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollDownButton, {
+				"data-uid": "src/components/ui/select.tsx:88:7",
+				"data-prohibitions": "[editContent]"
+			})
+		]
+	})
+}));
+SelectContent.displayName = Content2.displayName;
+var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+	"data-uid": "src/components/ui/select.tsx:98:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("py-1.5 pl-8 pr-2 text-sm font-semibold", className),
+	...props
+}));
+SelectLabel.displayName = Label.displayName;
+var SelectItem = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Item, {
+	"data-uid": "src/components/ui/select.tsx:110:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", className),
+	...props,
+	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		"data-uid": "src/components/ui/select.tsx:118:5",
+		"data-prohibitions": "[]",
+		className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemIndicator, {
+			"data-uid": "src/components/ui/select.tsx:119:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+				"data-uid": "src/components/ui/select.tsx:120:9",
+				"data-prohibitions": "[editContent]",
+				className: "h-4 w-4"
+			})
+		})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemText, {
+		"data-uid": "src/components/ui/select.tsx:124:5",
+		"data-prohibitions": "[editContent]",
+		children
+	})]
+}));
+SelectItem.displayName = Item.displayName;
+var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Separator, {
+	"data-uid": "src/components/ui/select.tsx:133:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("-mx-1 my-1 h-px bg-muted", className),
+	...props
+}));
+SelectSeparator.displayName = Separator.displayName;
+//#endregion
+//#region src/pages/Matching.tsx
+function MatchingPage() {
+	const { erpNeeds, matchedNeeds, supplierItems, confirmMatch } = useProcurementStore();
+	if (erpNeeds.length === 0) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Matching.tsx:28:7",
+		"data-prohibitions": "[]",
+		className: "text-center mt-20",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			"data-uid": "src/pages/Matching.tsx:29:9",
+			"data-prohibitions": "[]",
+			children: "Por favor, importe os dados do ERP primeiro."
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+			"data-uid": "src/pages/Matching.tsx:30:9",
+			"data-prohibitions": "[]",
+			asChild: true,
+			className: "mt-4",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+				"data-uid": "src/pages/Matching.tsx:31:11",
+				"data-prohibitions": "[]",
+				to: "/",
+				children: "Voltar para Importação"
+			})
+		})]
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Matching.tsx:38:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-6 animate-fade-in-up",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/pages/Matching.tsx:39:7",
+			"data-prohibitions": "[]",
+			className: "flex flex-col md:flex-row justify-between items-start md:items-end gap-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Matching.tsx:40:9",
+				"data-prohibitions": "[]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+					"data-uid": "src/pages/Matching.tsx:41:11",
+					"data-prohibitions": "[]",
+					className: "text-3xl font-bold tracking-tight mb-2 flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrainCircuit, {
+						"data-uid": "src/pages/Matching.tsx:42:13",
+						"data-prohibitions": "[editContent]",
+						className: "w-8 h-8 text-primary"
+					}), " Mapeamento de Produtos"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					"data-uid": "src/pages/Matching.tsx:44:11",
+					"data-prohibitions": "[]",
+					className: "text-muted-foreground",
+					children: "A IA identificou automaticamente os produtos correspondentes entre o ERP e as cotações."
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				"data-uid": "src/pages/Matching.tsx:48:9",
+				"data-prohibitions": "[]",
+				asChild: true,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+					"data-uid": "src/pages/Matching.tsx:49:11",
+					"data-prohibitions": "[]",
+					to: "/optimization",
+					className: "gap-2",
+					children: ["Ir para Otimização ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
+						"data-uid": "src/pages/Matching.tsx:50:32",
+						"data-prohibitions": "[editContent]",
+						className: "w-4 h-4"
+					})]
+				})
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+			"data-uid": "src/pages/Matching.tsx:55:7",
+			"data-prohibitions": "[editContent]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+				"data-uid": "src/pages/Matching.tsx:56:9",
+				"data-prohibitions": "[editContent]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+					"data-uid": "src/pages/Matching.tsx:57:11",
+					"data-prohibitions": "[]",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/pages/Matching.tsx:58:13",
+						"data-prohibitions": "[]",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/pages/Matching.tsx:59:15",
+								"data-prohibitions": "[]",
+								children: "Necessidade ERP"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/pages/Matching.tsx:60:15",
+								"data-prohibitions": "[]",
+								children: "Sugestão (Cotações & AM)"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/pages/Matching.tsx:61:15",
+								"data-prohibitions": "[]",
+								children: "Confiança"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/pages/Matching.tsx:62:15",
+								"data-prohibitions": "[]",
+								children: "Status"
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+					"data-uid": "src/pages/Matching.tsx:65:11",
+					"data-prohibitions": "[editContent]",
+					children: matchedNeeds.map((match) => {
+						const need = erpNeeds.find((n) => n.id === match.erpId);
+						const bestMatch = match.matches[0];
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+							"data-uid": "src/pages/Matching.tsx:71:17",
+							"data-prohibitions": "[editContent]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/pages/Matching.tsx:72:19",
+									"data-prohibitions": "[editContent]",
+									className: "font-medium",
+									children: need.description
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/pages/Matching.tsx:73:19",
+									"data-prohibitions": "[editContent]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+										"data-uid": "src/pages/Matching.tsx:74:21",
+										"data-prohibitions": "[editContent]",
+										value: match.selectedItemId,
+										onValueChange: (val) => confirmMatch(match.erpId, val),
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+											"data-uid": "src/pages/Matching.tsx:78:23",
+											"data-prohibitions": "[]",
+											className: "w-[300px]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+												"data-uid": "src/pages/Matching.tsx:79:25",
+												"data-prohibitions": "[editContent]",
+												placeholder: "Selecione um correspondente"
+											})
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, {
+											"data-uid": "src/pages/Matching.tsx:81:23",
+											"data-prohibitions": "[editContent]",
+											children: match.matches.map((m) => {
+												const item = supplierItems.find((i) => i.id === m.itemId);
+												return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectItem, {
+													"data-uid": "src/pages/Matching.tsx:85:29",
+													"data-prohibitions": "[editContent]",
+													value: m.itemId,
+													children: [
+														item.description,
+														" (",
+														item.source,
+														") - $",
+														item.price.toFixed(2)
+													]
+												}, m.itemId);
+											})
+										})]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/pages/Matching.tsx:93:19",
+									"data-prohibitions": "[editContent]",
+									children: bestMatch && bestMatch.confidence > .9 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										"data-uid": "src/pages/Matching.tsx:95:23",
+										"data-prohibitions": "[]",
+										className: "bg-emerald-500 hover:bg-emerald-600",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											"data-uid": "src/pages/Matching.tsx:96:25",
+											"data-prohibitions": "[editContent]",
+											className: "w-3 h-3 mr-1"
+										}), " Alta"]
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										"data-uid": "src/pages/Matching.tsx:99:23",
+										"data-prohibitions": "[]",
+										variant: "secondary",
+										className: "text-amber-600 border-amber-200",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
+											"data-uid": "src/pages/Matching.tsx:100:25",
+											"data-prohibitions": "[editContent]",
+											className: "w-3 h-3 mr-1"
+										}), " Revisão Manual"]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/pages/Matching.tsx:104:19",
+									"data-prohibitions": "[editContent]",
+									children: match.selectedItemId ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										"data-uid": "src/pages/Matching.tsx:106:23",
+										"data-prohibitions": "[]",
+										className: "text-xs text-emerald-600 font-medium flex items-center gap-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											"data-uid": "src/pages/Matching.tsx:107:25",
+											"data-prohibitions": "[editContent]",
+											className: "w-4 h-4"
+										}), " Mapeado"]
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/pages/Matching.tsx:110:23",
+										"data-prohibitions": "[]",
+										className: "text-xs text-muted-foreground",
+										children: "Pendente"
+									})
+								})
+							]
+						}, match.erpId);
+					})
+				})]
+			})
+		})]
+	});
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-context@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-context/dist/index.mjs
+function createContextScope(scopeName, createContextScopeDeps = []) {
+	let defaultContexts = [];
+	function createContext3(rootComponentName, defaultContext) {
+		const BaseContext = import_react.createContext(defaultContext);
+		BaseContext.displayName = rootComponentName + "Context";
+		const index = defaultContexts.length;
+		defaultContexts = [...defaultContexts, defaultContext];
+		const Provider = (props) => {
+			const { scope, children, ...context } = props;
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const value = import_react.useMemo(() => context, Object.values(context));
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
+				value,
+				children
+			});
+		};
+		Provider.displayName = rootComponentName + "Provider";
+		function useContext2(consumerName, scope) {
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const context = import_react.useContext(Context);
+			if (context) return context;
+			if (defaultContext !== void 0) return defaultContext;
+			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+		}
+		return [Provider, useContext2];
+	}
+	const createScope = () => {
+		const scopeContexts = defaultContexts.map((defaultContext) => {
+			return import_react.createContext(defaultContext);
+		});
+		return function useScope(scope) {
+			const contexts = scope?.[scopeName] || scopeContexts;
+			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
+				...scope,
+				[scopeName]: contexts
+			} }), [scope, contexts]);
+		};
+	};
+	createScope.scopeName = scopeName;
+	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+	const baseScope = scopes[0];
+	if (scopes.length === 1) return baseScope;
+	const createScope = () => {
+		const scopeHooks = scopes.map((createScope2) => ({
+			useScope: createScope2(),
+			scopeName: createScope2.scopeName
+		}));
+		return function useComposedScopes(overrideScopes) {
+			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
+				return {
+					...nextScopes2,
+					...currentScope
+				};
+			}, {});
+			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+		};
+	};
+	createScope.scopeName = baseScope.scopeName;
+	return createScope;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.3_@types+react@19.2.14__@types+re_0243fb2db8a1fb85ca77b8d9e5c2d650/node_modules/@radix-ui/react-primitive/dist/index.mjs
+var Primitive = [
+	"a",
+	"button",
+	"div",
+	"form",
+	"h2",
+	"h3",
+	"img",
+	"input",
+	"label",
+	"li",
+	"nav",
+	"ol",
+	"p",
+	"select",
+	"span",
+	"svg",
+	"ul"
+].reduce((primitive, node) => {
+	const Slot = /* @__PURE__ */ createSlot(`Primitive.${node}`);
+	const Node = import_react.forwardRef((props, forwardedRef) => {
+		const { asChild, ...primitiveProps } = props;
+		const Comp = asChild ? Slot : node;
+		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
+			...primitiveProps,
+			ref: forwardedRef
+		});
+	});
+	Node.displayName = `Primitive.${node}`;
+	return {
+		...primitive,
+		[node]: Node
+	};
+}, {});
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/@radix-ui+react-progress@1.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_7258c0b550570cef5cd6f2d2227aa6b9/node_modules/@radix-ui/react-progress/dist/index.mjs
+var PROGRESS_NAME = "Progress";
+var DEFAULT_MAX = 100;
+var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
+var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
+var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
+	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
+	const max = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
+	if (valueProp !== null && !isValidValueNumber(valueProp, max)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
+	const value = isValidValueNumber(valueProp, max) ? valueProp : null;
+	const valueLabel = isNumber(value) ? getValueLabel(value, max) : void 0;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
+		scope: __scopeProgress,
+		value,
+		max,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+			"aria-valuemax": max,
+			"aria-valuemin": 0,
+			"aria-valuenow": isNumber(value) ? value : void 0,
+			"aria-valuetext": valueLabel,
+			role: "progressbar",
+			"data-state": getProgressState(value, max),
+			"data-value": value ?? void 0,
+			"data-max": max,
+			...progressProps,
+			ref: forwardedRef
+		})
+	});
+});
+Progress$1.displayName = PROGRESS_NAME;
+var INDICATOR_NAME = "ProgressIndicator";
+var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeProgress, ...indicatorProps } = props;
+	const context = useProgressContext(INDICATOR_NAME, __scopeProgress);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+		"data-state": getProgressState(context.value, context.max),
+		"data-value": context.value ?? void 0,
+		"data-max": context.max,
+		...indicatorProps,
+		ref: forwardedRef
+	});
+});
+ProgressIndicator.displayName = INDICATOR_NAME;
+function defaultGetValueLabel(value, max) {
+	return `${Math.round(value / max * 100)}%`;
+}
+function getProgressState(value, maxValue) {
+	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
+}
+function isNumber(value) {
+	return typeof value === "number";
+}
+function isValidMaxNumber(max) {
+	return isNumber(max) && !isNaN(max) && max > 0;
+}
+function isValidValueNumber(value, max) {
+	return isNumber(value) && !isNaN(value) && value <= max && value >= 0;
+}
+function getInvalidMaxError(propValue, componentName) {
+	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
+}
+function getInvalidValueError(propValue, componentName) {
+	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
+  - a positive number
+  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
+  - \`null\` or \`undefined\` if the progress is indeterminate.
+
+Defaulting to \`null\`.`;
+}
+var Root = Progress$1;
+var Indicator = ProgressIndicator;
+//#endregion
+//#region src/components/ui/progress.tsx
+var Progress = import_react.forwardRef(({ className, value, indicatorClassName, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
+	"data-uid": "src/components/ui/progress.tsx:11:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
+		"data-uid": "src/components/ui/progress.tsx:16:5",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("h-full w-full flex-1 bg-primary transition-all", indicatorClassName),
+		style: { transform: `translateX(-${100 - (value || 0)}%)` }
+	})
+}));
+Progress.displayName = Root.displayName;
+//#endregion
+//#region src/components/optimization/CIFWidget.tsx
+function CIFWidget() {
+	const { suppliers, supplierItems, matchedNeeds } = useProcurementStore();
+	const supplierTotals = suppliers.map((s) => {
+		const total = matchedNeeds.reduce((sum, match) => {
+			const item = supplierItems.find((i) => i.id === match.selectedItemId);
+			if (item && item.supplierId === s.id) return sum + match.suggestedQuantity * item.price;
+			return sum;
+		}, 0);
+		return {
+			...s,
+			total
+		};
+	}).filter((s) => s.total > 0);
+	if (supplierTotals.length === 0) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		"data-uid": "src/components/optimization/CIFWidget.tsx:24:7",
+		"data-prohibitions": "[]",
+		className: "text-sm text-muted-foreground",
+		children: "Nenhum fornecedor selecionado nas compras."
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/optimization/CIFWidget.tsx:29:5",
+		"data-prohibitions": "[editContent]",
+		className: "grid grid-cols-1 md:grid-cols-3 gap-4",
+		children: supplierTotals.map((s) => {
+			const pct = Math.min(100, s.total / s.cifThreshold * 100);
+			const reached = pct >= 100;
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				"data-uid": "src/components/optimization/CIFWidget.tsx:34:11",
+				"data-prohibitions": "[editContent]",
+				className: reached ? "border-emerald-200 bg-emerald-50/30" : "border-amber-200 bg-amber-50/30",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+					"data-uid": "src/components/optimization/CIFWidget.tsx:40:13",
+					"data-prohibitions": "[editContent]",
+					className: "pb-2",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
+						"data-uid": "src/components/optimization/CIFWidget.tsx:41:15",
+						"data-prohibitions": "[editContent]",
+						className: "text-sm flex justify-between items-center",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:42:17",
+							"data-prohibitions": "[editContent]",
+							className: "flex items-center gap-2",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Truck, {
+									"data-uid": "src/components/optimization/CIFWidget.tsx:43:19",
+									"data-prohibitions": "[editContent]",
+									className: "w-4 h-4"
+								}),
+								" ",
+								s.name
+							]
+						}), reached ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:46:19",
+							"data-prohibitions": "[editContent]",
+							className: "w-4 h-4 text-emerald-500"
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:48:19",
+							"data-prohibitions": "[editContent]",
+							className: "w-4 h-4 text-amber-500"
+						})]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+					"data-uid": "src/components/optimization/CIFWidget.tsx:52:13",
+					"data-prohibitions": "[editContent]",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:53:15",
+							"data-prohibitions": "[editContent]",
+							className: "flex justify-between text-xs font-medium mb-1.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								"data-uid": "src/components/optimization/CIFWidget.tsx:54:17",
+								"data-prohibitions": "[editContent]",
+								children: ["$", s.total.toFixed(2)]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								"data-uid": "src/components/optimization/CIFWidget.tsx:55:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-muted-foreground",
+								children: ["Meta: $", s.cifThreshold]
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:57:15",
+							"data-prohibitions": "[editContent]",
+							value: pct,
+							className: "h-2 bg-black/5",
+							indicatorClassName: reached ? "bg-emerald-500" : "bg-amber-500"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-uid": "src/components/optimization/CIFWidget.tsx:62:15",
+							"data-prohibitions": "[editContent]",
+							className: "text-[10px] mt-2 text-muted-foreground text-right",
+							children: reached ? "Frete CIF Garantido" : `Faltam $${(s.cifThreshold - s.total).toFixed(2)} para CIF`
+						})
+					]
+				})]
+			}, s.id);
+		})
+	});
+}
+//#endregion
+//#region src/components/ui/input.tsx
+var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+		"data-uid": "src/components/ui/input.tsx:9:7",
+		"data-prohibitions": "[editContent]",
+		type,
+		className: cn$1("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Input.displayName = "Input";
+//#endregion
+//#region src/lib/optimizationUtils.ts
+var SELIC_PLUS_1_MONTHLY = .01;
+function calculateMonthsToExpiry(expiryDate) {
+	const expiry = new Date(expiryDate);
+	const now = /* @__PURE__ */ new Date("2024-01-01");
+	return (expiry.getTime() - now.getTime()) / (1e3 * 60 * 60 * 24 * 30);
+}
+function checkExpiryRisk(qty, item, need) {
+	const maxSafeQty = calculateMonthsToExpiry(item.expiryDate) * need.monthlyConsumption - need.currentStock;
+	return {
+		isRisk: qty > maxSafeQty,
+		maxSafeQty: Math.max(0, maxSafeQty)
+	};
+}
+function evaluateBulkPurchase(reqQty, item, need) {
+	if (!item.bulkDiscount || reqQty >= item.bulkDiscount.qty) return null;
+	const qBulk = item.bulkDiscount.qty;
+	const extraUnits = qBulk - reqQty;
+	const discountedPrice = item.price * (1 - item.bulkDiscount.discount);
+	const totalSavings = qBulk * (item.price - discountedPrice);
+	const averageHoldingMonths = extraUnits / need.monthlyConsumption / 2;
+	const netBenefit = totalSavings - extraUnits * discountedPrice * SELIC_PLUS_1_MONTHLY * averageHoldingMonths;
+	return {
+		qBulk,
+		netBenefit,
+		recommendBulk: netBenefit > 0
+	};
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/constants.js
+/**
+* @constant
+* @name daysInYear
+* @summary Days in 1 year.
+*
+* @description
+* How many days in a year.
+*
+* One years equals 365.2425 days according to the formula:
+*
+* > Leap year occurs every 4 years, except for years that are divisible by 100 and not divisible by 400.
+* > 1 mean year = (365+1/4-1/100+1/400) days = 365.2425 days
+*/
+var daysInYear = 365.2425;
+Math.pow(10, 8) * 24 * 60 * 60 * 1e3;
+/**
+* @constant
+* @name millisecondsInWeek
+* @summary Milliseconds in 1 week.
+*/
+var millisecondsInWeek = 6048e5;
+/**
+* @constant
+* @name millisecondsInDay
+* @summary Milliseconds in 1 day.
+*/
+var millisecondsInDay = 864e5;
+/**
+* @constant
+* @name secondsInDay
+* @summary Seconds in 1 day.
+*/
+var secondsInDay = 3600 * 24;
+secondsInDay * 7;
+secondsInDay * daysInYear / 12 * 3;
+/**
+* @constant
+* @name constructFromSymbol
+* @summary Symbol enabling Date extensions to inherit properties from the reference date.
+*
+* The symbol is used to enable the `constructFrom` function to construct a date
+* using a reference date and a value. It allows to transfer extra properties
+* from the reference date to the new date. It's useful for extensions like
+* [`TZDate`](https://github.com/date-fns/tz) that accept a time zone as
+* a constructor argument.
+*/
+var constructFromSymbol = Symbol.for("constructDateFrom");
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/constructFrom.js
+/**
+* @name constructFrom
+* @category Generic Helpers
+* @summary Constructs a date using the reference date and the value
+*
+* @description
+* The function constructs a new date using the constructor from the reference
+* date and the given value. It helps to build generic functions that accept
+* date extensions.
+*
+* It defaults to `Date` if the passed reference date is a number or a string.
+*
+* Starting from v3.7.0, it allows to construct a date using `[Symbol.for("constructDateFrom")]`
+* enabling to transfer extra properties from the reference date to the new date.
+* It's useful for extensions like [`TZDate`](https://github.com/date-fns/tz)
+* that accept a time zone as a constructor argument.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+*
+* @param date - The reference date to take constructor from
+* @param value - The value to create the date
+*
+* @returns Date initialized using the given date and value
+*
+* @example
+* import { constructFrom } from "./constructFrom/date-fns";
+*
+* // A function that clones a date preserving the original type
+* function cloneDate<DateType extends Date>(date: DateType): DateType {
+*   return constructFrom(
+*     date, // Use constructor from the given date
+*     date.getTime() // Use the date value to create a new date
+*   );
+* }
+*/
+function constructFrom(date, value) {
+	if (typeof date === "function") return date(value);
+	if (date && typeof date === "object" && constructFromSymbol in date) return date[constructFromSymbol](value);
+	if (date instanceof Date) return new date.constructor(value);
+	return new Date(value);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/toDate.js
+/**
+* @name toDate
+* @category Common Helpers
+* @summary Convert the given argument to an instance of Date.
+*
+* @description
+* Convert the given argument to an instance of Date.
+*
+* If the argument is an instance of Date, the function returns its clone.
+*
+* If the argument is a number, it is treated as a timestamp.
+*
+* If the argument is none of the above, the function returns Invalid Date.
+*
+* Starting from v3.7.0, it clones a date using `[Symbol.for("constructDateFrom")]`
+* enabling to transfer extra properties from the reference date to the new date.
+* It's useful for extensions like [`TZDate`](https://github.com/date-fns/tz)
+* that accept a time zone as a constructor argument.
+*
+* **Note**: *all* Date arguments passed to any *date-fns* function is processed by `toDate`.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param argument - The value to convert
+*
+* @returns The parsed date in the local time zone
+*
+* @example
+* // Clone the date:
+* const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
+* //=> Tue Feb 11 2014 11:30:30
+*
+* @example
+* // Convert the timestamp to date:
+* const result = toDate(1392098430000)
+* //=> Tue Feb 11 2014 11:30:30
+*/
+function toDate(argument, context) {
+	return constructFrom(context || argument, argument);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/defaultOptions.js
+var defaultOptions = {};
+function getDefaultOptions() {
+	return defaultOptions;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfWeek.js
+/**
+* The {@link startOfWeek} function options.
+*/
+/**
+* @name startOfWeek
+* @category Week Helpers
+* @summary Return the start of a week for the given date.
+*
+* @description
+* Return the start of a week for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of a week
+*
+* @example
+* // The start of a week for 2 September 2014 11:55:00:
+* const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Sun Aug 31 2014 00:00:00
+*
+* @example
+* // If the week starts on Monday, the start of the week for 2 September 2014 11:55:00:
+* const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
+* //=> Mon Sep 01 2014 00:00:00
+*/
+function startOfWeek(date, options) {
+	const defaultOptions = getDefaultOptions();
+	const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions.weekStartsOn ?? defaultOptions.locale?.options?.weekStartsOn ?? 0;
+	const _date = toDate(date, options?.in);
+	const day = _date.getDay();
+	const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+	_date.setDate(_date.getDate() - diff);
+	_date.setHours(0, 0, 0, 0);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfISOWeek.js
+/**
+* The {@link startOfISOWeek} function options.
+*/
+/**
+* @name startOfISOWeek
+* @category ISO Week Helpers
+* @summary Return the start of an ISO week for the given date.
+*
+* @description
+* Return the start of an ISO week for the given date.
+* The result will be in the local timezone.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of an ISO week
+*
+* @example
+* // The start of an ISO week for 2 September 2014 11:55:00:
+* const result = startOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Mon Sep 01 2014 00:00:00
+*/
+function startOfISOWeek(date, options) {
+	return startOfWeek(date, {
+		...options,
+		weekStartsOn: 1
+	});
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getISOWeekYear.js
+/**
+* The {@link getISOWeekYear} function options.
+*/
+/**
+* @name getISOWeekYear
+* @category ISO Week-Numbering Year Helpers
+* @summary Get the ISO week-numbering year of the given date.
+*
+* @description
+* Get the ISO week-numbering year of the given date,
+* which always starts 3 days before the year's first Thursday.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @param date - The given date
+*
+* @returns The ISO week-numbering year
+*
+* @example
+* // Which ISO-week numbering year is 2 January 2005?
+* const result = getISOWeekYear(new Date(2005, 0, 2))
+* //=> 2004
+*/
+function getISOWeekYear(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const fourthOfJanuaryOfNextYear = constructFrom(_date, 0);
+	fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
+	fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
+	const startOfNextYear = startOfISOWeek(fourthOfJanuaryOfNextYear);
+	const fourthOfJanuaryOfThisYear = constructFrom(_date, 0);
+	fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
+	fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
+	const startOfThisYear = startOfISOWeek(fourthOfJanuaryOfThisYear);
+	if (_date.getTime() >= startOfNextYear.getTime()) return year + 1;
+	else if (_date.getTime() >= startOfThisYear.getTime()) return year;
+	else return year - 1;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.js
+/**
+* Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
+* They usually appear for dates that denote time before the timezones were introduced
+* (e.g. for 'Europe/Prague' timezone the offset is GMT+00:57:44 before 1 October 1891
+* and GMT+01:00:00 after that date)
+*
+* Date#getTimezoneOffset returns the offset in minutes and would return 57 for the example above,
+* which would lead to incorrect calculations.
+*
+* This function returns the timezone offset in milliseconds that takes seconds in account.
+*/
+function getTimezoneOffsetInMilliseconds(date) {
+	const _date = toDate(date);
+	const utcDate = new Date(Date.UTC(_date.getFullYear(), _date.getMonth(), _date.getDate(), _date.getHours(), _date.getMinutes(), _date.getSeconds(), _date.getMilliseconds()));
+	utcDate.setUTCFullYear(_date.getFullYear());
+	return +date - +utcDate;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/normalizeDates.js
+function normalizeDates(context, ...dates) {
+	const normalize = constructFrom.bind(null, context || dates.find((date) => typeof date === "object"));
+	return dates.map(normalize);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfDay.js
+/**
+* The {@link startOfDay} function options.
+*/
+/**
+* @name startOfDay
+* @category Day Helpers
+* @summary Return the start of a day for the given date.
+*
+* @description
+* Return the start of a day for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - The options
+*
+* @returns The start of a day
+*
+* @example
+* // The start of a day for 2 September 2014 11:55:00:
+* const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Tue Sep 02 2014 00:00:00
+*/
+function startOfDay(date, options) {
+	const _date = toDate(date, options?.in);
+	_date.setHours(0, 0, 0, 0);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/differenceInCalendarDays.js
+/**
+* The {@link differenceInCalendarDays} function options.
+*/
+/**
+* @name differenceInCalendarDays
+* @category Day Helpers
+* @summary Get the number of calendar days between the given dates.
+*
+* @description
+* Get the number of calendar days between the given dates. This means that the times are removed
+* from the dates and then the difference in days is calculated.
+*
+* @param laterDate - The later date
+* @param earlierDate - The earlier date
+* @param options - The options object
+*
+* @returns The number of calendar days
+*
+* @example
+* // How many calendar days are between
+* // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
+* const result = differenceInCalendarDays(
+*   new Date(2012, 6, 2, 0, 0),
+*   new Date(2011, 6, 2, 23, 0)
+* )
+* //=> 366
+* // How many calendar days are between
+* // 2 July 2011 23:59:00 and 3 July 2011 00:01:00?
+* const result = differenceInCalendarDays(
+*   new Date(2011, 6, 3, 0, 1),
+*   new Date(2011, 6, 2, 23, 59)
+* )
+* //=> 1
+*/
+function differenceInCalendarDays(laterDate, earlierDate, options) {
+	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
+	const laterStartOfDay = startOfDay(laterDate_);
+	const earlierStartOfDay = startOfDay(earlierDate_);
+	const laterTimestamp = +laterStartOfDay - getTimezoneOffsetInMilliseconds(laterStartOfDay);
+	const earlierTimestamp = +earlierStartOfDay - getTimezoneOffsetInMilliseconds(earlierStartOfDay);
+	return Math.round((laterTimestamp - earlierTimestamp) / millisecondsInDay);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfISOWeekYear.js
+/**
+* The {@link startOfISOWeekYear} function options.
+*/
+/**
+* @name startOfISOWeekYear
+* @category ISO Week-Numbering Year Helpers
+* @summary Return the start of an ISO week-numbering year for the given date.
+*
+* @description
+* Return the start of an ISO week-numbering year,
+* which always starts 3 days before the year's first Thursday.
+* The result will be in the local timezone.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of an ISO week-numbering year
+*
+* @example
+* // The start of an ISO week-numbering year for 2 July 2005:
+* const result = startOfISOWeekYear(new Date(2005, 6, 2))
+* //=> Mon Jan 03 2005 00:00:00
+*/
+function startOfISOWeekYear(date, options) {
+	const year = getISOWeekYear(date, options);
+	const fourthOfJanuary = constructFrom(options?.in || date, 0);
+	fourthOfJanuary.setFullYear(year, 0, 4);
+	fourthOfJanuary.setHours(0, 0, 0, 0);
+	return startOfISOWeek(fourthOfJanuary);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isDate.js
+/**
+* @name isDate
+* @category Common Helpers
+* @summary Is the given value a date?
+*
+* @description
+* Returns true if the given value is an instance of Date. The function works for dates transferred across iframes.
+*
+* @param value - The value to check
+*
+* @returns True if the given value is a date
+*
+* @example
+* // For a valid date:
+* const result = isDate(new Date())
+* //=> true
+*
+* @example
+* // For an invalid date:
+* const result = isDate(new Date(NaN))
+* //=> true
+*
+* @example
+* // For some value:
+* const result = isDate('2014-02-31')
+* //=> false
+*
+* @example
+* // For an object:
+* const result = isDate({})
+* //=> false
+*/
+function isDate(value) {
+	return value instanceof Date || typeof value === "object" && Object.prototype.toString.call(value) === "[object Date]";
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isValid.js
+/**
+* @name isValid
+* @category Common Helpers
+* @summary Is the given date valid?
+*
+* @description
+* Returns false if argument is Invalid Date and true otherwise.
+* Argument is converted to Date using `toDate`. See [toDate](https://date-fns.org/docs/toDate)
+* Invalid Date is a Date, whose time value is NaN.
+*
+* Time value of Date: http://es5.github.io/#x15.9.1.1
+*
+* @param date - The date to check
+*
+* @returns The date is valid
+*
+* @example
+* // For the valid date:
+* const result = isValid(new Date(2014, 1, 31))
+* //=> true
+*
+* @example
+* // For the value, convertible into a date:
+* const result = isValid(1393804800000)
+* //=> true
+*
+* @example
+* // For the invalid date:
+* const result = isValid(new Date(''))
+* //=> false
+*/
+function isValid(date) {
+	return !(!isDate(date) && typeof date !== "number" || isNaN(+toDate(date)));
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfYear.js
+/**
+* The {@link startOfYear} function options.
+*/
+/**
+* @name startOfYear
+* @category Year Helpers
+* @summary Return the start of a year for the given date.
+*
+* @description
+* Return the start of a year for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - The options
+*
+* @returns The start of a year
+*
+* @example
+* // The start of a year for 2 September 2014 11:55:00:
+* const result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
+* //=> Wed Jan 01 2014 00:00:00
+*/
+function startOfYear(date, options) {
+	const date_ = toDate(date, options?.in);
+	date_.setFullYear(date_.getFullYear(), 0, 1);
+	date_.setHours(0, 0, 0, 0);
+	return date_;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/formatDistance.js
+var formatDistanceLocale = {
+	lessThanXSeconds: {
+		one: "less than a second",
+		other: "less than {{count}} seconds"
+	},
+	xSeconds: {
+		one: "1 second",
+		other: "{{count}} seconds"
+	},
+	halfAMinute: "half a minute",
+	lessThanXMinutes: {
+		one: "less than a minute",
+		other: "less than {{count}} minutes"
+	},
+	xMinutes: {
+		one: "1 minute",
+		other: "{{count}} minutes"
+	},
+	aboutXHours: {
+		one: "about 1 hour",
+		other: "about {{count}} hours"
+	},
+	xHours: {
+		one: "1 hour",
+		other: "{{count}} hours"
+	},
+	xDays: {
+		one: "1 day",
+		other: "{{count}} days"
+	},
+	aboutXWeeks: {
+		one: "about 1 week",
+		other: "about {{count}} weeks"
+	},
+	xWeeks: {
+		one: "1 week",
+		other: "{{count}} weeks"
+	},
+	aboutXMonths: {
+		one: "about 1 month",
+		other: "about {{count}} months"
+	},
+	xMonths: {
+		one: "1 month",
+		other: "{{count}} months"
+	},
+	aboutXYears: {
+		one: "about 1 year",
+		other: "about {{count}} years"
+	},
+	xYears: {
+		one: "1 year",
+		other: "{{count}} years"
+	},
+	overXYears: {
+		one: "over 1 year",
+		other: "over {{count}} years"
+	},
+	almostXYears: {
+		one: "almost 1 year",
+		other: "almost {{count}} years"
+	}
+};
+var formatDistance = (token, count, options) => {
+	let result;
+	const tokenValue = formatDistanceLocale[token];
+	if (typeof tokenValue === "string") result = tokenValue;
+	else if (count === 1) result = tokenValue.one;
+	else result = tokenValue.other.replace("{{count}}", count.toString());
+	if (options?.addSuffix) if (options.comparison && options.comparison > 0) return "in " + result;
+	else return result + " ago";
+	return result;
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildFormatLongFn.js
+function buildFormatLongFn(args) {
+	return (options = {}) => {
+		const width = options.width ? String(options.width) : args.defaultWidth;
+		return args.formats[width] || args.formats[args.defaultWidth];
+	};
+}
+var formatLong = {
+	date: buildFormatLongFn({
+		formats: {
+			full: "EEEE, MMMM do, y",
+			long: "MMMM do, y",
+			medium: "MMM d, y",
+			short: "MM/dd/yyyy"
+		},
+		defaultWidth: "full"
+	}),
+	time: buildFormatLongFn({
+		formats: {
+			full: "h:mm:ss a zzzz",
+			long: "h:mm:ss a z",
+			medium: "h:mm:ss a",
+			short: "h:mm a"
+		},
+		defaultWidth: "full"
+	}),
+	dateTime: buildFormatLongFn({
+		formats: {
+			full: "{{date}} 'at' {{time}}",
+			long: "{{date}} 'at' {{time}}",
+			medium: "{{date}}, {{time}}",
+			short: "{{date}}, {{time}}"
+		},
+		defaultWidth: "full"
+	})
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/formatRelative.js
+var formatRelativeLocale = {
+	lastWeek: "'last' eeee 'at' p",
+	yesterday: "'yesterday at' p",
+	today: "'today at' p",
+	tomorrow: "'tomorrow at' p",
+	nextWeek: "eeee 'at' p",
+	other: "P"
+};
+var formatRelative = (token, _date, _baseDate, _options) => formatRelativeLocale[token];
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildLocalizeFn.js
+/**
+* The localize function argument callback which allows to convert raw value to
+* the actual type.
+*
+* @param value - The value to convert
+*
+* @returns The converted value
+*/
+/**
+* The map of localized values for each width.
+*/
+/**
+* The index type of the locale unit value. It types conversion of units of
+* values that don't start at 0 (i.e. quarters).
+*/
+/**
+* Converts the unit value to the tuple of values.
+*/
+/**
+* The tuple of localized era values. The first element represents BC,
+* the second element represents AD.
+*/
+/**
+* The tuple of localized quarter values. The first element represents Q1.
+*/
+/**
+* The tuple of localized day values. The first element represents Sunday.
+*/
+/**
+* The tuple of localized month values. The first element represents January.
+*/
+function buildLocalizeFn(args) {
+	return (value, options) => {
+		const context = options?.context ? String(options.context) : "standalone";
+		let valuesArray;
+		if (context === "formatting" && args.formattingValues) {
+			const defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
+			const width = options?.width ? String(options.width) : defaultWidth;
+			valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
+		} else {
+			const defaultWidth = args.defaultWidth;
+			const width = options?.width ? String(options.width) : args.defaultWidth;
+			valuesArray = args.values[width] || args.values[defaultWidth];
+		}
+		const index = args.argumentCallback ? args.argumentCallback(value) : value;
+		return valuesArray[index];
+	};
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/localize.js
+var eraValues = {
+	narrow: ["B", "A"],
+	abbreviated: ["BC", "AD"],
+	wide: ["Before Christ", "Anno Domini"]
+};
+var quarterValues = {
+	narrow: [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	abbreviated: [
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
+	],
+	wide: [
+		"1st quarter",
+		"2nd quarter",
+		"3rd quarter",
+		"4th quarter"
+	]
+};
+var monthValues = {
+	narrow: [
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"A",
+		"S",
+		"O",
+		"N",
+		"D"
+	],
+	abbreviated: [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec"
+	],
+	wide: [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	]
+};
+var dayValues = {
+	narrow: [
+		"S",
+		"M",
+		"T",
+		"W",
+		"T",
+		"F",
+		"S"
+	],
+	short: [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
+	abbreviated: [
+		"Sun",
+		"Mon",
+		"Tue",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat"
+	],
+	wide: [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday"
+	]
+};
+var dayPeriodValues = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mi",
+		noon: "n",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	}
+};
+var formattingDayPeriodValues = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mi",
+		noon: "n",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	}
+};
+var ordinalNumber = (dirtyNumber, _options) => {
+	const number = Number(dirtyNumber);
+	const rem100 = number % 100;
+	if (rem100 > 20 || rem100 < 10) switch (rem100 % 10) {
+		case 1: return number + "st";
+		case 2: return number + "nd";
+		case 3: return number + "rd";
+	}
+	return number + "th";
+};
+var localize = {
+	ordinalNumber,
+	era: buildLocalizeFn({
+		values: eraValues,
+		defaultWidth: "wide"
+	}),
+	quarter: buildLocalizeFn({
+		values: quarterValues,
+		defaultWidth: "wide",
+		argumentCallback: (quarter) => quarter - 1
+	}),
+	month: buildLocalizeFn({
+		values: monthValues,
+		defaultWidth: "wide"
+	}),
+	day: buildLocalizeFn({
+		values: dayValues,
+		defaultWidth: "wide"
+	}),
+	dayPeriod: buildLocalizeFn({
+		values: dayPeriodValues,
+		defaultWidth: "wide",
+		formattingValues: formattingDayPeriodValues,
+		defaultFormattingWidth: "wide"
+	})
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildMatchFn.js
+function buildMatchFn(args) {
+	return (string, options = {}) => {
+		const width = options.width;
+		const matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+		const matchResult = string.match(matchPattern);
+		if (!matchResult) return null;
+		const matchedString = matchResult[0];
+		const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
+		const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : findKey(parsePatterns, (pattern) => pattern.test(matchedString));
+		let value;
+		value = args.valueCallback ? args.valueCallback(key) : key;
+		value = options.valueCallback ? options.valueCallback(value) : value;
+		const rest = string.slice(matchedString.length);
+		return {
+			value,
+			rest
+		};
+	};
+}
+function findKey(object, predicate) {
+	for (const key in object) if (Object.prototype.hasOwnProperty.call(object, key) && predicate(object[key])) return key;
+}
+function findIndex(array, predicate) {
+	for (let key = 0; key < array.length; key++) if (predicate(array[key])) return key;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildMatchPatternFn.js
+function buildMatchPatternFn(args) {
+	return (string, options = {}) => {
+		const matchResult = string.match(args.matchPattern);
+		if (!matchResult) return null;
+		const matchedString = matchResult[0];
+		const parseResult = string.match(args.parsePattern);
+		if (!parseResult) return null;
+		let value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
+		value = options.valueCallback ? options.valueCallback(value) : value;
+		const rest = string.slice(matchedString.length);
+		return {
+			value,
+			rest
+		};
+	};
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US.js
+/**
+* @category Locales
+* @summary English locale (United States).
+* @language English
+* @iso-639-2 eng
+* @author Sasha Koss [@kossnocorp](https://github.com/kossnocorp)
+* @author Lesha Koss [@leshakoss](https://github.com/leshakoss)
+*/
+var enUS = {
+	code: "en-US",
+	formatDistance,
+	formatLong,
+	formatRelative,
+	localize,
+	match: {
+		ordinalNumber: buildMatchPatternFn({
+			matchPattern: /^(\d+)(th|st|nd|rd)?/i,
+			parsePattern: /\d+/i,
+			valueCallback: (value) => parseInt(value, 10)
+		}),
+		era: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(b|a)/i,
+				abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
+				wide: /^(before christ|before common era|anno domini|common era)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: { any: [/^b/i, /^(a|c)/i] },
+			defaultParseWidth: "any"
+		}),
+		quarter: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[1234]/i,
+				abbreviated: /^q[1234]/i,
+				wide: /^[1234](th|st|nd|rd)? quarter/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: { any: [
+				/1/i,
+				/2/i,
+				/3/i,
+				/4/i
+			] },
+			defaultParseWidth: "any",
+			valueCallback: (index) => index + 1
+		}),
+		month: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[jfmasond]/i,
+				abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+				wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				narrow: [
+					/^j/i,
+					/^f/i,
+					/^m/i,
+					/^a/i,
+					/^m/i,
+					/^j/i,
+					/^j/i,
+					/^a/i,
+					/^s/i,
+					/^o/i,
+					/^n/i,
+					/^d/i
+				],
+				any: [
+					/^ja/i,
+					/^f/i,
+					/^mar/i,
+					/^ap/i,
+					/^may/i,
+					/^jun/i,
+					/^jul/i,
+					/^au/i,
+					/^s/i,
+					/^o/i,
+					/^n/i,
+					/^d/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		day: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[smtwf]/i,
+				short: /^(su|mo|tu|we|th|fr|sa)/i,
+				abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+				wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				narrow: [
+					/^s/i,
+					/^m/i,
+					/^t/i,
+					/^w/i,
+					/^t/i,
+					/^f/i,
+					/^s/i
+				],
+				any: [
+					/^su/i,
+					/^m/i,
+					/^tu/i,
+					/^w/i,
+					/^th/i,
+					/^f/i,
+					/^sa/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		dayPeriod: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+				any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
+			},
+			defaultMatchWidth: "any",
+			parsePatterns: { any: {
+				am: /^a/i,
+				pm: /^p/i,
+				midnight: /^mi/i,
+				noon: /^no/i,
+				morning: /morning/i,
+				afternoon: /afternoon/i,
+				evening: /evening/i,
+				night: /night/i
+			} },
+			defaultParseWidth: "any"
+		})
+	},
+	options: {
+		weekStartsOn: 0,
+		firstWeekContainsDate: 1
+	}
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getDayOfYear.js
+/**
+* The {@link getDayOfYear} function options.
+*/
+/**
+* @name getDayOfYear
+* @category Day Helpers
+* @summary Get the day of the year of the given date.
+*
+* @description
+* Get the day of the year of the given date.
+*
+* @param date - The given date
+* @param options - The options
+*
+* @returns The day of year
+*
+* @example
+* // Which day of the year is 2 July 2014?
+* const result = getDayOfYear(new Date(2014, 6, 2))
+* //=> 183
+*/
+function getDayOfYear(date, options) {
+	const _date = toDate(date, options?.in);
+	return differenceInCalendarDays(_date, startOfYear(_date)) + 1;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getISOWeek.js
+/**
+* The {@link getISOWeek} function options.
+*/
+/**
+* @name getISOWeek
+* @category ISO Week Helpers
+* @summary Get the ISO week of the given date.
+*
+* @description
+* Get the ISO week of the given date.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @param date - The given date
+* @param options - The options
+*
+* @returns The ISO week
+*
+* @example
+* // Which week of the ISO-week numbering year is 2 January 2005?
+* const result = getISOWeek(new Date(2005, 0, 2))
+* //=> 53
+*/
+function getISOWeek(date, options) {
+	const _date = toDate(date, options?.in);
+	const diff = +startOfISOWeek(_date) - +startOfISOWeekYear(_date);
+	return Math.round(diff / millisecondsInWeek) + 1;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getWeekYear.js
+/**
+* The {@link getWeekYear} function options.
+*/
+/**
+* @name getWeekYear
+* @category Week-Numbering Year Helpers
+* @summary Get the local week-numbering year of the given date.
+*
+* @description
+* Get the local week-numbering year of the given date.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @param date - The given date
+* @param options - An object with options.
+*
+* @returns The local week-numbering year
+*
+* @example
+* // Which week numbering year is 26 December 2004 with the default settings?
+* const result = getWeekYear(new Date(2004, 11, 26))
+* //=> 2005
+*
+* @example
+* // Which week numbering year is 26 December 2004 if week starts on Saturday?
+* const result = getWeekYear(new Date(2004, 11, 26), { weekStartsOn: 6 })
+* //=> 2004
+*
+* @example
+* // Which week numbering year is 26 December 2004 if the first week contains 4 January?
+* const result = getWeekYear(new Date(2004, 11, 26), { firstWeekContainsDate: 4 })
+* //=> 2004
+*/
+function getWeekYear(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const defaultOptions = getDefaultOptions();
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const firstWeekOfNextYear = constructFrom(options?.in || date, 0);
+	firstWeekOfNextYear.setFullYear(year + 1, 0, firstWeekContainsDate);
+	firstWeekOfNextYear.setHours(0, 0, 0, 0);
+	const startOfNextYear = startOfWeek(firstWeekOfNextYear, options);
+	const firstWeekOfThisYear = constructFrom(options?.in || date, 0);
+	firstWeekOfThisYear.setFullYear(year, 0, firstWeekContainsDate);
+	firstWeekOfThisYear.setHours(0, 0, 0, 0);
+	const startOfThisYear = startOfWeek(firstWeekOfThisYear, options);
+	if (+_date >= +startOfNextYear) return year + 1;
+	else if (+_date >= +startOfThisYear) return year;
+	else return year - 1;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfWeekYear.js
+/**
+* The {@link startOfWeekYear} function options.
+*/
+/**
+* @name startOfWeekYear
+* @category Week-Numbering Year Helpers
+* @summary Return the start of a local week-numbering year for the given date.
+*
+* @description
+* Return the start of a local week-numbering year.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of a week-numbering year
+*
+* @example
+* // The start of an a week-numbering year for 2 July 2005 with default settings:
+* const result = startOfWeekYear(new Date(2005, 6, 2))
+* //=> Sun Dec 26 2004 00:00:00
+*
+* @example
+* // The start of a week-numbering year for 2 July 2005
+* // if Monday is the first day of week
+* // and 4 January is always in the first week of the year:
+* const result = startOfWeekYear(new Date(2005, 6, 2), {
+*   weekStartsOn: 1,
+*   firstWeekContainsDate: 4
+* })
+* //=> Mon Jan 03 2005 00:00:00
+*/
+function startOfWeekYear(date, options) {
+	const defaultOptions = getDefaultOptions();
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const year = getWeekYear(date, options);
+	const firstWeek = constructFrom(options?.in || date, 0);
+	firstWeek.setFullYear(year, 0, firstWeekContainsDate);
+	firstWeek.setHours(0, 0, 0, 0);
+	return startOfWeek(firstWeek, options);
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getWeek.js
+/**
+* The {@link getWeek} function options.
+*/
+/**
+* @name getWeek
+* @category Week Helpers
+* @summary Get the local week index of the given date.
+*
+* @description
+* Get the local week index of the given date.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @param date - The given date
+* @param options - An object with options
+*
+* @returns The week
+*
+* @example
+* // Which week of the local week numbering year is 2 January 2005 with default options?
+* const result = getWeek(new Date(2005, 0, 2))
+* //=> 2
+*
+* @example
+* // Which week of the local week numbering year is 2 January 2005,
+* // if Monday is the first day of the week,
+* // and the first week of the year always contains 4 January?
+* const result = getWeek(new Date(2005, 0, 2), {
+*   weekStartsOn: 1,
+*   firstWeekContainsDate: 4
+* })
+* //=> 53
+*/
+function getWeek(date, options) {
+	const _date = toDate(date, options?.in);
+	const diff = +startOfWeek(_date, options) - +startOfWeekYear(_date, options);
+	return Math.round(diff / millisecondsInWeek) + 1;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/addLeadingZeros.js
+function addLeadingZeros(number, targetLength) {
+	return (number < 0 ? "-" : "") + Math.abs(number).toString().padStart(targetLength, "0");
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/lightFormatters.js
+var lightFormatters = {
+	y(date, token) {
+		const signedYear = date.getFullYear();
+		const year = signedYear > 0 ? signedYear : 1 - signedYear;
+		return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
+	},
+	M(date, token) {
+		const month = date.getMonth();
+		return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
+	},
+	d(date, token) {
+		return addLeadingZeros(date.getDate(), token.length);
+	},
+	a(date, token) {
+		const dayPeriodEnumValue = date.getHours() / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "a":
+			case "aa": return dayPeriodEnumValue.toUpperCase();
+			case "aaa": return dayPeriodEnumValue;
+			case "aaaaa": return dayPeriodEnumValue[0];
+			default: return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
+		}
+	},
+	h(date, token) {
+		return addLeadingZeros(date.getHours() % 12 || 12, token.length);
+	},
+	H(date, token) {
+		return addLeadingZeros(date.getHours(), token.length);
+	},
+	m(date, token) {
+		return addLeadingZeros(date.getMinutes(), token.length);
+	},
+	s(date, token) {
+		return addLeadingZeros(date.getSeconds(), token.length);
+	},
+	S(date, token) {
+		const numberOfDigits = token.length;
+		const milliseconds = date.getMilliseconds();
+		return addLeadingZeros(Math.trunc(milliseconds * Math.pow(10, numberOfDigits - 3)), token.length);
+	}
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/formatters.js
+var dayPeriodEnum = {
+	am: "am",
+	pm: "pm",
+	midnight: "midnight",
+	noon: "noon",
+	morning: "morning",
+	afternoon: "afternoon",
+	evening: "evening",
+	night: "night"
+};
+var formatters = {
+	G: function(date, token, localize) {
+		const era = date.getFullYear() > 0 ? 1 : 0;
+		switch (token) {
+			case "G":
+			case "GG":
+			case "GGG": return localize.era(era, { width: "abbreviated" });
+			case "GGGGG": return localize.era(era, { width: "narrow" });
+			default: return localize.era(era, { width: "wide" });
+		}
+	},
+	y: function(date, token, localize) {
+		if (token === "yo") {
+			const signedYear = date.getFullYear();
+			const year = signedYear > 0 ? signedYear : 1 - signedYear;
+			return localize.ordinalNumber(year, { unit: "year" });
+		}
+		return lightFormatters.y(date, token);
+	},
+	Y: function(date, token, localize, options) {
+		const signedWeekYear = getWeekYear(date, options);
+		const weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
+		if (token === "YY") return addLeadingZeros(weekYear % 100, 2);
+		if (token === "Yo") return localize.ordinalNumber(weekYear, { unit: "year" });
+		return addLeadingZeros(weekYear, token.length);
+	},
+	R: function(date, token) {
+		return addLeadingZeros(getISOWeekYear(date), token.length);
+	},
+	u: function(date, token) {
+		return addLeadingZeros(date.getFullYear(), token.length);
+	},
+	Q: function(date, token, localize) {
+		const quarter = Math.ceil((date.getMonth() + 1) / 3);
+		switch (token) {
+			case "Q": return String(quarter);
+			case "QQ": return addLeadingZeros(quarter, 2);
+			case "Qo": return localize.ordinalNumber(quarter, { unit: "quarter" });
+			case "QQQ": return localize.quarter(quarter, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "QQQQQ": return localize.quarter(quarter, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.quarter(quarter, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	q: function(date, token, localize) {
+		const quarter = Math.ceil((date.getMonth() + 1) / 3);
+		switch (token) {
+			case "q": return String(quarter);
+			case "qq": return addLeadingZeros(quarter, 2);
+			case "qo": return localize.ordinalNumber(quarter, { unit: "quarter" });
+			case "qqq": return localize.quarter(quarter, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "qqqqq": return localize.quarter(quarter, {
+				width: "narrow",
+				context: "standalone"
+			});
+			default: return localize.quarter(quarter, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	M: function(date, token, localize) {
+		const month = date.getMonth();
+		switch (token) {
+			case "M":
+			case "MM": return lightFormatters.M(date, token);
+			case "Mo": return localize.ordinalNumber(month + 1, { unit: "month" });
+			case "MMM": return localize.month(month, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "MMMMM": return localize.month(month, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.month(month, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	L: function(date, token, localize) {
+		const month = date.getMonth();
+		switch (token) {
+			case "L": return String(month + 1);
+			case "LL": return addLeadingZeros(month + 1, 2);
+			case "Lo": return localize.ordinalNumber(month + 1, { unit: "month" });
+			case "LLL": return localize.month(month, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "LLLLL": return localize.month(month, {
+				width: "narrow",
+				context: "standalone"
+			});
+			default: return localize.month(month, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	w: function(date, token, localize, options) {
+		const week = getWeek(date, options);
+		if (token === "wo") return localize.ordinalNumber(week, { unit: "week" });
+		return addLeadingZeros(week, token.length);
+	},
+	I: function(date, token, localize) {
+		const isoWeek = getISOWeek(date);
+		if (token === "Io") return localize.ordinalNumber(isoWeek, { unit: "week" });
+		return addLeadingZeros(isoWeek, token.length);
+	},
+	d: function(date, token, localize) {
+		if (token === "do") return localize.ordinalNumber(date.getDate(), { unit: "date" });
+		return lightFormatters.d(date, token);
+	},
+	D: function(date, token, localize) {
+		const dayOfYear = getDayOfYear(date);
+		if (token === "Do") return localize.ordinalNumber(dayOfYear, { unit: "dayOfYear" });
+		return addLeadingZeros(dayOfYear, token.length);
+	},
+	E: function(date, token, localize) {
+		const dayOfWeek = date.getDay();
+		switch (token) {
+			case "E":
+			case "EE":
+			case "EEE": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "EEEEE": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "EEEEEE": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	e: function(date, token, localize, options) {
+		const dayOfWeek = date.getDay();
+		const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+		switch (token) {
+			case "e": return String(localDayOfWeek);
+			case "ee": return addLeadingZeros(localDayOfWeek, 2);
+			case "eo": return localize.ordinalNumber(localDayOfWeek, { unit: "day" });
+			case "eee": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "eeeee": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "eeeeee": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	c: function(date, token, localize, options) {
+		const dayOfWeek = date.getDay();
+		const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+		switch (token) {
+			case "c": return String(localDayOfWeek);
+			case "cc": return addLeadingZeros(localDayOfWeek, token.length);
+			case "co": return localize.ordinalNumber(localDayOfWeek, { unit: "day" });
+			case "ccc": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "ccccc": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "standalone"
+			});
+			case "cccccc": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "standalone"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	i: function(date, token, localize) {
+		const dayOfWeek = date.getDay();
+		const isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+		switch (token) {
+			case "i": return String(isoDayOfWeek);
+			case "ii": return addLeadingZeros(isoDayOfWeek, token.length);
+			case "io": return localize.ordinalNumber(isoDayOfWeek, { unit: "day" });
+			case "iii": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "iiiii": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "iiiiii": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	a: function(date, token, localize) {
+		const dayPeriodEnumValue = date.getHours() / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "a":
+			case "aa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "aaa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			}).toLowerCase();
+			case "aaaaa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	b: function(date, token, localize) {
+		const hours = date.getHours();
+		let dayPeriodEnumValue;
+		if (hours === 12) dayPeriodEnumValue = dayPeriodEnum.noon;
+		else if (hours === 0) dayPeriodEnumValue = dayPeriodEnum.midnight;
+		else dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "b":
+			case "bb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "bbb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			}).toLowerCase();
+			case "bbbbb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	B: function(date, token, localize) {
+		const hours = date.getHours();
+		let dayPeriodEnumValue;
+		if (hours >= 17) dayPeriodEnumValue = dayPeriodEnum.evening;
+		else if (hours >= 12) dayPeriodEnumValue = dayPeriodEnum.afternoon;
+		else if (hours >= 4) dayPeriodEnumValue = dayPeriodEnum.morning;
+		else dayPeriodEnumValue = dayPeriodEnum.night;
+		switch (token) {
+			case "B":
+			case "BB":
+			case "BBB": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "BBBBB": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	h: function(date, token, localize) {
+		if (token === "ho") {
+			let hours = date.getHours() % 12;
+			if (hours === 0) hours = 12;
+			return localize.ordinalNumber(hours, { unit: "hour" });
+		}
+		return lightFormatters.h(date, token);
+	},
+	H: function(date, token, localize) {
+		if (token === "Ho") return localize.ordinalNumber(date.getHours(), { unit: "hour" });
+		return lightFormatters.H(date, token);
+	},
+	K: function(date, token, localize) {
+		const hours = date.getHours() % 12;
+		if (token === "Ko") return localize.ordinalNumber(hours, { unit: "hour" });
+		return addLeadingZeros(hours, token.length);
+	},
+	k: function(date, token, localize) {
+		let hours = date.getHours();
+		if (hours === 0) hours = 24;
+		if (token === "ko") return localize.ordinalNumber(hours, { unit: "hour" });
+		return addLeadingZeros(hours, token.length);
+	},
+	m: function(date, token, localize) {
+		if (token === "mo") return localize.ordinalNumber(date.getMinutes(), { unit: "minute" });
+		return lightFormatters.m(date, token);
+	},
+	s: function(date, token, localize) {
+		if (token === "so") return localize.ordinalNumber(date.getSeconds(), { unit: "second" });
+		return lightFormatters.s(date, token);
+	},
+	S: function(date, token) {
+		return lightFormatters.S(date, token);
+	},
+	X: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		if (timezoneOffset === 0) return "Z";
+		switch (token) {
+			case "X": return formatTimezoneWithOptionalMinutes(timezoneOffset);
+			case "XXXX":
+			case "XX": return formatTimezone(timezoneOffset);
+			default: return formatTimezone(timezoneOffset, ":");
+		}
+	},
+	x: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "x": return formatTimezoneWithOptionalMinutes(timezoneOffset);
+			case "xxxx":
+			case "xx": return formatTimezone(timezoneOffset);
+			default: return formatTimezone(timezoneOffset, ":");
+		}
+	},
+	O: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "O":
+			case "OO":
+			case "OOO": return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+			default: return "GMT" + formatTimezone(timezoneOffset, ":");
+		}
+	},
+	z: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "z":
+			case "zz":
+			case "zzz": return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+			default: return "GMT" + formatTimezone(timezoneOffset, ":");
+		}
+	},
+	t: function(date, token, _localize) {
+		return addLeadingZeros(Math.trunc(+date / 1e3), token.length);
+	},
+	T: function(date, token, _localize) {
+		return addLeadingZeros(+date, token.length);
+	}
+};
+function formatTimezoneShort(offset, delimiter = "") {
+	const sign = offset > 0 ? "-" : "+";
+	const absOffset = Math.abs(offset);
+	const hours = Math.trunc(absOffset / 60);
+	const minutes = absOffset % 60;
+	if (minutes === 0) return sign + String(hours);
+	return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
+}
+function formatTimezoneWithOptionalMinutes(offset, delimiter) {
+	if (offset % 60 === 0) return (offset > 0 ? "-" : "+") + addLeadingZeros(Math.abs(offset) / 60, 2);
+	return formatTimezone(offset, delimiter);
+}
+function formatTimezone(offset, delimiter = "") {
+	const sign = offset > 0 ? "-" : "+";
+	const absOffset = Math.abs(offset);
+	const hours = addLeadingZeros(Math.trunc(absOffset / 60), 2);
+	const minutes = addLeadingZeros(absOffset % 60, 2);
+	return sign + hours + delimiter + minutes;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/longFormatters.js
+var dateLongFormatter = (pattern, formatLong) => {
+	switch (pattern) {
+		case "P": return formatLong.date({ width: "short" });
+		case "PP": return formatLong.date({ width: "medium" });
+		case "PPP": return formatLong.date({ width: "long" });
+		default: return formatLong.date({ width: "full" });
+	}
+};
+var timeLongFormatter = (pattern, formatLong) => {
+	switch (pattern) {
+		case "p": return formatLong.time({ width: "short" });
+		case "pp": return formatLong.time({ width: "medium" });
+		case "ppp": return formatLong.time({ width: "long" });
+		default: return formatLong.time({ width: "full" });
+	}
+};
+var dateTimeLongFormatter = (pattern, formatLong) => {
+	const matchResult = pattern.match(/(P+)(p+)?/) || [];
+	const datePattern = matchResult[1];
+	const timePattern = matchResult[2];
+	if (!timePattern) return dateLongFormatter(pattern, formatLong);
+	let dateTimeFormat;
+	switch (datePattern) {
+		case "P":
+			dateTimeFormat = formatLong.dateTime({ width: "short" });
+			break;
+		case "PP":
+			dateTimeFormat = formatLong.dateTime({ width: "medium" });
+			break;
+		case "PPP":
+			dateTimeFormat = formatLong.dateTime({ width: "long" });
+			break;
+		default:
+			dateTimeFormat = formatLong.dateTime({ width: "full" });
+			break;
+	}
+	return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong)).replace("{{time}}", timeLongFormatter(timePattern, formatLong));
+};
+var longFormatters = {
+	p: timeLongFormatter,
+	P: dateTimeLongFormatter
+};
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/protectedTokens.js
+var dayOfYearTokenRE = /^D+$/;
+var weekYearTokenRE = /^Y+$/;
+var throwTokens = [
+	"D",
+	"DD",
+	"YY",
+	"YYYY"
+];
+function isProtectedDayOfYearToken(token) {
+	return dayOfYearTokenRE.test(token);
+}
+function isProtectedWeekYearToken(token) {
+	return weekYearTokenRE.test(token);
+}
+function warnOrThrowProtectedError(token, format, input) {
+	const _message = message(token, format, input);
+	console.warn(_message);
+	if (throwTokens.includes(token)) throw new RangeError(_message);
+}
+function message(token, format, input) {
+	const subject = token[0] === "Y" ? "years" : "days of the month";
+	return `Use \`${token.toLowerCase()}\` instead of \`${token}\` (in \`${format}\`) for formatting ${subject} to the input \`${input}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
+}
+//#endregion
+//#region ../../cache/modules/construcao-saas-1b022/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/format.js
+var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
+var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+var escapedStringRegExp = /^'([^]*?)'?$/;
+var doubleQuoteRegExp = /''/g;
+var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+/**
+* The {@link format} function options.
+*/
+/**
+* @name format
+* @alias formatDate
+* @category Common Helpers
+* @summary Format the date.
+*
+* @description
+* Return the formatted date string in the given format. The result may vary by locale.
+*
+* > ⚠️ Please note that the `format` tokens differ from Moment.js and other libraries.
+* > See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* The characters wrapped between two single quotes characters (') are escaped.
+* Two single quotes in a row, whether inside or outside a quoted sequence, represent a 'real' single quote.
+* (see the last example)
+*
+* Format of the string is based on Unicode Technical Standard #35:
+* https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+* with a few additions (see note 7 below the table).
+*
+* Accepted patterns:
+* | Unit                            | Pattern | Result examples                   | Notes |
+* |---------------------------------|---------|-----------------------------------|-------|
+* | Era                             | G..GGG  | AD, BC                            |       |
+* |                                 | GGGG    | Anno Domini, Before Christ        | 2     |
+* |                                 | GGGGG   | A, B                              |       |
+* | Calendar year                   | y       | 44, 1, 1900, 2017                 | 5     |
+* |                                 | yo      | 44th, 1st, 0th, 17th              | 5,7   |
+* |                                 | yy      | 44, 01, 00, 17                    | 5     |
+* |                                 | yyy     | 044, 001, 1900, 2017              | 5     |
+* |                                 | yyyy    | 0044, 0001, 1900, 2017            | 5     |
+* |                                 | yyyyy   | ...                               | 3,5   |
+* | Local week-numbering year       | Y       | 44, 1, 1900, 2017                 | 5     |
+* |                                 | Yo      | 44th, 1st, 1900th, 2017th         | 5,7   |
+* |                                 | YY      | 44, 01, 00, 17                    | 5,8   |
+* |                                 | YYY     | 044, 001, 1900, 2017              | 5     |
+* |                                 | YYYY    | 0044, 0001, 1900, 2017            | 5,8   |
+* |                                 | YYYYY   | ...                               | 3,5   |
+* | ISO week-numbering year         | R       | -43, 0, 1, 1900, 2017             | 5,7   |
+* |                                 | RR      | -43, 00, 01, 1900, 2017           | 5,7   |
+* |                                 | RRR     | -043, 000, 001, 1900, 2017        | 5,7   |
+* |                                 | RRRR    | -0043, 0000, 0001, 1900, 2017     | 5,7   |
+* |                                 | RRRRR   | ...                               | 3,5,7 |
+* | Extended year                   | u       | -43, 0, 1, 1900, 2017             | 5     |
+* |                                 | uu      | -43, 01, 1900, 2017               | 5     |
+* |                                 | uuu     | -043, 001, 1900, 2017             | 5     |
+* |                                 | uuuu    | -0043, 0001, 1900, 2017           | 5     |
+* |                                 | uuuuu   | ...                               | 3,5   |
+* | Quarter (formatting)            | Q       | 1, 2, 3, 4                        |       |
+* |                                 | Qo      | 1st, 2nd, 3rd, 4th                | 7     |
+* |                                 | QQ      | 01, 02, 03, 04                    |       |
+* |                                 | QQQ     | Q1, Q2, Q3, Q4                    |       |
+* |                                 | QQQQ    | 1st quarter, 2nd quarter, ...     | 2     |
+* |                                 | QQQQQ   | 1, 2, 3, 4                        | 4     |
+* | Quarter (stand-alone)           | q       | 1, 2, 3, 4                        |       |
+* |                                 | qo      | 1st, 2nd, 3rd, 4th                | 7     |
+* |                                 | qq      | 01, 02, 03, 04                    |       |
+* |                                 | qqq     | Q1, Q2, Q3, Q4                    |       |
+* |                                 | qqqq    | 1st quarter, 2nd quarter, ...     | 2     |
+* |                                 | qqqqq   | 1, 2, 3, 4                        | 4     |
+* | Month (formatting)              | M       | 1, 2, ..., 12                     |       |
+* |                                 | Mo      | 1st, 2nd, ..., 12th               | 7     |
+* |                                 | MM      | 01, 02, ..., 12                   |       |
+* |                                 | MMM     | Jan, Feb, ..., Dec                |       |
+* |                                 | MMMM    | January, February, ..., December  | 2     |
+* |                                 | MMMMM   | J, F, ..., D                      |       |
+* | Month (stand-alone)             | L       | 1, 2, ..., 12                     |       |
+* |                                 | Lo      | 1st, 2nd, ..., 12th               | 7     |
+* |                                 | LL      | 01, 02, ..., 12                   |       |
+* |                                 | LLL     | Jan, Feb, ..., Dec                |       |
+* |                                 | LLLL    | January, February, ..., December  | 2     |
+* |                                 | LLLLL   | J, F, ..., D                      |       |
+* | Local week of year              | w       | 1, 2, ..., 53                     |       |
+* |                                 | wo      | 1st, 2nd, ..., 53th               | 7     |
+* |                                 | ww      | 01, 02, ..., 53                   |       |
+* | ISO week of year                | I       | 1, 2, ..., 53                     | 7     |
+* |                                 | Io      | 1st, 2nd, ..., 53th               | 7     |
+* |                                 | II      | 01, 02, ..., 53                   | 7     |
+* | Day of month                    | d       | 1, 2, ..., 31                     |       |
+* |                                 | do      | 1st, 2nd, ..., 31st               | 7     |
+* |                                 | dd      | 01, 02, ..., 31                   |       |
+* | Day of year                     | D       | 1, 2, ..., 365, 366               | 9     |
+* |                                 | Do      | 1st, 2nd, ..., 365th, 366th       | 7     |
+* |                                 | DD      | 01, 02, ..., 365, 366             | 9     |
+* |                                 | DDD     | 001, 002, ..., 365, 366           |       |
+* |                                 | DDDD    | ...                               | 3     |
+* | Day of week (formatting)        | E..EEE  | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | EEEE    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | EEEEE   | M, T, W, T, F, S, S               |       |
+* |                                 | EEEEEE  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | ISO day of week (formatting)    | i       | 1, 2, 3, ..., 7                   | 7     |
+* |                                 | io      | 1st, 2nd, ..., 7th                | 7     |
+* |                                 | ii      | 01, 02, ..., 07                   | 7     |
+* |                                 | iii     | Mon, Tue, Wed, ..., Sun           | 7     |
+* |                                 | iiii    | Monday, Tuesday, ..., Sunday      | 2,7   |
+* |                                 | iiiii   | M, T, W, T, F, S, S               | 7     |
+* |                                 | iiiiii  | Mo, Tu, We, Th, Fr, Sa, Su        | 7     |
+* | Local day of week (formatting)  | e       | 2, 3, 4, ..., 1                   |       |
+* |                                 | eo      | 2nd, 3rd, ..., 1st                | 7     |
+* |                                 | ee      | 02, 03, ..., 01                   |       |
+* |                                 | eee     | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | eeee    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | eeeee   | M, T, W, T, F, S, S               |       |
+* |                                 | eeeeee  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | Local day of week (stand-alone) | c       | 2, 3, 4, ..., 1                   |       |
+* |                                 | co      | 2nd, 3rd, ..., 1st                | 7     |
+* |                                 | cc      | 02, 03, ..., 01                   |       |
+* |                                 | ccc     | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | cccc    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | ccccc   | M, T, W, T, F, S, S               |       |
+* |                                 | cccccc  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | AM, PM                          | a..aa   | AM, PM                            |       |
+* |                                 | aaa     | am, pm                            |       |
+* |                                 | aaaa    | a.m., p.m.                        | 2     |
+* |                                 | aaaaa   | a, p                              |       |
+* | AM, PM, noon, midnight          | b..bb   | AM, PM, noon, midnight            |       |
+* |                                 | bbb     | am, pm, noon, midnight            |       |
+* |                                 | bbbb    | a.m., p.m., noon, midnight        | 2     |
+* |                                 | bbbbb   | a, p, n, mi                       |       |
+* | Flexible day period             | B..BBB  | at night, in the morning, ...     |       |
+* |                                 | BBBB    | at night, in the morning, ...     | 2     |
+* |                                 | BBBBB   | at night, in the morning, ...     |       |
+* | Hour [1-12]                     | h       | 1, 2, ..., 11, 12                 |       |
+* |                                 | ho      | 1st, 2nd, ..., 11th, 12th         | 7     |
+* |                                 | hh      | 01, 02, ..., 11, 12               |       |
+* | Hour [0-23]                     | H       | 0, 1, 2, ..., 23                  |       |
+* |                                 | Ho      | 0th, 1st, 2nd, ..., 23rd          | 7     |
+* |                                 | HH      | 00, 01, 02, ..., 23               |       |
+* | Hour [0-11]                     | K       | 1, 2, ..., 11, 0                  |       |
+* |                                 | Ko      | 1st, 2nd, ..., 11th, 0th          | 7     |
+* |                                 | KK      | 01, 02, ..., 11, 00               |       |
+* | Hour [1-24]                     | k       | 24, 1, 2, ..., 23                 |       |
+* |                                 | ko      | 24th, 1st, 2nd, ..., 23rd         | 7     |
+* |                                 | kk      | 24, 01, 02, ..., 23               |       |
+* | Minute                          | m       | 0, 1, ..., 59                     |       |
+* |                                 | mo      | 0th, 1st, ..., 59th               | 7     |
+* |                                 | mm      | 00, 01, ..., 59                   |       |
+* | Second                          | s       | 0, 1, ..., 59                     |       |
+* |                                 | so      | 0th, 1st, ..., 59th               | 7     |
+* |                                 | ss      | 00, 01, ..., 59                   |       |
+* | Fraction of second              | S       | 0, 1, ..., 9                      |       |
+* |                                 | SS      | 00, 01, ..., 99                   |       |
+* |                                 | SSS     | 000, 001, ..., 999                |       |
+* |                                 | SSSS    | ...                               | 3     |
+* | Timezone (ISO-8601 w/ Z)        | X       | -08, +0530, Z                     |       |
+* |                                 | XX      | -0800, +0530, Z                   |       |
+* |                                 | XXX     | -08:00, +05:30, Z                 |       |
+* |                                 | XXXX    | -0800, +0530, Z, +123456          | 2     |
+* |                                 | XXXXX   | -08:00, +05:30, Z, +12:34:56      |       |
+* | Timezone (ISO-8601 w/o Z)       | x       | -08, +0530, +00                   |       |
+* |                                 | xx      | -0800, +0530, +0000               |       |
+* |                                 | xxx     | -08:00, +05:30, +00:00            | 2     |
+* |                                 | xxxx    | -0800, +0530, +0000, +123456      |       |
+* |                                 | xxxxx   | -08:00, +05:30, +00:00, +12:34:56 |       |
+* | Timezone (GMT)                  | O...OOO | GMT-8, GMT+5:30, GMT+0            |       |
+* |                                 | OOOO    | GMT-08:00, GMT+05:30, GMT+00:00   | 2     |
+* | Timezone (specific non-locat.)  | z...zzz | GMT-8, GMT+5:30, GMT+0            | 6     |
+* |                                 | zzzz    | GMT-08:00, GMT+05:30, GMT+00:00   | 2,6   |
+* | Seconds timestamp               | t       | 512969520                         | 7     |
+* |                                 | tt      | ...                               | 3,7   |
+* | Milliseconds timestamp          | T       | 512969520900                      | 7     |
+* |                                 | TT      | ...                               | 3,7   |
+* | Long localized date             | P       | 04/29/1453                        | 7     |
+* |                                 | PP      | Apr 29, 1453                      | 7     |
+* |                                 | PPP     | April 29th, 1453                  | 7     |
+* |                                 | PPPP    | Friday, April 29th, 1453          | 2,7   |
+* | Long localized time             | p       | 12:00 AM                          | 7     |
+* |                                 | pp      | 12:00:00 AM                       | 7     |
+* |                                 | ppp     | 12:00:00 AM GMT+2                 | 7     |
+* |                                 | pppp    | 12:00:00 AM GMT+02:00             | 2,7   |
+* | Combination of date and time    | Pp      | 04/29/1453, 12:00 AM              | 7     |
+* |                                 | PPpp    | Apr 29, 1453, 12:00:00 AM         | 7     |
+* |                                 | PPPppp  | April 29th, 1453 at ...           | 7     |
+* |                                 | PPPPpppp| Friday, April 29th, 1453 at ...   | 2,7   |
+* Notes:
+* 1. "Formatting" units (e.g. formatting quarter) in the default en-US locale
+*    are the same as "stand-alone" units, but are different in some languages.
+*    "Formatting" units are declined according to the rules of the language
+*    in the context of a date. "Stand-alone" units are always nominative singular:
+*
+*    `format(new Date(2017, 10, 6), 'do LLLL', {locale: cs}) //=> '6. listopad'`
+*
+*    `format(new Date(2017, 10, 6), 'do MMMM', {locale: cs}) //=> '6. listopadu'`
+*
+* 2. Any sequence of the identical letters is a pattern, unless it is escaped by
+*    the single quote characters (see below).
+*    If the sequence is longer than listed in table (e.g. `EEEEEEEEEEE`)
+*    the output will be the same as default pattern for this unit, usually
+*    the longest one (in case of ISO weekdays, `EEEE`). Default patterns for units
+*    are marked with "2" in the last column of the table.
+*
+*    `format(new Date(2017, 10, 6), 'MMM') //=> 'Nov'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMM') //=> 'November'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMM') //=> 'N'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMMM') //=> 'November'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMMMM') //=> 'November'`
+*
+* 3. Some patterns could be unlimited length (such as `yyyyyyyy`).
+*    The output will be padded with zeros to match the length of the pattern.
+*
+*    `format(new Date(2017, 10, 6), 'yyyyyyyy') //=> '00002017'`
+*
+* 4. `QQQQQ` and `qqqqq` could be not strictly numerical in some locales.
+*    These tokens represent the shortest form of the quarter.
+*
+* 5. The main difference between `y` and `u` patterns are B.C. years:
+*
+*    | Year | `y` | `u` |
+*    |------|-----|-----|
+*    | AC 1 |   1 |   1 |
+*    | BC 1 |   1 |   0 |
+*    | BC 2 |   2 |  -1 |
+*
+*    Also `yy` always returns the last two digits of a year,
+*    while `uu` pads single digit years to 2 characters and returns other years unchanged:
+*
+*    | Year | `yy` | `uu` |
+*    |------|------|------|
+*    | 1    |   01 |   01 |
+*    | 14   |   14 |   14 |
+*    | 376  |   76 |  376 |
+*    | 1453 |   53 | 1453 |
+*
+*    The same difference is true for local and ISO week-numbering years (`Y` and `R`),
+*    except local week-numbering years are dependent on `options.weekStartsOn`
+*    and `options.firstWeekContainsDate` (compare [getISOWeekYear](https://date-fns.org/docs/getISOWeekYear)
+*    and [getWeekYear](https://date-fns.org/docs/getWeekYear)).
+*
+* 6. Specific non-location timezones are currently unavailable in `date-fns`,
+*    so right now these tokens fall back to GMT timezones.
+*
+* 7. These patterns are not in the Unicode Technical Standard #35:
+*    - `i`: ISO day of week
+*    - `I`: ISO week of year
+*    - `R`: ISO week-numbering year
+*    - `t`: seconds timestamp
+*    - `T`: milliseconds timestamp
+*    - `o`: ordinal number modifier
+*    - `P`: long localized date
+*    - `p`: long localized time
+*
+* 8. `YY` and `YYYY` tokens represent week-numbering years but they are often confused with years.
+*    You should enable `options.useAdditionalWeekYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* 9. `D` and `DD` tokens represent days of the year but they are often confused with days of the month.
+*    You should enable `options.useAdditionalDayOfYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* @param date - The original date
+* @param format - The string of tokens
+* @param options - An object with options
+*
+* @returns The formatted date string
+*
+* @throws `date` must not be Invalid Date
+* @throws `options.locale` must contain `localize` property
+* @throws `options.locale` must contain `formatLong` property
+* @throws use `yyyy` instead of `YYYY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `yy` instead of `YY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `d` instead of `D` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `dd` instead of `DD` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws format string contains an unescaped latin alphabet character
+*
+* @example
+* // Represent 11 February 2014 in middle-endian format:
+* const result = format(new Date(2014, 1, 11), 'MM/dd/yyyy')
+* //=> '02/11/2014'
+*
+* @example
+* // Represent 2 July 2014 in Esperanto:
+* import { eoLocale } from 'date-fns/locale/eo'
+* const result = format(new Date(2014, 6, 2), "do 'de' MMMM yyyy", {
+*   locale: eoLocale
+* })
+* //=> '2-a de julio 2014'
+*
+* @example
+* // Escape string by single quote characters:
+* const result = format(new Date(2014, 6, 2, 15), "h 'o''clock'")
+* //=> "3 o'clock"
+*/
+function format(date, formatStr, options) {
+	const defaultOptions = getDefaultOptions();
+	const locale = options?.locale ?? defaultOptions.locale ?? enUS;
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions.weekStartsOn ?? defaultOptions.locale?.options?.weekStartsOn ?? 0;
+	const originalDate = toDate(date, options?.in);
+	if (!isValid(originalDate)) throw new RangeError("Invalid time value");
+	let parts = formatStr.match(longFormattingTokensRegExp).map((substring) => {
+		const firstCharacter = substring[0];
+		if (firstCharacter === "p" || firstCharacter === "P") {
+			const longFormatter = longFormatters[firstCharacter];
+			return longFormatter(substring, locale.formatLong);
+		}
+		return substring;
+	}).join("").match(formattingTokensRegExp).map((substring) => {
+		if (substring === "''") return {
+			isToken: false,
+			value: "'"
+		};
+		const firstCharacter = substring[0];
+		if (firstCharacter === "'") return {
+			isToken: false,
+			value: cleanEscapedString(substring)
+		};
+		if (formatters[firstCharacter]) return {
+			isToken: true,
+			value: substring
+		};
+		if (firstCharacter.match(unescapedLatinCharacterRegExp)) throw new RangeError("Format string contains an unescaped latin alphabet character `" + firstCharacter + "`");
+		return {
+			isToken: false,
+			value: substring
+		};
+	});
+	if (locale.localize.preprocessor) parts = locale.localize.preprocessor(originalDate, parts);
+	const formatterOptions = {
+		firstWeekContainsDate,
+		weekStartsOn,
+		locale
+	};
+	return parts.map((part) => {
+		if (!part.isToken) return part.value;
+		const token = part.value;
+		if (!options?.useAdditionalWeekYearTokens && isProtectedWeekYearToken(token) || !options?.useAdditionalDayOfYearTokens && isProtectedDayOfYearToken(token)) warnOrThrowProtectedError(token, formatStr, String(date));
+		const formatter = formatters[token[0]];
+		return formatter(originalDate, token, locale.localize, formatterOptions);
+	}).join("");
+}
+function cleanEscapedString(input) {
+	const matched = input.match(escapedStringRegExp);
+	if (!matched) return input;
+	return matched[1].replace(doubleQuoteRegExp, "'");
+}
+//#endregion
+//#region src/components/optimization/DecisionTable.tsx
+function DecisionTable() {
+	const { erpNeeds, supplierItems, matchedNeeds, suppliers, updateQuantity } = useProcurementStore();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+		"data-uid": "src/components/optimization/DecisionTable.tsx:22:5",
+		"data-prohibitions": "[editContent]",
+		className: "overflow-hidden",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+			"data-uid": "src/components/optimization/DecisionTable.tsx:23:7",
+			"data-prohibitions": "[editContent]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+				"data-uid": "src/components/optimization/DecisionTable.tsx:24:9",
+				"data-prohibitions": "[]",
+				className: "bg-muted/50",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+					"data-uid": "src/components/optimization/DecisionTable.tsx:25:11",
+					"data-prohibitions": "[]",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:26:13",
+							"data-prohibitions": "[]",
+							children: "Produto / Necessidade"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:27:13",
+							"data-prohibitions": "[]",
+							children: "Fornecedor"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:28:13",
+							"data-prohibitions": "[]",
+							children: "Preço"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:29:13",
+							"data-prohibitions": "[]",
+							children: "Qtd Ideal"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:30:13",
+							"data-prohibitions": "[]",
+							children: "Validade / Risco"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							"data-uid": "src/components/optimization/DecisionTable.tsx:31:13",
+							"data-prohibitions": "[]",
+							children: "Custo de Oportunidade"
+						})
+					]
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+				"data-uid": "src/components/optimization/DecisionTable.tsx:34:9",
+				"data-prohibitions": "[editContent]",
+				children: matchedNeeds.map((match) => {
+					const need = erpNeeds.find((n) => n.id === match.erpId);
+					const item = supplierItems.find((i) => i.id === match.selectedItemId);
+					if (!need || !item) return null;
+					const supplier = suppliers.find((s) => s.id === item.supplierId);
+					const bulkEval = evaluateBulkPurchase(need.requiredQuantity, item, need);
+					const { isRisk, maxSafeQty } = checkExpiryRisk(match.suggestedQuantity, item, need);
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/components/optimization/DecisionTable.tsx:45:15",
+						"data-prohibitions": "[editContent]",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:46:17",
+								"data-prohibitions": "[editContent]",
+								className: "font-medium",
+								children: [need.description, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:48:19",
+									"data-prohibitions": "[editContent]",
+									className: "text-xs text-muted-foreground mt-1",
+									children: [
+										"Req: ",
+										need.requiredQuantity,
+										" | Est: ",
+										need.currentStock
+									]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:52:17",
+								"data-prohibitions": "[editContent]",
+								children: [supplier?.name, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:54:19",
+									"data-prohibitions": "[editContent]",
+									variant: "outline",
+									className: "ml-2 text-[10px] block w-fit mt-1",
+									children: item.source
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:58:17",
+								"data-prohibitions": "[editContent]",
+								children: ["$", item.price.toFixed(2)]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:59:17",
+								"data-prohibitions": "[editContent]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:60:19",
+									"data-prohibitions": "[editContent]",
+									type: "number",
+									value: match.suggestedQuantity,
+									onChange: (e) => updateQuantity(match.erpId, Number(e.target.value)),
+									className: `w-24 h-8 ${isRisk ? "border-red-500" : ""}`
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:67:17",
+								"data-prohibitions": "[editContent]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:68:19",
+									"data-prohibitions": "[editContent]",
+									className: "flex flex-col gap-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										"data-uid": "src/components/optimization/DecisionTable.tsx:69:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-sm flex items-center gap-1",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clock, {
+												"data-uid": "src/components/optimization/DecisionTable.tsx:70:23",
+												"data-prohibitions": "[editContent]",
+												className: "w-3 h-3"
+											}),
+											" ",
+											format(new Date(item.expiryDate), "MM/yyyy")
+										]
+									}), isRisk ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										"data-uid": "src/components/optimization/DecisionTable.tsx:73:23",
+										"data-prohibitions": "[editContent]",
+										variant: "destructive",
+										className: "w-fit text-[10px]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, {
+												"data-uid": "src/components/optimization/DecisionTable.tsx:74:25",
+												"data-prohibitions": "[editContent]",
+												className: "w-3 h-3 mr-1"
+											}),
+											" Máx: ",
+											Math.floor(maxSafeQty)
+										]
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+										"data-uid": "src/components/optimization/DecisionTable.tsx:77:23",
+										"data-prohibitions": "[]",
+										variant: "secondary",
+										className: "w-fit bg-emerald-100 text-emerald-700 text-[10px]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageCheck, {
+											"data-uid": "src/components/optimization/DecisionTable.tsx:81:25",
+											"data-prohibitions": "[editContent]",
+											className: "w-3 h-3 mr-1"
+										}), " Seguro"]
+									})]
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/optimization/DecisionTable.tsx:86:17",
+								"data-prohibitions": "[editContent]",
+								children: bulkEval?.recommendBulk ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:88:21",
+									"data-prohibitions": "[editContent]",
+									className: "flex flex-col gap-2 bg-blue-50/50 p-2 rounded border border-blue-100",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										"data-uid": "src/components/optimization/DecisionTable.tsx:89:23",
+										"data-prohibitions": "[editContent]",
+										className: "text-xs text-blue-700 flex items-start gap-1",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingDown, {
+												"data-uid": "src/components/optimization/DecisionTable.tsx:90:25",
+												"data-prohibitions": "[editContent]",
+												className: "w-4 h-4 shrink-0"
+											}),
+											"Ganho real sobre Selic. Benefício líq: $",
+											bulkEval.netBenefit.toFixed(2)
+										]
+									}), match.suggestedQuantity !== bulkEval.qBulk && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+										"data-uid": "src/components/optimization/DecisionTable.tsx:94:25",
+										"data-prohibitions": "[editContent]",
+										size: "sm",
+										variant: "outline",
+										className: "h-7 text-xs bg-white",
+										onClick: () => updateQuantity(match.erpId, bulkEval.qBulk),
+										children: [
+											"Aplicar Volume (",
+											bulkEval.qBulk,
+											")"
+										]
+									})]
+								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/optimization/DecisionTable.tsx:105:21",
+									"data-prohibitions": "[]",
+									className: "text-xs text-muted-foreground",
+									children: "Nenhum ganho financeiro detectado em volume."
+								})
+							})
+						]
+					}, match.erpId);
+				})
+			})]
+		})
+	});
+}
+//#endregion
+//#region src/pages/Optimization.tsx
+function OptimizationPage() {
+	const { matchedNeeds } = useProcurementStore();
+	if (matchedNeeds.length === 0) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Optimization.tsx:13:7",
+		"data-prohibitions": "[]",
+		className: "text-center mt-20",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			"data-uid": "src/pages/Optimization.tsx:14:9",
+			"data-prohibitions": "[]",
+			children: "Realize o mapeamento de produtos primeiro."
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+			"data-uid": "src/pages/Optimization.tsx:15:9",
+			"data-prohibitions": "[]",
+			asChild: true,
+			className: "mt-4",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+				"data-uid": "src/pages/Optimization.tsx:16:11",
+				"data-prohibitions": "[]",
+				to: "/matching",
+				children: "Ir para Mapeamento"
+			})
+		})]
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Optimization.tsx:23:5",
+		"data-prohibitions": "[]",
+		className: "space-y-8 animate-fade-in-up",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Optimization.tsx:24:7",
+				"data-prohibitions": "[]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+					"data-uid": "src/pages/Optimization.tsx:25:9",
+					"data-prohibitions": "[]",
+					className: "text-3xl font-bold tracking-tight mb-2 flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartLine, {
+						"data-uid": "src/pages/Optimization.tsx:26:11",
+						"data-prohibitions": "[editContent]",
+						className: "w-8 h-8 text-primary"
+					}), " Motor de Otimização"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					"data-uid": "src/pages/Optimization.tsx:28:9",
+					"data-prohibitions": "[]",
+					className: "text-muted-foreground",
+					children: "Análise combinada de Frete CIF, Validade e Custo de Oportunidade para decisões assertivas."
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Optimization.tsx:33:7",
+				"data-prohibitions": "[]",
+				className: "space-y-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					"data-uid": "src/pages/Optimization.tsx:34:9",
+					"data-prohibitions": "[]",
+					className: "text-xl font-semibold",
+					children: "Status de Frete CIF por Fornecedor"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CIFWidget, {
+					"data-uid": "src/pages/Optimization.tsx:35:9",
+					"data-prohibitions": "[editContent]"
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Optimization.tsx:38:7",
+				"data-prohibitions": "[]",
+				className: "space-y-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					"data-uid": "src/pages/Optimization.tsx:39:9",
+					"data-prohibitions": "[]",
+					className: "text-xl font-semibold",
+					children: "Recomendações e Painel de Decisão"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DecisionTable, {
+					"data-uid": "src/pages/Optimization.tsx:40:9",
+					"data-prohibitions": "[editContent]"
+				})]
+			})
+		]
+	});
+}
+//#endregion
+//#region src/pages/NotFound.tsx
+var NotFound = () => {
+	const location = useLocation();
+	(0, import_react.useEffect)(() => {
+		console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+	}, [location.pathname]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/pages/NotFound.tsx:13:5",
+		"data-prohibitions": "[]",
+		className: "min-h-screen flex items-center justify-center bg-gray-100",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/pages/NotFound.tsx:14:7",
+			"data-prohibitions": "[]",
+			className: "text-center",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+					"data-uid": "src/pages/NotFound.tsx:15:9",
+					"data-prohibitions": "[]",
+					className: "text-4xl font-bold mb-4",
+					children: "404"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					"data-uid": "src/pages/NotFound.tsx:16:9",
+					"data-prohibitions": "[]",
+					className: "text-xl text-gray-600 mb-4",
+					children: "Oops! Page not found"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					"data-uid": "src/pages/NotFound.tsx:17:9",
+					"data-prohibitions": "[]",
+					href: "/",
+					className: "text-blue-500 hover:text-blue-700 underline",
+					children: "Return to Home"
+				})
+			]
+		})
+	});
+};
+//#endregion
 //#region src/App.tsx
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
-	"data-uid": "src/App.tsx:16:3",
+	"data-uid": "src/App.tsx:15:3",
 	"data-prohibitions": "[]",
-	defaultTheme: "dark",
-	storageKey: "saas-blueprint-theme",
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PlannerProvider, {
-		"data-uid": "src/App.tsx:17:5",
+	defaultTheme: "light",
+	storageKey: "vite-ui-theme",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProcurementProvider, {
+		"data-uid": "src/App.tsx:16:5",
 		"data-prohibitions": "[]",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-			"data-uid": "src/App.tsx:18:7",
+			"data-uid": "src/App.tsx:17:7",
 			"data-prohibitions": "[]",
 			future: {
 				v7_startTransition: false,
 				v7_relativeSplatPath: false
 			},
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:19:9",
+				"data-uid": "src/App.tsx:18:9",
 				"data-prohibitions": "[]",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:20:11",
+						"data-uid": "src/App.tsx:19:11",
 						"data-prohibitions": "[editContent]"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
-						"data-uid": "src/App.tsx:21:11",
+						"data-uid": "src/App.tsx:20:11",
 						"data-prohibitions": "[editContent]"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
-						"data-uid": "src/App.tsx:22:11",
+						"data-uid": "src/App.tsx:21:11",
 						"data-prohibitions": "[]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-							"data-uid": "src/App.tsx:23:13",
+							"data-uid": "src/App.tsx:22:13",
 							"data-prohibitions": "[]",
 							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-								"data-uid": "src/App.tsx:23:29",
+								"data-uid": "src/App.tsx:22:29",
 								"data-prohibitions": "[editContent]"
 							}),
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-									"data-uid": "src/App.tsx:24:15",
+									"data-uid": "src/App.tsx:23:15",
 									"data-prohibitions": "[editContent]",
 									path: "/",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
-										"data-uid": "src/App.tsx:24:40",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImportPage, {
+										"data-uid": "src/App.tsx:23:40",
+										"data-prohibitions": "[editContent]"
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:24:15",
+									"data-prohibitions": "[editContent]",
+									path: "/matching",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MatchingPage, {
+										"data-uid": "src/App.tsx:24:48",
 										"data-prohibitions": "[editContent]"
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 									"data-uid": "src/App.tsx:25:15",
 									"data-prohibitions": "[editContent]",
-									path: "/roteiro",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Roadmap, {
-										"data-uid": "src/App.tsx:25:47",
-										"data-prohibitions": "[editContent]"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-									"data-uid": "src/App.tsx:26:15",
-									"data-prohibitions": "[editContent]",
-									path: "/ferramentas",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tools, {
-										"data-uid": "src/App.tsx:26:51",
-										"data-prohibitions": "[editContent]"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-									"data-uid": "src/App.tsx:27:15",
-									"data-prohibitions": "[editContent]",
-									path: "/plano",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Planner, {
-										"data-uid": "src/App.tsx:27:45",
+									path: "/optimization",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(OptimizationPage, {
+										"data-uid": "src/App.tsx:25:52",
 										"data-prohibitions": "[editContent]"
 									})
 								})
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-							"data-uid": "src/App.tsx:29:13",
+							"data-uid": "src/App.tsx:27:13",
 							"data-prohibitions": "[editContent]",
 							path: "*",
 							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-								"data-uid": "src/App.tsx:29:38",
+								"data-uid": "src/App.tsx:27:38",
 								"data-prohibitions": "[editContent]"
 							})
 						})]
@@ -28164,4 +30731,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-CeqhOZYq.js.map
+//# sourceMappingURL=index-8efHEQhP.js.map
