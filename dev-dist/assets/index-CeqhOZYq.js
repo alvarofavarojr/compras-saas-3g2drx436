@@ -20724,7 +20724,7 @@ var twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
 * @param inputs - Array of class names
 * @returns Merged class names
 */
-function cn$2(...inputs) {
+function cn$1(...inputs) {
 	return twMerge(clsx(inputs));
 }
 //#endregion
@@ -20734,7 +20734,7 @@ var ToastViewport = import_react.forwardRef(({ className, ...props }, ref) => /*
 	"data-uid": "src/components/ui/toast.tsx:15:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]", className),
+	className: cn$1("fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]", className),
 	...props
 }));
 ToastViewport.displayName = Viewport.displayName;
@@ -20750,7 +20750,7 @@ var Toast$1 = import_react.forwardRef(({ className, variant, ...props }, ref) =>
 		"data-uid": "src/components/ui/toast.tsx:47:5",
 		"data-prohibitions": "[editContent]",
 		ref,
-		className: cn$2(toastVariants({ variant }), className),
+		className: cn$1(toastVariants({ variant }), className),
 		...props
 	});
 });
@@ -20759,7 +20759,7 @@ var ToastAction = import_react.forwardRef(({ className, ...props }, ref) => /* @
 	"data-uid": "src/components/ui/toast.tsx:60:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive", className),
+	className: cn$1("inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive", className),
 	...props
 }));
 ToastAction.displayName = Action.displayName;
@@ -20767,7 +20767,7 @@ var ToastClose = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 	"data-uid": "src/components/ui/toast.tsx:75:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600", className),
+	className: cn$1("absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600", className),
 	"toast-close": "",
 	...props,
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
@@ -20781,7 +20781,7 @@ var ToastTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 	"data-uid": "src/components/ui/toast.tsx:93:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-sm font-semibold", className),
+	className: cn$1("text-sm font-semibold", className),
 	...props
 }));
 ToastTitle.displayName = Title$1.displayName;
@@ -20789,7 +20789,7 @@ var ToastDescription = import_react.forwardRef(({ className, ...props }, ref) =>
 	"data-uid": "src/components/ui/toast.tsx:101:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-sm opacity-90", className),
+	className: cn$1("text-sm opacity-90", className),
 	...props
 }));
 ToastDescription.displayName = Description$1.displayName;
@@ -21232,7 +21232,7 @@ var TOAST_WIDTH = 356;
 var GAP = 14;
 var SWIPE_THRESHOLD = 45;
 var TIME_BEFORE_UNMOUNT = 200;
-function cn$1(...classes) {
+function cn(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 function getDefaultSwipeDirections(position) {
@@ -21385,12 +21385,12 @@ var Toast = (props) => {
 		if (icons == null ? void 0 : icons.loading) {
 			var _toast_classNames1;
 			return /* @__PURE__ */ import_react.createElement("div", {
-				className: cn$1(classNames == null ? void 0 : classNames.loader, toast == null ? void 0 : (_toast_classNames1 = toast.classNames) == null ? void 0 : _toast_classNames1.loader, "sonner-loader"),
+				className: cn(classNames == null ? void 0 : classNames.loader, toast == null ? void 0 : (_toast_classNames1 = toast.classNames) == null ? void 0 : _toast_classNames1.loader, "sonner-loader"),
 				"data-visible": toastType === "loading"
 			}, icons.loading);
 		}
 		return /* @__PURE__ */ import_react.createElement(Loader, {
-			className: cn$1(classNames == null ? void 0 : classNames.loader, toast == null ? void 0 : (_toast_classNames = toast.classNames) == null ? void 0 : _toast_classNames.loader),
+			className: cn(classNames == null ? void 0 : classNames.loader, toast == null ? void 0 : (_toast_classNames = toast.classNames) == null ? void 0 : _toast_classNames.loader),
 			visible: toastType === "loading"
 		});
 	}
@@ -21399,7 +21399,7 @@ var Toast = (props) => {
 	return /* @__PURE__ */ import_react.createElement("li", {
 		tabIndex: 0,
 		ref: toastRef,
-		className: cn$1(className, toastClassname, classNames == null ? void 0 : classNames.toast, toast == null ? void 0 : (_toast_classNames = toast.classNames) == null ? void 0 : _toast_classNames.toast, classNames == null ? void 0 : classNames.default, classNames == null ? void 0 : classNames[toastType], toast == null ? void 0 : (_toast_classNames1 = toast.classNames) == null ? void 0 : _toast_classNames1[toastType]),
+		className: cn(className, toastClassname, classNames == null ? void 0 : classNames.toast, toast == null ? void 0 : (_toast_classNames = toast.classNames) == null ? void 0 : _toast_classNames.toast, classNames == null ? void 0 : classNames.default, classNames == null ? void 0 : classNames[toastType], toast == null ? void 0 : (_toast_classNames1 = toast.classNames) == null ? void 0 : _toast_classNames1[toastType]),
 		"data-sonner-toast": "",
 		"data-rich-colors": (_toast_richColors = toast.richColors) != null ? _toast_richColors : defaultRichColors,
 		"data-styled": !Boolean(toast.jsx || toast.unstyled || unstyled),
@@ -21514,19 +21514,19 @@ var Toast = (props) => {
 			deleteToast();
 			toast.onDismiss == null || toast.onDismiss.call(toast, toast);
 		},
-		className: cn$1(classNames == null ? void 0 : classNames.closeButton, toast == null ? void 0 : (_toast_classNames2 = toast.classNames) == null ? void 0 : _toast_classNames2.closeButton)
+		className: cn(classNames == null ? void 0 : classNames.closeButton, toast == null ? void 0 : (_toast_classNames2 = toast.classNames) == null ? void 0 : _toast_classNames2.closeButton)
 	}, (_icons_close = icons == null ? void 0 : icons.close) != null ? _icons_close : CloseIcon) : null, (toastType || toast.icon || toast.promise) && toast.icon !== null && ((icons == null ? void 0 : icons[toastType]) !== null || toast.icon) ? /* @__PURE__ */ import_react.createElement("div", {
 		"data-icon": "",
-		className: cn$1(classNames == null ? void 0 : classNames.icon, toast == null ? void 0 : (_toast_classNames3 = toast.classNames) == null ? void 0 : _toast_classNames3.icon)
+		className: cn(classNames == null ? void 0 : classNames.icon, toast == null ? void 0 : (_toast_classNames3 = toast.classNames) == null ? void 0 : _toast_classNames3.icon)
 	}, toast.promise || toast.type === "loading" && !toast.icon ? toast.icon || getLoadingIcon() : null, toast.type !== "loading" ? icon : null) : null, /* @__PURE__ */ import_react.createElement("div", {
 		"data-content": "",
-		className: cn$1(classNames == null ? void 0 : classNames.content, toast == null ? void 0 : (_toast_classNames4 = toast.classNames) == null ? void 0 : _toast_classNames4.content)
+		className: cn(classNames == null ? void 0 : classNames.content, toast == null ? void 0 : (_toast_classNames4 = toast.classNames) == null ? void 0 : _toast_classNames4.content)
 	}, /* @__PURE__ */ import_react.createElement("div", {
 		"data-title": "",
-		className: cn$1(classNames == null ? void 0 : classNames.title, toast == null ? void 0 : (_toast_classNames5 = toast.classNames) == null ? void 0 : _toast_classNames5.title)
+		className: cn(classNames == null ? void 0 : classNames.title, toast == null ? void 0 : (_toast_classNames5 = toast.classNames) == null ? void 0 : _toast_classNames5.title)
 	}, toast.jsx ? toast.jsx : typeof toast.title === "function" ? toast.title() : toast.title), toast.description ? /* @__PURE__ */ import_react.createElement("div", {
 		"data-description": "",
-		className: cn$1(descriptionClassName, toastDescriptionClassname, classNames == null ? void 0 : classNames.description, toast == null ? void 0 : (_toast_classNames6 = toast.classNames) == null ? void 0 : _toast_classNames6.description)
+		className: cn(descriptionClassName, toastDescriptionClassname, classNames == null ? void 0 : classNames.description, toast == null ? void 0 : (_toast_classNames6 = toast.classNames) == null ? void 0 : _toast_classNames6.description)
 	}, typeof toast.description === "function" ? toast.description() : toast.description) : null), /* @__PURE__ */ import_react.isValidElement(toast.cancel) ? toast.cancel : toast.cancel && isAction(toast.cancel) ? /* @__PURE__ */ import_react.createElement("button", {
 		"data-button": true,
 		"data-cancel": true,
@@ -21537,7 +21537,7 @@ var Toast = (props) => {
 			toast.cancel.onClick == null || toast.cancel.onClick.call(toast.cancel, event);
 			deleteToast();
 		},
-		className: cn$1(classNames == null ? void 0 : classNames.cancelButton, toast == null ? void 0 : (_toast_classNames7 = toast.classNames) == null ? void 0 : _toast_classNames7.cancelButton)
+		className: cn(classNames == null ? void 0 : classNames.cancelButton, toast == null ? void 0 : (_toast_classNames7 = toast.classNames) == null ? void 0 : _toast_classNames7.cancelButton)
 	}, toast.cancel.label) : null, /* @__PURE__ */ import_react.isValidElement(toast.action) ? toast.action : toast.action && isAction(toast.action) ? /* @__PURE__ */ import_react.createElement("button", {
 		"data-button": true,
 		"data-action": true,
@@ -21548,7 +21548,7 @@ var Toast = (props) => {
 			if (event.defaultPrevented) return;
 			deleteToast();
 		},
-		className: cn$1(classNames == null ? void 0 : classNames.actionButton, toast == null ? void 0 : (_toast_classNames8 = toast.classNames) == null ? void 0 : _toast_classNames8.actionButton)
+		className: cn(classNames == null ? void 0 : classNames.actionButton, toast == null ? void 0 : (_toast_classNames8 = toast.classNames) == null ? void 0 : _toast_classNames8.actionButton)
 	}, toast.action.label) : null);
 };
 function getDocumentDirection() {
@@ -24246,7 +24246,7 @@ var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...pr
 	"data-prohibitions": "[editContent]",
 	ref,
 	sideOffset,
-	className: cn$2("z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]", className),
+	className: cn$1("z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]", className),
 	...props
 }));
 TooltipContent.displayName = Content2$1.displayName;
@@ -24520,7 +24520,7 @@ var Button = import_react.forwardRef(({ className, variant, size, asChild = fals
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(asChild ? Slot$1 : "button", {
 		"data-uid": "src/components/ui/button.tsx:44:7",
 		"data-prohibitions": "[editContent]",
-		className: cn$2(buttonVariants({
+		className: cn$1(buttonVariants({
 			variant,
 			size,
 			className
@@ -24536,7 +24536,7 @@ var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE_
 	"data-uid": "src/components/ui/card.tsx:8:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("rounded-lg border bg-card text-card-foreground shadow-sm", className),
+	className: cn$1("rounded-lg border bg-card text-card-foreground shadow-sm", className),
 	...props
 }));
 Card.displayName = "Card";
@@ -24544,7 +24544,7 @@ var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 	"data-uid": "src/components/ui/card.tsx:19:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("flex flex-col space-y-1.5 p-6", className),
+	className: cn$1("flex flex-col space-y-1.5 p-6", className),
 	...props
 }));
 CardHeader.displayName = "CardHeader";
@@ -24552,7 +24552,7 @@ var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__
 	"data-uid": "src/components/ui/card.tsx:26:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-2xl font-semibold leading-none tracking-tight", className),
+	className: cn$1("text-2xl font-semibold leading-none tracking-tight", className),
 	...props
 }));
 CardTitle.displayName = "CardTitle";
@@ -24560,7 +24560,7 @@ var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => 
 	"data-uid": "src/components/ui/card.tsx:37:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-sm text-muted-foreground", className),
+	className: cn$1("text-sm text-muted-foreground", className),
 	...props
 }));
 CardDescription.displayName = "CardDescription";
@@ -24568,7 +24568,7 @@ var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @
 	"data-uid": "src/components/ui/card.tsx:44:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("p-6 pt-0", className),
+	className: cn$1("p-6 pt-0", className),
 	...props
 }));
 CardContent.displayName = "CardContent";
@@ -24576,7 +24576,7 @@ var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 	"data-uid": "src/components/ui/card.tsx:51:5",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("flex items-center p-6 pt-0", className),
+	className: cn$1("flex items-center p-6 pt-0", className),
 	...props
 }));
 CardFooter.displayName = "CardFooter";
@@ -24761,7 +24761,7 @@ var Progress = import_react.forwardRef(({ className, value, ...props }, ref) => 
 	"data-uid": "src/components/ui/progress.tsx:11:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
+	className: cn$1("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
 	...props,
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
 		"data-uid": "src/components/ui/progress.tsx:16:5",
@@ -24806,79 +24806,79 @@ function Index() {
 		}
 	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:43:5",
+		"data-uid": "src/pages/Index.tsx:44:5",
 		"data-prohibitions": "[editContent]",
 		className: "animate-fade-in-up space-y-20",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				"data-uid": "src/pages/Index.tsx:45:7",
+				"data-uid": "src/pages/Index.tsx:46:7",
 				"data-prohibitions": "[]",
 				className: "text-center space-y-6 pt-12 pb-8",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/Index.tsx:46:9",
+						"data-uid": "src/pages/Index.tsx:47:9",
 						"data-prohibitions": "[]",
 						className: "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Rocket, {
-							"data-uid": "src/pages/Index.tsx:47:11",
+							"data-uid": "src/pages/Index.tsx:48:11",
 							"data-prohibitions": "[editContent]",
 							className: "w-4 h-4"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/pages/Index.tsx:48:11",
+							"data-uid": "src/pages/Index.tsx:49:11",
 							"data-prohibitions": "[]",
 							children: "O guia definitivo para o seu primeiro SaaS"
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-						"data-uid": "src/pages/Index.tsx:50:9",
+						"data-uid": "src/pages/Index.tsx:51:9",
 						"data-prohibitions": "[]",
 						className: "text-4xl md:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight",
 						children: [
-							"Transforme sua ideia em um",
+							"SaaS Blueprint:",
 							" ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/pages/Index.tsx:52:11",
+								"data-uid": "src/pages/Index.tsx:53:11",
 								"data-prohibitions": "[]",
 								className: "text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400",
-								children: "SaaS lucrativo."
+								children: "De Zero ao Primeiro Cliente"
 							})
 						]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:56:9",
+						"data-uid": "src/pages/Index.tsx:57:9",
 						"data-prohibitions": "[]",
 						className: "text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed",
 						children: "O caminho para um software bem-sucedido não é apenas sobre escrever código perfeito. É sobre validar problemas reais, planejar estrategicamente e lançar rápido."
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/Index.tsx:61:9",
+						"data-uid": "src/pages/Index.tsx:62:9",
 						"data-prohibitions": "[]",
 						className: "flex flex-col sm:flex-row items-center justify-center gap-4 pt-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							"data-uid": "src/pages/Index.tsx:62:11",
+							"data-uid": "src/pages/Index.tsx:63:11",
 							"data-prohibitions": "[]",
 							asChild: true,
 							size: "lg",
 							className: "h-12 px-8 text-base shadow-lg shadow-primary/20 hover:scale-105 transition-transform",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-								"data-uid": "src/pages/Index.tsx:67:13",
+								"data-uid": "src/pages/Index.tsx:68:13",
 								"data-prohibitions": "[]",
 								to: "/roteiro",
 								children: ["Começar a Jornada ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-									"data-uid": "src/pages/Index.tsx:68:33",
+									"data-uid": "src/pages/Index.tsx:69:33",
 									"data-prohibitions": "[editContent]",
 									className: "ml-2 w-5 h-5"
 								})]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							"data-uid": "src/pages/Index.tsx:71:11",
+							"data-uid": "src/pages/Index.tsx:72:11",
 							"data-prohibitions": "[]",
 							asChild: true,
 							variant: "outline",
 							size: "lg",
 							className: "h-12 px-8 text-base",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-								"data-uid": "src/pages/Index.tsx:72:13",
+								"data-uid": "src/pages/Index.tsx:73:13",
 								"data-prohibitions": "[]",
 								to: "/ferramentas",
 								children: "Explorar Ferramentas"
@@ -24888,50 +24888,50 @@ function Index() {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-				"data-uid": "src/pages/Index.tsx:78:7",
+				"data-uid": "src/pages/Index.tsx:79:7",
 				"data-prohibitions": "[editContent]",
 				className: "max-w-md mx-auto",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-					"data-uid": "src/pages/Index.tsx:79:9",
+					"data-uid": "src/pages/Index.tsx:80:9",
 					"data-prohibitions": "[editContent]",
 					className: "border-primary/20 shadow-xl shadow-primary/5 bg-card/50 backdrop-blur",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-						"data-uid": "src/pages/Index.tsx:80:11",
+						"data-uid": "src/pages/Index.tsx:81:11",
 						"data-prohibitions": "[editContent]",
 						className: "p-6",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Index.tsx:81:13",
+								"data-uid": "src/pages/Index.tsx:82:13",
 								"data-prohibitions": "[editContent]",
 								className: "flex justify-between items-center mb-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-									"data-uid": "src/pages/Index.tsx:82:15",
+									"data-uid": "src/pages/Index.tsx:83:15",
 									"data-prohibitions": "[]",
 									className: "font-semibold flex items-center gap-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-										"data-uid": "src/pages/Index.tsx:83:17",
+										"data-uid": "src/pages/Index.tsx:84:17",
 										"data-prohibitions": "[editContent]",
 										className: "w-5 h-5 text-emerald-500"
 									}), "Progresso do seu Plano"]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									"data-uid": "src/pages/Index.tsx:86:15",
+									"data-uid": "src/pages/Index.tsx:87:15",
 									"data-prohibitions": "[editContent]",
 									className: "text-sm font-medium text-muted-foreground",
 									children: [progress, "%"]
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-								"data-uid": "src/pages/Index.tsx:88:13",
+								"data-uid": "src/pages/Index.tsx:89:13",
 								"data-prohibitions": "[editContent]",
 								value: progress,
 								className: "h-2 mb-4"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Index.tsx:89:13",
+								"data-uid": "src/pages/Index.tsx:90:13",
 								"data-prohibitions": "[editContent]",
 								className: "text-center",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-									"data-uid": "src/pages/Index.tsx:90:15",
+									"data-uid": "src/pages/Index.tsx:91:15",
 									"data-prohibitions": "[editContent]",
 									to: "/plano",
 									className: "text-sm text-primary hover:underline font-medium",
@@ -24943,55 +24943,55 @@ function Index() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				"data-uid": "src/pages/Index.tsx:101:7",
+				"data-uid": "src/pages/Index.tsx:102:7",
 				"data-prohibitions": "[editContent]",
 				className: "space-y-8",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Index.tsx:102:9",
+					"data-uid": "src/pages/Index.tsx:103:9",
 					"data-prohibitions": "[]",
 					className: "text-center",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						"data-uid": "src/pages/Index.tsx:103:11",
+						"data-uid": "src/pages/Index.tsx:104:11",
 						"data-prohibitions": "[]",
 						className: "text-3xl font-bold tracking-tight",
 						children: "Os 4 Pilares da Construção"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:104:11",
+						"data-uid": "src/pages/Index.tsx:105:11",
 						"data-prohibitions": "[]",
 						className: "text-muted-foreground mt-2",
 						children: "Um framework testado para minimizar riscos e maximizar resultados."
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:109:9",
+					"data-uid": "src/pages/Index.tsx:110:9",
 					"data-prohibitions": "[editContent]",
 					className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
 					children: pillars.map((pillar, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-						"data-uid": "src/pages/Index.tsx:111:13",
+						"data-uid": "src/pages/Index.tsx:112:13",
 						"data-prohibitions": "[editContent]",
 						className: "group hover:border-primary/50 transition-colors bg-card/40",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-							"data-uid": "src/pages/Index.tsx:112:15",
+							"data-uid": "src/pages/Index.tsx:113:15",
 							"data-prohibitions": "[editContent]",
 							className: "p-6 space-y-4",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									"data-uid": "src/pages/Index.tsx:113:17",
+									"data-uid": "src/pages/Index.tsx:114:17",
 									"data-prohibitions": "[editContent]",
-									className: cn("w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110", pillar.bg, pillar.color),
+									className: cn$1("w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110", pillar.bg, pillar.color),
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(pillar.icon, {
-										"data-uid": "src/pages/Index.tsx:120:19",
+										"data-uid": "src/pages/Index.tsx:121:19",
 										"data-prohibitions": "[editContent]",
 										className: "w-6 h-6"
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-									"data-uid": "src/pages/Index.tsx:122:17",
+									"data-uid": "src/pages/Index.tsx:123:17",
 									"data-prohibitions": "[editContent]",
 									className: "font-bold text-lg",
 									children: pillar.title
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/pages/Index.tsx:123:17",
+									"data-uid": "src/pages/Index.tsx:124:17",
 									"data-prohibitions": "[editContent]",
 									className: "text-sm text-muted-foreground leading-relaxed",
 									children: pillar.desc
@@ -25373,7 +25373,7 @@ var AccordionItem = import_react.forwardRef(({ className, ...props }, ref) => /*
 	"data-uid": "src/components/ui/accordion.tsx:14:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("border-b", className),
+	className: cn$1("border-b", className),
 	...props
 }));
 AccordionItem.displayName = "AccordionItem";
@@ -25385,7 +25385,7 @@ var AccordionTrigger = import_react.forwardRef(({ className, children, ...props 
 		"data-uid": "src/components/ui/accordion.tsx:23:5",
 		"data-prohibitions": "[editContent]",
 		ref,
-		className: cn$2("flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180", className),
+		className: cn$1("flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180", className),
 		...props,
 		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
 			"data-uid": "src/components/ui/accordion.tsx:32:7",
@@ -25404,7 +25404,7 @@ var AccordionContent = import_react.forwardRef(({ className, children, ...props 
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		"data-uid": "src/components/ui/accordion.tsx:47:5",
 		"data-prohibitions": "[editContent]",
-		className: cn$2("pb-4 pt-0", className),
+		className: cn$1("pb-4 pt-0", className),
 		children
 	})
 }));
@@ -25424,7 +25424,7 @@ function Badge({ className, variant, ...props }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		"data-uid": "src/components/ui/badge.tsx:30:10",
 		"data-prohibitions": "[editContent]",
-		className: cn$2(badgeVariants({ variant }), className),
+		className: cn$1(badgeVariants({ variant }), className),
 		...props
 	});
 }
@@ -25897,7 +25897,7 @@ var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
 		"data-uid": "src/components/ui/input.tsx:9:7",
 		"data-prohibitions": "[editContent]",
 		type,
-		className: cn$2("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		className: cn$1("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
 		ref,
 		...props
 	});
@@ -25926,7 +25926,7 @@ var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2(labelVariants(), className),
+	className: cn$1(labelVariants(), className),
 	...props
 }));
 Label.displayName = Root$1.displayName;
@@ -25936,7 +25936,7 @@ var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
 		"data-uid": "src/components/ui/textarea.tsx:9:7",
 		"data-prohibitions": "[editContent]",
-		className: cn$2("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		className: cn$1("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
 		ref,
 		...props
 	});
@@ -26136,12 +26136,12 @@ var Checkbox = import_react.forwardRef(({ className, ...props }, ref) => /* @__P
 	"data-uid": "src/components/ui/checkbox.tsx:12:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground", className),
+	className: cn$1("peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground", className),
 	...props,
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxIndicator, {
 		"data-uid": "src/components/ui/checkbox.tsx:20:5",
 		"data-prohibitions": "[editContent]",
-		className: cn$2("flex items-center justify-center text-current"),
+		className: cn$1("flex items-center justify-center text-current"),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
 			"data-uid": "src/components/ui/checkbox.tsx:21:7",
 			"data-prohibitions": "[editContent]",
@@ -26370,7 +26370,7 @@ function Planner() {
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
 										"data-uid": "src/pages/Planner.tsx:118:23",
 										"data-prohibitions": "[editContent]",
-										className: cn$2("text-sm font-bold uppercase tracking-wider flex items-center gap-2", isAllCompleted ? "text-emerald-500" : "text-muted-foreground"),
+										className: cn$1("text-sm font-bold uppercase tracking-wider flex items-center gap-2", isAllCompleted ? "text-emerald-500" : "text-muted-foreground"),
 										children: [
 											isAllCompleted && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
 												"data-uid": "src/pages/Planner.tsx:124:44",
@@ -26387,7 +26387,7 @@ function Planner() {
 										children: phaseItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 											"data-uid": "src/pages/Planner.tsx:129:27",
 											"data-prohibitions": "[editContent]",
-											className: cn$2("flex items-start gap-3 p-3 rounded-md border transition-colors hover:bg-muted/50", item.completed ? "bg-muted/30 border-transparent" : "bg-card"),
+											className: cn$1("flex items-start gap-3 p-3 rounded-md border transition-colors hover:bg-muted/50", item.completed ? "bg-muted/30 border-transparent" : "bg-card"),
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
 												"data-uid": "src/pages/Planner.tsx:136:29",
 												"data-prohibitions": "[editContent]",
@@ -26399,7 +26399,7 @@ function Planner() {
 												"data-uid": "src/pages/Planner.tsx:142:29",
 												"data-prohibitions": "[editContent]",
 												htmlFor: item.id,
-												className: cn$2("text-sm font-medium leading-tight cursor-pointer", item.completed && "line-through text-muted-foreground"),
+												className: cn$1("text-sm font-medium leading-tight cursor-pointer", item.completed && "line-through text-muted-foreground"),
 												children: item.text
 											})]
 										}, item.id))
@@ -27771,7 +27771,7 @@ var SheetPortal = Portal;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/sheet.tsx:21:3",
 	"data-prohibitions": "[editContent]",
-	className: cn$2("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
+	className: cn$1("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
 	...props,
 	ref
 }));
@@ -27795,7 +27795,7 @@ var SheetContent = import_react.forwardRef(({ side = "right", className, childre
 		"data-uid": "src/components/ui/sheet.tsx:62:5",
 		"data-prohibitions": "[editContent]",
 		ref,
-		className: cn$2(sheetVariants({ side }), className),
+		className: cn$1(sheetVariants({ side }), className),
 		...props,
 		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
 			"data-uid": "src/components/ui/sheet.tsx:64:7",
@@ -27818,14 +27818,14 @@ SheetContent.displayName = Content.displayName;
 var SheetHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	"data-uid": "src/components/ui/sheet.tsx:74:3",
 	"data-prohibitions": "[editContent]",
-	className: cn$2("flex flex-col space-y-2 text-center sm:text-left", className),
+	className: cn$1("flex flex-col space-y-2 text-center sm:text-left", className),
 	...props
 });
 SheetHeader.displayName = "SheetHeader";
 var SheetFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	"data-uid": "src/components/ui/sheet.tsx:79:3",
 	"data-prohibitions": "[editContent]",
-	className: cn$2("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
+	className: cn$1("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
 	...props
 });
 SheetFooter.displayName = "SheetFooter";
@@ -27833,7 +27833,7 @@ var SheetTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 	"data-uid": "src/components/ui/sheet.tsx:90:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-lg font-semibold text-foreground", className),
+	className: cn$1("text-lg font-semibold text-foreground", className),
 	...props
 }));
 SheetTitle.displayName = Title.displayName;
@@ -27841,7 +27841,7 @@ var SheetDescription = import_react.forwardRef(({ className, ...props }, ref) =>
 	"data-uid": "src/components/ui/sheet.tsx:102:3",
 	"data-prohibitions": "[editContent]",
 	ref,
-	className: cn$2("text-sm text-muted-foreground", className),
+	className: cn$1("text-sm text-muted-foreground", className),
 	...props
 }));
 SheetDescription.displayName = Description.displayName;
@@ -27882,7 +27882,7 @@ function Layout() {
 			"data-prohibitions": "[editContent]",
 			to: link.path,
 			onClick: () => setIsOpen(false),
-			className: cn$2("flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors", isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"),
+			className: cn$1("flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors", isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"),
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
 					"data-uid": "src/components/Layout.tsx:55:13",
@@ -28164,4 +28164,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-cR0vy_aJ.js.map
+//# sourceMappingURL=index-CeqhOZYq.js.map

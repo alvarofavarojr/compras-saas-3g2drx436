@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import usePlannerStore from '@/stores/usePlannerStore'
 import { Progress } from '@/components/ui/progress'
+import { cn } from '@/lib/utils'
 
 export default function Index() {
   const { progress } = usePlannerStore()
@@ -48,9 +49,9 @@ export default function Index() {
           <span>O guia definitivo para o seu primeiro SaaS</span>
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
-          Transforme sua ideia em um{' '}
+          SaaS Blueprint:{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
-            SaaS lucrativo.
+            De Zero ao Primeiro Cliente
           </span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
