@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { UploadCloud, X, File as FileIcon } from 'lucide-react'
+import { UploadCloud, X, FileText, FileSpreadsheet } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -8,6 +8,9 @@ export interface FileSlotProps {
   files: File[]
   onChange: (files: File[]) => void
   accept: string
+  validExtensions: string[]
+  errorMessage: string
+  formatHelpText: string
   disabled: boolean
   maxFiles?: number
   onError?: (msg: string) => void
@@ -18,6 +21,9 @@ export function FileSlot({
   files,
   onChange,
   accept,
+  validExtensions,
+  errorMessage,
+  formatHelpText,
   disabled,
   maxFiles = 1,
   onError,
@@ -28,9 +34,11 @@ export function FileSlot({
     const selected = Array.from(e.target.files || [])
     if (!selected.length) return
 
-    const validFiles = selected.filter((f) => f.name.match(/\.(csv|xls|xlsx)$/i))
+    const extRegex = new RegExp(`\\.(${validExtensions.join('|')})$`, 'i')
+    const validFiles = selected.filter((f) => f.name.match(extRegex))
+
     if (validFiles.length !== selected.length) {
-      if (onError) onError('Por favor, selecione apenas arquivos válidos (CSV ou Excel).')
+      if (onError) onError(errorMessage)
     }
 
     if (maxFiles === 1) {
@@ -52,6 +60,13 @@ export function FileSlot({
 
   const removeFile = (index: number) => {
     onChange(files.filter((_, i) => i !== index))
+  }
+
+  const getFileIcon = (fileName: string) => {
+    const lowerName = fileName.toLowerCase()
+    if (lowerName.endsWith('.pdf')) return <FileText className="w-4 h-4 text-rose-500" />
+    if (lowerName.endsWith('.html')) return <FileText className="w-4 h-4 text-orange-500" />
+    return <FileSpreadsheet className="w-4 h-4 text-emerald-500" />
   }
 
   return (
@@ -79,7 +94,7 @@ export function FileSlot({
         >
           <UploadCloud className="w-6 h-6 text-muted-foreground/70 mb-2" />
           <span className="text-sm font-medium text-muted-foreground">Clique para selecionar</span>
-          <span className="text-xs text-muted-foreground/70 mt-1">CSV ou Excel (.xlsx, .xls)</span>
+          <span className="text-xs text-muted-foreground/70 mt-1">{formatHelpText}</span>
         </button>
       )}
 
@@ -91,15 +106,19 @@ export function FileSlot({
               className="flex items-center justify-between p-2.5 border rounded-lg bg-accent/20 border-primary/20 shadow-sm transition-all duration-200"
             >
               <div className="flex items-center space-x-3 overflow-hidden pr-2">
-                <div className="p-1.5 bg-primary/10 rounded-md shrink-0">
-                  <FileIcon className="w-4 h-4 text-primary" />
+                <div className="p-1.5 bg-background rounded-md shrink-0 border shadow-sm">
+                  {getFileIcon(file.name)}
                 </div>
                 <div className="flex flex-col overflow-hidden text-left">
                   <span className="text-xs font-medium truncate" title={file.name}>
                     {file.name}
                   </span>
-                  <span className="text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground flex items-center gap-1.5 mt-0.5">
                     {(file.size / 1024).toFixed(1)} KB
+                    <span className="w-1 h-1 rounded-full bg-emerald-500" />
+                    <span className="text-emerald-600 font-medium">
+                      {disabled ? 'Carregado' : 'Pronto para processar'}
+                    </span>
                   </span>
                 </div>
               </div>

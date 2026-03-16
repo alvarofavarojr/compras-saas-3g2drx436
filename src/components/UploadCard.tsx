@@ -19,6 +19,10 @@ export type SlotConfig = {
   required?: boolean
   maxFiles?: number
   helpText?: React.ReactNode
+  accept?: string
+  validExtensions?: string[]
+  errorMessage?: string
+  formatHelpText?: string
 }
 
 export interface UploadCardProps {
@@ -73,7 +77,15 @@ export function UploadCard({
               label={slot.label}
               files={slot.files}
               onChange={(files) => onFileChange(slot.id, files)}
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              accept={
+                slot.accept ||
+                '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+              }
+              validExtensions={slot.validExtensions || ['csv', 'xls', 'xlsx']}
+              errorMessage={
+                slot.errorMessage || 'Por favor, selecione apenas arquivos válidos (CSV ou Excel).'
+              }
+              formatHelpText={slot.formatHelpText || 'CSV ou Excel (.xlsx, .xls)'}
               disabled={loading || loaded}
               maxFiles={slot.maxFiles}
               onError={onError}

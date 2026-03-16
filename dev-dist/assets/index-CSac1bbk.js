@@ -19207,13 +19207,28 @@ var FileSpreadsheet = createLucideIcon("file-spreadsheet", [
 		key: "10kma7"
 	}]
 ]);
-var File = createLucideIcon("file", [["path", {
-	d: "M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",
-	key: "1oefj6"
-}], ["path", {
-	d: "M14 2v5a1 1 0 0 0 1 1h5",
-	key: "wfsgrz"
-}]]);
+var FileText = createLucideIcon("file-text", [
+	["path", {
+		d: "M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",
+		key: "1oefj6"
+	}],
+	["path", {
+		d: "M14 2v5a1 1 0 0 0 1 1h5",
+		key: "wfsgrz"
+	}],
+	["path", {
+		d: "M10 9H8",
+		key: "b1mrlr"
+	}],
+	["path", {
+		d: "M16 13H8",
+		key: "t4e002"
+	}],
+	["path", {
+		d: "M16 17H8",
+		key: "z1uh3a"
+	}]
+]);
 var Lightbulb = createLucideIcon("lightbulb", [
 	["path", {
 		d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
@@ -26555,14 +26570,15 @@ var Progress = import_react.forwardRef(({ className, value, indicatorClassName, 
 Progress.displayName = Root.displayName;
 //#endregion
 //#region src/components/FileSlot.tsx
-function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onError }) {
+function FileSlot({ label, files, onChange, accept, validExtensions, errorMessage, formatHelpText, disabled, maxFiles = 1, onError }) {
 	const inputRef = (0, import_react.useRef)(null);
 	const handleFileChange = (e) => {
 		const selected = Array.from(e.target.files || []);
 		if (!selected.length) return;
-		const validFiles = selected.filter((f) => f.name.match(/\.(csv|xls|xlsx)$/i));
+		const extRegex = new RegExp(`\\.(${validExtensions.join("|")})$`, "i");
+		const validFiles = selected.filter((f) => f.name.match(extRegex));
 		if (validFiles.length !== selected.length) {
-			if (onError) onError("Por favor, selecione apenas arquivos válidos (CSV ou Excel).");
+			if (onError) onError(errorMessage);
 		}
 		if (maxFiles === 1) {
 			if (validFiles.length > 0) onChange([validFiles[0]]);
@@ -26579,22 +26595,40 @@ function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onEr
 	const removeFile = (index) => {
 		onChange(files.filter((_, i) => i !== index));
 	};
+	const getFileIcon = (fileName) => {
+		const lowerName = fileName.toLowerCase();
+		if (lowerName.endsWith(".pdf")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
+			"data-uid": "src/components/FileSlot.tsx:67:44",
+			"data-prohibitions": "[editContent]",
+			className: "w-4 h-4 text-rose-500"
+		});
+		if (lowerName.endsWith(".html")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
+			"data-uid": "src/components/FileSlot.tsx:68:45",
+			"data-prohibitions": "[editContent]",
+			className: "w-4 h-4 text-orange-500"
+		});
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
+			"data-uid": "src/components/FileSlot.tsx:69:12",
+			"data-prohibitions": "[editContent]",
+			className: "w-4 h-4 text-emerald-500"
+		});
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/FileSlot.tsx:58:5",
+		"data-uid": "src/components/FileSlot.tsx:73:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-2",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/FileSlot.tsx:59:7",
+				"data-uid": "src/components/FileSlot.tsx:74:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex justify-between items-center",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/FileSlot.tsx:60:9",
+					"data-uid": "src/components/FileSlot.tsx:75:9",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm font-medium text-foreground/90",
 					children: label
 				}), maxFiles > 1 && files.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/FileSlot.tsx:62:11",
+					"data-uid": "src/components/FileSlot.tsx:77:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-xs text-muted-foreground",
 					children: [
@@ -26606,7 +26640,7 @@ function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onEr
 				})]
 			}),
 			(!maxFiles || files.length < maxFiles) && !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-				"data-uid": "src/components/FileSlot.tsx:69:9",
+				"data-uid": "src/components/FileSlot.tsx:84:9",
 				"data-prohibitions": "[editContent]",
 				type: "button",
 				onClick: () => !disabled && inputRef.current?.click(),
@@ -26614,64 +26648,74 @@ function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onEr
 				className: cn$1("w-full border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", disabled ? "opacity-50 cursor-not-allowed bg-muted/50" : "hover:bg-accent/40 hover:border-primary/40 cursor-pointer bg-background"),
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-						"data-uid": "src/components/FileSlot.tsx:80:11",
+						"data-uid": "src/components/FileSlot.tsx:95:11",
 						"data-prohibitions": "[editContent]",
 						className: "w-6 h-6 text-muted-foreground/70 mb-2"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/FileSlot.tsx:81:11",
+						"data-uid": "src/components/FileSlot.tsx:96:11",
 						"data-prohibitions": "[]",
 						className: "text-sm font-medium text-muted-foreground",
 						children: "Clique para selecionar"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/FileSlot.tsx:82:11",
-						"data-prohibitions": "[]",
+						"data-uid": "src/components/FileSlot.tsx:97:11",
+						"data-prohibitions": "[editContent]",
 						className: "text-xs text-muted-foreground/70 mt-1",
-						children: "CSV ou Excel (.xlsx, .xls)"
+						children: formatHelpText
 					})
 				]
 			}),
 			files.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/FileSlot.tsx:87:9",
+				"data-uid": "src/components/FileSlot.tsx:102:9",
 				"data-prohibitions": "[editContent]",
 				className: "space-y-2 mt-3 max-h-[160px] overflow-y-auto pr-1",
 				children: files.map((file, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/FileSlot.tsx:89:13",
+					"data-uid": "src/components/FileSlot.tsx:104:13",
 					"data-prohibitions": "[editContent]",
 					className: "flex items-center justify-between p-2.5 border rounded-lg bg-accent/20 border-primary/20 shadow-sm transition-all duration-200",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/FileSlot.tsx:93:15",
+						"data-uid": "src/components/FileSlot.tsx:108:15",
 						"data-prohibitions": "[editContent]",
 						className: "flex items-center space-x-3 overflow-hidden pr-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/FileSlot.tsx:94:17",
-							"data-prohibitions": "[]",
-							className: "p-1.5 bg-primary/10 rounded-md shrink-0",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(File, {
-								"data-uid": "src/components/FileSlot.tsx:95:19",
-								"data-prohibitions": "[editContent]",
-								className: "w-4 h-4 text-primary"
-							})
+							"data-uid": "src/components/FileSlot.tsx:109:17",
+							"data-prohibitions": "[editContent]",
+							className: "p-1.5 bg-background rounded-md shrink-0 border shadow-sm",
+							children: getFileIcon(file.name)
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/FileSlot.tsx:97:17",
+							"data-uid": "src/components/FileSlot.tsx:112:17",
 							"data-prohibitions": "[editContent]",
 							className: "flex flex-col overflow-hidden text-left",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/FileSlot.tsx:98:19",
+								"data-uid": "src/components/FileSlot.tsx:113:19",
 								"data-prohibitions": "[editContent]",
 								className: "text-xs font-medium truncate",
 								title: file.name,
 								children: file.name
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								"data-uid": "src/components/FileSlot.tsx:101:19",
+								"data-uid": "src/components/FileSlot.tsx:116:19",
 								"data-prohibitions": "[editContent]",
-								className: "text-[10px] text-muted-foreground",
-								children: [(file.size / 1024).toFixed(1), " KB"]
+								className: "text-[10px] text-muted-foreground flex items-center gap-1.5 mt-0.5",
+								children: [
+									(file.size / 1024).toFixed(1),
+									" KB",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/FileSlot.tsx:118:21",
+										"data-prohibitions": "[editContent]",
+										className: "w-1 h-1 rounded-full bg-emerald-500"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/FileSlot.tsx:119:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-emerald-600 font-medium",
+										children: disabled ? "Carregado" : "Pronto para processar"
+									})
+								]
 							})]
 						})]
 					}), !disabled && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-						"data-uid": "src/components/FileSlot.tsx:107:17",
+						"data-uid": "src/components/FileSlot.tsx:126:17",
 						"data-prohibitions": "[]",
 						variant: "ghost",
 						size: "icon",
@@ -26679,7 +26723,7 @@ function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onEr
 						onClick: () => removeFile(idx),
 						title: "Remover arquivo",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
-							"data-uid": "src/components/FileSlot.tsx:114:19",
+							"data-uid": "src/components/FileSlot.tsx:133:19",
 							"data-prohibitions": "[editContent]",
 							className: "w-3.5 h-3.5"
 						})
@@ -26687,7 +26731,7 @@ function FileSlot({ label, files, onChange, accept, disabled, maxFiles = 1, onEr
 				}, idx))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-				"data-uid": "src/components/FileSlot.tsx:122:7",
+				"data-uid": "src/components/FileSlot.tsx:141:7",
 				"data-prohibitions": "[editContent]",
 				type: "file",
 				className: "hidden",
@@ -26706,49 +26750,56 @@ function UploadCard({ title, description, slots, onFileChange, onUpload, loading
 	const allRequiredFilesPresent = slots.every((s) => !s.required || s.files.length > 0);
 	const canUpload = slots.some((s) => s.files.length > 0) && allRequiredFilesPresent && !loading && !loaded;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		"data-uid": "src/components/UploadCard.tsx:52:5",
+		"data-uid": "src/components/UploadCard.tsx:56:5",
 		"data-prohibitions": "[editContent]",
 		className: cn$1("flex flex-col h-full transition-colors", loaded ? "border-primary/50 bg-primary/[0.03]" : ""),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-				"data-uid": "src/components/UploadCard.tsx:58:7",
+				"data-uid": "src/components/UploadCard.tsx:62:7",
 				"data-prohibitions": "[editContent]",
 				className: "pb-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
-					"data-uid": "src/components/UploadCard.tsx:59:9",
+					"data-uid": "src/components/UploadCard.tsx:63:9",
 					"data-prohibitions": "[editContent]",
 					className: "flex items-center gap-2 text-lg",
 					children: [loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-						"data-uid": "src/components/UploadCard.tsx:61:13",
+						"data-uid": "src/components/UploadCard.tsx:65:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-5 h-5 text-emerald-500"
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSpreadsheet, {
-						"data-uid": "src/components/UploadCard.tsx:63:13",
+						"data-uid": "src/components/UploadCard.tsx:67:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-5 h-5 text-muted-foreground"
 					}), title]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-					"data-uid": "src/components/UploadCard.tsx:67:9",
+					"data-uid": "src/components/UploadCard.tsx:71:9",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm",
 					children: description
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-				"data-uid": "src/components/UploadCard.tsx:69:7",
+				"data-uid": "src/components/UploadCard.tsx:73:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex-1 space-y-5 pb-4",
 				children: slots.map((slot) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/UploadCard.tsx:71:11",
+					"data-uid": "src/components/UploadCard.tsx:75:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-1.5",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileSlot, {
-						"data-uid": "src/components/UploadCard.tsx:72:13",
+						"data-uid": "src/components/UploadCard.tsx:76:13",
 						"data-prohibitions": "[editContent]",
 						label: slot.label,
 						files: slot.files,
 						onChange: (files) => onFileChange(slot.id, files),
-						accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+						accept: slot.accept || ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+						validExtensions: slot.validExtensions || [
+							"csv",
+							"xls",
+							"xlsx"
+						],
+						errorMessage: slot.errorMessage || "Por favor, selecione apenas arquivos válidos (CSV ou Excel).",
+						formatHelpText: slot.formatHelpText || "CSV ou Excel (.xlsx, .xls)",
 						disabled: loading || loaded,
 						maxFiles: slot.maxFiles,
 						onError
@@ -26756,50 +26807,50 @@ function UploadCard({ title, description, slots, onFileChange, onUpload, loading
 				}, slot.id))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardFooter, {
-				"data-uid": "src/components/UploadCard.tsx:85:7",
+				"data-uid": "src/components/UploadCard.tsx:97:7",
 				"data-prohibitions": "[editContent]",
 				className: "pt-2 flex flex-col gap-3 items-stretch",
 				children: [loading && typeof progress === "number" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/UploadCard.tsx:87:11",
+					"data-uid": "src/components/UploadCard.tsx:99:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-1.5 w-full",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/UploadCard.tsx:88:13",
+						"data-uid": "src/components/UploadCard.tsx:100:13",
 						"data-prohibitions": "[editContent]",
 						className: "flex justify-between text-xs text-muted-foreground",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/UploadCard.tsx:89:15",
+							"data-uid": "src/components/UploadCard.tsx:101:15",
 							"data-prohibitions": "[]",
 							children: "Processando arquivos..."
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							"data-uid": "src/components/UploadCard.tsx:90:15",
+							"data-uid": "src/components/UploadCard.tsx:102:15",
 							"data-prohibitions": "[editContent]",
 							children: [progress, "%"]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-						"data-uid": "src/components/UploadCard.tsx:92:13",
+						"data-uid": "src/components/UploadCard.tsx:104:13",
 						"data-prohibitions": "[editContent]",
 						value: progress,
 						className: "h-1.5"
 					})]
 				}), loaded ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/UploadCard.tsx:96:11",
+					"data-uid": "src/components/UploadCard.tsx:108:11",
 					"data-prohibitions": "[]",
 					className: "w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-						"data-uid": "src/components/UploadCard.tsx:97:13",
+						"data-uid": "src/components/UploadCard.tsx:109:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-4 h-4"
 					}), " Dados Processados"]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/components/UploadCard.tsx:100:11",
+					"data-uid": "src/components/UploadCard.tsx:112:11",
 					"data-prohibitions": "[editContent]",
 					className: "w-full transition-all",
 					onClick: onUpload,
 					disabled: !canUpload || loading,
 					variant: canUpload ? "default" : "secondary",
 					children: [loading ? "Processando..." : "Processar Dados", !loading && canUpload && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-						"data-uid": "src/components/UploadCard.tsx:107:39",
+						"data-uid": "src/components/UploadCard.tsx:119:39",
 						"data-prohibitions": "[editContent]",
 						className: "w-4 h-4 ml-2"
 					})]
@@ -26847,39 +26898,39 @@ function ImportPage() {
 	const handleFileChangeError = (msg) => {
 		toast({
 			title: "Atenção",
-			description: typeof msg === "string" ? msg : "Por favor, selecione um arquivo válido (CSV ou Excel).",
+			description: typeof msg === "string" ? msg : "Por favor, selecione um arquivo válido.",
 			variant: "destructive"
 		});
 	};
 	const showNextStep = isErpLoaded && (isAmLoaded || isQuoteLoaded);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Import.tsx:58:5",
+		"data-uid": "src/pages/Import.tsx:57:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-8 animate-fade-in-up pb-12",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:59:7",
+				"data-uid": "src/pages/Import.tsx:58:7",
 				"data-prohibitions": "[]",
 				className: "text-center max-w-2xl mx-auto space-y-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/pages/Import.tsx:60:9",
+					"data-uid": "src/pages/Import.tsx:59:9",
 					"data-prohibitions": "[]",
 					className: "text-3xl font-bold tracking-tight",
 					children: "Importação de Dados"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Import.tsx:61:9",
+					"data-uid": "src/pages/Import.tsx:60:9",
 					"data-prohibitions": "[]",
 					className: "text-muted-foreground text-sm md:text-base",
 					children: "Faça o upload das suas planilhas para cruzar os dados de compras e otimizar suas decisões."
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Import.tsx:66:7",
+				"data-uid": "src/pages/Import.tsx:65:7",
 				"data-prohibitions": "[]",
 				className: "grid grid-cols-1 md:grid-cols-3 gap-6 items-start",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:67:9",
+						"data-uid": "src/pages/Import.tsx:66:9",
 						"data-prohibitions": "[editContent]",
 						title: "Planilha ERP",
 						description: "Extração de Necessidade e Estoque Mín/Máx do seu sistema.",
@@ -26893,40 +26944,40 @@ function ImportPage() {
 							maxFiles: 1,
 							required: true,
 							helpText: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/Import.tsx:81:17",
+								"data-uid": "src/pages/Import.tsx:80:17",
 								"data-prohibitions": "[]",
 								className: "text-[11px] text-muted-foreground mt-2 p-3 bg-muted/40 rounded-md border border-border/50",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									"data-uid": "src/pages/Import.tsx:82:19",
+									"data-uid": "src/pages/Import.tsx:81:19",
 									"data-prohibitions": "[]",
 									className: "font-semibold block mb-1.5 text-foreground/80 flex items-center gap-1.5",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
-										"data-uid": "src/pages/Import.tsx:83:21",
+										"data-uid": "src/pages/Import.tsx:82:21",
 										"data-prohibitions": "[editContent]",
 										className: "w-3.5 h-3.5"
 									}), " Colunas obrigatórias:"]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
-									"data-uid": "src/pages/Import.tsx:85:19",
+									"data-uid": "src/pages/Import.tsx:84:19",
 									"data-prohibitions": "[]",
 									className: "list-disc list-inside space-y-1 ml-1",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:86:21",
+											"data-uid": "src/pages/Import.tsx:85:21",
 											"data-prohibitions": "[]",
 											children: "Descrição do Produto"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:87:21",
+											"data-uid": "src/pages/Import.tsx:86:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade Mínima em Estoque"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:88:21",
+											"data-uid": "src/pages/Import.tsx:87:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade Máxima de Estoque"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-											"data-uid": "src/pages/Import.tsx:89:21",
+											"data-uid": "src/pages/Import.tsx:88:21",
 											"data-prohibitions": "[]",
 											children: "Quantidade que deve ser comprada"
 										})
@@ -26939,7 +26990,7 @@ function ImportPage() {
 						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:100:9",
+						"data-uid": "src/pages/Import.tsx:99:9",
 						"data-prohibitions": "[editContent]",
 						title: "Ação Magistral",
 						description: "Relatórios de Demanda (Exclusivos) e Pedidos (Commodities).",
@@ -26967,10 +27018,10 @@ function ImportPage() {
 						onError: handleFileChangeError
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(UploadCard, {
-						"data-uid": "src/pages/Import.tsx:130:9",
+						"data-uid": "src/pages/Import.tsx:129:9",
 						"data-prohibitions": "[editContent]",
 						title: "Cotações Diretas",
-						description: "Planilhas de cotações enviadas diretamente por fornecedores (Opcional).",
+						description: "Cotações enviadas diretamente por fornecedores (Opcional).",
 						loaded: isQuoteLoaded,
 						loading: loading === "QUOTE",
 						progress: loading === "QUOTE" ? progress : void 0,
@@ -26979,7 +27030,11 @@ function ImportPage() {
 							label: "Cotação de Fornecedor",
 							files: quoteFiles,
 							maxFiles: 20,
-							required: true
+							required: true,
+							accept: ".pdf, .html",
+							validExtensions: ["pdf", "html"],
+							errorMessage: "Formato de arquivo não suportado. Por favor, envie arquivos PDF ou HTML.",
+							formatHelpText: "PDF ou HTML"
 						}],
 						onFileChange: (id, files) => setQuoteFiles(files),
 						onUpload: () => handleUpload("QUOTE"),
@@ -26988,21 +27043,21 @@ function ImportPage() {
 				]
 			}),
 			showNextStep && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Import.tsx:152:9",
+				"data-uid": "src/pages/Import.tsx:156:9",
 				"data-prohibitions": "[]",
 				className: "flex justify-center mt-12 animate-fade-in",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-					"data-uid": "src/pages/Import.tsx:153:11",
+					"data-uid": "src/pages/Import.tsx:157:11",
 					"data-prohibitions": "[]",
 					asChild: true,
 					size: "lg",
 					className: "gap-2 px-8 shadow-md",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-						"data-uid": "src/pages/Import.tsx:154:13",
+						"data-uid": "src/pages/Import.tsx:158:13",
 						"data-prohibitions": "[]",
 						to: "/matching",
 						children: ["Ir para Mapeamento IA ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-							"data-uid": "src/pages/Import.tsx:155:37",
+							"data-uid": "src/pages/Import.tsx:159:37",
 							"data-prohibitions": "[editContent]",
 							className: "w-4 h-4"
 						})]
@@ -31326,4 +31381,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-7VXxL0eb.js.map
+//# sourceMappingURL=index-CSac1bbk.js.map

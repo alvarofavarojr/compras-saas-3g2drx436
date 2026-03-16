@@ -46,8 +46,7 @@ export default function ImportPage() {
   const handleFileChangeError = (msg?: string) => {
     toast({
       title: 'Atenção',
-      description:
-        typeof msg === 'string' ? msg : 'Por favor, selecione um arquivo válido (CSV ou Excel).',
+      description: typeof msg === 'string' ? msg : 'Por favor, selecione um arquivo válido.',
       variant: 'destructive',
     })
   }
@@ -129,7 +128,7 @@ export default function ImportPage() {
 
         <UploadCard
           title="Cotações Diretas"
-          description="Planilhas de cotações enviadas diretamente por fornecedores (Opcional)."
+          description="Cotações enviadas diretamente por fornecedores (Opcional)."
           loaded={isQuoteLoaded}
           loading={loading === 'QUOTE'}
           progress={loading === 'QUOTE' ? progress : undefined}
@@ -140,6 +139,11 @@ export default function ImportPage() {
               files: quoteFiles,
               maxFiles: 20,
               required: true,
+              accept: '.pdf, .html',
+              validExtensions: ['pdf', 'html'],
+              errorMessage:
+                'Formato de arquivo não suportado. Por favor, envie arquivos PDF ou HTML.',
+              formatHelpText: 'PDF ou HTML',
             },
           ]}
           onFileChange={(id, files) => setQuoteFiles(files)}
