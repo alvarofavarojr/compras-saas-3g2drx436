@@ -1,5 +1,15 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { Rocket, Menu, Moon, Sun, UploadCloud, BrainCircuit, LineChart, Map } from 'lucide-react'
+import {
+  Rocket,
+  Menu,
+  Moon,
+  Sun,
+  UploadCloud,
+  BrainCircuit,
+  LineChart,
+  Map,
+  Database,
+} from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -22,6 +32,7 @@ export default function Layout() {
     { name: 'Mapeamento IA', path: '/matching', icon: BrainCircuit },
     { name: 'Otimização', path: '/optimization', icon: LineChart },
     { name: 'Roteiro', path: '/roteiro', icon: Map },
+    { name: 'Gestão de Dados', path: '/dados', icon: Database },
   ]
 
   const NavItems = () => (
