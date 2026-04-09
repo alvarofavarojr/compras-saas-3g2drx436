@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react'
 import { Supplier, ERPNeed, SupplierItem, MatchedNeed } from '@/lib/types'
 import { MOCK_SUPPLIERS, MOCK_ERP_NEEDS, MOCK_SUPPLIER_ITEMS } from '@/lib/mockData'
+import { calculateSimilarity } from '@/lib/optimizationUtils'
 
 interface StoreState {
   suppliers: Supplier[]
@@ -41,22 +42,23 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
 
   const generateMatches = (needs: ERPNeed[], items: SupplierItem[]) => {
     const matches: MatchedNeed[] = needs.map((need) => {
-      const keyword = need.description.split(' ')[0].toLowerCase()
       const needMatches = items
-        .filter((item) => item.description.toLowerCase().includes(keyword))
         .map((item) => ({
           itemId: item.id,
-          confidence: item.description === need.description ? 0.99 : 0.85,
+          confidence: calculateSimilarity(need.description, item.description),
         }))
+        .filter((m) => m.confidence > 0.3)
 
       needMatches.sort((a, b) => b.confidence - a.confidence)
       const bestMatch = needMatches[0]
+      const isHighConfidence = bestMatch && bestMatch.confidence >= 0.8
 
       return {
         erpId: need.id,
         matches: needMatches,
         selectedItemId: bestMatch?.itemId,
         suggestedQuantity: need.requiredQuantity,
+        confirmed: !!isHighConfidence,
       }
     })
     setMatchedNeeds(matches)
@@ -64,7 +66,7 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
 
   const confirmMatch = (erpId: string, itemId: string) => {
     setMatchedNeeds((prev) =>
-      prev.map((m) => (m.erpId === erpId ? { ...m, selectedItemId: itemId } : m)),
+      prev.map((m) => (m.erpId === erpId ? { ...m, selectedItemId: itemId, confirmed: true } : m)),
     )
   }
 

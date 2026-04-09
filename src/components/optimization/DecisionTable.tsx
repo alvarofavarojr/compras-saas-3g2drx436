@@ -18,6 +18,17 @@ import { format } from 'date-fns'
 export default function DecisionTable() {
   const { erpNeeds, supplierItems, matchedNeeds, suppliers, updateQuantity } = useProcurementStore()
 
+  // Only show confirmed matches in optimization
+  const confirmedMatches = matchedNeeds.filter((m) => m.confirmed)
+
+  if (confirmedMatches.length === 0) {
+    return (
+      <Card className="p-8 text-center text-muted-foreground">
+        Nenhum produto foi mapeado e confirmado ainda. Volte à tela de Mapeamento.
+      </Card>
+    )
+  }
+
   return (
     <Card className="overflow-hidden">
       <Table>
@@ -32,7 +43,7 @@ export default function DecisionTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {matchedNeeds.map((match) => {
+          {confirmedMatches.map((match) => {
             const need = erpNeeds.find((n) => n.id === match.erpId)
             const item = supplierItems.find((i) => i.id === match.selectedItemId)
             if (!need || !item) return null
@@ -45,24 +56,35 @@ export default function DecisionTable() {
               <TableRow key={match.erpId}>
                 <TableCell className="font-medium">
                   {need.description}
-                  <div className="text-xs text-muted-foreground mt-1">
-                    Req: {need.requiredQuantity} | Est: {need.currentStock}
+                  <div className="text-xs text-muted-foreground mt-1 flex items-center gap-2">
+                    <span>
+                      Req: {need.requiredQuantity} {need.unit || 'KG'}
+                    </span>
+                    <span>
+                      Est: {need.currentStock} {need.unit || 'KG'}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell>
-                  {supplier?.name}
-                  <Badge variant="outline" className="ml-2 text-[10px] block w-fit mt-1">
+                  <div className="font-medium text-sm">{supplier?.name}</div>
+                  <Badge variant="outline" className="text-[10px] w-fit mt-1 bg-secondary/50">
                     {item.source}
                   </Badge>
                 </TableCell>
-                <TableCell>${item.price.toFixed(2)}</TableCell>
                 <TableCell>
-                  <Input
-                    type="number"
-                    value={match.suggestedQuantity}
-                    onChange={(e) => updateQuantity(match.erpId, Number(e.target.value))}
-                    className={`w-24 h-8 ${isRisk ? 'border-red-500' : ''}`}
-                  />
+                  ${item.price.toFixed(2)}
+                  <span className="text-xs text-muted-foreground ml-1">/ {item.unit || 'KG'}</span>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="number"
+                      value={match.suggestedQuantity}
+                      onChange={(e) => updateQuantity(match.erpId, Number(e.target.value))}
+                      className={`w-20 h-8 ${isRisk ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
+                    />
+                    <span className="text-xs text-muted-foreground">{item.unit || 'KG'}</span>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-col gap-1">

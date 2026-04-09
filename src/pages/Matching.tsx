@@ -19,6 +19,8 @@ import {
 import useProcurementStore from '@/stores/useProcurementStore'
 import { BrainCircuit, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Database, Info } from 'lucide-react'
 
 export default function MatchingPage() {
   const { erpNeeds, matchedNeeds, supplierItems, confirmMatch } = useProcurementStore()
@@ -36,6 +38,18 @@ export default function MatchingPage() {
 
   return (
     <div className="space-y-6 animate-fade-in-up">
+      <Alert className="bg-blue-50/50 text-blue-900 border-blue-200">
+        <Info className="h-4 w-4 text-blue-600" />
+        <AlertTitle className="text-blue-800">
+          Armazenamento Temporário (Sem Banco de Dados)
+        </AlertTitle>
+        <AlertDescription className="text-blue-700/80">
+          O mapeamento realizado nesta sessão é temporário e será perdido ao recarregar a página.
+          Recomendamos integrar o <strong>Skip Cloud</strong> ou <strong>Supabase</strong>{' '}
+          futuramente para persistir essas configurações de forma definitiva.
+        </AlertDescription>
+      </Alert>
+
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-2">
@@ -65,17 +79,27 @@ export default function MatchingPage() {
           <TableBody>
             {matchedNeeds.map((match) => {
               const need = erpNeeds.find((n) => n.id === match.erpId)!
-              const bestMatch = match.matches[0]
+              const bestMatch =
+                match.matches.find((m) => m.itemId === match.selectedItemId) || match.matches[0]
 
               return (
-                <TableRow key={match.erpId}>
-                  <TableCell className="font-medium">{need.description}</TableCell>
+                <TableRow key={match.erpId} className={!match.confirmed ? 'bg-amber-50/30' : ''}>
+                  <TableCell className="font-medium">
+                    {need.description}
+                    {need.unit && (
+                      <Badge variant="outline" className="ml-2 text-[10px]">
+                        {need.unit}
+                      </Badge>
+                    )}
+                  </TableCell>
                   <TableCell>
                     <Select
                       value={match.selectedItemId}
                       onValueChange={(val) => confirmMatch(match.erpId, val)}
                     >
-                      <SelectTrigger className="w-[300px]">
+                      <SelectTrigger
+                        className={`w-[300px] ${!match.confirmed && match.selectedItemId ? 'border-amber-400' : ''}`}
+                      >
                         <SelectValue placeholder="Selecione um correspondente" />
                       </SelectTrigger>
                       <SelectContent>
@@ -83,7 +107,8 @@ export default function MatchingPage() {
                           const item = supplierItems.find((i) => i.id === m.itemId)!
                           return (
                             <SelectItem key={m.itemId} value={m.itemId}>
-                              {item.description} ({item.source}) - ${item.price.toFixed(2)}
+                              {item.description} {item.unit ? `(${item.unit})` : ''} - $
+                              {item.price.toFixed(2)}
                             </SelectItem>
                           )
                         })}
@@ -91,23 +116,54 @@ export default function MatchingPage() {
                     </Select>
                   </TableCell>
                   <TableCell>
-                    {bestMatch && bestMatch.confidence > 0.9 ? (
-                      <Badge className="bg-emerald-500 hover:bg-emerald-600">
-                        <CheckCircle2 className="w-3 h-3 mr-1" /> Alta
-                      </Badge>
+                    {bestMatch ? (
+                      bestMatch.confidence >= 0.8 ? (
+                        <Badge className="bg-emerald-500 hover:bg-emerald-600">
+                          <CheckCircle2 className="w-3 h-3 mr-1" /> Alta (
+                          {(bestMatch.confidence * 100).toFixed(0)}%)
+                        </Badge>
+                      ) : bestMatch.confidence >= 0.5 ? (
+                        <Badge
+                          variant="secondary"
+                          className="text-amber-600 border-amber-200 bg-amber-100"
+                        >
+                          <AlertCircle className="w-3 h-3 mr-1" /> Média (
+                          {(bestMatch.confidence * 100).toFixed(0)}%)
+                        </Badge>
+                      ) : (
+                        <Badge
+                          variant="destructive"
+                          className="bg-red-100 text-red-700 border-red-200 hover:bg-red-200"
+                        >
+                          <AlertCircle className="w-3 h-3 mr-1" /> Baixa (
+                          {(bestMatch.confidence * 100).toFixed(0)}%)
+                        </Badge>
+                      )
                     ) : (
-                      <Badge variant="secondary" className="text-amber-600 border-amber-200">
-                        <AlertCircle className="w-3 h-3 mr-1" /> Revisão Manual
-                      </Badge>
+                      <span className="text-xs text-muted-foreground">Sem sugestões</span>
                     )}
                   </TableCell>
                   <TableCell>
-                    {match.selectedItemId ? (
+                    {match.confirmed ? (
                       <span className="text-xs text-emerald-600 font-medium flex items-center gap-1">
-                        <CheckCircle2 className="w-4 h-4" /> Mapeado
+                        <CheckCircle2 className="w-4 h-4" /> Confirmado
                       </span>
                     ) : (
-                      <span className="text-xs text-muted-foreground">Pendente</span>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs text-amber-600 font-medium flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" /> Pendente
+                        </span>
+                        {match.selectedItemId && (
+                          <Button
+                            size="sm"
+                            variant="default"
+                            className="h-7 text-xs"
+                            onClick={() => confirmMatch(match.erpId, match.selectedItemId!)}
+                          >
+                            Confirmar
+                          </Button>
+                        )}
+                      </div>
                     )}
                   </TableCell>
                 </TableRow>

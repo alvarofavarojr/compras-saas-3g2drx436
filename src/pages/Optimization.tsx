@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom'
 export default function OptimizationPage() {
   const { matchedNeeds } = useProcurementStore()
 
-  if (matchedNeeds.length === 0) {
+  const hasConfirmed = matchedNeeds.some((m) => m.confirmed)
+
+  if (matchedNeeds.length === 0 || !hasConfirmed) {
     return (
       <div className="text-center mt-20">
-        <p>Realize o mapeamento de produtos primeiro.</p>
+        <p>Realize e confirme o mapeamento de produtos primeiro.</p>
         <Button asChild className="mt-4">
           <Link to="/matching">Ir para Mapeamento</Link>
         </Button>

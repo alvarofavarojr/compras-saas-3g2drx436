@@ -12,6 +12,7 @@ export interface ERPNeed {
   currentStock: number
   requiredQuantity: number
   monthlyConsumption: number
+  unit?: string
 }
 
 export interface SupplierItem {
@@ -23,6 +24,7 @@ export interface SupplierItem {
   expiryDate: string
   minQuantity: number
   bulkDiscount?: { qty: number; discount: number }
+  unit?: string
 }
 
 export interface MatchedNeed {
@@ -30,4 +32,5 @@ export interface MatchedNeed {
   matches: { itemId: string; confidence: number }[]
   selectedItemId?: string
   suggestedQuantity: number
+  confirmed: boolean
 }
