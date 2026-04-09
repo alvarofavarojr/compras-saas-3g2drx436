@@ -21,7 +21,7 @@ export default function ImportPage() {
   const isAmLoaded = supplierItems.some((i) => i.source.startsWith('AM'))
   const isQuoteLoaded = supplierItems.some((i) => i.source === 'DIRECT_QUOTE')
 
-  const handleUpload = (type: 'ERP' | 'AM' | 'QUOTE') => {
+  const handleUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
     setLoading(type)
     setProgress(0)
 
@@ -32,15 +32,25 @@ export default function ImportPage() {
       })
     }, 150)
 
-    setTimeout(() => {
+    try {
+      await Promise.all([importData(type), new Promise((resolve) => setTimeout(resolve, 1500))])
+
       clearInterval(interval)
       setProgress(100)
+
       setTimeout(() => {
-        importData(type)
         setLoading(null)
         toast({ title: 'Sucesso', description: `Dados de ${type} processados com sucesso.` })
       }, 300)
-    }, 1500)
+    } catch (error) {
+      clearInterval(interval)
+      setLoading(null)
+      toast({
+        title: 'Erro',
+        description: 'Ocorreu um erro ao importar os dados.',
+        variant: 'destructive',
+      })
+    }
   }
 
   const handleFileChangeError = (msg?: string) => {
