@@ -50,7 +50,7 @@ export function UploadCard({
 }: UploadCardProps) {
   const allRequiredFilesPresent = slots.every((s) => !s.required || s.files.length > 0)
   const anyFilePresent = slots.some((s) => s.files.length > 0)
-  const canUpload = anyFilePresent && allRequiredFilesPresent && !loading && !loaded
+  const canUpload = anyFilePresent && allRequiredFilesPresent && !loading
 
   return (
     <Card
@@ -86,7 +86,7 @@ export function UploadCard({
                 slot.errorMessage || 'Por favor, selecione apenas arquivos válidos (CSV ou Excel).'
               }
               formatHelpText={slot.formatHelpText || 'CSV ou Excel (.xlsx, .xls)'}
-              disabled={loading || loaded}
+              disabled={loading}
               maxFiles={slot.maxFiles}
               onError={onError}
             />
@@ -104,21 +104,20 @@ export function UploadCard({
             <Progress value={progress} className="h-1.5" />
           </div>
         )}
-        {loaded ? (
-          <div className="w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20">
+        {loaded && (
+          <div className="w-full flex items-center justify-center gap-2 text-sm font-medium text-emerald-600 bg-emerald-500/10 py-2.5 rounded-md border border-emerald-500/20 mb-2">
             <CheckCircle2 className="w-4 h-4" /> Dados Processados
           </div>
-        ) : (
-          <Button
-            className="w-full transition-all"
-            onClick={onUpload}
-            disabled={!canUpload || loading}
-            variant={canUpload ? 'default' : 'secondary'}
-          >
-            {loading ? 'Processando...' : 'Processar Dados'}
-            {!loading && canUpload && <UploadCloud className="w-4 h-4 ml-2" />}
-          </Button>
         )}
+        <Button
+          className="w-full transition-all"
+          onClick={onUpload}
+          disabled={!canUpload || loading}
+          variant={canUpload ? 'default' : 'secondary'}
+        >
+          {loading ? 'Processando...' : loaded ? 'Novo Upload' : 'Processar Dados'}
+          {!loading && canUpload && <UploadCloud className="w-4 h-4 ml-2" />}
+        </Button>
       </CardFooter>
     </Card>
   )

@@ -84,6 +84,30 @@ export type Database = {
           },
         ]
       }
+      selic_rates: {
+        Row: {
+          created_at: string
+          id: string
+          rate: number
+          user_id: string
+          valid_from: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          rate: number
+          user_id: string
+          valid_from: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          rate?: number
+          user_id?: string
+          valid_from?: string
+        }
+        Relationships: []
+      }
       supplier_items: {
         Row: {
           created_at: string
@@ -309,6 +333,12 @@ export const Constants = {
 //   suggested_quantity: numeric (not null)
 //   confirmed: boolean (not null, default: false)
 //   created_at: timestamp with time zone (not null, default: now())
+// Table: selic_rates
+//   id: uuid (not null, default: gen_random_uuid())
+//   user_id: uuid (not null)
+//   valid_from: date (not null)
+//   rate: numeric (not null)
+//   created_at: timestamp with time zone (not null, default: now())
 // Table: supplier_items
 //   id: text (not null)
 //   user_id: uuid (not null)
@@ -333,6 +363,9 @@ export const Constants = {
 //   PRIMARY KEY matched_needs_pkey: PRIMARY KEY (erp_id)
 //   FOREIGN KEY matched_needs_selected_item_id_fkey: FOREIGN KEY (selected_item_id) REFERENCES supplier_items(id) ON DELETE SET NULL
 //   FOREIGN KEY matched_needs_user_id_fkey: FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+// Table: selic_rates
+//   PRIMARY KEY selic_rates_pkey: PRIMARY KEY (id)
+//   FOREIGN KEY selic_rates_user_id_fkey: FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
 // Table: supplier_items
 //   PRIMARY KEY supplier_items_pkey: PRIMARY KEY (id)
 //   FOREIGN KEY supplier_items_supplier_id_fkey: FOREIGN KEY (supplier_id) REFERENCES suppliers(id) ON DELETE CASCADE
@@ -348,6 +381,10 @@ export const Constants = {
 //     WITH CHECK: (auth.uid() = user_id)
 // Table: matched_needs
 //   Policy "Users can manage their own matched_needs" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: (auth.uid() = user_id)
+//     WITH CHECK: (auth.uid() = user_id)
+// Table: selic_rates
+//   Policy "Users can manage their own selic_rates" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: (auth.uid() = user_id)
 //     WITH CHECK: (auth.uid() = user_id)
 // Table: supplier_items

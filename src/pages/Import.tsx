@@ -5,6 +5,7 @@ import { useToast } from '@/hooks/use-toast'
 import useProcurementStore from '@/stores/useProcurementStore'
 import { Link } from 'react-router-dom'
 import { UploadCard } from '@/components/UploadCard'
+import { supabase } from '@/lib/supabase/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,11 +34,19 @@ export default function ImportPage() {
     message: string
   }>({ isOpen: false, type: null, message: '' })
 
+  const [uploadModeAlert, setUploadModeAlert] = useState<{
+    isOpen: boolean
+    type: 'ERP' | 'AM' | 'QUOTE' | null
+  }>({ isOpen: false, type: null })
+
   const isErpLoaded = erpNeeds.length > 0
   const isAmLoaded = supplierItems.some((i) => i.source.startsWith('AM'))
   const isQuoteLoaded = supplierItems.some((i) => i.source === 'DIRECT_QUOTE')
 
-  const executeUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
+  const executeUpload = async (
+    type: 'ERP' | 'AM' | 'QUOTE',
+    mode: 'merge' | 'replace' = 'replace',
+  ) => {
     setLoading(type)
     setProgress(0)
 
@@ -49,7 +58,32 @@ export default function ImportPage() {
     }, 150)
 
     try {
-      await Promise.all([importData(type), new Promise((resolve) => setTimeout(resolve, 1500))])
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (user && mode === 'replace') {
+        if (type === 'ERP') {
+          await supabase.from('erp_needs').delete().eq('user_id', user.id)
+        } else if (type === 'AM') {
+          await supabase
+            .from('supplier_items')
+            .delete()
+            .eq('user_id', user.id)
+            .like('source', 'AM%')
+        } else if (type === 'QUOTE') {
+          await supabase
+            .from('supplier_items')
+            .delete()
+            .eq('user_id', user.id)
+            .eq('source', 'DIRECT_QUOTE')
+        }
+      }
+
+      // @ts-expect-error - Support for optional mode parameter
+      await Promise.all([
+        importData(type, mode),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ])
 
       clearInterval(interval)
       setProgress(100)
@@ -70,6 +104,17 @@ export default function ImportPage() {
   }
 
   const handleUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
+    const isLoaded = type === 'ERP' ? isErpLoaded : type === 'AM' ? isAmLoaded : isQuoteLoaded
+
+    if (isLoaded) {
+      setUploadModeAlert({ isOpen: true, type })
+      return
+    }
+
+    proceedWithUpload(type, 'replace')
+  }
+
+  const proceedWithUpload = (type: 'ERP' | 'AM' | 'QUOTE', mode: 'merge' | 'replace') => {
     // Advanced validations logic simulation
     if (type === 'AM') {
       setValidationAlert({
@@ -90,14 +135,21 @@ export default function ImportPage() {
       return
     }
 
-    executeUpload(type)
+    executeUpload(type, mode)
   }
 
   const handleConfirmValidation = () => {
     if (validationAlert.type) {
-      executeUpload(validationAlert.type)
+      executeUpload(validationAlert.type, 'replace')
     }
     setValidationAlert({ isOpen: false, type: null, message: '' })
+  }
+
+  const handleModeSelection = (mode: 'merge' | 'replace') => {
+    if (uploadModeAlert.type) {
+      proceedWithUpload(uploadModeAlert.type, mode)
+    }
+    setUploadModeAlert({ isOpen: false, type: null })
   }
 
   const handleFileChangeError = (msg?: string) => {
@@ -240,6 +292,50 @@ export default function ImportPage() {
             <AlertDialogAction onClick={handleConfirmValidation}>
               Prosseguir Importação
             </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog
+        open={uploadModeAlert.isOpen}
+        onOpenChange={(open) => !open && setUploadModeAlert({ isOpen: false, type: null })}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Como deseja processar o novo upload?</AlertDialogTitle>
+            <AlertDialogDescription className="text-base text-foreground/90">
+              Já existem dados carregados para esta fonte. Escolha como deseja importar os novos
+              dados:
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex flex-col gap-3 py-4">
+            <Button
+              variant="outline"
+              className="justify-start h-auto py-3 px-4"
+              onClick={() => handleModeSelection('merge')}
+            >
+              <div className="text-left">
+                <div className="font-semibold">Atualizar / Mesclar</div>
+                <div className="text-xs text-muted-foreground font-normal mt-1">
+                  Adiciona novos registros e atualiza os existentes (via UPSERT).
+                </div>
+              </div>
+            </Button>
+            <Button
+              variant="outline"
+              className="justify-start h-auto py-3 px-4"
+              onClick={() => handleModeSelection('replace')}
+            >
+              <div className="text-left">
+                <div className="font-semibold text-destructive">Limpar e Substituir</div>
+                <div className="text-xs text-muted-foreground font-normal mt-1">
+                  Remove os dados antigos e importa a nova planilha como fonte única.
+                </div>
+              </div>
+            </Button>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
