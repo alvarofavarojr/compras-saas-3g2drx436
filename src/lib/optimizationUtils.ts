@@ -1,7 +1,5 @@
 import { ERPNeed, SupplierItem } from './types'
 
-export const SELIC_PLUS_1_MONTHLY = 0.01
-
 export function normalizeUnit(qty: number, unit?: string) {
   if (!unit) return qty
   const lower = unit.toLowerCase()
@@ -91,7 +89,12 @@ export function checkExpiryRisk(qty: number, item: SupplierItem, need: ERPNeed) 
   }
 }
 
-export function evaluateBulkPurchase(reqQty: number, item: SupplierItem, need: ERPNeed) {
+export function evaluateBulkPurchase(
+  reqQty: number,
+  item: SupplierItem,
+  need: ERPNeed,
+  selicMonthlyRate: number = 0.01,
+) {
   if (!item.bulkDiscount || reqQty >= item.bulkDiscount.qty) return null
 
   const qBulk = item.bulkDiscount.qty
@@ -105,7 +108,7 @@ export function evaluateBulkPurchase(reqQty: number, item: SupplierItem, need: E
 
   const monthsToConsumeExtra = normMonthlyCons > 0 ? extraUnitsKg / normMonthlyCons : 0
   const averageHoldingMonths = monthsToConsumeExtra / 2
-  const holdingCost = extraUnits * discountedPrice * SELIC_PLUS_1_MONTHLY * averageHoldingMonths
+  const holdingCost = extraUnits * discountedPrice * selicMonthlyRate * averageHoldingMonths
 
   const netBenefit = totalSavings - holdingCost
 

@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { supabase } from '@/lib/supabase/client'
+import { useAuth } from '@/hooks/use-auth'
+import { useToast } from '@/hooks/use-toast'
 import {
   Table,
   TableBody,
@@ -7,135 +10,84 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { getSuppliers, deleteSupplier, createSupplier } from '@/services/suppliers'
-import { Trash2, Plus } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Search, Trash2 } from 'lucide-react'
 
 export default function SuppliersTab() {
   const [data, setData] = useState<any[]>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [formData, setFormData] = useState({ id: '', name: '' })
+  const [search, setSearch] = useState('')
+  const { user } = useAuth()
   const { toast } = useToast()
 
-  const load = async () => {
-    try {
-      setData((await getSuppliers()) || [])
-    } catch (e) {
-      console.error(e)
-    }
+  const fetch = async () => {
+    if (!user) return
+    const { data: res } = await supabase
+      .from('suppliers')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (res) setData(res)
   }
 
   useEffect(() => {
-    load()
-  }, [])
+    fetch()
+  }, [user])
 
   const handleDelete = async (id: string) => {
-    try {
-      await deleteSupplier(id)
-      toast({ title: 'Sucesso', description: 'Fornecedor removido com sucesso' })
-      load()
-    } catch (e) {
-      toast({ title: 'Erro', description: 'Falha ao remover fornecedor', variant: 'destructive' })
-    }
+    const { error } = await supabase.from('suppliers').delete().eq('id', id)
+    if (!error) {
+      toast({ title: 'Sucesso', description: 'Fornecedor removido.' })
+      fetch()
+    } else toast({ title: 'Erro', description: error.message, variant: 'destructive' })
   }
 
-  const handleCreate = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await createSupplier(formData)
-      toast({ title: 'Sucesso', description: 'Fornecedor adicionado com sucesso' })
-      setIsOpen(false)
-      setFormData({ id: '', name: '' })
-      load()
-    } catch (e: any) {
-      toast({
-        title: 'Erro',
-        description: e.message || 'Falha ao salvar fornecedor',
-        variant: 'destructive',
-      })
-    }
-  }
+  const filtered = data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
-    <div className="space-y-4 mt-4 animate-fade-in-up">
-      <div className="flex justify-end">
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="w-4 h-4 mr-2" /> Novo Fornecedor
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Adicionar Fornecedor</DialogTitle>
-            </DialogHeader>
-            <form onSubmit={handleCreate} className="space-y-4">
-              <div className="space-y-2">
-                <Label>ID / Código</Label>
-                <Input
-                  value={formData.id}
-                  onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-                  required
-                  placeholder="Ex: SUP-001"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Nome</Label>
-                <Input
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  placeholder="Ex: Distribuidora Central"
-                />
-              </div>
-              <Button type="submit" className="w-full">
-                Salvar
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </div>
-      <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>Nome</TableHead>
-              <TableHead className="w-[100px] text-right">Ações</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
-                    <Trash2 className="w-4 h-4 text-destructive" />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-            {data.length === 0 && (
+    <Card>
+      <CardContent className="pt-6 space-y-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            placeholder="Buscar fornecedores..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9 max-w-sm"
+          />
+        </div>
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={3} className="text-center py-8 text-muted-foreground">
-                  Nenhum fornecedor cadastrado.
-                </TableCell>
+                <TableHead>Nome do Fornecedor</TableHead>
+                <TableHead>ID de Referência</TableHead>
+                <TableHead className="w-[80px]"></TableHead>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
+            </TableHeader>
+            <TableBody>
+              {filtered.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell className="font-medium">{item.name}</TableCell>
+                  <TableCell className="text-muted-foreground text-sm">{item.id}</TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
+                      <Trash2 className="w-4 h-4 text-destructive" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {filtered.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={3} className="text-center py-8">
+                    Nenhum fornecedor encontrado.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

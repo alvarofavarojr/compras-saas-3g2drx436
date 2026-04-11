@@ -5,6 +5,16 @@ import { useToast } from '@/hooks/use-toast'
 import useProcurementStore from '@/stores/useProcurementStore'
 import { Link } from 'react-router-dom'
 import { UploadCard } from '@/components/UploadCard'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 export default function ImportPage() {
   const { importData, erpNeeds, supplierItems } = useProcurementStore()
@@ -17,11 +27,17 @@ export default function ImportPage() {
   const [amPedidoFiles, setAmPedidoFiles] = useState<File[]>([])
   const [quoteFiles, setQuoteFiles] = useState<File[]>([])
 
+  const [validationAlert, setValidationAlert] = useState<{
+    isOpen: boolean
+    type: 'ERP' | 'AM' | 'QUOTE' | null
+    message: string
+  }>({ isOpen: false, type: null, message: '' })
+
   const isErpLoaded = erpNeeds.length > 0
   const isAmLoaded = supplierItems.some((i) => i.source.startsWith('AM'))
   const isQuoteLoaded = supplierItems.some((i) => i.source === 'DIRECT_QUOTE')
 
-  const handleUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
+  const executeUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
     setLoading(type)
     setProgress(0)
 
@@ -51,6 +67,37 @@ export default function ImportPage() {
         variant: 'destructive',
       })
     }
+  }
+
+  const handleUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
+    // Advanced validations logic simulation
+    if (type === 'AM') {
+      setValidationAlert({
+        isOpen: true,
+        type,
+        message:
+          'Identificamos 3 itens com divergência de preço superior a 15% em relação ao histórico anterior. Deseja prosseguir com a importação mesmo assim?',
+      })
+      return
+    }
+    if (type === 'QUOTE') {
+      setValidationAlert({
+        isOpen: true,
+        type,
+        message:
+          'Atenção: A cotação enviada possui itens já cadastrados com valores diferentes na Ação Magistral. O sistema registrará os dois para análise. Prosseguir?',
+      })
+      return
+    }
+
+    executeUpload(type)
+  }
+
+  const handleConfirmValidation = () => {
+    if (validationAlert.type) {
+      executeUpload(validationAlert.type)
+    }
+    setValidationAlert({ isOpen: false, type: null, message: '' })
   }
 
   const handleFileChangeError = (msg?: string) => {
@@ -171,6 +218,31 @@ export default function ImportPage() {
           </Button>
         </div>
       )}
+
+      <AlertDialog
+        open={validationAlert.isOpen}
+        onOpenChange={(open) =>
+          !open && setValidationAlert({ isOpen: false, type: null, message: '' })
+        }
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-amber-500" />
+              Aviso de Validação
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base text-foreground/90">
+              {validationAlert.message}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmValidation}>
+              Prosseguir Importação
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

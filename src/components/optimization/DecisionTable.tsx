@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {
   Table,
   TableBody,
@@ -7,18 +8,35 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { evaluateBulkPurchase, checkExpiryRisk } from '@/lib/optimizationUtils'
+import { evaluateBulkPurchase, checkExpiryRisk, calculateSimilarity } from '@/lib/optimizationUtils'
 import useProcurementStore from '@/stores/useProcurementStore'
-import { AlertTriangle, TrendingDown, Clock, PackageCheck } from 'lucide-react'
-import { format } from 'date-fns'
+import { TrendingDown, ShieldAlert, Truck } from 'lucide-react'
+import { supabase } from '@/lib/supabase/client'
+import { useToast } from '@/hooks/use-toast'
 
-export default function DecisionTable() {
-  const { erpNeeds, supplierItems, matchedNeeds, suppliers, updateQuantity } = useProcurementStore()
+export default function DecisionMatrix() {
+  const { erpNeeds, supplierItems, matchedNeeds, suppliers } = useProcurementStore()
+  const [selicRate, setSelicRate] = useState(0.01) // default 1% monthly
+  const { toast } = useToast()
 
-  // Only show confirmed matches in optimization
+  useEffect(() => {
+    supabase
+      .from('selic_rates')
+      .select('rate')
+      .order('valid_from', { ascending: false })
+      .limit(1)
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          // convert annual selic to monthly
+          const annual = data[0].rate
+          const monthly = Math.pow(1 + annual / 100, 1 / 12) - 1
+          setSelicRate(monthly)
+        }
+      })
+  }, [])
+
   const confirmedMatches = matchedNeeds.filter((m) => m.confirmed)
 
   if (confirmedMatches.length === 0) {
@@ -29,106 +47,160 @@ export default function DecisionTable() {
     )
   }
 
+  // Get unique suppliers that offer items for these needs
+  const relevantSupplierIds = new Set<string>()
+  supplierItems.forEach((si) => {
+    if (si.supplierId) relevantSupplierIds.add(si.supplierId)
+  })
+
+  const columns = suppliers.filter((s) => relevantSupplierIds.has(s.id))
+
+  const handleSelectMock = () => {
+    toast({
+      title: 'Ação Registrada',
+      description: 'A troca de fornecedor foi registrada para a próxima aprovação.',
+    })
+  }
+
   return (
-    <Card className="overflow-hidden">
-      <Table>
+    <Card className="overflow-x-auto">
+      <Table className="min-w-max">
         <TableHeader className="bg-muted/50">
           <TableRow>
-            <TableHead>Produto / Necessidade</TableHead>
-            <TableHead>Fornecedor</TableHead>
-            <TableHead>Preço</TableHead>
-            <TableHead>Qtd Ideal</TableHead>
-            <TableHead>Validade / Risco</TableHead>
-            <TableHead>Custo de Oportunidade</TableHead>
+            <TableHead className="sticky left-0 z-20 bg-muted/90 backdrop-blur-sm min-w-[250px]">
+              Produto / Necessidade
+            </TableHead>
+            {columns.map((sup) => (
+              <TableHead key={sup.id} className="text-center min-w-[200px] border-l">
+                {sup.name}
+              </TableHead>
+            ))}
           </TableRow>
         </TableHeader>
         <TableBody>
           {confirmedMatches.map((match) => {
             const need = erpNeeds.find((n) => n.id === match.erpId)
-            const item = supplierItems.find((i) => i.id === match.selectedItemId)
-            if (!need || !item) return null
+            if (!need) return null
 
-            const supplier = suppliers.find((s) => s.id === item.supplierId)
-            const bulkEval = evaluateBulkPurchase(need.requiredQuantity, item, need)
-            const { isRisk, maxSafeQty } = checkExpiryRisk(match.suggestedQuantity, item, need)
+            // Find all supplier items that match this need (using a simple similarity or matching id)
+            const options = supplierItems.filter(
+              (si) =>
+                calculateSimilarity(si.description, need.description) > 0.4 ||
+                si.id === match.selectedItemId,
+            )
+
+            // Find cheapest option for comparison
+            const validOptions = options.filter((o) => o.price > 0)
+            const minPrice =
+              validOptions.length > 0 ? Math.min(...validOptions.map((o) => o.price)) : 0
 
             return (
               <TableRow key={match.erpId}>
-                <TableCell className="font-medium">
-                  {need.description}
-                  <div className="text-xs text-muted-foreground mt-1 flex items-center gap-2">
-                    <span>
-                      Req: {need.requiredQuantity} {need.unit || 'KG'}
-                    </span>
-                    <span>
-                      Est: {need.currentStock} {need.unit || 'KG'}
-                    </span>
+                <TableCell className="sticky left-0 z-20 bg-background/90 backdrop-blur-sm shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">
+                  <div className="font-medium">{need.description}</div>
+                  <div className="text-xs text-muted-foreground mt-1 flex flex-col gap-0.5">
+                    <span>Qtd Req: {need.requiredQuantity}</span>
+                    <span>Estoque: {need.currentStock}</span>
                   </div>
                 </TableCell>
-                <TableCell>
-                  <div className="font-medium text-sm">{supplier?.name}</div>
-                  <Badge variant="outline" className="text-[10px] w-fit mt-1 bg-secondary/50">
-                    {item.source}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  ${item.price.toFixed(2)}
-                  <span className="text-xs text-muted-foreground ml-1">/ {item.unit || 'KG'}</span>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="number"
-                      value={match.suggestedQuantity}
-                      onChange={(e) => updateQuantity(match.erpId, Number(e.target.value))}
-                      className={`w-20 h-8 ${isRisk ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
-                    />
-                    <span className="text-xs text-muted-foreground">{item.unit || 'KG'}</span>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-sm flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {format(new Date(item.expiryDate), 'MM/yyyy')}
-                    </span>
-                    {isRisk ? (
-                      <Badge variant="destructive" className="w-fit text-[10px]">
-                        <AlertTriangle className="w-3 h-3 mr-1" /> Máx: {Math.floor(maxSafeQty)}
-                      </Badge>
-                    ) : (
-                      <Badge
-                        variant="secondary"
-                        className="w-fit bg-emerald-100 text-emerald-700 text-[10px]"
+
+                {columns.map((sup) => {
+                  const item = options.find((o) => o.supplierId === sup.id)
+
+                  if (!item)
+                    return (
+                      <TableCell
+                        key={sup.id}
+                        className="text-center border-l text-muted-foreground bg-muted/5"
                       >
-                        <PackageCheck className="w-3 h-3 mr-1" /> Seguro
-                      </Badge>
-                    )}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  {bulkEval?.recommendBulk ? (
-                    <div className="flex flex-col gap-2 bg-blue-50/50 p-2 rounded border border-blue-100">
-                      <span className="text-xs text-blue-700 flex items-start gap-1">
-                        <TrendingDown className="w-4 h-4 shrink-0" />
-                        Ganho real sobre Selic. Benefício líq: ${bulkEval.netBenefit.toFixed(2)}
-                      </span>
-                      {match.suggestedQuantity !== bulkEval.qBulk && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-7 text-xs bg-white"
-                          onClick={() => updateQuantity(match.erpId, bulkEval.qBulk)}
+                        -
+                      </TableCell>
+                    )
+
+                  const isSelected = item.id === match.selectedItemId
+                  const bulkEval = evaluateBulkPurchase(
+                    need.requiredQuantity,
+                    item,
+                    need,
+                    selicRate,
+                  )
+                  const { isRisk } = checkExpiryRisk(match.suggestedQuantity, item, need)
+                  const isCheapest = item.price === minPrice
+
+                  let JustificationIcon = isCheapest ? TrendingDown : Truck
+                  let justificationText = isCheapest ? 'Menor Preço' : 'Melhor Prazo / Logística'
+
+                  if (isSelected && !isCheapest) {
+                    if (bulkEval?.recommendBulk) {
+                      JustificationIcon = TrendingDown
+                      justificationText = 'Desconto Volume (Supera SELIC)'
+                    } else if (isRisk) {
+                      JustificationIcon = ShieldAlert
+                      justificationText = 'Segurança de Validade'
+                    }
+                  }
+
+                  return (
+                    <TableCell
+                      key={sup.id}
+                      className={`text-center border-l relative transition-colors ${isSelected ? 'bg-primary/5 ring-1 ring-inset ring-primary/30' : 'hover:bg-muted/10'}`}
+                    >
+                      {isSelected && (
+                        <div
+                          className="absolute top-0 right-0 p-1 bg-primary text-primary-foreground rounded-bl-lg shadow-sm"
+                          title={justificationText}
                         >
-                          Aplicar Volume ({bulkEval.qBulk})
-                        </Button>
+                          <JustificationIcon className="w-3.5 h-3.5" />
+                        </div>
                       )}
-                    </div>
-                  ) : (
-                    <span className="text-xs text-muted-foreground">
-                      Nenhum ganho financeiro detectado em volume.
-                    </span>
-                  )}
-                </TableCell>
+
+                      <div className="flex flex-col items-center gap-1.5 p-2 group">
+                        <span
+                          className={`font-semibold text-lg ${isSelected ? 'text-primary' : ''}`}
+                        >
+                          ${item.price.toFixed(2)}
+                        </span>
+
+                        <div className="flex flex-wrap justify-center gap-1">
+                          <Badge variant="outline" className="text-[10px] bg-background">
+                            {item.source}
+                          </Badge>
+                          {bulkEval?.recommendBulk && (
+                            <Badge
+                              variant="secondary"
+                              className="text-[10px] bg-blue-100 text-blue-800 border-transparent"
+                            >
+                              Vol: {bulkEval.qBulk}
+                            </Badge>
+                          )}
+                          {isRisk && (
+                            <Badge variant="destructive" className="text-[10px]">
+                              Curto
+                            </Badge>
+                          )}
+                        </div>
+
+                        {!isSelected && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-xs mt-2 w-full opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+                            onClick={handleSelectMock}
+                          >
+                            Selecionar
+                          </Button>
+                        )}
+                        {isSelected && (
+                          <div className="h-6 mt-2 flex items-center justify-center">
+                            <span className="text-[10px] text-primary/80 font-medium uppercase tracking-wider">
+                              {justificationText}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </TableCell>
+                  )
+                })}
               </TableRow>
             )
           })}

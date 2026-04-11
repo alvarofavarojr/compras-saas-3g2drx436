@@ -3,6 +3,7 @@ import SuppliersTab from './SuppliersTab'
 import ErpNeedsTab from './ErpNeedsTab'
 import SupplierItemsTab from './SupplierItemsTab'
 import MatchedNeedsTab from './MatchedNeedsTab'
+import SelicRatesTab from './SelicRatesTab'
 
 export default function DataManagementPage() {
   return (
@@ -19,6 +20,7 @@ export default function DataManagementPage() {
           <TabsTrigger value="erp-needs">Necessidades ERP</TabsTrigger>
           <TabsTrigger value="supplier-items">Itens</TabsTrigger>
           <TabsTrigger value="matched-needs">Mapeamentos</TabsTrigger>
+          <TabsTrigger value="selic-rates">Taxas SELIC</TabsTrigger>
         </TabsList>
         <TabsContent value="suppliers">
           <SuppliersTab />
@@ -31,6 +33,9 @@ export default function DataManagementPage() {
         </TabsContent>
         <TabsContent value="matched-needs">
           <MatchedNeedsTab />
+        </TabsContent>
+        <TabsContent value="selic-rates">
+          <SelicRatesTab />
         </TabsContent>
       </Tabs>
     </div>
