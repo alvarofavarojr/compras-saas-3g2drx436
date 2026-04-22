@@ -19,8 +19,6 @@ import {
 import useProcurementStore from '@/stores/useProcurementStore'
 import { BrainCircuit, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Database, Info } from 'lucide-react'
 
 export default function MatchingPage() {
   const { erpNeeds, matchedNeeds, supplierItems, confirmMatch } = useProcurementStore()
@@ -38,18 +36,6 @@ export default function MatchingPage() {
 
   return (
     <div className="space-y-6 animate-fade-in-up">
-      <Alert className="bg-blue-50/50 text-blue-900 border-blue-200">
-        <Info className="h-4 w-4 text-blue-600" />
-        <AlertTitle className="text-blue-800">
-          Armazenamento Temporário (Sem Banco de Dados)
-        </AlertTitle>
-        <AlertDescription className="text-blue-700/80">
-          O mapeamento realizado nesta sessão é temporário e será perdido ao recarregar a página.
-          Recomendamos integrar o <strong>Skip Cloud</strong> ou <strong>Supabase</strong>{' '}
-          futuramente para persistir essas configurações de forma definitiva.
-        </AlertDescription>
-      </Alert>
-
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-2">

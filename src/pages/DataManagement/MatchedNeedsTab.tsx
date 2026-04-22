@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
+import { useRealtime } from '@/hooks/use-realtime'
 import { useAuth } from '@/hooks/use-auth'
 import { useToast } from '@/hooks/use-toast'
 import {
@@ -19,32 +20,39 @@ import { Search, Trash2 } from 'lucide-react'
 export default function MatchedNeedsTab() {
   const [data, setData] = useState<any[]>([])
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
   const { user } = useAuth()
   const { toast } = useToast()
 
   const fetch = async () => {
     if (!user) return
-    const { data: res } = await supabase
-      .from('matched_needs')
-      .select('*, erp_needs(description), supplier_items(description, price)')
-      .order('created_at', { ascending: false })
-    if (res) setData(res)
+    setLoading(true)
+    try {
+      const res = await pb
+        .collection('matched_needs')
+        .getFullList({ sort: '-created', expand: 'erp_id,selected_item_id' })
+      setData(res)
+    } catch (e) {}
+    setLoading(false)
   }
 
   useEffect(() => {
     fetch()
   }, [user])
 
+  useRealtime('matched_needs', () => {
+    fetch()
+  })
+
   const handleDelete = async (id: string) => {
-    const { error } = await supabase.from('matched_needs').delete().eq('erp_id', id)
-    if (!error) {
+    try {
+      await pb.collection('matched_needs').delete(id)
       toast({ title: 'Sucesso', description: 'Mapeamento removido.' })
-      fetch()
-    }
+    } catch (e) {}
   }
 
   const filtered = data.filter((item) => {
-    const erpDesc = item.erp_needs?.description || ''
+    const erpDesc = item.expand?.erp_id?.description || ''
     return erpDesc.toLowerCase().includes(search.toLowerCase())
   })
 
@@ -61,54 +69,62 @@ export default function MatchedNeedsTab() {
           />
         </div>
         <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Necessidade ERP</TableHead>
-                <TableHead>Item Mapeado (Fornecedor)</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="w-[80px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.map((item) => (
-                <TableRow key={item.erp_id}>
-                  <TableCell className="font-medium">{item.erp_needs?.description}</TableCell>
-                  <TableCell>
-                    {item.supplier_items ? (
-                      <div>
-                        <div>{item.supplier_items.description}</div>
-                        <div className="text-xs text-muted-foreground">
-                          ${Number(item.supplier_items.price).toFixed(2)}
-                        </div>
-                      </div>
-                    ) : (
-                      <span className="text-muted-foreground italic">Nenhum selecionado</span>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {item.confirmed ? (
-                      <Badge className="bg-emerald-500 hover:bg-emerald-600">Confirmado</Badge>
-                    ) : (
-                      <Badge variant="secondary">Pendente</Badge>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(item.erp_id)}>
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-              {filtered.length === 0 && (
+          {loading ? (
+            <div className="p-8 text-center text-muted-foreground animate-pulse">
+              Carregando dados...
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8">
-                    Nenhum mapeamento encontrado.
-                  </TableCell>
+                  <TableHead>Necessidade ERP</TableHead>
+                  <TableHead>Item Mapeado (Fornecedor)</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((item) => (
+                  <TableRow key={item.erp_id}>
+                    <TableCell className="font-medium">
+                      {item.expand?.erp_id?.description}
+                    </TableCell>
+                    <TableCell>
+                      {item.expand?.selected_item_id ? (
+                        <div>
+                          <div>{item.expand?.selected_item_id.description}</div>
+                          <div className="text-xs text-muted-foreground">
+                            ${Number(item.expand?.selected_item_id.price).toFixed(2)}
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="text-muted-foreground italic">Nenhum selecionado</span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {item.confirmed ? (
+                        <Badge className="bg-emerald-500 hover:bg-emerald-600">Confirmado</Badge>
+                      ) : (
+                        <Badge variant="secondary">Pendente</Badge>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="ghost" size="icon" onClick={() => handleDelete(item.erp_id)}>
+                        <Trash2 className="w-4 h-4 text-destructive" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {filtered.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center py-8">
+                      Nenhum mapeamento encontrado.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          )}
         </div>
       </CardContent>
     </Card>

@@ -1,15 +1,9 @@
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
 
 export async function getErpNeeds() {
-  const { data, error } = await supabase
-    .from('erp_needs')
-    .select('*')
-    .order('created_at', { ascending: false })
-  if (error) throw error
-  return data
+  return await pb.collection('erp_needs').getFullList({ sort: '-created' })
 }
 
 export async function deleteErpNeed(id: string) {
-  const { error } = await supabase.from('erp_needs').delete().eq('id', id)
-  if (error) throw error
+  return await pb.collection('erp_needs').delete(id)
 }

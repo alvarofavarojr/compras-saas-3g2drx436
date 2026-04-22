@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
+import { useRealtime } from '@/hooks/use-realtime'
 import { useAuth } from '@/hooks/use-auth'
 import { useToast } from '@/hooks/use-toast'
 import {
@@ -20,34 +21,42 @@ export default function SupplierItemsTab() {
   const [data, setData] = useState<any[]>([])
   const [search, setSearch] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
+  const [loading, setLoading] = useState(true)
   const { user } = useAuth()
   const { toast } = useToast()
 
   const fetch = async () => {
     if (!user) return
-    const { data: res } = await supabase
-      .from('supplier_items')
-      .select('*, suppliers(name)')
-      .order('created_at', { ascending: false })
-    if (res) setData(res)
+    setLoading(true)
+    try {
+      const res = await pb
+        .collection('supplier_items')
+        .getFullList({ sort: '-created', expand: 'supplier_id' })
+      setData(res)
+    } catch (e) {}
+    setLoading(false)
   }
 
   useEffect(() => {
     fetch()
   }, [user])
 
+  useRealtime('supplier_items', () => {
+    fetch()
+  })
+
   const handleDelete = async (id: string) => {
-    const { error } = await supabase.from('supplier_items').delete().eq('id', id)
-    if (!error) {
+    try {
+      await pb.collection('supplier_items').delete(id)
       toast({ title: 'Sucesso', description: 'Item removido.' })
-      fetch()
-    }
+    } catch (e) {}
   }
 
   const filtered = data.filter((item) => {
+    const supplierName = item.expand?.supplier_id?.nome || item.expand?.supplier_id?.name || ''
     const matchesSearch =
       item.description.toLowerCase().includes(search.toLowerCase()) ||
-      (item.suppliers?.name || '').toLowerCase().includes(search.toLowerCase())
+      supplierName.toLowerCase().includes(search.toLowerCase())
     const matchesSource = sourceFilter ? item.source === sourceFilter : true
     return matchesSearch && matchesSource
   })
@@ -84,41 +93,51 @@ export default function SupplierItemsTab() {
           </div>
         </div>
         <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Descrição</TableHead>
-                <TableHead>Fornecedor</TableHead>
-                <TableHead>Preço</TableHead>
-                <TableHead>Fonte</TableHead>
-                <TableHead className="w-[80px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.description}</TableCell>
-                  <TableCell>{item.suppliers?.name || 'Desconhecido'}</TableCell>
-                  <TableCell>${Number(item.price).toFixed(2)}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{item.source}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-              {filtered.length === 0 && (
+          {loading ? (
+            <div className="p-8 text-center text-muted-foreground animate-pulse">
+              Carregando dados...
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
-                    Nenhum item encontrado.
-                  </TableCell>
+                  <TableHead>Descrição</TableHead>
+                  <TableHead>Fornecedor</TableHead>
+                  <TableHead>Preço</TableHead>
+                  <TableHead>Fonte</TableHead>
+                  <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell className="font-medium">{item.description}</TableCell>
+                    <TableCell>
+                      {item.expand?.supplier_id?.nome ||
+                        item.expand?.supplier_id?.name ||
+                        'Desconhecido'}
+                    </TableCell>
+                    <TableCell>${Number(item.price).toFixed(2)}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{item.source}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="ghost" size="icon" onClick={() => handleDelete(item.id)}>
+                        <Trash2 className="w-4 h-4 text-destructive" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {filtered.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={5} className="text-center py-8">
+                      Nenhum item encontrado.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          )}
         </div>
       </CardContent>
     </Card>

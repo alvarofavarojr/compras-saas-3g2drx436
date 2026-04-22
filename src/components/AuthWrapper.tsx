@@ -7,8 +7,8 @@ import { Loader2 } from 'lucide-react'
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const { user, loading, signIn } = useAuth()
-  const [email, setEmail] = useState('alvaro@farmaciarhamus.com.br')
-  const [password, setPassword] = useState('Skip@Pass')
+  const [email, setEmail] = useState('admin@farmacia.com.br')
+  const [password, setPassword] = useState('Skip@Pass123')
   const [isSigningIn, setIsSigningIn] = useState(false)
   const [error, setError] = useState('')
 
@@ -26,7 +26,9 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
       setIsSigningIn(true)
       setError('')
       const { error } = await signIn(email, password)
-      if (error) setError(error.message)
+      if (error) {
+        setError('E-mail ou senha inválidos.')
+      }
       setIsSigningIn(false)
     }
 

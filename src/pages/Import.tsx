@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast'
 import useProcurementStore from '@/stores/useProcurementStore'
 import { Link } from 'react-router-dom'
 import { UploadCard } from '@/components/UploadCard'
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -58,28 +58,23 @@ export default function ImportPage() {
     }, 150)
 
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
+      const user = pb.authStore.record
       if (user && mode === 'replace') {
         if (type === 'ERP') {
-          await supabase.from('erp_needs').delete().eq('user_id', user.id)
+          const list = await pb.collection('erp_needs').getFullList()
+          await Promise.all(list.map((l) => pb.collection('erp_needs').delete(l.id)))
         } else if (type === 'AM') {
-          await supabase
-            .from('supplier_items')
-            .delete()
-            .eq('user_id', user.id)
-            .like('source', 'AM%')
+          const list = await pb.collection('supplier_items').getFullList()
+          const toDelete = list.filter((l) => l.source.startsWith('AM'))
+          await Promise.all(toDelete.map((l) => pb.collection('supplier_items').delete(l.id)))
         } else if (type === 'QUOTE') {
-          await supabase
-            .from('supplier_items')
-            .delete()
-            .eq('user_id', user.id)
-            .eq('source', 'DIRECT_QUOTE')
+          const list = await pb
+            .collection('supplier_items')
+            .getFullList({ filter: 'source="DIRECT_QUOTE"' })
+          await Promise.all(list.map((l) => pb.collection('supplier_items').delete(l.id)))
         }
       }
 
-      // @ts-expect-error - Support for optional mode parameter
       await Promise.all([
         importData(type, mode),
         new Promise((resolve) => setTimeout(resolve, 1500)),
@@ -218,6 +213,7 @@ export default function ImportPage() {
               files: amDemandaFiles,
               maxFiles: 20,
               required: true,
+              accept: '.pdf, .html, .htm, .xlsx, .xls',
             },
             {
               id: 'am_pedido',
@@ -225,6 +221,7 @@ export default function ImportPage() {
               files: amPedidoFiles,
               maxFiles: 20,
               required: true,
+              accept: '.pdf, .html, .htm, .xlsx, .xls',
             },
           ]}
           onFileChange={(id, files) => {

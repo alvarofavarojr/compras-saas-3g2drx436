@@ -1,15 +1,11 @@
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
 
 export async function getMatchedNeeds() {
-  const { data, error } = await supabase
-    .from('matched_needs')
-    .select('*, erp_needs(description), supplier_items(description)')
-    .order('created_at', { ascending: false })
-  if (error) throw error
-  return data
+  return await pb
+    .collection('matched_needs')
+    .getFullList({ sort: '-created', expand: 'erp_id,selected_item_id' })
 }
 
 export async function deleteMatchedNeed(id: string) {
-  const { error } = await supabase.from('matched_needs').delete().eq('erp_id', id)
-  if (error) throw error
+  return await pb.collection('matched_needs').delete(id)
 }

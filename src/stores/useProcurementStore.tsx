@@ -1,8 +1,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react'
 import { Supplier, ERPNeed, SupplierItem, MatchedNeed } from '@/lib/types'
-import { MOCK_SUPPLIERS, MOCK_ERP_NEEDS, MOCK_SUPPLIER_ITEMS } from '@/lib/mockData'
 import { calculateSimilarity } from '@/lib/optimizationUtils'
-import { supabase } from '@/lib/supabase/client'
+import pb from '@/lib/pocketbase/client'
 import { useAuth } from '@/hooks/use-auth'
 
 interface StoreState {
@@ -10,7 +9,7 @@ interface StoreState {
   erpNeeds: ERPNeed[]
   supplierItems: SupplierItem[]
   matchedNeeds: MatchedNeed[]
-  importData: (type: 'ERP' | 'AM' | 'QUOTE') => Promise<void>
+  importData: (type: 'ERP' | 'AM' | 'QUOTE', mode: 'merge' | 'replace') => Promise<void>
   confirmMatch: (erpId: string, itemId: string) => Promise<void>
   updateQuantity: (erpId: string, qty: number) => Promise<void>
   loadData: () => Promise<void>
@@ -31,16 +30,15 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
     if (!user) return
     setIsLoading(true)
 
-    const [{ data: supData }, { data: erpData }, { data: itemsData }, { data: matchData }] =
-      await Promise.all([
-        supabase.from('suppliers').select('*').eq('user_id', user.id),
-        supabase.from('erp_needs').select('*').eq('user_id', user.id),
-        supabase.from('supplier_items').select('*').eq('user_id', user.id),
-        supabase.from('matched_needs').select('*').eq('user_id', user.id),
+    try {
+      const [supData, erpData, itemsData, matchData] = await Promise.all([
+        pb.collection('suppliers').getFullList(),
+        pb.collection('erp_needs').getFullList(),
+        pb.collection('supplier_items').getFullList(),
+        pb.collection('matched_needs').getFullList(),
       ])
 
-    if (supData) setSuppliers(supData.map((s) => ({ id: s.id, name: s.name })))
-    if (erpData)
+      setSuppliers(supData.map((s) => ({ id: s.id, name: s.nome || s.name, cifThreshold: 0 })))
       setErpNeeds(
         erpData.map((e) => ({
           id: e.id,
@@ -48,9 +46,10 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
           minStock: Number(e.min_stock),
           maxStock: Number(e.max_stock),
           requiredQuantity: Number(e.required_quantity),
+          currentStock: 0,
+          monthlyConsumption: 0,
         })),
       )
-    if (itemsData)
       setSupplierItems(
         itemsData.map((i) => ({
           id: i.id,
@@ -58,10 +57,11 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
           description: i.description,
           price: Number(i.price),
           packSize: Number(i.pack_size),
-          source: i.source,
+          source: i.source as any,
+          expiryDate: '',
+          minQuantity: 0,
         })),
       )
-    if (matchData)
       setMatchedNeeds(
         matchData.map((m) => ({
           erpId: m.erp_id,
@@ -71,6 +71,9 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
           confirmed: m.confirmed,
         })),
       )
+    } catch (e) {
+      console.error(e)
+    }
 
     setIsLoading(false)
   }, [user])
@@ -78,21 +81,6 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     loadData()
   }, [loadData])
-
-  const saveMatches = async (matches: MatchedNeed[]) => {
-    if (!user) return
-    const records = matches.map((m) => ({
-      erp_id: m.erpId,
-      user_id: user.id,
-      matches_json: m.matches,
-      selected_item_id: m.selectedItemId || null,
-      suggested_quantity: m.suggestedQuantity,
-      confirmed: m.confirmed,
-    }))
-    if (records.length > 0) {
-      await supabase.from('matched_needs').upsert(records)
-    }
-  }
 
   const generateMatches = (needs: ERPNeed[], items: SupplierItem[]) => {
     const matches: MatchedNeed[] = needs.map((need) => {
@@ -118,54 +106,144 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
     return matches
   }
 
-  const importData = async (type: 'ERP' | 'AM' | 'QUOTE') => {
+  const saveMatches = async (matches: MatchedNeed[]) => {
+    if (!user) return
+    for (const m of matches) {
+      try {
+        const existing = await pb
+          .collection('matched_needs')
+          .getFirstListItem(`erp_id="${m.erpId}"`)
+        await pb.collection('matched_needs').update(existing.id, {
+          matches_json: m.matches,
+          selected_item_id: m.selectedItemId || null,
+          suggested_quantity: m.suggestedQuantity,
+          confirmed: m.confirmed,
+        })
+      } catch {
+        await pb.collection('matched_needs').create({
+          user_id: user.id,
+          erp_id: m.erpId,
+          matches_json: m.matches,
+          selected_item_id: m.selectedItemId || null,
+          suggested_quantity: m.suggestedQuantity,
+          confirmed: m.confirmed,
+        })
+      }
+    }
+  }
+
+  const importData = async (type: 'ERP' | 'AM' | 'QUOTE', mode: 'merge' | 'replace') => {
     if (!user) return
 
     if (type === 'ERP') {
-      const records = MOCK_ERP_NEEDS.map((n) => ({
-        id: n.id,
-        user_id: user.id,
-        description: n.description,
-        min_stock: n.minStock,
-        max_stock: n.maxStock,
-        required_quantity: n.requiredQuantity,
-      }))
-      await supabase.from('erp_needs').upsert(records)
-
-      const newMatches = generateMatches(MOCK_ERP_NEEDS, supplierItems)
-      await saveMatches(newMatches)
+      const mockErpNeeds = [
+        {
+          description: 'Paracetamol 500mg',
+          min_stock: 1000,
+          max_stock: 5000,
+          required_quantity: 4200,
+        },
+        {
+          description: 'Amoxicilina 500mg',
+          min_stock: 500,
+          max_stock: 2000,
+          required_quantity: 1600,
+        },
+        {
+          description: 'Ibuprofeno 400mg',
+          min_stock: 800,
+          max_stock: 3000,
+          required_quantity: 2500,
+        },
+        {
+          description: 'Dipirona 500mg',
+          min_stock: 2000,
+          max_stock: 10000,
+          required_quantity: 8500,
+        },
+      ]
+      for (const n of mockErpNeeds) {
+        await pb.collection('erp_needs').create({
+          user_id: user.id,
+          description: n.description,
+          min_stock: n.min_stock,
+          max_stock: n.max_stock,
+          required_quantity: n.required_quantity,
+        })
+      }
     } else {
-      const supRecords = MOCK_SUPPLIERS.map((s) => ({
-        id: s.id,
-        user_id: user.id,
-        name: s.name,
-      }))
-      await supabase.from('suppliers').upsert(supRecords)
+      const existingSuppliers = await pb.collection('suppliers').getFullList()
+      let supId = existingSuppliers[0]?.id
+      if (!supId) {
+        const sup = await pb
+          .collection('suppliers')
+          .create({ user_id: user.id, nome: 'Fornecedor IA', ativo: true })
+        supId = sup.id
+      }
 
-      const newItems =
+      const mockItems =
         type === 'AM'
-          ? MOCK_SUPPLIER_ITEMS.filter((i) => i.source.startsWith('AM'))
-          : MOCK_SUPPLIER_ITEMS.filter((i) => i.source === 'DIRECT_QUOTE')
+          ? [
+              {
+                description: 'Paracetamol 500mg cx 50',
+                price: 0.12,
+                pack_size: 50,
+                source: 'AM_DEMANDA',
+              },
+              { description: 'Amoxil 500mg', price: 0.45, pack_size: 30, source: 'AM_PEDIDO' },
+              { description: 'Ibuprofeno 400mg', price: 0.18, pack_size: 20, source: 'AM_PEDIDO' },
+              {
+                description: 'Dipirona Sódica 500mg',
+                price: 0.08,
+                pack_size: 100,
+                source: 'AM_DEMANDA',
+              },
+            ]
+          : [
+              { description: 'Paracetamol 500', price: 0.1, pack_size: 10, source: 'DIRECT_QUOTE' },
+              {
+                description: 'Amoxicilina 500mg',
+                price: 0.4,
+                pack_size: 10,
+                source: 'DIRECT_QUOTE',
+              },
+              {
+                description: 'Ibuprofeno 400mg',
+                price: 0.15,
+                pack_size: 10,
+                source: 'DIRECT_QUOTE',
+              },
+            ]
 
-      const itemRecords = newItems.map((i) => ({
-        id: i.id,
-        user_id: user.id,
-        supplier_id: i.supplierId,
-        description: i.description,
-        price: i.price,
-        pack_size: i.packSize,
-        source: i.source,
-      }))
-      await supabase.from('supplier_items').upsert(itemRecords)
-
-      const allItems = [...supplierItems, ...newItems]
-      const uniqueItems = Array.from(new Map(allItems.map((i) => [i.id, i])).values())
-
-      if (erpNeeds.length > 0) {
-        const newMatches = generateMatches(erpNeeds, uniqueItems)
-        await saveMatches(newMatches)
+      for (const i of mockItems) {
+        await pb.collection('supplier_items').create({
+          user_id: user.id,
+          supplier_id: supId,
+          description: i.description,
+          price: i.price,
+          pack_size: i.pack_size,
+          source: i.source,
+        })
       }
     }
+
+    const erpData = await pb.collection('erp_needs').getFullList()
+    const itemsData = await pb.collection('supplier_items').getFullList()
+
+    const formattedErp = erpData.map(
+      (e) =>
+        ({
+          id: e.id,
+          description: e.description,
+          requiredQuantity: e.required_quantity,
+        }) as ERPNeed,
+    )
+    const formattedItems = itemsData.map(
+      (i) => ({ id: i.id, description: i.description }) as SupplierItem,
+    )
+
+    const newMatches = generateMatches(formattedErp, formattedItems)
+    await saveMatches(newMatches)
 
     await loadData()
   }
@@ -175,14 +253,13 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
       prev.map((m) => (m.erpId === erpId ? { ...m, selectedItemId: itemId, confirmed: true } : m)),
     )
     if (user) {
-      await supabase
-        .from('matched_needs')
-        .update({
+      try {
+        const existing = await pb.collection('matched_needs').getFirstListItem(`erp_id="${erpId}"`)
+        await pb.collection('matched_needs').update(existing.id, {
           selected_item_id: itemId,
           confirmed: true,
         })
-        .eq('erp_id', erpId)
-        .eq('user_id', user.id)
+      } catch (e) {}
     }
   }
 
@@ -191,13 +268,12 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
       prev.map((m) => (m.erpId === erpId ? { ...m, suggestedQuantity: qty } : m)),
     )
     if (user) {
-      await supabase
-        .from('matched_needs')
-        .update({
+      try {
+        const existing = await pb.collection('matched_needs').getFirstListItem(`erp_id="${erpId}"`)
+        await pb.collection('matched_needs').update(existing.id, {
           suggested_quantity: qty,
         })
-        .eq('erp_id', erpId)
-        .eq('user_id', user.id)
+      } catch (e) {}
     }
   }
 
