@@ -29,7 +29,9 @@ export default function ErpNeedsTab() {
     try {
       const res = await pb.collection('erp_needs').getFullList({ sort: '-created' })
       setData(res)
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
     setLoading(false)
   }
 
@@ -45,7 +47,9 @@ export default function ErpNeedsTab() {
     try {
       await pb.collection('erp_needs').delete(id)
       toast({ title: 'Sucesso', description: 'Registro removido.' })
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const filtered = data.filter((item) =>

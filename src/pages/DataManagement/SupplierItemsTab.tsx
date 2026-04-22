@@ -33,7 +33,9 @@ export default function SupplierItemsTab() {
         .collection('supplier_items')
         .getFullList({ sort: '-created', expand: 'supplier_id' })
       setData(res)
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
     setLoading(false)
   }
 
@@ -49,7 +51,9 @@ export default function SupplierItemsTab() {
     try {
       await pb.collection('supplier_items').delete(id)
       toast({ title: 'Sucesso', description: 'Item removido.' })
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const filtered = data.filter((item) => {

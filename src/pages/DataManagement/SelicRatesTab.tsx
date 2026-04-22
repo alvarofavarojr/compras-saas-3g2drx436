@@ -31,7 +31,9 @@ export default function SelicRatesTab() {
     try {
       const res = await pb.collection('selic_rates').getFullList({ sort: '-valid_from' })
       setRates(res)
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
     setLoading(false)
   }
 
@@ -63,7 +65,9 @@ export default function SelicRatesTab() {
     try {
       await pb.collection('selic_rates').delete(id)
       toast({ title: 'Removido', description: 'Taxa removida com sucesso.' })
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (

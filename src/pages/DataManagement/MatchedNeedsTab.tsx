@@ -32,7 +32,9 @@ export default function MatchedNeedsTab() {
         .collection('matched_needs')
         .getFullList({ sort: '-created', expand: 'erp_id,selected_item_id' })
       setData(res)
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
     setLoading(false)
   }
 
@@ -48,7 +50,9 @@ export default function MatchedNeedsTab() {
     try {
       await pb.collection('matched_needs').delete(id)
       toast({ title: 'Sucesso', description: 'Mapeamento removido.' })
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const filtered = data.filter((item) => {

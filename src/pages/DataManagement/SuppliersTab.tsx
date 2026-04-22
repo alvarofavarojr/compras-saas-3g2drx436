@@ -29,7 +29,9 @@ export default function SuppliersTab() {
     try {
       const res = await pb.collection('suppliers').getFullList({ sort: '-created' })
       setData(res)
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
     setLoading(false)
   }
 

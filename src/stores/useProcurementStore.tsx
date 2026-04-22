@@ -259,7 +259,9 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
           selected_item_id: itemId,
           confirmed: true,
         })
-      } catch (e) {}
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 
@@ -273,7 +275,9 @@ export const ProcurementProvider = ({ children }: { children: ReactNode }) => {
         await pb.collection('matched_needs').update(existing.id, {
           suggested_quantity: qty,
         })
-      } catch (e) {}
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 
