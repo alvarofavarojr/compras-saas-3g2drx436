@@ -77,9 +77,68 @@ export default function ImportPage() {
     }, 150)
 
     try {
+      const file = quoteFiles[0]
       const formData = new FormData()
-      formData.append('file', quoteFiles[0])
+      formData.append('file', file)
       formData.append('supplier_id', selectedSupplier)
+
+      if (file.name.toLowerCase().endsWith('.csv')) {
+        try {
+          const text = await file.text()
+          const lines = text.split('\n')
+          if (lines.length > 1) {
+            const headers = lines[0]
+              .split(/[;,]/)
+              .map((h) => h.trim().toLowerCase().replace(/ /g, '_'))
+            const items = []
+
+            const nomeIdx = headers.findIndex(
+              (h) => h === 'produto_nome' || h === 'nome' || h === 'produto' || h === 'descricao',
+            )
+            const qtdIdx = headers.findIndex(
+              (h) => h === 'quantidade' || h === 'qtd' || h === 'quant',
+            )
+            const precoIdx = headers.findIndex(
+              (h) =>
+                h === 'preco_unitario' || h === 'preco' || h === 'valor_unitario' || h === 'valor',
+            )
+
+            if (nomeIdx !== -1 && qtdIdx !== -1 && precoIdx !== -1) {
+              for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue
+
+                const separator = lines[i].includes(';') ? ';' : ','
+                const row = lines[i].split(separator)
+
+                if (row.length > Math.max(nomeIdx, qtdIdx, precoIdx)) {
+                  let precoStr = row[precoIdx].replace(/[^\d.,-]/g, '')
+                  if (precoStr.includes(',') && precoStr.includes('.')) {
+                    precoStr = precoStr.replace(/\./g, '').replace(',', '.')
+                  } else if (precoStr.includes(',')) {
+                    precoStr = precoStr.replace(',', '.')
+                  }
+
+                  const qtd = parseFloat(row[qtdIdx])
+                  const preco = parseFloat(precoStr)
+
+                  if (row[nomeIdx] && !isNaN(qtd) && !isNaN(preco)) {
+                    items.push({
+                      produto_nome: row[nomeIdx].trim().replace(/^"|"$/g, ''),
+                      quantidade: qtd,
+                      preco_unitario: preco,
+                    })
+                  }
+                }
+              }
+              if (items.length > 0) {
+                formData.append('items', JSON.stringify(items))
+              }
+            }
+          }
+        } catch (e) {
+          console.error('Error parsing CSV on client:', e)
+        }
+      }
 
       const res = await pb.send('/backend/v1/processar_cotacao', {
         method: 'POST',
