@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { FileSlot } from './FileSlot'
+import { ReactNode } from 'react'
 
 export type SlotConfig = {
   id: string
@@ -35,6 +36,8 @@ export interface UploadCardProps {
   progress?: number
   loaded: boolean
   onError: (msg: string) => void
+  extraUi?: ReactNode
+  uploadLabel?: string
 }
 
 export function UploadCard({
@@ -47,6 +50,8 @@ export function UploadCard({
   progress,
   loaded,
   onError,
+  extraUi,
+  uploadLabel = 'Processar Dados',
 }: UploadCardProps) {
   const allRequiredFilesPresent = slots.every((s) => !s.required || s.files.length > 0)
   const anyFilePresent = slots.some((s) => s.files.length > 0)
@@ -71,6 +76,7 @@ export function UploadCard({
         <CardDescription className="text-sm">{description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 space-y-5 pb-4">
+        {extraUi && <div className="mb-2">{extraUi}</div>}
         {slots.map((slot) => (
           <div key={slot.id} className="space-y-1.5">
             <FileSlot
@@ -115,7 +121,7 @@ export function UploadCard({
           disabled={!canUpload || loading}
           variant={canUpload ? 'default' : 'secondary'}
         >
-          {loading ? 'Processando...' : loaded ? 'Novo Upload' : 'Processar Dados'}
+          {loading ? 'Processando...' : loaded ? 'Novo Upload' : uploadLabel}
           {!loading && canUpload && <UploadCloud className="w-4 h-4 ml-2" />}
         </Button>
       </CardFooter>

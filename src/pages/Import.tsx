@@ -16,9 +16,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export default function ImportPage() {
-  const { importData, erpNeeds, supplierItems } = useProcurementStore()
+  const { importData, erpNeeds, supplierItems, suppliers, loadData } = useProcurementStore()
   const { toast } = useToast()
   const [loading, setLoading] = useState<string | null>(null)
   const [progress, setProgress] = useState<number>(0)
@@ -27,6 +34,7 @@ export default function ImportPage() {
   const [amDemandaFiles, setAmDemandaFiles] = useState<File[]>([])
   const [amPedidoFiles, setAmPedidoFiles] = useState<File[]>([])
   const [quoteFiles, setQuoteFiles] = useState<File[]>([])
+  const [selectedSupplier, setSelectedSupplier] = useState<string>('')
 
   const [validationAlert, setValidationAlert] = useState<{
     isOpen: boolean
@@ -42,6 +50,67 @@ export default function ImportPage() {
   const isErpLoaded = erpNeeds.length > 0
   const isAmLoaded = supplierItems.some((i) => i.source.startsWith('AM'))
   const isQuoteLoaded = supplierItems.some((i) => i.source === 'DIRECT_QUOTE')
+
+  const handleUploadQuote = async () => {
+    if (!selectedSupplier) {
+      toast({
+        title: 'Atenção',
+        description: 'Selecione um fornecedor antes de enviar.',
+        variant: 'destructive',
+      })
+      return
+    }
+    if (quoteFiles.length === 0) {
+      toast({
+        title: 'Atenção',
+        description: 'Selecione um arquivo de cotação.',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    setLoading('QUOTE')
+    setProgress(0)
+
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev >= 90 ? 90 : prev + 10))
+    }, 150)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', quoteFiles[0])
+      formData.append('supplier_id', selectedSupplier)
+
+      const res = await pb.send('/backend/v1/processar_cotacao', {
+        method: 'POST',
+        body: formData,
+      })
+
+      clearInterval(interval)
+      setProgress(100)
+
+      setTimeout(async () => {
+        await loadData()
+        setLoading(null)
+        toast({
+          title: 'Sucesso',
+          description: `Cotação processada! ${res.items_inseridos} itens inseridos.`,
+          className: 'bg-emerald-600 text-white border-emerald-700',
+        })
+        setQuoteFiles([])
+        setSelectedSupplier('')
+      }, 300)
+    } catch (error: any) {
+      clearInterval(interval)
+      setLoading(null)
+      const msg = error.response?.mensagem || error.message || 'Erro desconhecido'
+      toast({
+        title: 'Erro',
+        description: `Erro ao processar cotação: ${msg}`,
+        variant: 'destructive',
+      })
+    }
+  }
 
   const executeUpload = async (
     type: 'ERP' | 'AM' | 'QUOTE',
@@ -99,7 +168,12 @@ export default function ImportPage() {
   }
 
   const handleUpload = async (type: 'ERP' | 'AM' | 'QUOTE') => {
-    const isLoaded = type === 'ERP' ? isErpLoaded : type === 'AM' ? isAmLoaded : isQuoteLoaded
+    if (type === 'QUOTE') {
+      await handleUploadQuote()
+      return
+    }
+
+    const isLoaded = type === 'ERP' ? isErpLoaded : isAmLoaded
 
     if (isLoaded) {
       setUploadModeAlert({ isOpen: true, type })
@@ -110,7 +184,6 @@ export default function ImportPage() {
   }
 
   const proceedWithUpload = (type: 'ERP' | 'AM' | 'QUOTE', mode: 'merge' | 'replace') => {
-    // Advanced validations logic simulation
     if (type === 'AM') {
       setValidationAlert({
         isOpen: true,
@@ -238,18 +311,36 @@ export default function ImportPage() {
           loaded={isQuoteLoaded}
           loading={loading === 'QUOTE'}
           progress={loading === 'QUOTE' ? progress : undefined}
+          uploadLabel="Upload de Cotação"
+          extraUi={
+            <div className="space-y-2 px-1">
+              <label className="text-sm font-medium text-foreground/80">Fornecedor</label>
+              <Select value={selectedSupplier} onValueChange={setSelectedSupplier}>
+                <SelectTrigger className="bg-background">
+                  <SelectValue placeholder="Selecione um fornecedor" />
+                </SelectTrigger>
+                <SelectContent>
+                  {suppliers.map((s) => (
+                    <SelectItem key={s.id} value={s.id}>
+                      {s.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          }
           slots={[
             {
               id: 'quote',
-              label: 'Cotação de Fornecedor',
+              label: 'Arquivo da Cotação',
               files: quoteFiles,
-              maxFiles: 20,
+              maxFiles: 1,
               required: true,
-              accept: '.pdf, .html',
-              validExtensions: ['pdf', 'html'],
+              accept: '.pdf, .html, .htm, .xlsx, .xls',
+              validExtensions: ['pdf', 'html', 'htm', 'xlsx', 'xls'],
               errorMessage:
-                'Formato de arquivo não suportado. Por favor, envie arquivos PDF ou HTML.',
-              formatHelpText: 'PDF ou HTML',
+                'Formato de arquivo não suportado. Por favor, envie arquivos PDF, HTML ou Excel.',
+              formatHelpText: 'Excel, PDF ou HTML',
             },
           ]}
           onFileChange={(id, files) => setQuoteFiles(files)}
