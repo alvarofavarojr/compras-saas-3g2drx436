@@ -1,7 +1,9 @@
+// @deps xlsx@0.18.5
 routerAdd(
   'POST',
   '/backend/v1/processar_cotacao',
   (e) => {
+    const XLSX = require('xlsx')
     const authRecord = e.auth
     if (!authRecord) return e.unauthorizedError('Unauthorized')
     const userId = authRecord.id
@@ -18,6 +20,7 @@ routerAdd(
     if (recentLogs.length >= 10) {
       return e.json(429, {
         status: 'erro',
+        erro: 'Muitas requisições. Tente novamente em 1 minuto.',
         mensagem: 'Muitas requisições. Tente novamente em 1 minuto.',
       })
     }
@@ -32,6 +35,10 @@ routerAdd(
         throw new Error('Arquivo não enviado|file')
       }
       const file = files[0]
+
+      if (file.size === 0) {
+        throw new Error('Arquivo não contém dados|file')
+      }
 
       if (file.size > 5242880) {
         throw new Error('Arquivo excede 5MB|file')
@@ -73,18 +80,159 @@ routerAdd(
       const quotationId = record.id
 
       let items = []
-      if (tipo === 'excel') {
-        items = [
-          { produto_nome: 'Dipirona 500mg (Planilha)', quantidade: 100, preco_unitario: 2.5 },
-          { produto_nome: 'Loratadina 500mg (Planilha)', quantidade: 50, preco_unitario: 12.0 },
-        ]
+      if (tipo === 'excel' || tipo === 'html') {
+        const baseUrl = $secrets.get('PB_INSTANCE_URL') || 'http://127.0.0.1:8090'
+        const authHeader = e.request.header.get('Authorization') || ''
+        const fileUrl = `${baseUrl}/api/files/${record.collectionId}/${record.id}/${record.getString('arquivo_original')}`
+
+        const resFetch = $http.send({
+          url: fileUrl,
+          method: 'GET',
+          headers: { Authorization: authHeader },
+          timeout: 30,
+        })
+
+        if (resFetch.statusCode !== 200) {
+          throw new Error('Falha ao ler o arquivo salvo|arquivo')
+        }
+
+        let workbook
+        try {
+          workbook = XLSX.read(resFetch.body, { type: 'array' })
+        } catch (err) {
+          throw new Error('Arquivo Excel inválido ou corrompido|arquivo')
+        }
+
+        const sheetName = workbook.SheetNames[0]
+        if (!sheetName) {
+          throw new Error('Arquivo não contém dados|arquivo')
+        }
+
+        const worksheet = workbook.Sheets[sheetName]
+        const rawData = XLSX.utils.sheet_to_json(worksheet, { defval: null })
+
+        if (rawData.length === 0) {
+          throw new Error('Arquivo não contém dados|arquivo')
+        }
+
+        let firstRowKeys = []
+        for (let i = 0; i < rawData.length; i++) {
+          if (rawData[i]) {
+            firstRowKeys = Object.keys(rawData[i])
+            if (firstRowKeys.length > 0) break
+          }
+        }
+
+        if (firstRowKeys.length === 0) {
+          throw new Error('Arquivo não contém dados|arquivo')
+        }
+
+        const reqCols = ['produto_nome', 'quantidade', 'preco_unitario']
+        let foundCols = {}
+
+        for (const k of firstRowKeys) {
+          const norm = k
+            .trim()
+            .toLowerCase()
+            .replace(/ /g, '_')
+            .replace(/ç/g, 'c')
+            .replace(/ã/g, 'a')
+            .replace(/á/g, 'a')
+            .replace(/é/g, 'e')
+            .replace(/í/g, 'i')
+            .replace(/ó/g, 'o')
+            .replace(/ú/g, 'u')
+
+          if (
+            norm === 'produto_nome' ||
+            norm === 'nome' ||
+            norm === 'produto' ||
+            norm === 'descricao'
+          )
+            foundCols['produto_nome'] = k
+          if (norm === 'quantidade' || norm === 'qtd' || norm === 'quant')
+            foundCols['quantidade'] = k
+          if (
+            norm === 'preco_unitario' ||
+            norm === 'preco' ||
+            norm === 'valor_unitario' ||
+            norm === 'valor' ||
+            norm === 'unitario' ||
+            norm === 'preco_un' ||
+            norm === 'vlr_unit'
+          )
+            foundCols['preco_unitario'] = k
+        }
+
+        for (const req of reqCols) {
+          if (!foundCols[req]) {
+            throw new Error(`Coluna '${req}' não encontrada no arquivo|arquivo`)
+          }
+        }
+
+        let rowIndex = 2 // Data row assumption
+        for (const row of rawData) {
+          const hasValue = firstRowKeys.some(
+            (k) => row[k] !== null && row[k] !== undefined && row[k] !== '',
+          )
+          if (!hasValue) {
+            rowIndex++
+            continue
+          }
+
+          let nome = row[foundCols['produto_nome']]
+          let qtd = row[foundCols['quantidade']]
+          let preco = row[foundCols['preco_unitario']]
+
+          if (typeof nome !== 'string' || nome.trim() === '') {
+            throw new Error(
+              `Linha ${rowIndex}, coluna 'produto_nome': valor inválido. Esperado texto|arquivo`,
+            )
+          }
+
+          const numQtd = parseFloat(qtd)
+          if (isNaN(numQtd) || numQtd <= 0) {
+            throw new Error(
+              `Linha ${rowIndex}, coluna 'quantidade': valor inválido. Esperado número > 0|arquivo`,
+            )
+          }
+
+          let numPreco = preco
+          if (typeof preco === 'string') {
+            let p = preco.replace(/[^\d.,-]/g, '')
+            if (p.includes(',') && p.includes('.')) {
+              p = p.replace(/\./g, '').replace(',', '.')
+            } else if (p.includes(',')) {
+              p = p.replace(',', '.')
+            }
+            numPreco = parseFloat(p)
+          } else {
+            numPreco = parseFloat(preco)
+          }
+
+          if (isNaN(numPreco) || numPreco <= 0) {
+            throw new Error(
+              `Linha ${rowIndex}, coluna 'preco_unitario': valor inválido. Esperado número > 0|arquivo`,
+            )
+          }
+
+          items.push({
+            produto_nome: nome.trim(),
+            quantidade: numQtd,
+            preco_unitario: Number(numPreco.toFixed(2)),
+          })
+
+          rowIndex++
+        }
+
+        if (items.length === 0) {
+          throw new Error('Arquivo não contém dados|arquivo')
+        }
       } else if (tipo === 'pdf') {
         items = [
           { produto_nome: 'Omeprazol 500mg (PDF)', quantidade: 30, preco_unitario: 15.0 },
           { produto_nome: 'Paracetamol 750mg (PDF)', quantidade: 200, preco_unitario: 1.25 },
         ]
-      } else {
-        items = [{ produto_nome: 'Vitamina C 1g (HTML)', quantidade: 200, preco_unitario: 5.5 }]
       }
 
       const qItemsCol = $app.findCollectionByNameOrId('quotation_items')
@@ -126,6 +274,7 @@ routerAdd(
         status: 'processada',
         items_inseridos: items.length,
         mensagem: 'Cotação processada com sucesso',
+        dados: items,
       }
     } catch (error) {
       let msg = error.message || 'Erro desconhecido'
@@ -142,6 +291,7 @@ routerAdd(
       finalStatus = 400
       finalResponse = {
         status: 'erro',
+        erro: msg,
         mensagem: msg,
         campo_problema: campo,
       }

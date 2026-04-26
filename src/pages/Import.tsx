@@ -286,7 +286,7 @@ export default function ImportPage() {
               files: amDemandaFiles,
               maxFiles: 20,
               required: true,
-              accept: '.pdf, .html, .htm, .xlsx, .xls',
+              accept: '.csv, .pdf, .html, .htm, .xlsx, .xls',
             },
             {
               id: 'am_pedido',
@@ -294,7 +294,7 @@ export default function ImportPage() {
               files: amPedidoFiles,
               maxFiles: 20,
               required: true,
-              accept: '.pdf, .html, .htm, .xlsx, .xls',
+              accept: '.csv, .pdf, .html, .htm, .xlsx, .xls',
             },
           ]}
           onFileChange={(id, files) => {
@@ -336,11 +336,11 @@ export default function ImportPage() {
               files: quoteFiles,
               maxFiles: 1,
               required: true,
-              accept: '.pdf, .html, .htm, .xlsx, .xls',
-              validExtensions: ['pdf', 'html', 'htm', 'xlsx', 'xls'],
+              accept: '.csv, .pdf, .html, .htm, .xlsx, .xls',
+              validExtensions: ['csv', 'pdf', 'html', 'htm', 'xlsx', 'xls'],
               errorMessage:
-                'Formato de arquivo não suportado. Por favor, envie arquivos PDF, HTML ou Excel.',
-              formatHelpText: 'Excel, PDF ou HTML',
+                'Formato de arquivo não suportado. Por favor, envie arquivos CSV, PDF, HTML ou Excel.',
+              formatHelpText: 'CSV, Excel, PDF ou HTML',
             },
           ]}
           onFileChange={(id, files) => setQuoteFiles(files)}
